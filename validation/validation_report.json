@@ -1,0 +1,2223 @@
+{
+  "status": "PASS",
+  "elapsed_seconds": 1.45,
+  "summary": {
+    "schemas": 16,
+    "tables": 96,
+    "rows": 16548418,
+    "relationships": 166,
+    "anomalies": 10,
+    "checks": 368,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "check": "estate has at least 15 schemas",
+      "passed": true,
+      "severity": "error",
+      "detail": "observed 16: billing, catalog, commerce, core, crm, external, field_ops, finance, fleet, growth, iot, platform, supply, support, trust, workforce"
+    },
+    {
+      "check": "estate has at least 90 tables",
+      "passed": true,
+      "severity": "error",
+      "detail": "observed 96"
+    },
+    {
+      "check": "estate has at least 10 million rows",
+      "passed": true,
+      "severity": "error",
+      "detail": "observed 16,548,418"
+    },
+    {
+      "check": "estate includes a 200+ column table",
+      "passed": true,
+      "severity": "error",
+      "detail": "maximum 213 columns"
+    },
+    {
+      "check": "estate includes at least 15 tables with 150k+ rows",
+      "passed": true,
+      "severity": "error",
+      "detail": "observed 32"
+    },
+    {
+      "check": "documented anomaly ledger is substantial",
+      "passed": true,
+      "severity": "error",
+      "detail": "observed 10 anomaly records"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: billing.invoice",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=719,302; columns=12"
+    },
+    {
+      "check": "primary key valid: billing.invoice",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=719,302; distinct_keys=719,302; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: billing.payment_attempt",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=764,039; columns=12"
+    },
+    {
+      "check": "primary key valid: billing.payment_attempt",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=764,039; distinct_keys=764,039; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: billing.subscription",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=40,000; columns=10"
+    },
+    {
+      "check": "primary key valid: billing.subscription",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=40,000; distinct_keys=40,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: billing.subscription_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=200,000; columns=8"
+    },
+    {
+      "check": "primary key valid: billing.subscription_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=200,000; distinct_keys=200,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: catalog.plan_price_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=54; columns=6"
+    },
+    {
+      "check": "primary key valid: catalog.plan_price_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=54; distinct_keys=54; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=720; columns=13"
+    },
+    {
+      "check": "primary key valid: catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=720; distinct_keys=720; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: catalog.product_category",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=55; columns=5"
+    },
+    {
+      "check": "primary key valid: catalog.product_category",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=55; distinct_keys=55; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: catalog.product_price_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=4,320; columns=8"
+    },
+    {
+      "check": "primary key valid: catalog.product_price_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=4,320; distinct_keys=4,320; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: catalog.product_substitution",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,440; columns=7"
+    },
+    {
+      "check": "primary key valid: catalog.product_substitution",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,440; distinct_keys=1,440; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: catalog.service_plan",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=18; columns=9"
+    },
+    {
+      "check": "primary key valid: catalog.service_plan",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=18; distinct_keys=18; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: commerce.order",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=220,000; columns=15"
+    },
+    {
+      "check": "primary key valid: commerce.order",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=220,000; distinct_keys=220,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: commerce.order_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=660,000; columns=8"
+    },
+    {
+      "check": "primary key valid: commerce.order_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=660,000; distinct_keys=660,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: commerce.order_line",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=394,054; columns=11"
+    },
+    {
+      "check": "primary key valid: commerce.order_line",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=394,054; distinct_keys=394,054; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: commerce.shipment_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=611,004; columns=8"
+    },
+    {
+      "check": "primary key valid: commerce.shipment_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=611,004; distinct_keys=611,004; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=36; columns=9"
+    },
+    {
+      "check": "primary key valid: core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=36; distinct_keys=36; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.business_calendar",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,096; columns=11"
+    },
+    {
+      "check": "primary key valid: core.business_calendar",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,096; distinct_keys=1,096; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.legacy_id_xref",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=74,825; columns=8"
+    },
+    {
+      "check": "primary key valid: core.legacy_id_xref",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=74,825; distinct_keys=74,825; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.org_unit",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=90; columns=8"
+    },
+    {
+      "check": "primary key valid: core.org_unit",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=90; distinct_keys=90; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.postal_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=800; columns=8"
+    },
+    {
+      "check": "primary key valid: core.postal_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=800; distinct_keys=800; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=6; columns=6"
+    },
+    {
+      "check": "primary key valid: core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=6; distinct_keys=6; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.service_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120; columns=8"
+    },
+    {
+      "check": "primary key valid: core.service_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120; distinct_keys=120; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: core.world_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=180; columns=10"
+    },
+    {
+      "check": "primary key valid: core.world_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=180; distinct_keys=180; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=65,000; columns=10"
+    },
+    {
+      "check": "primary key valid: crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=65,000; distinct_keys=65,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: crm.account_member",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=79,300; columns=7"
+    },
+    {
+      "check": "primary key valid: crm.account_member",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=79,300; distinct_keys=79,300; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: crm.account_status_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=76,806; columns=6"
+    },
+    {
+      "check": "primary key valid: crm.account_status_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=76,806; distinct_keys=76,806; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: crm.consent_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=110,000; columns=9"
+    },
+    {
+      "check": "primary key valid: crm.consent_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=110,000; distinct_keys=110,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: crm.contact_point",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=82,800; columns=8"
+    },
+    {
+      "check": "primary key valid: crm.contact_point",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=82,800; distinct_keys=82,800; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: crm.customer",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=60,000; columns=10"
+    },
+    {
+      "check": "primary key valid: crm.customer",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=60,000; distinct_keys=60,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=80,000; columns=12"
+    },
+    {
+      "check": "primary key valid: crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=80,000; distinct_keys=80,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: external.energy_price_daily",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=19,728; columns=7"
+    },
+    {
+      "check": "primary key valid: external.energy_price_daily",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=19,728; distinct_keys=19,728; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: external.holiday_calendar",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=540; columns=6"
+    },
+    {
+      "check": "primary key valid: external.holiday_calendar",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=540; distinct_keys=540; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: external.postal_demographic_annual",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=2,400; columns=10"
+    },
+    {
+      "check": "primary key valid: external.postal_demographic_annual",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=2,400; distinct_keys=2,400; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: external.traffic_area_hourly",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=380,000; columns=8"
+    },
+    {
+      "check": "primary key valid: external.traffic_area_hourly",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=380,000; distinct_keys=380,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: external.weather_hourly",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=315,648; columns=14"
+    },
+    {
+      "check": "primary key valid: external.weather_hourly",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=315,648; distinct_keys=315,648; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: external.weather_station",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=12; columns=8"
+    },
+    {
+      "check": "primary key valid: external.weather_station",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=12; distinct_keys=12; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: field_ops.appointment",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; columns=10"
+    },
+    {
+      "check": "primary key valid: field_ops.appointment",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; distinct_keys=120,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: field_ops.visit",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; columns=11"
+    },
+    {
+      "check": "primary key valid: field_ops.visit",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; distinct_keys=120,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; columns=20"
+    },
+    {
+      "check": "primary key valid: field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; distinct_keys=120,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: field_ops.work_order_analytics",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; columns=38"
+    },
+    {
+      "check": "primary key valid: field_ops.work_order_analytics",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120,000; distinct_keys=120,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: field_ops.work_order_note",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=210,000; columns=7"
+    },
+    {
+      "check": "primary key valid: field_ops.work_order_note",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=210,000; distinct_keys=210,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: field_ops.work_order_part",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=260,000; columns=7"
+    },
+    {
+      "check": "primary key valid: field_ops.work_order_part",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=260,000; distinct_keys=260,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: field_ops.work_order_status_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=720,000; columns=7"
+    },
+    {
+      "check": "primary key valid: field_ops.work_order_status_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=720,000; distinct_keys=720,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: finance.budget_monthly",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=17,280; columns=6"
+    },
+    {
+      "check": "primary key valid: finance.budget_monthly",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=17,280; distinct_keys=17,280; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: finance.chart_of_account",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=96; columns=7"
+    },
+    {
+      "check": "primary key valid: finance.chart_of_account",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=96; distinct_keys=96; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: finance.cost_center",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120; columns=7"
+    },
+    {
+      "check": "primary key valid: finance.cost_center",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=120; distinct_keys=120; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: finance.journal_entry",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=145,000; columns=10"
+    },
+    {
+      "check": "primary key valid: finance.journal_entry",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=145,000; distinct_keys=145,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: finance.journal_line",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=460,000; columns=11"
+    },
+    {
+      "check": "primary key valid: finance.journal_line",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=460,000; distinct_keys=460,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: fleet.fuel_charge",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=58,000; columns=8"
+    },
+    {
+      "check": "primary key valid: fleet.fuel_charge",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=58,000; distinct_keys=58,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: fleet.gps_ping",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=540,000; columns=10"
+    },
+    {
+      "check": "primary key valid: fleet.gps_ping",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=540,000; distinct_keys=540,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: fleet.maintenance_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=11,000; columns=8"
+    },
+    {
+      "check": "primary key valid: fleet.maintenance_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=11,000; distinct_keys=11,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: fleet.route",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=110,000; columns=10"
+    },
+    {
+      "check": "primary key valid: fleet.route",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=110,000; distinct_keys=110,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: fleet.route_stop",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=320,000; columns=8"
+    },
+    {
+      "check": "primary key valid: fleet.route_stop",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=320,000; distinct_keys=320,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: fleet.vehicle",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=220; columns=10"
+    },
+    {
+      "check": "primary key valid: fleet.vehicle",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=220; distinct_keys=220; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: fleet.vehicle_assignment_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=519; columns=6"
+    },
+    {
+      "check": "primary key valid: fleet.vehicle_assignment_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=519; distinct_keys=519; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: growth.experiment",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=8; columns=7"
+    },
+    {
+      "check": "primary key valid: growth.experiment",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=8; distinct_keys=8; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: growth.experiment_assignment",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=321,706; columns=9"
+    },
+    {
+      "check": "primary key valid: growth.experiment_assignment",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=321,706; distinct_keys=321,706; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: growth.session",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=450,000; columns=12"
+    },
+    {
+      "check": "primary key valid: growth.session",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=450,000; distinct_keys=450,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: growth.web_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,303,974; columns=8"
+    },
+    {
+      "check": "primary key valid: growth.web_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,303,974; distinct_keys=1,303,974; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=55,000; columns=12"
+    },
+    {
+      "check": "primary key valid: iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=55,000; distinct_keys=55,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: iot.asset_health_daily",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=360,000; columns=38"
+    },
+    {
+      "check": "primary key valid: iot.asset_health_daily",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=360,000; distinct_keys=360,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: iot.asset_installation_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=72,000; columns=7"
+    },
+    {
+      "check": "primary key valid: iot.asset_installation_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=72,000; distinct_keys=72,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: iot.device_alert",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=180,000; columns=9"
+    },
+    {
+      "check": "primary key valid: iot.device_alert",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=180,000; distinct_keys=180,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: iot.sensor",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=72,000; columns=6"
+    },
+    {
+      "check": "primary key valid: iot.sensor",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=72,000; distinct_keys=72,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: iot.sensor_reading",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,200,000; columns=10"
+    },
+    {
+      "check": "primary key valid: iot.sensor_reading",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,200,000; distinct_keys=1,200,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.account_feature_snapshot",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=165,000; columns=213"
+    },
+    {
+      "check": "primary key valid: platform.account_feature_snapshot",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=165,000; distinct_keys=165,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.data_quality_result",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=260,000; columns=11"
+    },
+    {
+      "check": "primary key valid: platform.data_quality_result",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=260,000; distinct_keys=260,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.model_prediction",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=370,000; columns=14"
+    },
+    {
+      "check": "primary key valid: platform.model_prediction",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=370,000; distinct_keys=370,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.model_registry",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=18; columns=8"
+    },
+    {
+      "check": "primary key valid: platform.model_registry",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=18; distinct_keys=18; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.model_version",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=76; columns=11"
+    },
+    {
+      "check": "primary key valid: platform.model_version",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=76; distinct_keys=76; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.pipeline",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=72; columns=9"
+    },
+    {
+      "check": "primary key valid: platform.pipeline",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=72; distinct_keys=72; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.pipeline_run",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=92,000; columns=11"
+    },
+    {
+      "check": "primary key valid: platform.pipeline_run",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=92,000; distinct_keys=92,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: platform.source_registry",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=16; columns=7"
+    },
+    {
+      "check": "primary key valid: platform.source_registry",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=16; distinct_keys=16; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.goods_receipt",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=82,000; columns=8"
+    },
+    {
+      "check": "primary key valid: supply.goods_receipt",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=82,000; distinct_keys=82,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.inventory_movement",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=520,000; columns=11"
+    },
+    {
+      "check": "primary key valid: supply.inventory_movement",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=520,000; distinct_keys=520,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.inventory_position_daily",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=330,000; columns=25"
+    },
+    {
+      "check": "primary key valid: supply.inventory_position_daily",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=330,000; distinct_keys=330,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.product_vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,440; columns=10"
+    },
+    {
+      "check": "primary key valid: supply.product_vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,440; distinct_keys=1,440; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.purchase_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=24,000; columns=10"
+    },
+    {
+      "check": "primary key valid: supply.purchase_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=24,000; distinct_keys=24,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.purchase_order_line",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=96,000; columns=9"
+    },
+    {
+      "check": "primary key valid: supply.purchase_order_line",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=96,000; distinct_keys=96,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=85; columns=9"
+    },
+    {
+      "check": "primary key valid: supply.vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=85; distinct_keys=85; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: supply.warehouse",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=3; columns=10"
+    },
+    {
+      "check": "primary key valid: supply.warehouse",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=3; distinct_keys=3; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: support.conversation",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=112,000; columns=6"
+    },
+    {
+      "check": "primary key valid: support.conversation",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=112,000; distinct_keys=112,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: support.csat_response",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=48,000; columns=8"
+    },
+    {
+      "check": "primary key valid: support.csat_response",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=48,000; distinct_keys=48,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: support.knowledge_article",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=520; columns=7"
+    },
+    {
+      "check": "primary key valid: support.knowledge_article",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=520; distinct_keys=520; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: support.knowledge_article_view",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=190,000; columns=6"
+    },
+    {
+      "check": "primary key valid: support.knowledge_article_view",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=190,000; distinct_keys=190,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: support.message",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=360,000; columns=9"
+    },
+    {
+      "check": "primary key valid: support.message",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=360,000; distinct_keys=360,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: support.ticket",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=100,000; columns=18"
+    },
+    {
+      "check": "primary key valid: support.ticket",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=100,000; distinct_keys=100,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: support.ticket_status_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=430,000; columns=7"
+    },
+    {
+      "check": "primary key valid: support.ticket_status_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=430,000; distinct_keys=430,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: trust.consent_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=190,000; columns=9"
+    },
+    {
+      "check": "primary key valid: trust.consent_event",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=190,000; distinct_keys=190,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: trust.data_access_log",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=540,000; columns=10"
+    },
+    {
+      "check": "primary key valid: trust.data_access_log",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=540,000; distinct_keys=540,000; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: trust.privacy_request",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=9,500; columns=9"
+    },
+    {
+      "check": "primary key valid: trust.privacy_request",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=9,500; distinct_keys=9,500; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: workforce.absence",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=7,650; columns=7"
+    },
+    {
+      "check": "primary key valid: workforce.absence",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=7,650; distinct_keys=7,650; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=850; columns=12"
+    },
+    {
+      "check": "primary key valid: workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=850; distinct_keys=850; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: workforce.employee_role_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,122; columns=9"
+    },
+    {
+      "check": "primary key valid: workforce.employee_role_history",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,122; distinct_keys=1,122; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: workforce.shift",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=297,500; columns=8"
+    },
+    {
+      "check": "primary key valid: workforce.shift",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=297,500; distinct_keys=297,500; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: workforce.skill_certification",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,600; columns=7"
+    },
+    {
+      "check": "primary key valid: workforce.skill_certification",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=1,600; distinct_keys=1,600; null_keys=0"
+    },
+    {
+      "check": "parquet readable and catalog-aligned: workforce.training_completion",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=7,650; columns=6"
+    },
+    {
+      "check": "primary key valid: workforce.training_completion",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=7,650; distinct_keys=7,650; null_keys=0"
+    },
+    {
+      "check": "foreign key resolves: billing.invoice -> billing.subscription",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: billing.invoice -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: billing.payment_attempt -> billing.invoice",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: billing.payment_attempt -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: billing.subscription -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: billing.subscription -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: billing.subscription_event -> billing.subscription",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: catalog.plan_price_history -> catalog.service_plan",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: catalog.product -> catalog.product_category",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: catalog.product_category -> catalog.product_category",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: catalog.product_price_history -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: catalog.product_substitution -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: catalog.product_substitution -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: catalog.service_plan -> catalog.product_category",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: commerce.order -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: commerce.order -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: commerce.order_event -> commerce.order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: commerce.order_line -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: commerce.order_line -> commerce.order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: commerce.shipment_event -> commerce.order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: commerce.shipment_event -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.branch -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.org_unit -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.org_unit -> core.org_unit",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.postal_area -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.postal_area -> core.service_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.service_area -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.service_area -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.world_event -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: core.world_event -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.account -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.account -> crm.customer",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.account_member -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.account_member -> crm.customer",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.account_status_event -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.consent_event -> crm.contact_point",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.consent_event -> crm.customer",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.contact_point -> crm.customer",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.customer -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.service_site -> core.postal_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: crm.service_site -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: external.energy_price_daily -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: external.holiday_calendar -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: external.postal_demographic_annual -> core.postal_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: external.traffic_area_hourly -> core.service_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: external.weather_hourly -> external.weather_station",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: external.weather_station -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.appointment -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.appointment -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.appointment -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.visit -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.visit -> field_ops.appointment",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.visit -> field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.visit -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order -> billing.subscription",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order -> field_ops.appointment",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order -> iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_analytics -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_analytics -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_analytics -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_analytics -> field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_analytics -> iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_analytics -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_note -> field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_note -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_part -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_part -> field_ops.visit",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_part -> field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_status_event -> field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: field_ops.work_order_status_event -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.budget_monthly -> finance.cost_center",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.cost_center -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.cost_center -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.journal_entry -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.journal_line -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.journal_line -> finance.chart_of_account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.journal_line -> finance.cost_center",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.journal_line -> finance.journal_entry",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: finance.journal_line -> supply.vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.fuel_charge -> fleet.vehicle",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.gps_ping -> fleet.route",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.gps_ping -> fleet.vehicle",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.maintenance_event -> fleet.vehicle",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.maintenance_event -> supply.vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.route -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.route -> fleet.vehicle",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.route -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.route_stop -> field_ops.work_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.route_stop -> fleet.route",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.vehicle -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.vehicle_assignment_history -> fleet.vehicle",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: fleet.vehicle_assignment_history -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: growth.experiment_assignment -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: growth.experiment_assignment -> growth.experiment",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: growth.experiment_assignment -> growth.session",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: growth.session -> commerce.order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: growth.session -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: growth.session -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: growth.web_event -> growth.session",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset -> billing.subscription",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset_health_daily -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset_health_daily -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset_health_daily -> iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset_installation_history -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.asset_installation_history -> iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.device_alert -> iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.device_alert -> iot.sensor",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.sensor -> iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.sensor_reading -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.sensor_reading -> iot.asset",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: iot.sensor_reading -> iot.sensor",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.account_feature_snapshot -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.data_quality_result -> platform.pipeline_run",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.model_prediction -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.model_prediction -> platform.model_registry",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.model_prediction -> platform.model_version",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.model_version -> platform.model_registry",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.pipeline -> platform.source_registry",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: platform.pipeline_run -> platform.pipeline",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.goods_receipt -> supply.purchase_order_line",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.goods_receipt -> supply.warehouse",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.inventory_movement -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.inventory_movement -> supply.warehouse",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.inventory_position_daily -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.inventory_position_daily -> supply.warehouse",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.product_vendor -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.product_vendor -> supply.vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.purchase_order -> supply.vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.purchase_order -> supply.warehouse",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.purchase_order -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.purchase_order_line -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.purchase_order_line -> supply.purchase_order",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.vendor -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.warehouse -> core.postal_area",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.warehouse -> core.region",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.warehouse -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: support.conversation -> support.ticket",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: support.csat_response -> support.ticket",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: support.knowledge_article_view -> support.knowledge_article",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: support.message -> support.conversation",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: support.ticket -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: support.ticket -> crm.service_site",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: support.ticket_status_event -> support.ticket",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: trust.consent_event -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: trust.data_access_log -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: trust.privacy_request -> crm.account",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: trust.privacy_request -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.absence -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.absence -> workforce.shift",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.employee -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.employee -> core.org_unit",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.employee -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.employee_role_history -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.employee_role_history -> core.org_unit",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.employee_role_history -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.shift -> core.branch",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.shift -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.skill_certification -> catalog.product",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.skill_certification -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: workforce.training_completion -> workforce.employee",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "dual-write duplicates are discoverable",
+      "passed": true,
+      "severity": "error",
+      "detail": "matching records/groups=61"
+    },
+    {
+      "check": "scanner retry defect is discoverable",
+      "passed": true,
+      "severity": "error",
+      "detail": "matching records/groups=2,293"
+    },
+    {
+      "check": "winter-storm records are discoverable",
+      "passed": true,
+      "severity": "error",
+      "detail": "matching records/groups=1,008"
+    },
+    {
+      "check": "feature-store leakage exercise is explicit",
+      "passed": true,
+      "severity": "error",
+      "detail": "present=['eventual_lifetime_value_cents', 'future_90d_cancelled_flag', 'future_90d_payment_failure_count']"
+    }
+  ]
+}

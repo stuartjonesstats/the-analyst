@@ -1,0 +1,2326 @@
+[
+  {
+    "from_table": "billing.invoice",
+    "from_columns": [
+      "subscription_id"
+    ],
+    "to_table": "billing.subscription",
+    "to_columns": [
+      "subscription_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "billing.invoice",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "billing.payment_attempt",
+    "from_columns": [
+      "invoice_id"
+    ],
+    "to_table": "billing.invoice",
+    "to_columns": [
+      "invoice_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "billing.payment_attempt",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "billing.subscription",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "billing.subscription",
+    "from_columns": [
+      "site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "billing.subscription_event",
+    "from_columns": [
+      "subscription_id"
+    ],
+    "to_table": "billing.subscription",
+    "to_columns": [
+      "subscription_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "catalog.plan_price_history",
+    "from_columns": [
+      "service_plan_id"
+    ],
+    "to_table": "catalog.service_plan",
+    "to_columns": [
+      "service_plan_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "catalog.product",
+    "from_columns": [
+      "category_id"
+    ],
+    "to_table": "catalog.product_category",
+    "to_columns": [
+      "category_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "catalog.product_category",
+    "from_columns": [
+      "parent_category_id"
+    ],
+    "to_table": "catalog.product_category",
+    "to_columns": [
+      "parent_category_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "catalog.product_price_history",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "catalog.product_substitution",
+    "from_columns": [
+      "requested_product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "catalog.product_substitution",
+    "from_columns": [
+      "substitute_product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "catalog.service_plan",
+    "from_columns": [
+      "covered_category_id"
+    ],
+    "to_table": "catalog.product_category",
+    "to_columns": [
+      "category_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "commerce.order",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "commerce.order",
+    "from_columns": [
+      "site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "commerce.order_event",
+    "from_columns": [
+      "order_id"
+    ],
+    "to_table": "commerce.order",
+    "to_columns": [
+      "order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "commerce.order_line",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "commerce.order_line",
+    "from_columns": [
+      "order_id"
+    ],
+    "to_table": "commerce.order",
+    "to_columns": [
+      "order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "commerce.shipment_event",
+    "from_columns": [
+      "order_id"
+    ],
+    "to_table": "commerce.order",
+    "to_columns": [
+      "order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "commerce.shipment_event",
+    "from_columns": [
+      "site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.branch",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.org_unit",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.org_unit",
+    "from_columns": [
+      "parent_org_unit_id"
+    ],
+    "to_table": "core.org_unit",
+    "to_columns": [
+      "parent_org_unit_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.postal_area",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.postal_area",
+    "from_columns": [
+      "service_area_id"
+    ],
+    "to_table": "core.service_area",
+    "to_columns": [
+      "service_area_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.service_area",
+    "from_columns": [
+      "default_branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.service_area",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.world_event",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "core.world_event",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.account",
+    "from_columns": [
+      "home_branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.account",
+    "from_columns": [
+      "primary_customer_id"
+    ],
+    "to_table": "crm.customer",
+    "to_columns": [
+      "customer_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.account_member",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.account_member",
+    "from_columns": [
+      "customer_id"
+    ],
+    "to_table": "crm.customer",
+    "to_columns": [
+      "customer_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.account_status_event",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.consent_event",
+    "from_columns": [
+      "contact_point_id"
+    ],
+    "to_table": "crm.contact_point",
+    "to_columns": [
+      "contact_point_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.consent_event",
+    "from_columns": [
+      "customer_id"
+    ],
+    "to_table": "crm.customer",
+    "to_columns": [
+      "customer_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.contact_point",
+    "from_columns": [
+      "customer_id"
+    ],
+    "to_table": "crm.customer",
+    "to_columns": [
+      "customer_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.customer",
+    "from_columns": [
+      "home_region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.service_site",
+    "from_columns": [
+      "postal_area_id"
+    ],
+    "to_table": "core.postal_area",
+    "to_columns": [
+      "postal_area_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "crm.service_site",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "external.energy_price_daily",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "external.holiday_calendar",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "external.postal_demographic_annual",
+    "from_columns": [
+      "postal_area_id"
+    ],
+    "to_table": "core.postal_area",
+    "to_columns": [
+      "postal_area_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "external.traffic_area_hourly",
+    "from_columns": [
+      "service_area_id"
+    ],
+    "to_table": "core.service_area",
+    "to_columns": [
+      "service_area_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "external.weather_hourly",
+    "from_columns": [
+      "weather_station_id"
+    ],
+    "to_table": "external.weather_station",
+    "to_columns": [
+      "weather_station_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "external.weather_station",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.appointment",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.appointment",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.appointment",
+    "from_columns": [
+      "service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.visit",
+    "from_columns": [
+      "service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.visit",
+    "from_columns": [
+      "appointment_id"
+    ],
+    "to_table": "field_ops.appointment",
+    "to_columns": [
+      "appointment_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.visit",
+    "from_columns": [
+      "work_order_id"
+    ],
+    "to_table": "field_ops.work_order",
+    "to_columns": [
+      "work_order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.visit",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order",
+    "from_columns": [
+      "subscription_id"
+    ],
+    "to_table": "billing.subscription",
+    "to_columns": [
+      "subscription_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order",
+    "from_columns": [
+      "service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order",
+    "from_columns": [
+      "appointment_id"
+    ],
+    "to_table": "field_ops.appointment",
+    "to_columns": [
+      "appointment_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order",
+    "from_columns": [
+      "asset_id"
+    ],
+    "to_table": "iot.asset",
+    "to_columns": [
+      "asset_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order",
+    "from_columns": [
+      "assigned_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_analytics",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_analytics",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_analytics",
+    "from_columns": [
+      "service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_analytics",
+    "from_columns": [
+      "work_order_id"
+    ],
+    "to_table": "field_ops.work_order",
+    "to_columns": [
+      "work_order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_analytics",
+    "from_columns": [
+      "asset_id"
+    ],
+    "to_table": "iot.asset",
+    "to_columns": [
+      "asset_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_analytics",
+    "from_columns": [
+      "assigned_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_note",
+    "from_columns": [
+      "work_order_id"
+    ],
+    "to_table": "field_ops.work_order",
+    "to_columns": [
+      "work_order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_note",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_part",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_part",
+    "from_columns": [
+      "visit_id"
+    ],
+    "to_table": "field_ops.visit",
+    "to_columns": [
+      "visit_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_part",
+    "from_columns": [
+      "work_order_id"
+    ],
+    "to_table": "field_ops.work_order",
+    "to_columns": [
+      "work_order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_status_event",
+    "from_columns": [
+      "work_order_id"
+    ],
+    "to_table": "field_ops.work_order",
+    "to_columns": [
+      "work_order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "field_ops.work_order_status_event",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.budget_monthly",
+    "from_columns": [
+      "cost_center_id"
+    ],
+    "to_table": "finance.cost_center",
+    "to_columns": [
+      "cost_center_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.cost_center",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.cost_center",
+    "from_columns": [
+      "manager_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.journal_entry",
+    "from_columns": [
+      "created_by_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.journal_line",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.journal_line",
+    "from_columns": [
+      "gl_account_id"
+    ],
+    "to_table": "finance.chart_of_account",
+    "to_columns": [
+      "gl_account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.journal_line",
+    "from_columns": [
+      "cost_center_id"
+    ],
+    "to_table": "finance.cost_center",
+    "to_columns": [
+      "cost_center_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.journal_line",
+    "from_columns": [
+      "journal_entry_id"
+    ],
+    "to_table": "finance.journal_entry",
+    "to_columns": [
+      "journal_entry_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "finance.journal_line",
+    "from_columns": [
+      "vendor_id"
+    ],
+    "to_table": "supply.vendor",
+    "to_columns": [
+      "vendor_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.fuel_charge",
+    "from_columns": [
+      "vehicle_id"
+    ],
+    "to_table": "fleet.vehicle",
+    "to_columns": [
+      "vehicle_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.gps_ping",
+    "from_columns": [
+      "route_id"
+    ],
+    "to_table": "fleet.route",
+    "to_columns": [
+      "route_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.gps_ping",
+    "from_columns": [
+      "vehicle_id"
+    ],
+    "to_table": "fleet.vehicle",
+    "to_columns": [
+      "vehicle_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.maintenance_event",
+    "from_columns": [
+      "vehicle_id"
+    ],
+    "to_table": "fleet.vehicle",
+    "to_columns": [
+      "vehicle_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.maintenance_event",
+    "from_columns": [
+      "vendor_id"
+    ],
+    "to_table": "supply.vendor",
+    "to_columns": [
+      "vendor_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.route",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.route",
+    "from_columns": [
+      "vehicle_id"
+    ],
+    "to_table": "fleet.vehicle",
+    "to_columns": [
+      "vehicle_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.route",
+    "from_columns": [
+      "technician_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.route_stop",
+    "from_columns": [
+      "work_order_id"
+    ],
+    "to_table": "field_ops.work_order",
+    "to_columns": [
+      "work_order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.route_stop",
+    "from_columns": [
+      "route_id"
+    ],
+    "to_table": "fleet.route",
+    "to_columns": [
+      "route_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.vehicle",
+    "from_columns": [
+      "home_branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.vehicle_assignment_history",
+    "from_columns": [
+      "vehicle_id"
+    ],
+    "to_table": "fleet.vehicle",
+    "to_columns": [
+      "vehicle_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "fleet.vehicle_assignment_history",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "growth.experiment_assignment",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "growth.experiment_assignment",
+    "from_columns": [
+      "experiment_id"
+    ],
+    "to_table": "growth.experiment",
+    "to_columns": [
+      "experiment_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "growth.experiment_assignment",
+    "from_columns": [
+      "session_id"
+    ],
+    "to_table": "growth.session",
+    "to_columns": [
+      "session_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "growth.session",
+    "from_columns": [
+      "converted_order_id"
+    ],
+    "to_table": "commerce.order",
+    "to_columns": [
+      "order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "growth.session",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "growth.session",
+    "from_columns": [
+      "site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "growth.web_event",
+    "from_columns": [
+      "session_id"
+    ],
+    "to_table": "growth.session",
+    "to_columns": [
+      "session_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset",
+    "from_columns": [
+      "subscription_id"
+    ],
+    "to_table": "billing.subscription",
+    "to_columns": [
+      "subscription_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset",
+    "from_columns": [
+      "current_service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset_health_daily",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset_health_daily",
+    "from_columns": [
+      "service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset_health_daily",
+    "from_columns": [
+      "asset_id"
+    ],
+    "to_table": "iot.asset",
+    "to_columns": [
+      "asset_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset_installation_history",
+    "from_columns": [
+      "service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.asset_installation_history",
+    "from_columns": [
+      "asset_id"
+    ],
+    "to_table": "iot.asset",
+    "to_columns": [
+      "asset_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.device_alert",
+    "from_columns": [
+      "asset_id"
+    ],
+    "to_table": "iot.asset",
+    "to_columns": [
+      "asset_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.device_alert",
+    "from_columns": [
+      "sensor_id"
+    ],
+    "to_table": "iot.sensor",
+    "to_columns": [
+      "sensor_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.sensor",
+    "from_columns": [
+      "asset_id"
+    ],
+    "to_table": "iot.asset",
+    "to_columns": [
+      "asset_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.sensor_reading",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.sensor_reading",
+    "from_columns": [
+      "asset_id"
+    ],
+    "to_table": "iot.asset",
+    "to_columns": [
+      "asset_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "iot.sensor_reading",
+    "from_columns": [
+      "sensor_id"
+    ],
+    "to_table": "iot.sensor",
+    "to_columns": [
+      "sensor_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.account_feature_snapshot",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.data_quality_result",
+    "from_columns": [
+      "pipeline_run_id"
+    ],
+    "to_table": "platform.pipeline_run",
+    "to_columns": [
+      "pipeline_run_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.model_prediction",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.model_prediction",
+    "from_columns": [
+      "model_id"
+    ],
+    "to_table": "platform.model_registry",
+    "to_columns": [
+      "model_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.model_prediction",
+    "from_columns": [
+      "model_version_id"
+    ],
+    "to_table": "platform.model_version",
+    "to_columns": [
+      "model_version_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.model_version",
+    "from_columns": [
+      "model_id"
+    ],
+    "to_table": "platform.model_registry",
+    "to_columns": [
+      "model_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.pipeline",
+    "from_columns": [
+      "source_id"
+    ],
+    "to_table": "platform.source_registry",
+    "to_columns": [
+      "source_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "platform.pipeline_run",
+    "from_columns": [
+      "pipeline_id"
+    ],
+    "to_table": "platform.pipeline",
+    "to_columns": [
+      "pipeline_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.goods_receipt",
+    "from_columns": [
+      "purchase_order_line_id"
+    ],
+    "to_table": "supply.purchase_order_line",
+    "to_columns": [
+      "purchase_order_line_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.goods_receipt",
+    "from_columns": [
+      "warehouse_id"
+    ],
+    "to_table": "supply.warehouse",
+    "to_columns": [
+      "warehouse_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.inventory_movement",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.inventory_movement",
+    "from_columns": [
+      "warehouse_id"
+    ],
+    "to_table": "supply.warehouse",
+    "to_columns": [
+      "warehouse_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.inventory_position_daily",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.inventory_position_daily",
+    "from_columns": [
+      "warehouse_id"
+    ],
+    "to_table": "supply.warehouse",
+    "to_columns": [
+      "warehouse_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.product_vendor",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.product_vendor",
+    "from_columns": [
+      "vendor_id"
+    ],
+    "to_table": "supply.vendor",
+    "to_columns": [
+      "vendor_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.purchase_order",
+    "from_columns": [
+      "vendor_id"
+    ],
+    "to_table": "supply.vendor",
+    "to_columns": [
+      "vendor_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.purchase_order",
+    "from_columns": [
+      "warehouse_id"
+    ],
+    "to_table": "supply.warehouse",
+    "to_columns": [
+      "warehouse_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.purchase_order",
+    "from_columns": [
+      "buyer_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.purchase_order_line",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.purchase_order_line",
+    "from_columns": [
+      "purchase_order_id"
+    ],
+    "to_table": "supply.purchase_order",
+    "to_columns": [
+      "purchase_order_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.vendor",
+    "from_columns": [
+      "home_region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.warehouse",
+    "from_columns": [
+      "postal_area_id"
+    ],
+    "to_table": "core.postal_area",
+    "to_columns": [
+      "postal_area_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.warehouse",
+    "from_columns": [
+      "region_id"
+    ],
+    "to_table": "core.region",
+    "to_columns": [
+      "region_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.warehouse",
+    "from_columns": [
+      "manager_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "support.conversation",
+    "from_columns": [
+      "ticket_id"
+    ],
+    "to_table": "support.ticket",
+    "to_columns": [
+      "ticket_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "support.csat_response",
+    "from_columns": [
+      "ticket_id"
+    ],
+    "to_table": "support.ticket",
+    "to_columns": [
+      "ticket_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "support.knowledge_article_view",
+    "from_columns": [
+      "article_id"
+    ],
+    "to_table": "support.knowledge_article",
+    "to_columns": [
+      "article_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "support.message",
+    "from_columns": [
+      "conversation_id"
+    ],
+    "to_table": "support.conversation",
+    "to_columns": [
+      "conversation_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "support.ticket",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "support.ticket",
+    "from_columns": [
+      "service_site_id"
+    ],
+    "to_table": "crm.service_site",
+    "to_columns": [
+      "service_site_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "support.ticket_status_event",
+    "from_columns": [
+      "ticket_id"
+    ],
+    "to_table": "support.ticket",
+    "to_columns": [
+      "ticket_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "trust.consent_event",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "trust.data_access_log",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "trust.privacy_request",
+    "from_columns": [
+      "account_id"
+    ],
+    "to_table": "crm.account",
+    "to_columns": [
+      "account_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "trust.privacy_request",
+    "from_columns": [
+      "case_owner_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.absence",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.absence",
+    "from_columns": [
+      "shift_id"
+    ],
+    "to_table": "workforce.shift",
+    "to_columns": [
+      "shift_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.employee",
+    "from_columns": [
+      "home_branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.employee",
+    "from_columns": [
+      "org_unit_id"
+    ],
+    "to_table": "core.org_unit",
+    "to_columns": [
+      "org_unit_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.employee",
+    "from_columns": [
+      "manager_employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.employee_role_history",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.employee_role_history",
+    "from_columns": [
+      "org_unit_id"
+    ],
+    "to_table": "core.org_unit",
+    "to_columns": [
+      "org_unit_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.employee_role_history",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.shift",
+    "from_columns": [
+      "branch_id"
+    ],
+    "to_table": "core.branch",
+    "to_columns": [
+      "branch_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.shift",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.skill_certification",
+    "from_columns": [
+      "product_id"
+    ],
+    "to_table": "catalog.product",
+    "to_columns": [
+      "product_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.skill_certification",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "workforce.training_completion",
+    "from_columns": [
+      "employee_id"
+    ],
+    "to_table": "workforce.employee",
+    "to_columns": [
+      "employee_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": false,
+    "temporal_condition": null,
+    "warning": null
+  }
+]

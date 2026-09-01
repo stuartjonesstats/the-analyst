@@ -1,0 +1,750 @@
+{
+  "schema_version": "1.0.0",
+  "scenario_id": "contract-smoke-test",
+  "title": "The Friday CSAT Check",
+  "company": "Meridian Living Systems",
+  "status": "draft",
+  "summary": "A deliberately small authoring fixture used to exercise the simulation contract. It is not one of the four production scenario designs.",
+  "estimated_duration_minutes": 35,
+  "tags": [
+    "fixture",
+    "support",
+    "metric-definition"
+  ],
+  "learner_context": {
+    "role": {
+      "role_id": "customer-insights-analyst",
+      "title": "Customer Insights Analyst",
+      "department": "Customer Insights",
+      "seniority": "junior",
+      "manager": {
+        "person_id": "maya-chen",
+        "name": "Maya Chen",
+        "title": "Director of Customer Insights",
+        "department": "Customer Insights"
+      },
+      "mandate": "Provide decision-ready customer metrics while preserving their definitions, populations, and limitations.",
+      "permissions_note": "Restricted message text is outside the assignment and must not be exported."
+    },
+    "analysis_cutoff": "2026-01-15T06:00:00Z",
+    "briefing": {
+      "briefing_id": "initial-csat-request",
+      "channel": "email",
+      "from": {
+        "person_id": "owen-price",
+        "name": "Owen Price",
+        "title": "VP, Customer Care",
+        "department": "Customer Care"
+      },
+      "to_role_id": "customer-insights-analyst",
+      "subject": "Did CSAT recover?",
+      "body": "I need one number for this afternoon's operating review. Compare the final two months of 2025 with the same two months of 2024 and tell me whether satisfaction recovered. Keep the answer short.",
+      "requested_outcomes": [
+        "Report a comparable satisfaction measure for the two periods.",
+        "Recommend what leadership may and may not conclude from the comparison."
+      ],
+      "decision_deadline": "2026-01-15T15:00:00Z",
+      "attachments": []
+    },
+    "learning_objectives": [
+      "Reconcile source-system tickets to the business-interaction grain.",
+      "Use the comparable normalized satisfaction field.",
+      "Match the strength of a recommendation to the available evidence."
+    ]
+  },
+  "data_access": {
+    "catalog_sources": {
+      "data_catalog": "catalog/data_catalog.json",
+      "relationships": "catalog/relationships.json",
+      "table_neighborhoods": "catalog/table_neighborhoods.json"
+    },
+    "accessible_neighborhoods": [
+      {
+        "neighborhood_id": "schema:support",
+        "availability": "initial",
+        "discovery_note": "The briefing concerns Customer Care tickets and satisfaction surveys.",
+        "initial_asset_ids": [
+          "tbl:support.ticket",
+          "tbl:support.csat_response"
+        ]
+      },
+      {
+        "neighborhood_id": "schema:platform",
+        "availability": "event-gated",
+        "discovery_note": "Pipeline and named-check history becomes available if the ticket migration is investigated.",
+        "revealed_by": "migration-context"
+      }
+    ],
+    "asset_access": [
+      {
+        "asset_id": "tbl:support.ticket",
+        "fully_qualified_name": "support.ticket",
+        "availability": "initial",
+        "handling_note": "Catalog sensitivity is confidential; use aggregates in the final brief."
+      },
+      {
+        "asset_id": "tbl:support.csat_response",
+        "fully_qualified_name": "support.csat_response",
+        "availability": "initial",
+        "handling_note": "Use score_normalized for comparisons across original rating scales."
+      },
+      {
+        "asset_id": "tbl:platform.data_quality_result",
+        "fully_qualified_name": "platform.data_quality_result",
+        "availability": "event-gated",
+        "revealed_by": "migration-context",
+        "handling_note": "A PASS applies only to its named check."
+      },
+      {
+        "asset_id": "tbl:support.message",
+        "fully_qualified_name": "support.message",
+        "availability": "unavailable",
+        "handling_note": "Restricted message bodies are unnecessary for the question."
+      }
+    ],
+    "query_policy": {
+      "allow_sql": true,
+      "allow_python": false,
+      "allow_row_preview": true,
+      "allow_raw_export": false,
+      "respect_catalog_sensitivity": true
+    }
+  },
+  "timeline": {
+    "clock_mode": "simulated",
+    "simulation_starts_at": "2026-01-15T09:00:00Z",
+    "events": [
+      {
+        "event_id": "scale-reminder",
+        "title": "Survey operations clarification",
+        "trigger": {
+          "kind": "elapsed-minutes",
+          "minutes": 8
+        },
+        "actions": [
+          {
+            "type": "deliver-message",
+            "message": {
+              "message_id": "survey-scale-message",
+              "channel": "chat",
+              "from": {
+                "person_id": "lena-ortiz",
+                "name": "Lena Ortiz",
+                "title": "Survey Operations Manager",
+                "department": "Customer Insights"
+              },
+              "subject": "One survey caveat",
+              "body": "The original survey scale is not consistent across sources. The catalog should point you to the comparable field."
+            }
+          }
+        ],
+        "once": true,
+        "instructor_note": "This is a nudge toward catalog reading, not an answer reveal."
+      },
+      {
+        "event_id": "migration-context",
+        "title": "Migration evidence becomes discoverable",
+        "trigger": {
+          "kind": "state-condition",
+          "when": {
+            "fact": "evidence.ticket-grain-audit.count",
+            "operator": "greater-than-or-equal",
+            "value": 1
+          }
+        },
+        "actions": [
+          {
+            "type": "unlock-neighborhood",
+            "neighborhood_id": "schema:platform"
+          },
+          {
+            "type": "unlock-asset",
+            "asset_id": "tbl:platform.data_quality_result"
+          },
+          {
+            "type": "deliver-message",
+            "message": {
+              "message_id": "migration-message",
+              "channel": "email",
+              "from": {
+                "person_id": "noah-williams",
+                "name": "Noah Williams",
+                "title": "Data Reliability Lead",
+                "department": "Data Reliability"
+              },
+              "subject": "2024 support migration",
+              "body": "The CRM migration briefly dual-wrote support interactions under distinct ticket IDs. A named quality check can help scope the window, but validate the business key yourself."
+            }
+          }
+        ],
+        "once": true,
+        "instructor_note": "Reward learners who independently notice repeated interaction_fingerprint values before this reveal."
+      }
+    ]
+  },
+  "branches": [
+    {
+      "branch_id": "refusal-path",
+      "priority": 20,
+      "when": {
+        "fact": "decision.mode",
+        "operator": "equals",
+        "value": "responsible-refusal"
+      },
+      "actions": [
+        {
+          "type": "deliver-message",
+          "message": {
+            "message_id": "refusal-acknowledged",
+            "channel": "chat",
+            "from": {
+              "person_id": "maya-chen",
+              "name": "Maya Chen",
+              "title": "Director of Customer Insights",
+              "department": "Customer Insights"
+            },
+            "subject": "Scope the refusal",
+            "body": "If the requested claim is not supportable, state what you can support, what blocks the stronger claim, and the fastest ethical way to close the gap."
+          }
+        },
+        {
+          "type": "request-artifact",
+          "artifact_id": "leadership-brief"
+        }
+      ],
+      "exclusive_group": "decision-path"
+    },
+    {
+      "branch_id": "qualified-conclusion-path",
+      "priority": 10,
+      "when": {
+        "fact": "decision.mode",
+        "operator": "in",
+        "value": [
+          "conclusion",
+          "qualified-conclusion"
+        ]
+      },
+      "actions": [
+        {
+          "type": "request-artifact",
+          "artifact_id": "leadership-brief"
+        }
+      ],
+      "exclusive_group": "decision-path"
+    }
+  ],
+  "evidence_requirements": [
+    {
+      "evidence_id": "ticket-grain-audit",
+      "title": "Ticket grain and duplicate audit",
+      "description": "Show the relationship between ticket_id and interaction_fingerprint, including the comparison-period effect of the dual-write window.",
+      "kind": "data-profile",
+      "required": true,
+      "minimum_count": 1,
+      "capture_mode": "either",
+      "evaluation_check_ids": [
+        "grain-check",
+        "evidence-check"
+      ]
+    },
+    {
+      "evidence_id": "period-definition",
+      "title": "Comparable-period query",
+      "description": "Preserve the analysis cutoff, period filters, survey normalization, population definition, and aggregation in executable SQL.",
+      "kind": "query",
+      "required": true,
+      "minimum_count": 1,
+      "capture_mode": "automatic",
+      "evaluation_check_ids": [
+        "time-check",
+        "reproducibility-check"
+      ]
+    },
+    {
+      "evidence_id": "uncertainty-note",
+      "title": "Limitations and uncertainty record",
+      "description": "Record denominator, selection, missingness, and causal limitations that affect the decision.",
+      "kind": "analysis-note",
+      "required": true,
+      "minimum_count": 1,
+      "capture_mode": "learner-selected",
+      "evaluation_check_ids": [
+        "uncertainty-check",
+        "judgment-check"
+      ]
+    }
+  ],
+  "artifact_requirements": [
+    {
+      "artifact_id": "analysis-sql",
+      "title": "Reproducible analysis SQL",
+      "type": "sql-file",
+      "prompt": "Submit the executable SQL used to define, reconcile, and compare the two periods.",
+      "audience": "Another Customer Insights analyst",
+      "required": true,
+      "accepted_formats": [
+        "text/plain",
+        "application/sql"
+      ],
+      "constraints": [
+        "Use only data available at the analysis cutoff.",
+        "Include reconciliation counts before and after joins or de-duplication."
+      ],
+      "evaluation_check_ids": [
+        "grain-check",
+        "time-check",
+        "reproducibility-check"
+      ]
+    },
+    {
+      "artifact_id": "leadership-brief",
+      "title": "Leadership decision brief",
+      "type": "decision-brief",
+      "prompt": "Give the best supported answer, define the metric and population, state material uncertainty, and recommend the next decision. A responsible refusal is valid when a stronger claim is unsupported.",
+      "audience": "VP, Customer Care",
+      "required": true,
+      "accepted_formats": [
+        "text/markdown",
+        "text/plain"
+      ],
+      "constraints": [
+        "Maximum 350 words.",
+        "Do not include row-level confidential or restricted data."
+      ],
+      "evaluation_check_ids": [
+        "uncertainty-check",
+        "judgment-check",
+        "communication-check"
+      ]
+    }
+  ],
+  "scaffolding": {
+    "default_tier_id": "independent",
+    "default_assessment_treatment": "no-penalty",
+    "tiers": [
+      {
+        "tier_id": "independent",
+        "order": 0,
+        "label": "Independent",
+        "description": "The learner receives the briefing, catalog, and normal workbench tools.",
+        "availability": "always",
+        "interventions": []
+      },
+      {
+        "tier_id": "guided-questions",
+        "order": 1,
+        "label": "Guided questions",
+        "description": "Questions direct attention to decision-critical definitions without prescribing a query.",
+        "availability": "on-request",
+        "interventions": [
+          {
+            "intervention_id": "ask-row-meaning",
+            "type": "question",
+            "content": "What does one row represent in each table, and can one customer interaction have more than one ticket_id?"
+          },
+          {
+            "intervention_id": "point-to-csat-card",
+            "type": "catalog-pointer",
+            "content": "Compare the grain and quality_notes on the satisfaction survey asset.",
+            "asset_id": "tbl:support.csat_response"
+          }
+        ]
+      },
+      {
+        "tier_id": "query-starter",
+        "order": 2,
+        "label": "Query starter",
+        "description": "A partial pattern helps a beginner profile business keys and scale coverage.",
+        "availability": "automatic",
+        "unlock_when": {
+          "fact": "harness.elapsed_minutes",
+          "operator": "greater-than-or-equal",
+          "value": 20
+        },
+        "interventions": [
+          {
+            "intervention_id": "profile-starter",
+            "type": "query-starter",
+            "content": "Start by grouping support.ticket on interaction_fingerprint and comparing COUNT(*) with COUNT(DISTINCT ticket_id). Then inspect scale_max coverage in support.csat_response."
+          }
+        ]
+      }
+    ]
+  },
+  "assessment": {
+    "rubric_ref": "docs/assessment_rubric.md",
+    "maximum_points": 100,
+    "completion_modes": [
+      "conclusion",
+      "qualified-conclusion",
+      "responsible-refusal"
+    ],
+    "responsible_refusal": {
+      "eligible": true,
+      "policy": "A refusal is scored by the same evidence and judgment standards as a positive recommendation; it is not a shortcut and carries no automatic penalty.",
+      "must_include": [
+        "The specific requested claim that is not supportable.",
+        "Evidence showing why the limitation is decision-material.",
+        "The narrower statement that is supportable now.",
+        "A proportional next step that could resolve the uncertainty."
+      ]
+    },
+    "checks": [
+      {
+        "check_id": "grain-check",
+        "title": "Business grain and join control",
+        "criterion": "grain",
+        "weight_points": 15,
+        "method": "hybrid",
+        "description": "The work distinguishes source-system tickets, customer interactions, and returned surveys and validates multiplicity before comparing periods.",
+        "evidence_ids": [
+          "ticket-grain-audit"
+        ],
+        "artifact_ids": [
+          "analysis-sql"
+        ],
+        "machine_rules": [
+          {
+            "rule_id": "reconciliation-present",
+            "signal": "analysis.reconciliation_count_queries",
+            "operator": "greater-than-or-equal",
+            "expected": 1,
+            "effect": "evidence"
+          }
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "descriptor": "Treats every physical row as an independent business interaction."
+          },
+          {
+            "level": 1,
+            "descriptor": "Mentions duplicates but does not quantify or resolve their effect."
+          },
+          {
+            "level": 2,
+            "descriptor": "Uses a plausible business key with incomplete multiplicity checks."
+          },
+          {
+            "level": 3,
+            "descriptor": "Defines the business grain and reconciles joins and de-duplication."
+          },
+          {
+            "level": 4,
+            "descriptor": "Also stress-tests legitimate repeat contacts and explains residual grain risk."
+          }
+        ]
+      },
+      {
+        "check_id": "time-check",
+        "title": "Point-in-time validity",
+        "criterion": "time",
+        "weight_points": 15,
+        "method": "hybrid",
+        "description": "Filters, data availability, comparison windows, and the analysis cutoff are explicit and internally consistent.",
+        "evidence_ids": [
+          "period-definition"
+        ],
+        "artifact_ids": [
+          "analysis-sql"
+        ],
+        "machine_rules": [
+          {
+            "rule_id": "cutoff-recorded",
+            "signal": "analysis.cutoff_is_explicit",
+            "operator": "equals",
+            "expected": true,
+            "effect": "evidence"
+          }
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "descriptor": "Uses future, current-state, or mismatched periods without recognition."
+          },
+          {
+            "level": 1,
+            "descriptor": "Uses date filters but leaves material timing semantics implicit."
+          },
+          {
+            "level": 2,
+            "descriptor": "Defines windows and cutoff with one unresolved timing issue."
+          },
+          {
+            "level": 3,
+            "descriptor": "Uses consistent periods and respects the analysis cutoff."
+          },
+          {
+            "level": 4,
+            "descriptor": "Also evaluates lag, revision, and sensitivity to boundary choices."
+          }
+        ]
+      },
+      {
+        "check_id": "evidence-check",
+        "title": "Evidence quality",
+        "criterion": "evidence-quality",
+        "weight_points": 10,
+        "method": "human",
+        "description": "The selected evidence is relevant, sufficient for the stated claim, and accompanied by appropriate quality checks.",
+        "evidence_ids": [
+          "ticket-grain-audit",
+          "period-definition"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "descriptor": "Provides no auditable evidence."
+          },
+          {
+            "level": 1,
+            "descriptor": "Provides a result without diagnostic support."
+          },
+          {
+            "level": 2,
+            "descriptor": "Provides relevant evidence with incomplete quality checks."
+          },
+          {
+            "level": 3,
+            "descriptor": "Triangulates the claim with decision-relevant diagnostics."
+          },
+          {
+            "level": 4,
+            "descriptor": "Tests plausible rival explanations and reports what evidence would change the conclusion."
+          }
+        ]
+      },
+      {
+        "check_id": "reproducibility-check",
+        "title": "Reproducibility",
+        "criterion": "reproducibility",
+        "weight_points": 15,
+        "method": "hybrid",
+        "description": "Another analyst can rerun the work and recover the metric, population, and diagnostics without hidden steps.",
+        "evidence_ids": [
+          "period-definition"
+        ],
+        "artifact_ids": [
+          "analysis-sql"
+        ],
+        "machine_rules": [
+          {
+            "rule_id": "sql-runs",
+            "signal": "artifact.analysis-sql.execution_status",
+            "operator": "equals",
+            "expected": "success",
+            "effect": "review-flag"
+          }
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "descriptor": "Relies on unrecorded manual work or non-executable code."
+          },
+          {
+            "level": 1,
+            "descriptor": "Code is partial or does not reproduce the reported result."
+          },
+          {
+            "level": 2,
+            "descriptor": "Core code runs but definitions or checks require reconstruction."
+          },
+          {
+            "level": 3,
+            "descriptor": "Executable work reproduces the result and key diagnostics."
+          },
+          {
+            "level": 4,
+            "descriptor": "Work is parameterized, readable, and includes explicit validation assertions."
+          }
+        ]
+      },
+      {
+        "check_id": "uncertainty-check",
+        "title": "Uncertainty calibration",
+        "criterion": "uncertainty",
+        "weight_points": 15,
+        "method": "human",
+        "description": "The brief identifies material selection, denominator, measurement, and causal limitations without generic caveat dumping.",
+        "evidence_ids": [
+          "uncertainty-note"
+        ],
+        "artifact_ids": [
+          "leadership-brief"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "descriptor": "States certainty unsupported by the design or data."
+          },
+          {
+            "level": 1,
+            "descriptor": "Adds generic caveats disconnected from the decision."
+          },
+          {
+            "level": 2,
+            "descriptor": "Names material limitations but does not calibrate their effect."
+          },
+          {
+            "level": 3,
+            "descriptor": "Calibrates language and recommendations to material uncertainty."
+          },
+          {
+            "level": 4,
+            "descriptor": "Quantifies or bounds key sensitivity and identifies decision-changing uncertainty."
+          }
+        ]
+      },
+      {
+        "check_id": "judgment-check",
+        "title": "Decision judgment",
+        "criterion": "judgment",
+        "weight_points": 20,
+        "method": "human",
+        "description": "The learner answers the decision actually faced, resists an unsupported causal claim, and chooses a proportional action or refusal.",
+        "evidence_ids": [
+          "uncertainty-note"
+        ],
+        "artifact_ids": [
+          "leadership-brief"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "descriptor": "Makes a materially unsafe or unsupported recommendation."
+          },
+          {
+            "level": 1,
+            "descriptor": "Reports analysis without a usable decision position."
+          },
+          {
+            "level": 2,
+            "descriptor": "Offers a plausible decision but weakly connects evidence and action."
+          },
+          {
+            "level": 3,
+            "descriptor": "Makes a proportional, evidence-aligned recommendation or responsible refusal."
+          },
+          {
+            "level": 4,
+            "descriptor": "Anticipates consequences, alternatives, and what new evidence should trigger a different decision."
+          }
+        ]
+      },
+      {
+        "check_id": "communication-check",
+        "title": "Decision communication",
+        "criterion": "communication",
+        "weight_points": 10,
+        "method": "human",
+        "description": "The brief is concise, audience-appropriate, definitionally precise, and clear about permitted and prohibited conclusions.",
+        "artifact_ids": [
+          "leadership-brief"
+        ],
+        "levels": [
+          {
+            "level": 0,
+            "descriptor": "Is misleading, inaccessible, or discloses protected detail."
+          },
+          {
+            "level": 1,
+            "descriptor": "Is hard to act on or omits the metric definition."
+          },
+          {
+            "level": 2,
+            "descriptor": "Is understandable but buries the decision or limitations."
+          },
+          {
+            "level": 3,
+            "descriptor": "Leads with the decision and concisely defines the evidence and limits."
+          },
+          {
+            "level": 4,
+            "descriptor": "Is unusually clear, anticipates likely misreading, and preserves analytical nuance."
+          }
+        ]
+      }
+    ]
+  },
+  "instructor_only": {
+    "truth_summary": "This fixture is about metric comparability rather than proving a business turnaround. A defensible comparison uses score_normalized and reconciles the 2024 dual-write ticket window at the interaction_fingerprint grain. The observational result alone cannot establish why satisfaction changed.",
+    "causal_model": [
+      {
+        "claim_id": "scale-mix-affects-raw-score",
+        "statement": "Mixing original 1-5 and 1-10 survey values makes score_raw unsuitable for direct period comparison.",
+        "confidence": "known",
+        "supporting_asset_ids": [
+          "tbl:support.csat_response"
+        ]
+      },
+      {
+        "claim_id": "dual-write-affects-denominator",
+        "statement": "The 2024 dual-write window can duplicate customer interactions under distinct ticket IDs and distort ticket-based response denominators.",
+        "confidence": "known",
+        "supporting_asset_ids": [
+          "tbl:support.ticket",
+          "tbl:support.csat_response"
+        ]
+      },
+      {
+        "claim_id": "observational-change-not-causal",
+        "statement": "A period-over-period satisfaction difference does not by itself identify the operational cause of the change.",
+        "confidence": "strong",
+        "supporting_asset_ids": [
+          "tbl:support.ticket",
+          "tbl:support.csat_response"
+        ]
+      }
+    ],
+    "known_anomalies": [
+      {
+        "anomaly_id": "support-dual-write",
+        "anomaly_ledger_ref": "A05",
+        "asset_ids": [
+          "tbl:support.ticket"
+        ],
+        "learner_signal": "interaction_fingerprint repeats while ticket_id remains unique during 2024-10-01 through 2024-11-30.",
+        "analytical_effect": "Naive ticket counts and joins can overstate distinct support interactions in the comparison period."
+      },
+      {
+        "anomaly_id": "mixed-survey-scales",
+        "asset_ids": [
+          "tbl:support.csat_response"
+        ],
+        "learner_signal": "scale_max includes both 5 and 10 and the catalog identifies score_normalized as comparable.",
+        "analytical_effect": "A raw-score average changes with scale mix even if underlying satisfaction does not."
+      }
+    ],
+    "expected_evidence": [
+      "Counts of ticket_id and interaction_fingerprint by period, including the dual_write_window_flag population.",
+      "Coverage of scale_max and use of score_normalized rather than score_raw.",
+      "A documented survey population and denominator, not only an average score.",
+      "Executable SQL with the analysis cutoff and comparison windows visible.",
+      "A decision statement that separates descriptive change from causal explanation."
+    ],
+    "plausible_conclusions": [
+      "Satisfaction is descriptively higher, lower, or approximately unchanged after using a comparable score and reconciled interaction population, with explicit survey-selection limitations.",
+      "The observed comparison is too sensitive to denominator or response-selection choices for a directional leadership claim; report the bounded findings and request a targeted follow-up."
+    ],
+    "unsupported_claims": [
+      "A change in mean score proves that Customer Care operations caused a recovery or decline.",
+      "Averages of score_raw are comparable without conditioning on scale_max.",
+      "Distinct ticket_id always represents distinct customer interactions."
+    ],
+    "responsible_refusal_conditions": [
+      "The requested causal language exceeds what the observational comparison can identify.",
+      "Material denominator or scale-definition ambiguity remains unresolved after proportionate investigation.",
+      "The learner states the narrower descriptive result and proposes a concrete way to resolve the gap."
+    ],
+    "author_notes": "Keep this fixture small. Its purpose is contract and harness testing, not production scenario depth."
+  },
+  "metadata": {
+    "authors": [
+      "The Analyst project"
+    ],
+    "created_at": "2026-09-01T09:00:00-04:00",
+    "updated_at": "2026-09-01T09:00:00-04:00",
+    "source_revision": "meridian-estate-v1"
+  }
+}

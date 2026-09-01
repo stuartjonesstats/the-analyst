@@ -1,0 +1,149 @@
+[
+  {
+    "anomaly_id": "A-TXN-ACQ-01",
+    "tables": [
+      "commerce.order",
+      "commerce.order_event"
+    ],
+    "date_range": [
+      "2024-04-01",
+      "2024-06-30"
+    ],
+    "selector": "HarborHome accounts during acquisition cutover",
+    "rate": "1,971 order headers plus their events",
+    "root_cause": "The acquired OMS exported local-naive timestamps and tenant-local order numbers without tenant identifiers.",
+    "symptom": "source_order_id is non-unique and source_recorded_at can precede canonical occurred_at by about five hours.",
+    "public_clue": "Source-system and warehouse-availability fields make the affected population isolatable.",
+    "learning_objective": "Distinguish canonical keys and event time from imperfect source-system representations.",
+    "allowed_invariant_violations": [
+      "source_order_id uniqueness",
+      "source_recorded_at >= occurred_at for the affected source"
+    ]
+  },
+  {
+    "anomaly_id": "A-TXN-BILL-01",
+    "tables": [
+      "billing.invoice",
+      "billing.payment_attempt"
+    ],
+    "date_range": [
+      "2025-09-01",
+      "2025-10-15"
+    ],
+    "selector": "Invoices and attempts processed during the NovaPay cutover",
+    "rate": "50,958 invoices in the cutover window",
+    "root_cause": "A payment-processor migration changed decline-code taxonomy, forced token refreshes, and delayed ingestion.",
+    "symptom": "Failure rates and raw decline labels jump while some failed attempts arrive 18-120 hours late.",
+    "public_clue": "Processor, raw code, event time, and warehouse-availability clocks are retained.",
+    "learning_objective": "Separate a real operational incident from a simultaneous measurement-definition change.",
+    "allowed_invariant_violations": [
+      "stable raw decline-code categories over time",
+      "normal warehouse ingestion latency during cutover"
+    ]
+  },
+  {
+    "anomaly_id": "A-TXN-ACQ-02",
+    "tables": [
+      "growth.session"
+    ],
+    "date_range": [
+      "2024-04-01",
+      "2024-06-30"
+    ],
+    "selector": "HarborHome digital sessions during identity-platform cutover",
+    "rate": "4,043 sessions",
+    "root_cause": "The acquired site issued new visitor identifiers and omitted its former tenant namespace.",
+    "symptom": "One customer can appear under multiple visitor IDs, while a subset of legacy-style IDs repeat.",
+    "public_clue": "Account attribution, visitor IDs, and cutover dates permit a scoped identity-quality audit.",
+    "learning_objective": "Choose an analytical identity grain rather than assuming a browser identifier is a person.",
+    "allowed_invariant_violations": [
+      "visitor_id uniqueness across the acquisition cutover"
+    ]
+  },
+  {
+    "anomaly_id": "A08",
+    "name": "Weather-induced telemetry missingness",
+    "affected_tables": [
+      "iot.sensor_reading",
+      "iot.asset_health_daily"
+    ],
+    "date_range": "2025-03-14/2025-03-20",
+    "mechanism": "Affected devices fail to report precisely when outages and failures rise.",
+    "breadcrumb": "quality_code=STORM_GAP and external weather observations",
+    "learning_objective": "Reason about missing-not-at-random operational telemetry."
+  },
+  {
+    "anomaly_id": "A14",
+    "name": "One-to-many work-order fanout",
+    "affected_tables": [
+      "field_ops.work_order",
+      "field_ops.work_order_part",
+      "field_ops.work_order_status_event"
+    ],
+    "date_range": "2023-01-01/2025-12-31",
+    "mechanism": "Joining work orders to both parts and status histories multiplies rows.",
+    "breadcrumb": "Catalog relationship cardinalities and count-distinct reconciliation.",
+    "learning_objective": "Recognize grain changes and join fanout."
+  },
+  {
+    "anomaly_id": "A05",
+    "name": "Support dual-write duplicates",
+    "affected_tables": [
+      "support.ticket",
+      "support.ticket_status_event"
+    ],
+    "date_range": "2024-10-01/2024-11-30",
+    "mechanism": "CRM migration wrote the same interaction to Zendesk and a CRM mirror under different ticket IDs.",
+    "breadcrumb": "interaction_fingerprint repeats while ticket_id remains unique.",
+    "learning_objective": "Define a business key and reconcile duplicates without deleting legitimate repeat contacts."
+  },
+  {
+    "anomaly_id": "A12",
+    "name": "Warehouse scanner retry replay",
+    "affected_tables": [
+      "supply.inventory_movement"
+    ],
+    "date_range": "2025-11-01/2025-11-30",
+    "mechanism": "Offline handhelds replayed acknowledged movements after reconnecting.",
+    "breadcrumb": "scanner_replay_flag and repeated reference/device/quantity combinations.",
+    "learning_objective": "Distinguish technical event identity from physical stock movement identity."
+  },
+  {
+    "anomaly_id": "A10",
+    "name": "Dispatch optimizer regime change",
+    "affected_tables": [
+      "fleet.route",
+      "fleet.route_stop",
+      "field_ops.appointment"
+    ],
+    "date_range": "2025-05-01/2025-12-31",
+    "mechanism": "A new optimizer altered route density and technician assignment patterns by region.",
+    "breadcrumb": "optimizer_version provides an explicit regime indicator.",
+    "learning_objective": "Avoid treating a policy-induced distribution shift as an employee performance effect."
+  },
+  {
+    "anomaly_id": "A07",
+    "name": "March 2025 winter storm",
+    "affected_tables": [
+      "external.weather_hourly",
+      "iot.sensor_reading",
+      "field_ops.work_order",
+      "fleet.route"
+    ],
+    "date_range": "2025-03-14/2025-03-20",
+    "mechanism": "Severe weather affected Northeast operations, telemetry, demand, and travel simultaneously.",
+    "breadcrumb": "condition_code='SEVERE_WINTER' in stations mapped to regions 1-3.",
+    "learning_objective": "Separate a shared external cause from a product, employee, or model effect."
+  },
+  {
+    "anomaly_id": "A13",
+    "name": "Future-outcome columns in feature extract",
+    "affected_tables": [
+      "platform.account_feature_snapshot"
+    ],
+    "date_range": "2024-01-01/2025-12-31",
+    "mechanism": "A convenience export places realized outcomes beside point-in-time features.",
+    "breadcrumb": "Columns prefixed future_ and eventual_ appear at the end of the table.",
+    "learning_objective": "Build an explicit predictor allow-list and reason about observation availability."
+  }
+]

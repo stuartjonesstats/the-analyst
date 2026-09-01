@@ -1,0 +1,1409 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://theanalyst.dev/schemas/simulation.schema.json",
+  "title": "The Analyst simulation contract",
+  "description": "Authoring contract for a judgment-focused simulation in the Meridian Living Systems data estate. Instructor-only fields must be removed when producing a learner manifest.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "scenario_id",
+    "title",
+    "company",
+    "status",
+    "summary",
+    "estimated_duration_minutes",
+    "learner_context",
+    "data_access",
+    "timeline",
+    "branches",
+    "evidence_requirements",
+    "artifact_requirements",
+    "scaffolding",
+    "assessment",
+    "instructor_only"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "scenario_id": {
+      "$ref": "#/$defs/stableId"
+    },
+    "title": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "company": {
+      "const": "Meridian Living Systems"
+    },
+    "status": {
+      "enum": [
+        "draft",
+        "pilot",
+        "published",
+        "retired"
+      ]
+    },
+    "summary": {
+      "$ref": "#/$defs/nonEmptyString"
+    },
+    "estimated_duration_minutes": {
+      "type": "integer",
+      "minimum": 10
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/stableId"
+      },
+      "uniqueItems": true,
+      "default": []
+    },
+    "learner_context": {
+      "$ref": "#/$defs/learnerContext"
+    },
+    "data_access": {
+      "$ref": "#/$defs/dataAccess"
+    },
+    "timeline": {
+      "$ref": "#/$defs/timeline"
+    },
+    "branches": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/branch"
+      },
+      "default": []
+    },
+    "evidence_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/evidenceRequirement"
+      }
+    },
+    "artifact_requirements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/artifactRequirement"
+      }
+    },
+    "scaffolding": {
+      "$ref": "#/$defs/scaffolding"
+    },
+    "assessment": {
+      "$ref": "#/$defs/assessment"
+    },
+    "instructor_only": {
+      "$ref": "#/$defs/instructorOnly"
+    },
+    "metadata": {
+      "$ref": "#/$defs/metadata"
+    }
+  },
+  "$defs": {
+    "nonEmptyString": {
+      "type": "string",
+      "minLength": 1
+    },
+    "stableId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$"
+    },
+    "assetId": {
+      "type": "string",
+      "pattern": "^tbl:[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"
+    },
+    "fullyQualifiedName": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*\\.[a-z][a-z0-9_]*$"
+    },
+    "neighborhoodId": {
+      "type": "string",
+      "pattern": "^schema:[a-z][a-z0-9_]*$"
+    },
+    "learnerContext": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role",
+        "analysis_cutoff",
+        "briefing"
+      ],
+      "properties": {
+        "role": {
+          "$ref": "#/$defs/role"
+        },
+        "analysis_cutoff": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Latest point in simulated time the learner may treat as known unless the scenario explicitly advances it."
+        },
+        "briefing": {
+          "$ref": "#/$defs/briefing"
+        },
+        "learning_objectives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "role": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "role_id",
+        "title",
+        "department",
+        "seniority",
+        "manager",
+        "mandate"
+      ],
+      "properties": {
+        "role_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "department": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "seniority": {
+          "enum": [
+            "intern",
+            "junior",
+            "mid",
+            "senior",
+            "lead"
+          ]
+        },
+        "manager": {
+          "$ref": "#/$defs/person"
+        },
+        "mandate": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "permissions_note": {
+          "type": "string"
+        }
+      }
+    },
+    "person": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "person_id",
+        "name",
+        "title"
+      ],
+      "properties": {
+        "person_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "name": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "department": {
+          "type": "string"
+        }
+      }
+    },
+    "briefing": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "briefing_id",
+        "channel",
+        "from",
+        "subject",
+        "body",
+        "requested_outcomes",
+        "decision_deadline"
+      ],
+      "properties": {
+        "briefing_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "channel": {
+          "enum": [
+            "email",
+            "chat",
+            "meeting-note",
+            "ticket",
+            "verbal"
+          ]
+        },
+        "from": {
+          "$ref": "#/$defs/person"
+        },
+        "to_role_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "subject": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "body": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "requested_outcomes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "decision_deadline": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attachment"
+          },
+          "default": []
+        }
+      }
+    },
+    "attachment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attachment_id",
+        "title",
+        "media_type"
+      ],
+      "properties": {
+        "attachment_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "media_type": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "path": {
+          "type": "string"
+        },
+        "inline_content": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "anyOf": [
+        {
+          "required": [
+            "path"
+          ]
+        },
+        {
+          "required": [
+            "inline_content"
+          ]
+        }
+      ]
+    },
+    "dataAccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "catalog_sources",
+        "accessible_neighborhoods",
+        "asset_access",
+        "query_policy"
+      ],
+      "properties": {
+        "catalog_sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "data_catalog",
+            "relationships",
+            "table_neighborhoods"
+          ],
+          "properties": {
+            "data_catalog": {
+              "const": "catalog/data_catalog.json"
+            },
+            "relationships": {
+              "const": "catalog/relationships.json"
+            },
+            "table_neighborhoods": {
+              "const": "catalog/table_neighborhoods.json"
+            }
+          }
+        },
+        "accessible_neighborhoods": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "neighborhood_id",
+              "availability",
+              "discovery_note"
+            ],
+            "properties": {
+              "neighborhood_id": {
+                "$ref": "#/$defs/neighborhoodId"
+              },
+              "availability": {
+                "enum": [
+                  "initial",
+                  "discoverable",
+                  "event-gated",
+                  "role-restricted"
+                ]
+              },
+              "discovery_note": {
+                "type": "string",
+                "description": "Learner-safe explanation of why this neighborhood is visible or how it can be found."
+              },
+              "revealed_by": {
+                "$ref": "#/$defs/stableId"
+              },
+              "initial_asset_ids": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/assetId"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "asset_access": {
+          "type": "array",
+          "description": "Optional per-asset overrides. Omission means the containing neighborhood policy applies.",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "asset_id",
+              "availability"
+            ],
+            "properties": {
+              "asset_id": {
+                "$ref": "#/$defs/assetId"
+              },
+              "fully_qualified_name": {
+                "$ref": "#/$defs/fullyQualifiedName"
+              },
+              "availability": {
+                "enum": [
+                  "initial",
+                  "discoverable",
+                  "event-gated",
+                  "unavailable"
+                ]
+              },
+              "revealed_by": {
+                "$ref": "#/$defs/stableId"
+              },
+              "handling_note": {
+                "type": "string"
+              }
+            }
+          },
+          "default": []
+        },
+        "query_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "allow_sql",
+            "allow_python",
+            "allow_row_preview",
+            "allow_raw_export",
+            "respect_catalog_sensitivity"
+          ],
+          "properties": {
+            "allow_sql": {
+              "type": "boolean"
+            },
+            "allow_python": {
+              "type": "boolean"
+            },
+            "allow_row_preview": {
+              "type": "boolean"
+            },
+            "allow_raw_export": {
+              "type": "boolean"
+            },
+            "respect_catalog_sensitivity": {
+              "const": true
+            }
+          }
+        }
+      }
+    },
+    "timeline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "clock_mode",
+        "simulation_starts_at",
+        "events"
+      ],
+      "properties": {
+        "clock_mode": {
+          "enum": [
+            "real-time",
+            "simulated",
+            "manual"
+          ]
+        },
+        "simulation_starts_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/event"
+          }
+        }
+      }
+    },
+    "event": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "event_id",
+        "title",
+        "trigger",
+        "actions",
+        "once"
+      ],
+      "properties": {
+        "event_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "trigger": {
+          "$ref": "#/$defs/trigger"
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "once": {
+          "type": "boolean"
+        },
+        "instructor_note": {
+          "type": "string"
+        }
+      }
+    },
+    "trigger": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "minutes"
+          ],
+          "properties": {
+            "kind": {
+              "const": "elapsed-minutes"
+            },
+            "minutes": {
+              "type": "integer",
+              "minimum": 0
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "at"
+          ],
+          "properties": {
+            "kind": {
+              "const": "simulation-time"
+            },
+            "at": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind",
+            "when"
+          ],
+          "properties": {
+            "kind": {
+              "const": "state-condition"
+            },
+            "when": {
+              "$ref": "#/$defs/condition"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "kind"
+          ],
+          "properties": {
+            "kind": {
+              "const": "instructor-manual"
+            }
+          }
+        }
+      ]
+    },
+    "condition": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "fact",
+            "operator",
+            "value"
+          ],
+          "properties": {
+            "fact": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z0-9_-]+)+$"
+            },
+            "operator": {
+              "enum": [
+                "equals",
+                "not-equals",
+                "in",
+                "not-in",
+                "contains",
+                "greater-than",
+                "greater-than-or-equal",
+                "less-than",
+                "less-than-or-equal"
+              ]
+            },
+            "value": true
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "all"
+          ],
+          "properties": {
+            "all": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/condition"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "any"
+          ],
+          "properties": {
+            "any": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/condition"
+              }
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "not"
+          ],
+          "properties": {
+            "not": {
+              "$ref": "#/$defs/condition"
+            }
+          }
+        }
+      ]
+    },
+    "action": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "message"
+          ],
+          "properties": {
+            "type": {
+              "const": "deliver-message"
+            },
+            "message": {
+              "$ref": "#/$defs/message"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "neighborhood_id"
+          ],
+          "properties": {
+            "type": {
+              "const": "unlock-neighborhood"
+            },
+            "neighborhood_id": {
+              "$ref": "#/$defs/neighborhoodId"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "asset_id"
+          ],
+          "properties": {
+            "type": {
+              "const": "unlock-asset"
+            },
+            "asset_id": {
+              "$ref": "#/$defs/assetId"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "attachment"
+          ],
+          "properties": {
+            "type": {
+              "const": "add-attachment"
+            },
+            "attachment": {
+              "$ref": "#/$defs/attachment"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "fact",
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "const": "set-fact"
+            },
+            "fact": {
+              "type": "string",
+              "pattern": "^scenario\\.[a-z0-9_-]+$"
+            },
+            "value": true
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "artifact_id"
+          ],
+          "properties": {
+            "type": {
+              "const": "request-artifact"
+            },
+            "artifact_id": {
+              "$ref": "#/$defs/stableId"
+            }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "outcome"
+          ],
+          "properties": {
+            "type": {
+              "const": "end-scenario"
+            },
+            "outcome": {
+              "enum": [
+                "concluded",
+                "qualified-conclusion",
+                "responsible-refusal",
+                "incomplete"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "message": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "message_id",
+        "channel",
+        "from",
+        "subject",
+        "body"
+      ],
+      "properties": {
+        "message_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "channel": {
+          "enum": [
+            "email",
+            "chat",
+            "meeting-note",
+            "system"
+          ]
+        },
+        "from": {
+          "$ref": "#/$defs/person"
+        },
+        "subject": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "body": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/attachment"
+          }
+        }
+      }
+    },
+    "branch": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "branch_id",
+        "priority",
+        "when",
+        "actions"
+      ],
+      "properties": {
+        "branch_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "priority": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "when": {
+          "$ref": "#/$defs/condition"
+        },
+        "actions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/action"
+          }
+        },
+        "exclusive_group": {
+          "$ref": "#/$defs/stableId"
+        }
+      }
+    },
+    "evidenceRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "title",
+        "description",
+        "kind",
+        "required",
+        "capture_mode",
+        "evaluation_check_ids"
+      ],
+      "properties": {
+        "evidence_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "description": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "kind": {
+          "enum": [
+            "query",
+            "result-snapshot",
+            "data-profile",
+            "join-audit",
+            "chart",
+            "source-citation",
+            "analysis-note",
+            "decision-record"
+          ]
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "minimum_count": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 1
+        },
+        "capture_mode": {
+          "enum": [
+            "automatic",
+            "learner-selected",
+            "either"
+          ]
+        },
+        "evaluation_check_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "artifactRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "artifact_id",
+        "title",
+        "type",
+        "prompt",
+        "audience",
+        "required",
+        "accepted_formats",
+        "evaluation_check_ids"
+      ],
+      "properties": {
+        "artifact_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "type": {
+          "enum": [
+            "sql-file",
+            "analysis-notebook",
+            "chart",
+            "memo",
+            "decision-brief",
+            "presentation",
+            "data-export",
+            "other"
+          ]
+        },
+        "prompt": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "audience": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "accepted_formats": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z0-9.+-]+/[a-z0-9.+-]+$"
+          },
+          "uniqueItems": true
+        },
+        "constraints": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "evaluation_check_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "scaffolding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "default_tier_id",
+        "default_assessment_treatment",
+        "tiers"
+      ],
+      "properties": {
+        "default_tier_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "default_assessment_treatment": {
+          "enum": [
+            "no-penalty",
+            "record-usage",
+            "score-cap"
+          ]
+        },
+        "tiers": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/scaffoldTier"
+          }
+        }
+      }
+    },
+    "scaffoldTier": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "tier_id",
+        "order",
+        "label",
+        "description",
+        "availability",
+        "interventions"
+      ],
+      "properties": {
+        "tier_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "label": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "description": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "availability": {
+          "enum": [
+            "always",
+            "on-request",
+            "automatic",
+            "instructor-only"
+          ]
+        },
+        "unlock_when": {
+          "$ref": "#/$defs/condition"
+        },
+        "interventions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "intervention_id",
+              "type",
+              "content"
+            ],
+            "properties": {
+              "intervention_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "type": {
+                "enum": [
+                  "orientation",
+                  "question",
+                  "catalog-pointer",
+                  "checklist",
+                  "concept-note",
+                  "query-starter",
+                  "worked-example"
+                ]
+              },
+              "content": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "asset_id": {
+                "$ref": "#/$defs/assetId"
+              }
+            }
+          }
+        }
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rubric_ref",
+        "maximum_points",
+        "completion_modes",
+        "responsible_refusal",
+        "checks"
+      ],
+      "properties": {
+        "rubric_ref": {
+          "const": "docs/assessment_rubric.md"
+        },
+        "maximum_points": {
+          "const": 100
+        },
+        "completion_modes": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "enum": [
+              "conclusion",
+              "qualified-conclusion",
+              "responsible-refusal"
+            ]
+          },
+          "uniqueItems": true
+        },
+        "responsible_refusal": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "eligible",
+            "policy",
+            "must_include"
+          ],
+          "properties": {
+            "eligible": {
+              "type": "boolean"
+            },
+            "policy": {
+              "$ref": "#/$defs/nonEmptyString"
+            },
+            "must_include": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "checks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/evaluationCheck"
+          }
+        }
+      }
+    },
+    "evaluationCheck": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "check_id",
+        "title",
+        "criterion",
+        "weight_points",
+        "method",
+        "description",
+        "levels"
+      ],
+      "properties": {
+        "check_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "title": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "criterion": {
+          "enum": [
+            "grain",
+            "time",
+            "evidence-quality",
+            "reproducibility",
+            "uncertainty",
+            "judgment",
+            "communication",
+            "governance"
+          ]
+        },
+        "weight_points": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 100
+        },
+        "method": {
+          "enum": [
+            "machine",
+            "human",
+            "hybrid"
+          ]
+        },
+        "description": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "evidence_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "uniqueItems": true
+        },
+        "artifact_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/stableId"
+          },
+          "uniqueItems": true
+        },
+        "machine_rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/machineRule"
+          }
+        },
+        "levels": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "level",
+              "descriptor"
+            ],
+            "properties": {
+              "level": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 4
+              },
+              "descriptor": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        }
+      }
+    },
+    "machineRule": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rule_id",
+        "signal",
+        "operator",
+        "expected",
+        "effect"
+      ],
+      "properties": {
+        "rule_id": {
+          "$ref": "#/$defs/stableId"
+        },
+        "signal": {
+          "type": "string",
+          "description": "Named harness signal, never an arbitrary executable expression."
+        },
+        "operator": {
+          "enum": [
+            "equals",
+            "not-equals",
+            "contains",
+            "greater-than-or-equal",
+            "less-than-or-equal"
+          ]
+        },
+        "expected": true,
+        "effect": {
+          "enum": [
+            "evidence",
+            "review-flag",
+            "completion-gate"
+          ]
+        }
+      }
+    },
+    "instructorOnly": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "truth_summary",
+        "causal_model",
+        "known_anomalies",
+        "expected_evidence",
+        "plausible_conclusions",
+        "unsupported_claims",
+        "responsible_refusal_conditions"
+      ],
+      "properties": {
+        "truth_summary": {
+          "$ref": "#/$defs/nonEmptyString"
+        },
+        "causal_model": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "claim_id",
+              "statement",
+              "confidence",
+              "supporting_asset_ids"
+            ],
+            "properties": {
+              "claim_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "statement": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "confidence": {
+                "enum": [
+                  "known",
+                  "strong",
+                  "moderate",
+                  "weak",
+                  "unknown"
+                ]
+              },
+              "supporting_asset_ids": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/$defs/assetId"
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        },
+        "known_anomalies": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "anomaly_id",
+              "asset_ids",
+              "learner_signal",
+              "analytical_effect"
+            ],
+            "properties": {
+              "anomaly_id": {
+                "$ref": "#/$defs/stableId"
+              },
+              "anomaly_ledger_ref": {
+                "type": "string",
+                "description": "Identifier in catalog/anomaly_ledger.json when one exists."
+              },
+              "asset_ids": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "$ref": "#/$defs/assetId"
+                },
+                "uniqueItems": true
+              },
+              "learner_signal": {
+                "$ref": "#/$defs/nonEmptyString"
+              },
+              "analytical_effect": {
+                "$ref": "#/$defs/nonEmptyString"
+              }
+            }
+          }
+        },
+        "expected_evidence": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "plausible_conclusions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "unsupported_claims": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "responsible_refusal_conditions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "author_notes": {
+          "type": "string"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "authors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/nonEmptyString"
+          }
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "source_revision": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

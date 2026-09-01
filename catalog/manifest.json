@@ -1,0 +1,777 @@
+{
+  "company": "Meridian Living Systems",
+  "master_seed": 20260831,
+  "table_count": 96,
+  "total_rows": 16548418,
+  "total_bytes": 592093499,
+  "files": [
+    {
+      "table": "billing.invoice",
+      "rows": 719302,
+      "columns": 12,
+      "bytes": 21618907,
+      "sha256": "93937d8f05b3a282528351cff59ff4a102dada1d6db908b1e1fab12de57514c5",
+      "path": "parquet/billing/invoice.parquet"
+    },
+    {
+      "table": "billing.payment_attempt",
+      "rows": 764039,
+      "columns": 12,
+      "bytes": 18455311,
+      "sha256": "17863d5f6f31876206f44105dd936c1c664b6d9400d80646a07c376f97a6a33a",
+      "path": "parquet/billing/payment_attempt.parquet"
+    },
+    {
+      "table": "billing.subscription",
+      "rows": 40000,
+      "columns": 10,
+      "bytes": 1126262,
+      "sha256": "3c321565d96e850b5ac40dd14edaf379ed966307e524b7c972ec2bcfb369b499",
+      "path": "parquet/billing/subscription.parquet"
+    },
+    {
+      "table": "billing.subscription_event",
+      "rows": 200000,
+      "columns": 8,
+      "bytes": 3942551,
+      "sha256": "1a6a96222deab27c2e412cfa104f134a1a6f8e49df3ad1a7c937a80ccf5e806a",
+      "path": "parquet/billing/subscription_event.parquet"
+    },
+    {
+      "table": "catalog.plan_price_history",
+      "rows": 54,
+      "columns": 6,
+      "bytes": 2354,
+      "sha256": "210a807244cba88b25ff3ed65db1de31a1543f163459510793a5716d20272997",
+      "path": "parquet/catalog/plan_price_history.parquet"
+    },
+    {
+      "table": "catalog.product",
+      "rows": 720,
+      "columns": 13,
+      "bytes": 19575,
+      "sha256": "c2cbe0e8860aad58f14f8f8197727fbc0b888ad2df1bd9aa1903d3f9d0c675ca",
+      "path": "parquet/catalog/product.parquet"
+    },
+    {
+      "table": "catalog.product_category",
+      "rows": 55,
+      "columns": 5,
+      "bytes": 2025,
+      "sha256": "a124424f20f50c693ccf9ae9b533ce450602cc913daa9664de30ece5432551d1",
+      "path": "parquet/catalog/product_category.parquet"
+    },
+    {
+      "table": "catalog.product_price_history",
+      "rows": 4320,
+      "columns": 8,
+      "bytes": 50723,
+      "sha256": "66d98110945add7c655707a347dc514522f709e2c9aebf04cf2174874dce23a9",
+      "path": "parquet/catalog/product_price_history.parquet"
+    },
+    {
+      "table": "catalog.product_substitution",
+      "rows": 1440,
+      "columns": 7,
+      "bytes": 10644,
+      "sha256": "a90c92b042b465d7645ad0b3b40da1ab15f2a5f077375864d0312d2437bb33e4",
+      "path": "parquet/catalog/product_substitution.parquet"
+    },
+    {
+      "table": "catalog.service_plan",
+      "rows": 18,
+      "columns": 9,
+      "bytes": 3120,
+      "sha256": "060a18cb8dfdd6b7d948d0c9b08266403a0f4b21c7f20e79545808062999ae26",
+      "path": "parquet/catalog/service_plan.parquet"
+    },
+    {
+      "table": "commerce.order",
+      "rows": 220000,
+      "columns": 15,
+      "bytes": 8962973,
+      "sha256": "cf9ec2d118fa4b30ffb88ee8d73218ef7c0385a2aac00b93ced06407f7431146",
+      "path": "parquet/commerce/order.parquet"
+    },
+    {
+      "table": "commerce.order_event",
+      "rows": 660000,
+      "columns": 8,
+      "bytes": 14380939,
+      "sha256": "b390e557c2789207ad24feb7e8ae506e4ed478f3fe72354562070d85d49b8b04",
+      "path": "parquet/commerce/order_event.parquet"
+    },
+    {
+      "table": "commerce.order_line",
+      "rows": 394054,
+      "columns": 11,
+      "bytes": 11271813,
+      "sha256": "e0f57922d0f8b54153af5cf3eaeffc5e949e14ab5ed71275429953938975fdee",
+      "path": "parquet/commerce/order_line.parquet"
+    },
+    {
+      "table": "commerce.shipment_event",
+      "rows": 611004,
+      "columns": 8,
+      "bytes": 15196986,
+      "sha256": "5b966ef123e4a8811088b543cad26fb95b54e03917fa6defa959ddc2d0815c12",
+      "path": "parquet/commerce/shipment_event.parquet"
+    },
+    {
+      "table": "core.branch",
+      "rows": 36,
+      "columns": 9,
+      "bytes": 4021,
+      "sha256": "b81e03642a32a71769992fca0b7923406ad7c931aab1549f1423c614f03ef513",
+      "path": "parquet/core/branch.parquet"
+    },
+    {
+      "table": "core.business_calendar",
+      "rows": 1096,
+      "columns": 11,
+      "bytes": 7643,
+      "sha256": "361736b119a9311ebf04aa6e5998d79c15846ff45aa1683366e179f2a92f1b18",
+      "path": "parquet/core/business_calendar.parquet"
+    },
+    {
+      "table": "core.legacy_id_xref",
+      "rows": 74825,
+      "columns": 8,
+      "bytes": 762135,
+      "sha256": "9c207d18e5f6372f07cf1e0bc268c05a8b4b334a58314089e1349ff041fd3cf9",
+      "path": "parquet/core/legacy_id_xref.parquet"
+    },
+    {
+      "table": "core.org_unit",
+      "rows": 90,
+      "columns": 8,
+      "bytes": 3830,
+      "sha256": "cb56a57aec96a8339b327aba86c614c461a7371b5d65a90962f0db0e7c3399bb",
+      "path": "parquet/core/org_unit.parquet"
+    },
+    {
+      "table": "core.postal_area",
+      "rows": 800,
+      "columns": 8,
+      "bytes": 20333,
+      "sha256": "00a58cb33aa7ad4540170d67ad5524cba3ca3a7f511f64a445522ce3223b0eb9",
+      "path": "parquet/core/postal_area.parquet"
+    },
+    {
+      "table": "core.region",
+      "rows": 6,
+      "columns": 6,
+      "bytes": 1992,
+      "sha256": "1b58eb4d5d1d174ff2d444b752eea23302b548e80d981f647992431faf174a6c",
+      "path": "parquet/core/region.parquet"
+    },
+    {
+      "table": "core.service_area",
+      "rows": 120,
+      "columns": 8,
+      "bytes": 3316,
+      "sha256": "e36460fb8a2152f7e888643239e42a51a8b3316418b2838fcd083e81539e04ed",
+      "path": "parquet/core/service_area.parquet"
+    },
+    {
+      "table": "core.world_event",
+      "rows": 180,
+      "columns": 10,
+      "bytes": 7289,
+      "sha256": "6a5aec99bad1b31ed0947df58c6733e019dc4f5535f43713d56db62728e5a325",
+      "path": "parquet/core/world_event.parquet"
+    },
+    {
+      "table": "crm.account",
+      "rows": 65000,
+      "columns": 10,
+      "bytes": 841528,
+      "sha256": "9ec3d10efd963164b4cc54632b6887fe184d469fa8851dd7915c455919147093",
+      "path": "parquet/crm/account.parquet"
+    },
+    {
+      "table": "crm.account_member",
+      "rows": 79300,
+      "columns": 7,
+      "bytes": 916824,
+      "sha256": "183f34b0d406e2e55d5ac7debd3a7b5a0eb307f75c8e673c4362765873c7f54f",
+      "path": "parquet/crm/account_member.parquet"
+    },
+    {
+      "table": "crm.account_status_event",
+      "rows": 76806,
+      "columns": 6,
+      "bytes": 544610,
+      "sha256": "3c286386e30fef6d07f8de79dad89d19a498b6425a62840532b6ba74766ec524",
+      "path": "parquet/crm/account_status_event.parquet"
+    },
+    {
+      "table": "crm.consent_event",
+      "rows": 110000,
+      "columns": 9,
+      "bytes": 1419738,
+      "sha256": "4129b12e15c4bf9f2763e8922eaede7a358b592839b793c7f5ad2dfe22adfec3",
+      "path": "parquet/crm/consent_event.parquet"
+    },
+    {
+      "table": "crm.contact_point",
+      "rows": 82800,
+      "columns": 8,
+      "bytes": 1187138,
+      "sha256": "22642db732c933d05ba856ba9164ee2fc94cb43ad77b6a58b342ee1d253b793c",
+      "path": "parquet/crm/contact_point.parquet"
+    },
+    {
+      "table": "crm.customer",
+      "rows": 60000,
+      "columns": 10,
+      "bytes": 533633,
+      "sha256": "668bb1f159a1fda1325fdff2dbcfda510c1d51d306c32072a5cb6108ffd1ffc4",
+      "path": "parquet/crm/customer.parquet"
+    },
+    {
+      "table": "crm.service_site",
+      "rows": 80000,
+      "columns": 12,
+      "bytes": 2211911,
+      "sha256": "51d396a7af4bb60b643d4352daed903891c1cd78b01c00ac2cd74558516992e9",
+      "path": "parquet/crm/service_site.parquet"
+    },
+    {
+      "table": "external.energy_price_daily",
+      "rows": 19728,
+      "columns": 7,
+      "bytes": 192640,
+      "sha256": "5c73387ac0b9d6f0720a9bff67f2315142e497996c5f063df33809aa1bf16e3b",
+      "path": "parquet/external/energy_price_daily.parquet"
+    },
+    {
+      "table": "external.holiday_calendar",
+      "rows": 540,
+      "columns": 6,
+      "bytes": 6091,
+      "sha256": "5a877dacf6e46e50fd8120adb4757a8594d32eef2ce07793f82e85c5c361dbfe",
+      "path": "parquet/external/holiday_calendar.parquet"
+    },
+    {
+      "table": "external.postal_demographic_annual",
+      "rows": 2400,
+      "columns": 10,
+      "bytes": 92312,
+      "sha256": "31819afe17dadcb7aaf1de7965e0d3456ae18731c8145cc92fc058294053812e",
+      "path": "parquet/external/postal_demographic_annual.parquet"
+    },
+    {
+      "table": "external.traffic_area_hourly",
+      "rows": 380000,
+      "columns": 8,
+      "bytes": 9148332,
+      "sha256": "e48deb1d54dbc847fabc2db883aedce88bb187a4e1e02c4a0440b93a7818db2c",
+      "path": "parquet/external/traffic_area_hourly.parquet"
+    },
+    {
+      "table": "external.weather_hourly",
+      "rows": 315648,
+      "columns": 14,
+      "bytes": 15527855,
+      "sha256": "0dd7f62c0e92bf5696bbcd4e256b0b522fb84a97a30f05333f07663f40ce572e",
+      "path": "parquet/external/weather_hourly.parquet"
+    },
+    {
+      "table": "external.weather_station",
+      "rows": 12,
+      "columns": 8,
+      "bytes": 3106,
+      "sha256": "b60f62c257f03dd98a8a82209c6929c20cbd260673f1547cae7c6862f4d9906b",
+      "path": "parquet/external/weather_station.parquet"
+    },
+    {
+      "table": "field_ops.appointment",
+      "rows": 120000,
+      "columns": 10,
+      "bytes": 3856387,
+      "sha256": "ea5e3d6aac60302de4d1e4e91986f7dc03f07e2d0dc4bdb2cade1b99fcbc7d76",
+      "path": "parquet/field_ops/appointment.parquet"
+    },
+    {
+      "table": "field_ops.visit",
+      "rows": 120000,
+      "columns": 11,
+      "bytes": 3698286,
+      "sha256": "104447018e3c0f97e4f2e4d90cff3453f04c38a64a85fec46f0d22d45315cb26",
+      "path": "parquet/field_ops/visit.parquet"
+    },
+    {
+      "table": "field_ops.work_order",
+      "rows": 120000,
+      "columns": 20,
+      "bytes": 6240802,
+      "sha256": "a61934c4ada15bf076c6c63502f5951d64353bc59fc894823ab3c8012adddfe0",
+      "path": "parquet/field_ops/work_order.parquet"
+    },
+    {
+      "table": "field_ops.work_order_analytics",
+      "rows": 120000,
+      "columns": 38,
+      "bytes": 13822605,
+      "sha256": "ef4afd28bf1ca67aa07cb873a9ee9ef666f47cbe39bec09e7a2d1c7c007a5351",
+      "path": "parquet/field_ops/work_order_analytics.parquet"
+    },
+    {
+      "table": "field_ops.work_order_note",
+      "rows": 210000,
+      "columns": 7,
+      "bytes": 3415271,
+      "sha256": "95b7003cea79d1877882edf866f93987642de7f61ece300a0e85936a9afcdd84",
+      "path": "parquet/field_ops/work_order_note.parquet"
+    },
+    {
+      "table": "field_ops.work_order_part",
+      "rows": 260000,
+      "columns": 7,
+      "bytes": 6137762,
+      "sha256": "211bf2e8834ab6b53792cba0f6e1feca055eff474efef5578d1554c760a4fedc",
+      "path": "parquet/field_ops/work_order_part.parquet"
+    },
+    {
+      "table": "field_ops.work_order_status_event",
+      "rows": 720000,
+      "columns": 7,
+      "bytes": 12302981,
+      "sha256": "7a5f2626c6b56a9fa823b6cfe712487ce7b1c1503071887c5865be1537f6b836",
+      "path": "parquet/field_ops/work_order_status_event.parquet"
+    },
+    {
+      "table": "finance.budget_monthly",
+      "rows": 17280,
+      "columns": 6,
+      "bytes": 286813,
+      "sha256": "85c385c8857d9c5cfd0d392c002fea7930eaf8d9f193b6a5c40aa04c82f856e4",
+      "path": "parquet/finance/budget_monthly.parquet"
+    },
+    {
+      "table": "finance.chart_of_account",
+      "rows": 96,
+      "columns": 7,
+      "bytes": 3130,
+      "sha256": "f4dab548c0e889b0dcaf36355551ab0c1d293a4c6485458f36c31a01185f1815",
+      "path": "parquet/finance/chart_of_account.parquet"
+    },
+    {
+      "table": "finance.cost_center",
+      "rows": 120,
+      "columns": 7,
+      "bytes": 3669,
+      "sha256": "e72662d4f5736a968d47efa36be693204fbd76cb61fdbc519611b56e7f44eb0f",
+      "path": "parquet/finance/cost_center.parquet"
+    },
+    {
+      "table": "finance.journal_entry",
+      "rows": 145000,
+      "columns": 10,
+      "bytes": 2477455,
+      "sha256": "f9ca56f6da67bfb5595289b513bff1801adeb66c4aa1b10a290dee707c1134fe",
+      "path": "parquet/finance/journal_entry.parquet"
+    },
+    {
+      "table": "finance.journal_line",
+      "rows": 460000,
+      "columns": 11,
+      "bytes": 7966768,
+      "sha256": "19ede726577e273ee5fbc1f09ab062849d619f9a4c1ddcc2597f9b17081f3bb9",
+      "path": "parquet/finance/journal_line.parquet"
+    },
+    {
+      "table": "fleet.fuel_charge",
+      "rows": 58000,
+      "columns": 8,
+      "bytes": 1416796,
+      "sha256": "f2c16797b26dec7289d5c425a726fc427d3f7465e626ecbdfbe6ed73ed3fb974",
+      "path": "parquet/fleet/fuel_charge.parquet"
+    },
+    {
+      "table": "fleet.gps_ping",
+      "rows": 540000,
+      "columns": 10,
+      "bytes": 22806624,
+      "sha256": "deac299585c7e1f379dec00bb6720e67a510f73378e2af072a77b6b2b1aab22d",
+      "path": "parquet/fleet/gps_ping.parquet"
+    },
+    {
+      "table": "fleet.maintenance_event",
+      "rows": 11000,
+      "columns": 8,
+      "bytes": 247441,
+      "sha256": "1bb480c521bc2b58dabcc2edd6326cf640c97643be2808af874e9e10382541bc",
+      "path": "parquet/fleet/maintenance_event.parquet"
+    },
+    {
+      "table": "fleet.route",
+      "rows": 110000,
+      "columns": 10,
+      "bytes": 2140281,
+      "sha256": "7970888ade934363fbff936db9647c9fc1e40a9045a22d4cb0b684effeccc1b7",
+      "path": "parquet/fleet/route.parquet"
+    },
+    {
+      "table": "fleet.route_stop",
+      "rows": 320000,
+      "columns": 8,
+      "bytes": 8760046,
+      "sha256": "f79df0a4c6e88555fb86e583e154f0b1440101c54ac92bd528ff72659f2d3e7d",
+      "path": "parquet/fleet/route_stop.parquet"
+    },
+    {
+      "table": "fleet.vehicle",
+      "rows": 220,
+      "columns": 10,
+      "bytes": 5938,
+      "sha256": "ed3a276332d80def26523b05c50d59cc0def620652718856252175de0ef4adea",
+      "path": "parquet/fleet/vehicle.parquet"
+    },
+    {
+      "table": "fleet.vehicle_assignment_history",
+      "rows": 519,
+      "columns": 6,
+      "bytes": 7397,
+      "sha256": "d2cdb2460a0fd03c394d3079d4743ad0afe758cbef33c99ab449743685bbda97",
+      "path": "parquet/fleet/vehicle_assignment_history.parquet"
+    },
+    {
+      "table": "growth.experiment",
+      "rows": 8,
+      "columns": 7,
+      "bytes": 2528,
+      "sha256": "f40cfcebefeebdd801b2eb8ba0b3bb6e8f7f9397c1d575879738f0aae8044c90",
+      "path": "parquet/growth/experiment.parquet"
+    },
+    {
+      "table": "growth.experiment_assignment",
+      "rows": 321706,
+      "columns": 9,
+      "bytes": 9301773,
+      "sha256": "e6195bd2d706b850b027e4890214e3aa48088ca114d09f0682d457caec8587a6",
+      "path": "parquet/growth/experiment_assignment.parquet"
+    },
+    {
+      "table": "growth.session",
+      "rows": 450000,
+      "columns": 12,
+      "bytes": 14863220,
+      "sha256": "33f0d6590d12e313fa74da2698b2914abf08b5299f031eb7c77154a851ec2619",
+      "path": "parquet/growth/session.parquet"
+    },
+    {
+      "table": "growth.web_event",
+      "rows": 1303974,
+      "columns": 8,
+      "bytes": 26222284,
+      "sha256": "608e972a2992fa58aafd9dfaaabb5b7a19545d30988bbcc6a7adf72a6f5dbb62",
+      "path": "parquet/growth/web_event.parquet"
+    },
+    {
+      "table": "iot.asset",
+      "rows": 55000,
+      "columns": 12,
+      "bytes": 1600090,
+      "sha256": "73493d697d745eee5d5c2f0725e7271502392073124465b5894ce91687454180",
+      "path": "parquet/iot/asset.parquet"
+    },
+    {
+      "table": "iot.asset_health_daily",
+      "rows": 360000,
+      "columns": 38,
+      "bytes": 40824456,
+      "sha256": "84d8ade5fe99b0be7efb90a0d447d11fce05f54cc680ab89c8eee9924cabbcb5",
+      "path": "parquet/iot/asset_health_daily.parquet"
+    },
+    {
+      "table": "iot.asset_installation_history",
+      "rows": 72000,
+      "columns": 7,
+      "bytes": 1897269,
+      "sha256": "ea774c39bab54348879cd32c2f815eef6ef52f4d35a9c9178fceeb20fdabdd1f",
+      "path": "parquet/iot/asset_installation_history.parquet"
+    },
+    {
+      "table": "iot.device_alert",
+      "rows": 180000,
+      "columns": 9,
+      "bytes": 4580872,
+      "sha256": "0e4b3d8139c348f02965f81b616190e86978fc16b2d3089b37e42920f909507b",
+      "path": "parquet/iot/device_alert.parquet"
+    },
+    {
+      "table": "iot.sensor",
+      "rows": 72000,
+      "columns": 6,
+      "bytes": 1146850,
+      "sha256": "b8c6c0b1c2e8f914d9e78426fa0acb44a28f9a6108d6ef572f23f73da0b50387",
+      "path": "parquet/iot/sensor.parquet"
+    },
+    {
+      "table": "iot.sensor_reading",
+      "rows": 1200000,
+      "columns": 10,
+      "bytes": 44473605,
+      "sha256": "0416591fbdd0161fc01636b9d5043d2759b74f27f7ee8344a3337a125fba868a",
+      "path": "parquet/iot/sensor_reading.parquet"
+    },
+    {
+      "table": "platform.account_feature_snapshot",
+      "rows": 165000,
+      "columns": 213,
+      "bytes": 112549517,
+      "sha256": "b13917ec1de2eb7ce1365092caa976928cbae30d6a815152b4205e3df5941ce4",
+      "path": "parquet/platform/account_feature_snapshot.parquet"
+    },
+    {
+      "table": "platform.data_quality_result",
+      "rows": 260000,
+      "columns": 11,
+      "bytes": 8393497,
+      "sha256": "bc3e1052b4fb2e8762bd3aa57aac3c3620b6970daa05f823a2eab50b6062c19c",
+      "path": "parquet/platform/data_quality_result.parquet"
+    },
+    {
+      "table": "platform.model_prediction",
+      "rows": 370000,
+      "columns": 14,
+      "bytes": 13565206,
+      "sha256": "879344ccac455de5d37fde6678abebe4fbb5b44e6aa8da6a067236e089418c71",
+      "path": "parquet/platform/model_prediction.parquet"
+    },
+    {
+      "table": "platform.model_registry",
+      "rows": 18,
+      "columns": 8,
+      "bytes": 3094,
+      "sha256": "dbada560e588b64dfd078354d691e95409507897272dff33939f5f61e41ff110",
+      "path": "parquet/platform/model_registry.parquet"
+    },
+    {
+      "table": "platform.model_version",
+      "rows": 76,
+      "columns": 11,
+      "bytes": 6159,
+      "sha256": "25400b52fd1dac6a66cc05cdceb5cc9d6c2e82e80c32eecb321bf90fb80642d3",
+      "path": "parquet/platform/model_version.parquet"
+    },
+    {
+      "table": "platform.pipeline",
+      "rows": 72,
+      "columns": 9,
+      "bytes": 3639,
+      "sha256": "e65a7e0c96a0ef4c43719919f92a3492faddc80a9c5a8bd657056857e387f840",
+      "path": "parquet/platform/pipeline.parquet"
+    },
+    {
+      "table": "platform.pipeline_run",
+      "rows": 92000,
+      "columns": 11,
+      "bytes": 3108990,
+      "sha256": "f330c5b31ed5b5c11db83b50e3578b4676c04cc3ca088211a1b5487f058d5152",
+      "path": "parquet/platform/pipeline_run.parquet"
+    },
+    {
+      "table": "platform.source_registry",
+      "rows": 16,
+      "columns": 7,
+      "bytes": 2506,
+      "sha256": "7b6f168a4c5169ac3b1a462283e0df3d1faa8beda12239f48ee0c870f2cfd6c3",
+      "path": "parquet/platform/source_registry.parquet"
+    },
+    {
+      "table": "supply.goods_receipt",
+      "rows": 82000,
+      "columns": 8,
+      "bytes": 1397883,
+      "sha256": "4ec0b695f8985e54fca3de8d6951dde735a9fbb6f0559cce484b599e97fe4882",
+      "path": "parquet/supply/goods_receipt.parquet"
+    },
+    {
+      "table": "supply.inventory_movement",
+      "rows": 520000,
+      "columns": 11,
+      "bytes": 11804243,
+      "sha256": "eacfcb0f501d335edaeb73a45527198b125a47dcfcc0fe0756c01d02ca74d86b",
+      "path": "parquet/supply/inventory_movement.parquet"
+    },
+    {
+      "table": "supply.inventory_position_daily",
+      "rows": 330000,
+      "columns": 25,
+      "bytes": 32496209,
+      "sha256": "0e2401566511aec5067374d30fb02acb4ab97bcfef3ee92f37b5c245e9a48c0e",
+      "path": "parquet/supply/inventory_position_daily.parquet"
+    },
+    {
+      "table": "supply.product_vendor",
+      "rows": 1440,
+      "columns": 10,
+      "bytes": 23614,
+      "sha256": "6c6f3832366dc05c3895605ef75ca18b3b2d96d19a01a415db32e45f7325cedd",
+      "path": "parquet/supply/product_vendor.parquet"
+    },
+    {
+      "table": "supply.purchase_order",
+      "rows": 24000,
+      "columns": 10,
+      "bytes": 416745,
+      "sha256": "6f69782a72dec01c64228544aee5fa895a856b497b65dd70d76deb18b64e44c4",
+      "path": "parquet/supply/purchase_order.parquet"
+    },
+    {
+      "table": "supply.purchase_order_line",
+      "rows": 96000,
+      "columns": 9,
+      "bytes": 2012604,
+      "sha256": "c0c61cb56fcebbb2b4bb031529ff0bcfa744d5c0e8c45bcafa5dab86daf24666",
+      "path": "parquet/supply/purchase_order_line.parquet"
+    },
+    {
+      "table": "supply.vendor",
+      "rows": 85,
+      "columns": 9,
+      "bytes": 3863,
+      "sha256": "b22299406e55079deffbbdbd99af568fe09e3fc99ee6384ec544a67abb9e1392",
+      "path": "parquet/supply/vendor.parquet"
+    },
+    {
+      "table": "supply.warehouse",
+      "rows": 3,
+      "columns": 10,
+      "bytes": 3250,
+      "sha256": "bda166e24fcad1912db3be0acd781e318a25122191cd75c45974913f1891b350",
+      "path": "parquet/supply/warehouse.parquet"
+    },
+    {
+      "table": "support.conversation",
+      "rows": 112000,
+      "columns": 6,
+      "bytes": 1708324,
+      "sha256": "ea7fdfc2018b9a59663b07a13438e9fbe00db7e380e7991d7a4d80aed4ab5d60",
+      "path": "parquet/support/conversation.parquet"
+    },
+    {
+      "table": "support.csat_response",
+      "rows": 48000,
+      "columns": 8,
+      "bytes": 801616,
+      "sha256": "54056a19fd3a18f025959d05b793e5ccc7a553c534cb7ae79c2fd8dac9b0d7ac",
+      "path": "parquet/support/csat_response.parquet"
+    },
+    {
+      "table": "support.knowledge_article",
+      "rows": 520,
+      "columns": 7,
+      "bytes": 8286,
+      "sha256": "699eaba2ef737d52d8bb46b7fe00f5620b5860871de3e85f3dfe0902a651b529",
+      "path": "parquet/support/knowledge_article.parquet"
+    },
+    {
+      "table": "support.knowledge_article_view",
+      "rows": 190000,
+      "columns": 6,
+      "bytes": 2746331,
+      "sha256": "54bc69c568ac2398ff44651030efe95753d24781a84120d36be3e6e0a435b257",
+      "path": "parquet/support/knowledge_article_view.parquet"
+    },
+    {
+      "table": "support.message",
+      "rows": 360000,
+      "columns": 9,
+      "bytes": 7441408,
+      "sha256": "cd2cb11fd4edb4faac4e8c229464796f1740346eb55a0c606a9c5e2b8f57b5d7",
+      "path": "parquet/support/message.parquet"
+    },
+    {
+      "table": "support.ticket",
+      "rows": 100000,
+      "columns": 18,
+      "bytes": 3294392,
+      "sha256": "aec99b75f466140473b1994ddce73e879d14e1833b0ad113a39fcbc6351b9fc9",
+      "path": "parquet/support/ticket.parquet"
+    },
+    {
+      "table": "support.ticket_status_event",
+      "rows": 430000,
+      "columns": 7,
+      "bytes": 6619244,
+      "sha256": "8d1da2a0ed9e5091b33034c1f529153b3a55cb6b762197340255ceda50018fb0",
+      "path": "parquet/support/ticket_status_event.parquet"
+    },
+    {
+      "table": "trust.consent_event",
+      "rows": 190000,
+      "columns": 9,
+      "bytes": 3369026,
+      "sha256": "7df906995e735c262000dd2b04c5ba49f5967a770ba3c215e047ca2a5fff72fb",
+      "path": "parquet/trust/consent_event.parquet"
+    },
+    {
+      "table": "trust.data_access_log",
+      "rows": 540000,
+      "columns": 10,
+      "bytes": 7885785,
+      "sha256": "4e227cbae0c5edd498406e25b83704b9d87aa1cf21ecf2acdd3b29241337720d",
+      "path": "parquet/trust/data_access_log.parquet"
+    },
+    {
+      "table": "trust.privacy_request",
+      "rows": 9500,
+      "columns": 9,
+      "bytes": 299726,
+      "sha256": "b362f4ef75b569fc452f3917b7806aabdee4876161576276d7ef21b1989c22b6",
+      "path": "parquet/trust/privacy_request.parquet"
+    },
+    {
+      "table": "workforce.absence",
+      "rows": 7650,
+      "columns": 7,
+      "bytes": 146139,
+      "sha256": "5b8d40ff59121c2d5ea668479da5ca4da1e6471866addafdfa4d28e4940f18d6",
+      "path": "parquet/workforce/absence.parquet"
+    },
+    {
+      "table": "workforce.employee",
+      "rows": 850,
+      "columns": 12,
+      "bytes": 15180,
+      "sha256": "6054fb3bf6960ec6fd96c85c2c5126bafd81b943274c7fa5f45d7399602d20b0",
+      "path": "parquet/workforce/employee.parquet"
+    },
+    {
+      "table": "workforce.employee_role_history",
+      "rows": 1122,
+      "columns": 9,
+      "bytes": 14196,
+      "sha256": "f8f23b4c124d9a8ebef8dbc2d06afed87ec7416771958be9f3976424f57ed8d3",
+      "path": "parquet/workforce/employee_role_history.parquet"
+    },
+    {
+      "table": "workforce.shift",
+      "rows": 297500,
+      "columns": 8,
+      "bytes": 2892546,
+      "sha256": "116b5436226a1a32bfaba5bbc2cddb3b6934c7a5b461d1905b8e0eeb78eb51cb",
+      "path": "parquet/workforce/shift.parquet"
+    },
+    {
+      "table": "workforce.skill_certification",
+      "rows": 1600,
+      "columns": 7,
+      "bytes": 21557,
+      "sha256": "47e7321740174df053ad71670bcc87257e04512b8bd141fc176f79d748167f0e",
+      "path": "parquet/workforce/skill_certification.parquet"
+    },
+    {
+      "table": "workforce.training_completion",
+      "rows": 7650,
+      "columns": 6,
+      "bytes": 48865,
+      "sha256": "ab7b305e6733311c49f02b4d8a679b670beba39b3287754c004575bc96ad439b",
+      "path": "parquet/workforce/training_completion.parquet"
+    }
+  ]
+}
