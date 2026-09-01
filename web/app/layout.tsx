@@ -4,6 +4,7 @@ import './globals.css';
 
 const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://theanalyst.dev';
 const publicAssetUrl = (path: string) => `${publicSiteUrl.replace(/\/$/, '')}/${path}`;
+const publicSitePath = (process.env.NEXT_PUBLIC_SITE_PATH ?? '').replace(/\/$/, '');
 
 export const dynamic = 'force-static';
 
@@ -36,7 +37,7 @@ export const metadata: Metadata = {
     description: 'Investigate. Decide. Show your work.',
     images: [publicAssetUrl('og.png')],
   },
-  icons: { icon: publicAssetUrl('favicon.svg') },
+  icons: { icon: `${publicSitePath}/favicon.svg` },
 };
 
 export default function RootLayout({

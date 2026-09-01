@@ -75,9 +75,10 @@ FROM route_month
 ORDER BY route_month, optimizer_version;`,
   defaultPython: `import pandas as pd
 import matplotlib.pyplot as plt
+from analyst import table
 
-routes = pd.read_parquet("/data/cases/the-orion-renewal/route.parquet")
-stops = pd.read_parquet("/data/cases/the-orion-renewal/route_stop.parquet")
+routes = table("fleet.route")
+stops = table("fleet.route_stop")
 
 route_grain = (
     stops.groupby("route_id")

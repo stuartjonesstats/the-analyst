@@ -20,7 +20,8 @@ export default function HomePage() {
             <h1>Do the work.<br />Defend the decision.</h1>
             <p className="hero-deck">
               Nine browser-based simulations built around the part of analytics that clean tutorials remove:
-              unclear requests, competing clocks, unreliable grains, operational limits, and accountable handoffs.
+              unclear requests, competing clocks, unreliable grains, operational limits, and accountable handoffs—for
+              college and university courses, workforce programs, professional training, or serious self-study.
             </p>
             <div className="hero-actions">
               <SiteLink path="/workbench" className="action-primary">ENTER CASEWORK <ArrowRight /></SiteLink>
@@ -44,7 +45,7 @@ export default function HomePage() {
           <div className="principle-register">
             <article><Database /><span>01</span><h3>Interrogate the estate</h3><p>Use SQL to establish grain, point-in-time availability, and reconciled evidence before reaching for a model.</p></article>
             <article><FileCode2 /><span>02</span><h3>Analyze in Python</h3><p>Profile, visualize, test, backtest, simulate, or model with the package profile appropriate to the case.</p></article>
-            <article><ShieldCheck /><span>03</span><h3>Leave an audit trail</h3><p>Export the exact SQL, Python, notes, evidence, captured outputs, versions, and hashes in one portable submission.</p></article>
+            <article><ShieldCheck /><span>03</span><h3>Leave an audit trail</h3><p>Export the exact SQL, Python, working notes, final brief, evidence, captured outputs, versions, and hashes in one portable submission.</p></article>
           </div>
         </section>
 
@@ -68,6 +69,14 @@ export default function HomePage() {
               </SiteLink>
             ))}
           </div>
+        </section>
+
+        <section className="section-lead split" aria-labelledby="home-instructor-note">
+          <div>
+            <span className="public-kicker" id="home-instructor-note">FOR INSTRUCTORS AND FACILITATORS</span>
+            <p>Planning guidance, workload bands, assessment boundaries, and local review tools sit in a deliberately separate instructor desk so the learner route stays focused on the work.</p>
+          </div>
+          <SiteLink path="/teach" rel="nofollow">OPEN INSTRUCTOR DESK <ArrowRight /></SiteLink>
         </section>
 
         <section className="public-cta">

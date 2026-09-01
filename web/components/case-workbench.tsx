@@ -50,13 +50,16 @@ type CaseWorkbenchProps = {
   onSelectCase: (slug: string) => void;
 };
 
+type WorkspaceLanguage = 'sql' | 'python' | 'notes' | 'final';
+
 export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) {
   const { status, error: engineError, run } = useDuckDB(definition.dataFiles);
   const python = usePython(definition.dataFiles, definition.pythonPackages);
-  const [workspaceLanguage, setWorkspaceLanguage] = useState<'sql' | 'python' | 'notes'>('sql');
+  const [workspaceLanguage, setWorkspaceLanguage] = useState<WorkspaceLanguage>('sql');
   const [query, setQuery] = useState(definition.defaultSql);
   const [pythonCode, setPythonCode] = useState(definition.defaultPython);
   const [notes, setNotes] = useState(definition.defaultNotes);
+  const [finalBrief, setFinalBrief] = useState('');
   const [pythonResult, setPythonResult] = useState<PythonRunResult | null>(null);
   const [pythonError, setPythonError] = useState<string | null>(null);
   const [columns, setColumns] = useState<string[]>([]);
@@ -92,6 +95,8 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
     if (savedPython) setPythonCode(savedPython);
     const savedNotes = window.localStorage.getItem(`${definition.persistenceKey}:notes`);
     if (savedNotes) setNotes(savedNotes);
+    const savedFinalBrief = window.localStorage.getItem(`${definition.persistenceKey}:final`);
+    if (savedFinalBrief) setFinalBrief(savedFinalBrief);
     const savedEvidence = window.localStorage.getItem(`${definition.persistenceKey}:evidence`);
     if (savedEvidence) {
       try {
@@ -116,6 +121,10 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
   useEffect(() => {
     if (hydrated) window.localStorage.setItem(`${definition.persistenceKey}:notes`, notes);
   }, [definition.persistenceKey, hydrated, notes]);
+
+  useEffect(() => {
+    if (hydrated) window.localStorage.setItem(`${definition.persistenceKey}:final`, finalBrief);
+  }, [definition.persistenceKey, finalBrief, hydrated]);
 
   useEffect(() => {
     if (hydrated) window.localStorage.setItem(`${definition.persistenceKey}:evidence`, JSON.stringify(evidence));
@@ -171,7 +180,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
     }
   }
 
-  function selectLanguage(language: 'sql' | 'python' | 'notes') {
+  function selectLanguage(language: WorkspaceLanguage) {
     setWorkspaceLanguage(language);
     if (language === 'python' && python.status === 'idle') {
       void python.start().catch((cause) => {
@@ -187,7 +196,13 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
     setEvidence((records) => [...records, {
       id: nextId,
       statement,
-      source: workspaceLanguage === 'sql' ? 'SQL WORKSHEET' : workspaceLanguage === 'python' ? 'PYTHON WORKSHEET' : 'SCRATCH NOTES',
+      source: workspaceLanguage === 'sql'
+        ? 'SQL WORKSHEET'
+        : workspaceLanguage === 'python'
+          ? 'PYTHON WORKSHEET'
+          : workspaceLanguage === 'final'
+            ? 'FINAL BRIEF'
+            : 'SCRATCH NOTES',
       state: 'review',
       recordedAt: new Date().toISOString(),
     }]);
@@ -202,6 +217,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
         sql: query,
         python: pythonCode,
         notes,
+        finalBrief,
         evidence,
         sqlRunCount,
         pythonRunCount,
@@ -234,7 +250,13 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           : python.status === 'error'
             ? 'PYTHON ERROR'
             : 'PYTHON READY';
-  const engineLabel = workspaceLanguage === 'sql' ? sqlEngineLabel : workspaceLanguage === 'python' ? pythonEngineLabel : 'LOCAL NOTES';
+  const engineLabel = workspaceLanguage === 'sql'
+    ? sqlEngineLabel
+    : workspaceLanguage === 'python'
+      ? pythonEngineLabel
+      : workspaceLanguage === 'final'
+        ? 'HANDOFF DRAFT'
+        : 'LOCAL NOTES';
   const activeError = workspaceLanguage === 'sql'
     ? queryError || engineError
     : workspaceLanguage === 'python' ? pythonError || python.error : null;
@@ -246,7 +268,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           <span className="brand-mark">MA</span>
           <div>
             <span className="brand-word">MERIDIAN</span>
-            <span className="ml-2 font-mono text-[8px] tracking-[0.15em] text-[#78878e]">ANALYST DESK</span>
+            <span className="ml-2 font-mono text-[10px] tracking-[0.08em] text-[#a8b5ba]">ANALYST DESK</span>
           </div>
         </div>
         <div className="system-breadcrumb">
@@ -258,11 +280,11 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
         <div className="operator-block">
           <div className="hidden items-center gap-2 lg:flex">
             <span className="signal-dot" />
-            <span className="font-mono text-[9px] tracking-[0.08em] text-[#a5b0b4]">{engineLabel}</span>
+            <span className="font-mono text-[11px] tracking-[0.04em] text-[#c0c9cc]">{engineLabel}</span>
           </div>
           <div className="border-l border-[#31414a] pl-3 text-right">
-            <p className="font-mono text-[9px] tracking-[0.08em] text-[#dbe2e3]">ANALYST / LOCAL-01</p>
-            <p className="font-mono text-[8px] text-[#74828a]">LOCAL SESSION / NO ACCOUNT</p>
+            <p className="font-mono text-[11px] tracking-[0.04em] text-[#edf1f2]">ANALYST / LOCAL-01</p>
+            <p className="font-mono text-[10px] text-[#a8b5ba]">LOCAL SESSION / NO ACCOUNT</p>
           </div>
         </div>
       </header>
@@ -305,9 +327,9 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             <p className="queue-section-label">OTHER CASE FILES</p>
             {caseDefinitions.filter((caseFile) => caseFile.slug !== definition.slug).map((caseFile) => (
               <button key={caseFile.id} onClick={() => onSelectCase(caseFile.slug)}>
-                <span className="font-mono text-[9px] text-[#78878e]">{caseFile.id}</span>
-                <span className="mt-1 block text-[11px] text-[#c5ced0]">{caseFile.title}</span>
-                <span className="mt-1 block font-mono text-[8px] tracking-[0.08em] text-[#66757c]">
+                <span className="font-mono text-[10px] text-[#a8b5ba]">{caseFile.id}</span>
+                <span className="mt-1 block text-[12px] text-[#e1e6e7]">{caseFile.title}</span>
+                <span className="mt-1 block font-mono text-[10px] tracking-[0.04em] text-[#94a3a9]">
                   CONNECTED
                 </span>
               </button>
@@ -384,13 +406,27 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
               >
                 SCRATCH NOTES
               </button>
+              <button
+                className={workspaceLanguage === 'final' ? 'active' : ''}
+                role="tab"
+                aria-selected={workspaceLanguage === 'final'}
+                onClick={() => selectLanguage('final')}
+              >
+                FINAL BRIEF
+              </button>
               <span className="ml-auto hidden sm:block">SESSION {definition.sessionLabel}</span>
             </div>
 
             <div className="editor-toolbar">
               <div className="worksheet-name">
                 <TerminalSquare />
-                {workspaceLanguage === 'sql' ? 'query_01.sql' : workspaceLanguage === 'python' ? 'analysis_01.py' : 'scratch_notes.md'}
+                {workspaceLanguage === 'sql'
+                  ? 'query_01.sql'
+                  : workspaceLanguage === 'python'
+                    ? 'analysis_01.py'
+                    : workspaceLanguage === 'final'
+                      ? 'final_brief.md'
+                      : 'scratch_notes.md'}
                 <span>MODIFIED</span>
               </div>
               <button aria-label="Search query"><Search /></button>
@@ -398,7 +434,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
                 <span className={(workspaceLanguage === 'sql' ? status === 'error' : workspaceLanguage === 'python' && python.status === 'error') ? 'is-error' : ''} />
                 {engineLabel}
               </div>
-              {workspaceLanguage !== 'notes' && (
+              {(workspaceLanguage === 'sql' || workspaceLanguage === 'python') && (
                 <Button
                   size="sm"
                   className="run-control"
@@ -423,14 +459,19 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
               )}
             </div>
 
-            {workspaceLanguage === 'notes' ? (
+            {workspaceLanguage === 'notes' || workspaceLanguage === 'final' ? (
               <textarea
-                className="notes-editor"
-                value={notes}
-                onChange={(event) => setNotes(event.target.value)}
-                placeholder="Record assumptions, open questions, definitions, and the reasoning you will need to defend in the handoff."
+                className={`notes-editor ${workspaceLanguage === 'final' ? 'final-brief-editor' : ''}`}
+                value={workspaceLanguage === 'final' ? finalBrief : notes}
+                onChange={(event) => {
+                  if (workspaceLanguage === 'final') setFinalBrief(event.target.value);
+                  else setNotes(event.target.value);
+                }}
+                placeholder={workspaceLanguage === 'final'
+                  ? `Write the polished conclusion another person could act on.\n\nRecommendation or decision:\n\nEvidence that matters:\n\nUncertainty and limitations:\n\nRisks, owners, and next action:`
+                  : 'Record assumptions, open questions, definitions, and the reasoning you will need to defend in the handoff.'}
                 spellCheck="true"
-                aria-label="Scratch notes"
+                aria-label={workspaceLanguage === 'final' ? 'Final brief' : 'Scratch notes'}
               />
             ) : (
               <Editor
@@ -447,8 +488,8 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
                   accessibilitySupport: 'auto',
                   minimap: { enabled: false },
                   fontFamily: 'var(--font-geist-mono), monospace',
-                  fontSize: 12,
-                  lineHeight: 22,
+                  fontSize: 14,
+                  lineHeight: 23,
                   lineNumbersMinChars: 3,
                   padding: { top: 12, bottom: 12 },
                   renderLineHighlight: 'line',
@@ -462,14 +503,14 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
               <div role="alert" className="query-alert">{activeError}</div>
             )}
 
-            {workspaceLanguage !== 'notes' && <div className="result-pane">
+            {(workspaceLanguage === 'sql' || workspaceLanguage === 'python') && <div className="result-pane">
               <div className="result-toolbar">
                 <span>{workspaceLanguage === 'sql' ? 'RESULT SET / 01' : 'PYTHON OUTPUT / 01'}</span>
                 <span>
                   {workspaceLanguage === 'sql'
                     ? sqlRunCount > 0 ? `${rows.length} ROWS RETURNED` : 'NOT YET EXECUTED'
                     : pythonResult
-                      ? `${pythonResult.stdout.length} STDOUT LINES`
+                      ? `${pythonResult.stdout.length} LINES / ${pythonResult.figures.length} FIGURES`
                       : python.detail.toUpperCase()}
                 </span>
                 <span>{workspaceLanguage === 'sql' ? sqlRunCount > 0 ? elapsedMs : 0 : pythonResult?.elapsedMs ?? 0} MS</span>
@@ -516,9 +557,17 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
                     {pythonResult?.stdout.map((line, index) => <pre key={`stdout-${index}`}>{line}</pre>)}
                     {pythonResult?.stderr.map((line, index) => <pre className="stderr" key={`stderr-${index}`}>{line}</pre>)}
                     {pythonResult?.display && <pre className="python-display">{pythonResult.display}</pre>}
-                    {pythonResult?.figures.map((figure, index) => (
-                      <Image key={`figure-${index}`} src={figure} alt={`Python output figure ${index + 1}`} width={1000} height={600} unoptimized />
-                    ))}
+                    {pythonResult?.figures.length ? (
+                      <section className="python-figures" aria-label="Python figures">
+                        <div className="python-figures-head">FIGURES / {String(pythonResult.figures.length).padStart(2, '0')}</div>
+                        {pythonResult.figures.map((figure, index) => (
+                          <figure key={`figure-${index}`}>
+                            <Image src={figure} alt={`Python output figure ${index + 1}`} width={1000} height={600} unoptimized />
+                            <figcaption>FIGURE {String(index + 1).padStart(2, '0')} / GENERATED IN THIS BROWSER</figcaption>
+                          </figure>
+                        ))}
+                      </section>
+                    ) : null}
                   </div>
                 )}
               </div>
@@ -598,7 +647,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
               <span>{isExporting ? 'PACKAGING CASE FILE' : 'DOWNLOAD SUBMISSION'}</span>
               <small>.ANALYSTCASE</small>
             </button>
-            <p className="download-case-note">Includes SQL, Python, notes, evidence, captured outputs, hashes, and runtime versions. No account required.</p>
+            <p className="download-case-note">Includes SQL, Python, working notes, final brief, evidence, captured outputs, hashes, and runtime versions. No account required.</p>
           </section>
         </aside>
         {ledgerOpen && <button className="ledger-scrim" onClick={() => setLedgerOpen(false)} aria-label="Close case ledger overlay" />}

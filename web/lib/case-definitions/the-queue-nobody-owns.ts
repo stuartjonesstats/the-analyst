@@ -88,15 +88,16 @@ FROM routing_mart
 GROUP BY 1, 2
 ORDER BY conversations DESC;`,
   defaultPython: `import pandas as pd
+from analyst import table
 from sklearn.dummy import DummyClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import f1_score
 from sklearn.pipeline import Pipeline
 
-conversations = pd.read_parquet("/data/cases/the-queue-nobody-owns/conversation.parquet")
-tickets = pd.read_parquet("/data/cases/the-queue-nobody-owns/ticket.parquet")
-messages = pd.read_parquet("/data/cases/the-queue-nobody-owns/message.parquet")
+conversations = table("support.conversation")
+tickets = table("support.ticket")
+messages = table("support.message")
 
 candidate = messages.merge(
     conversations[["conversation_id", "ticket_id", "started_at", "language_code"]],

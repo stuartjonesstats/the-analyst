@@ -436,7 +436,7 @@ A complete submission:
 
 ## Complexity profile
 
-Scale: 1 is foundational and 5 is capstone-level.
+Scale: 1 is foundational and 5 is advanced independent practice.
 
 | Dimension | Rating | Why |
 |---|---:|---|

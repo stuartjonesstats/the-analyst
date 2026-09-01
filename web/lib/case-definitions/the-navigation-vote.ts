@@ -130,12 +130,12 @@ ORDER BY variant;`,
   defaultPython: `import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
+from analyst import table
 
-CASE = "/data/cases/the-navigation-vote"
 SEED = 250505
 
-assignments = pd.read_parquet(f"{CASE}/growth_experiment_assignment.parquet")
-sessions = pd.read_parquet(f"{CASE}/growth_session.parquet")
+assignments = table("growth.experiment_assignment")
+sessions = table("growth.session")
 
 # validate='one_to_one' makes an accidental grain change fail loudly.
 mart = assignments.merge(

@@ -71,6 +71,7 @@ export type BuildCaseInput = {
   sql: string;
   python: string;
   notes: string;
+  finalBrief: string;
   evidence: EvidenceRecord[];
   sqlRunCount: number;
   pythonRunCount: number;
@@ -92,6 +93,7 @@ export async function buildAnalystCase(definition: CaseDefinition, input: BuildC
     { path: 'workspace/query_01.sql', language: 'sql' as const, content: input.sql },
     { path: 'workspace/analysis_01.py', language: 'python' as const, content: input.python },
     { path: 'workspace/scratch_notes.md', language: 'markdown' as const, content: input.notes },
+    { path: 'workspace/final_brief.md', language: 'markdown' as const, content: input.finalBrief },
   ];
 
   return {

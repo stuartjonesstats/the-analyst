@@ -102,7 +102,7 @@ npm install
 npm run dev
 ```
 
-The public front door includes a nine-case progression register, pedagogical approach, learner field guide, and a searchable dictionary for all 96 source tables. Each case mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; source Parquets remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
+The public front door includes a nine-case progression register, pedagogical approach, learner field guide, and a searchable dictionary for all 96 source tables. Each case mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
 
 The case-pack builders, manifests, and exact validators live in `generator/case_packs/`. Together the browser packs contain more than five million rows in about 110 MiB while preserving each case's authored mechanisms. The checks cover hashes, row/column contracts, relationship closure, cutoffs, and planted mechanical invariants—not the quality of a learner's conclusion.
 
@@ -136,4 +136,4 @@ Every planted issue has a mechanism, date range, breadcrumb, and learning object
 - Dense analytical snapshots may be sampled rather than complete date spines.
 - The catalog is the contract; filenames and convenient columns alone are not sufficient semantics.
 - Instructor judgment is not replaced by automatic scoring. The browser may verify only explicit mechanical invariants and artifact presence; the rubric owns analytical quality.
-- Learners can export a versioned `.analystcase` submission containing their SQL, Python, notes, evidence, captured outputs, runtime metadata, and file hashes. The public instructor viewer opens it locally without an account; see [`docs/submission_format.md`](docs/submission_format.md).
+- Learners can export a versioned `.analystcase` submission containing their SQL, Python, scratch notes, polished final brief, evidence, captured outputs, runtime metadata, and file hashes. The public instructor viewer opens it locally without an account; see [`docs/submission_format.md`](docs/submission_format.md).

@@ -126,12 +126,11 @@ GROUP BY source_system
 ORDER BY source_system;`,
   defaultPython: `import pandas as pd
 import matplotlib.pyplot as plt
+from analyst import table
 
-CASE = "/data/cases/the-quarter-that-moved"
-
-orders = pd.read_parquet(f"{CASE}/commerce_order.parquet")
-finance = pd.read_parquet(f"{CASE}/q2_commercial_close.parquet")
-fulfillment_review = pd.read_parquet(f"{CASE}/q2_fulfillment_review.parquet")
+orders = table("commerce.order")
+finance = table("casefiles.q2_commercial_close")
+fulfillment_review = table("casefiles.q2_fulfillment_review")
 
 ANALYSIS_CUTOFF = pd.Timestamp("2024-07-08 08:30:00")
 

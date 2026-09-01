@@ -71,6 +71,7 @@ GROUP BY 1
 ORDER BY 1 DESC
 LIMIT 60;`,
   defaultPython: `import pandas as pd
+from analyst import table
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import LogisticRegression
@@ -78,13 +79,12 @@ from sklearn.metrics import brier_score_loss, roc_auc_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
-root = "/data/cases/the-730-capacity-call"
 cutoff = pd.Timestamp("2025-03-20 07:30:00")
 
-appointments = pd.read_parquet(f"{root}/field_ops/appointment.parquet")
-orders = pd.read_parquet(f"{root}/field_ops/work_order.parquet")
-visits = pd.read_parquet(f"{root}/field_ops/visit.parquet")
-roster = pd.read_parquet(f"{root}/scenario/current_appointment_roster.parquet")
+appointments = table("field_ops.appointment")
+orders = table("field_ops.work_order")
+visits = table("field_ops.visit")
+roster = table("scenario.current_appointment_roster")
 
 first_arrival = visits.groupby("appointment_id", as_index=False).agg(
     first_arrived_at=("arrived_at", "min")

@@ -63,11 +63,11 @@ CROSS JOIN replay_audit a
 ORDER BY p.movement_type_code;`,
   defaultPython: `import pandas as pd
 import matplotlib.pyplot as plt
+from analyst import table
 
-root = "/data/cases/forty-eight-hours-of-stock"
 cutoff = pd.Timestamp("2025-12-01 06:45:00")
-watchlist = pd.read_parquet(f"{root}/scenario/supply_watchlist.parquet")
-movement = pd.read_parquet(f"{root}/supply/inventory_movement.parquet")
+watchlist = table("scenario.supply_watchlist")
+movement = table("supply.inventory_movement")
 
 keys = ["warehouse_id", "product_id"]
 cohort = watchlist[keys].drop_duplicates()
@@ -150,7 +150,7 @@ profile.sort_values("zero_day_pct", ascending=False).head(12)`,
     'Movement, position, demand, and receipt reconciliation report',
     'Rolling-origin forecasting package',
     'Seeded 21-day inventory-risk simulator',
-    'Inventory risk Parquet',
+    'Inventory risk dataset',
     'Constrained supply action CSV',
     'Forecast/model card',
     'Supply-call brief and decision log',

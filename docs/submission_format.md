@@ -15,7 +15,7 @@ The file is UTF-8 JSON with the extension `.analystcase` and media type
 - format and schema version;
 - export timestamp;
 - scenario ID, slug, revision, and data-catalog snapshot;
-- SQL, Python, and scratch-note files;
+- SQL, Python, scratch-note, and polished final-brief files;
 - SHA-256 hash for each learner-authored file;
 - the case evidence register;
 - the most recent successful displayed SQL result and run count;

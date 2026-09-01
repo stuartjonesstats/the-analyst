@@ -7,10 +7,10 @@ import { complexityDimensions, scenarios } from '@/lib/scenarios';
 export const dynamic = 'force-static';
 
 const audienceByBand = {
-  Brief: 'New analysts and early-course learners',
+  Brief: 'New analysts and learners building foundations',
   Investigation: 'Learners comfortable with joins and dataframe work',
   'Decision case': 'Intermediate analysts ready for statistical judgment',
-  Practicum: 'Advanced learners and capstone teams',
+  Practicum: 'Advanced learners and professional development groups',
 } as const;
 
 export default function ProjectsPage() {
@@ -20,7 +20,7 @@ export default function ProjectsPage() {
         <header className="public-page-head">
           <p className="public-kicker">CASE FILE REGISTER / 09 ACTIVE</p>
           <h1>Nine shifts inside one company.</h1>
-          <p>Each case has its own role, decision pressure, source neighborhood, Python purpose, deliverables, and legitimate outcome space. Work them in sequence or assign them by capability.</p>
+          <p>Each case has its own role, decision pressure, source neighborhood, Python purpose, deliverables, and legitimate outcome space. Work them in sequence or assign them by capability in a course, lab, training program, or independent study plan.</p>
         </header>
         <section className="project-register" aria-label="Project summaries">
           {scenarios.map((scenario) => (
@@ -55,6 +55,13 @@ export default function ProjectsPage() {
               </footer>
             </article>
           ))}
+        </section>
+        <section className="section-lead split" aria-labelledby="projects-instructor-note">
+          <div>
+            <span className="public-kicker" id="projects-instructor-note">PLANNING A SEQUENCE?</span>
+            <p>The instructor desk compares prerequisites, workload ranges, scaffolding options, and review boundaries across all nine cases without placing solution material in the learner path.</p>
+          </div>
+          <SiteLink path="/teach" rel="nofollow">OPEN INSTRUCTOR DESK <ArrowRight /></SiteLink>
         </section>
       </main>
     </PublicShell>

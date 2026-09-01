@@ -59,8 +59,9 @@ GROUP BY 1, 2
 ORDER BY responses DESC;`,
   defaultPython: `import pandas as pd
 import matplotlib.pyplot as plt
+from analyst import table
 
-csat = pd.read_parquet("/data/support/csat_response.parquet")
+csat = table("support.csat_response")
 
 profile = (
     csat.groupby(["survey_source_code", "scale_max"])
@@ -69,6 +70,16 @@ profile = (
              mean_normalized=("score_normalized", "mean"))
         .reset_index()
 )
+
+profile.plot(
+    x="survey_source_code",
+    y="mean_normalized",
+    kind="bar",
+    legend=False,
+    title="Normalized satisfaction by source",
+)
+plt.ylabel("Mean normalized score")
+plt.tight_layout()
 
 profile`,
   defaultNotes: `# Working notes
@@ -94,4 +105,3 @@ profile`,
   ],
   pythonPackages: [],
 };
-

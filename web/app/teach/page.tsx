@@ -54,7 +54,7 @@ export default function TeachPage() {
       <section className="curriculum-register" aria-labelledby="sequence-heading">
         <div className="teaching-section-title">
           <span id="sequence-heading">RECOMMENDED SEQUENCE</span>
-          <b>24-WEEK BOOT CAMP / 16-WEEK SEMESTER</b>
+          <b>24-WEEK PROGRAM / 16-WEEK SEMESTER</b>
         </div>
 
         <div className="curriculum-table-wrap">

@@ -1,4 +1,5 @@
 import { PublicShell } from '@/components/public-shell';
+import { SiteLink } from '@/components/site-link';
 
 export const dynamic = 'force-static';
 
@@ -17,8 +18,8 @@ export default function ApproachPage() {
       <main className="public-main">
         <header className="public-page-head approach-head">
           <p className="public-kicker">PEDAGOGICAL OPERATING STANDARD</p>
-          <h1>Practice judgment before the capstone.</h1>
-          <p>The Analyst occupies the missing middle between a guided notebook and an open-ended project: the world is controlled enough to teach from, but the analytical choices remain real.</p>
+          <h1>Practice judgment before the stakes rise.</h1>
+          <p>The Analyst occupies the missing middle between a guided lesson and fully open-ended work: the world is controlled enough to teach from, but the analytical choices remain real. It can support college and university courses, workforce programs, professional training, or structured self-study without assuming one calendar or credential.</p>
         </header>
         <section className="approach-register">
           {principles.map(([index, title, body]) => (
@@ -35,8 +36,14 @@ export default function ApproachPage() {
           <article><b>GUIDED</b><p>Data neighborhood, cutoff, deliverable contracts, and hints for mechanically detectable failure modes.</p></article>
           <article><b>INDEPENDENT</b><p>Executive request, source estate, workbench, and handoff requirements. The analytical route remains learner-owned.</p></article>
         </section>
+        <section className="section-lead split" aria-labelledby="approach-instructor-note">
+          <div>
+            <span className="public-kicker" id="approach-instructor-note">TEACHING AND ASSESSMENT</span>
+            <p>The low-profile instructor desk holds sequencing guidance, the human-review boundary, a local submission viewer, and spoiler-separated case notes. None of those materials are required for self-directed use.</p>
+          </div>
+          <SiteLink path="/teach" rel="nofollow">OPEN INSTRUCTOR DESK →</SiteLink>
+        </section>
       </main>
     </PublicShell>
   );
 }
-

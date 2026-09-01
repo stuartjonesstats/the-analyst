@@ -10,6 +10,8 @@ export type PythonStatus = 'idle' | 'booting' | 'loading_data' | 'ready' | 'runn
 export type PythonDataFile = {
   path: string;
   url: string;
+  table: string;
+  /** @deprecated Kept for compatibility with older cached workers. */
   label?: string;
 };
 
@@ -31,6 +33,7 @@ export function usePython(dataFiles: CaseDataFile[], packages: string[]) {
   const files = useMemo<PythonDataFile[]>(() => dataFiles.map((file) => ({
     path: file.pythonPath,
     url: sitePath(file.url),
+    table: file.table,
     label: file.table,
   })), [dataFiles]);
   const workerRef = useRef<Worker | null>(null);

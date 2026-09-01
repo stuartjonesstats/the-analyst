@@ -68,11 +68,12 @@ CROSS JOIN account_overlap
 GROUP BY submitted_partition
 ORDER BY submitted_partition;`,
   defaultPython: `import pandas as pd
+from analyst import table
 from sklearn.metrics import roc_auc_score
 from sklearn.tree import DecisionTreeClassifier
 
-snapshot = pd.read_parquet("/data/cases/too-good-to-ship/account_feature_snapshot.parquet")
-submitted_split = pd.read_parquet("/data/cases/too-good-to-ship/beacon_submitted_split.parquet")
+snapshot = table("platform.account_feature_snapshot")
+submitted_split = table("case_input.beacon_submitted_split")
 submitted = snapshot.merge(submitted_split, on="account_feature_snapshot_id", validate="one_to_one")
 
 # Exact reproduction of the contractor's wildcard and row-split logic.

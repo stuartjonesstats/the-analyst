@@ -4,6 +4,7 @@ __pycache__/
 *.pyc
 .DS_Store
 .playwright-cli/
+output/playwright/
 *.tsbuildinfo
 
 # The full estate is deterministic and is regenerated locally. Keeping the

@@ -72,12 +72,12 @@ JOIN denominator d USING (region_id)
 ORDER BY r.period, r.region_id;`,
   defaultPython: `import pandas as pd
 import matplotlib.pyplot as plt
+from analyst import table
 
-root = "/data/cases/rollback-before-dawn"
 cutoff = pd.Timestamp("2025-03-20 11:40:00")
 
-cohort = pd.read_parquet(f"{root}/scenario/asset_cohort.parquet")
-readings = pd.read_parquet(f"{root}/iot/sensor_reading.parquet")
+cohort = table("scenario.asset_cohort")
+readings = table("iot.sensor_reading")
 readings = readings[
     (readings["observed_at"] >= "2025-03-01")
     & (readings["observed_at"] <= cutoff)
