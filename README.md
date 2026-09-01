@@ -96,7 +96,7 @@ npm install
 npm run dev
 ```
 
-The workbench currently serves only `support.csat_response`, `support.ticket`, and `crm.account` to the browser. DuckDB runs locally in WebAssembly and learner SQL is restricted to read-only statements. The complete estate is not downloaded on startup. All four case files are now represented in the learner-safe scenario registry; the remaining three data packs and staged runtime content are the next implementation layer.
+The connected Monday workbench currently serves only `support.csat_response`, `support.ticket`, and `crm.account` to the browser. DuckDB runs locally in WebAssembly inside a disposable learner workspace; source Parquets remain unchanged, while learner-created local tables and views may be rebuilt on refresh. The complete estate is not downloaded on startup. All nine case files are represented in the learner-safe registry; the remaining case-specific data packs and staged runtime content are the next implementation layer.
 
 ## Why the data are messy
 
@@ -121,3 +121,4 @@ Every planted issue has a mechanism, date range, breadcrumb, and learning object
 - Dense analytical snapshots may be sampled rather than complete date spines.
 - The catalog is the contract; filenames and convenient columns alone are not sufficient semantics.
 - Instructor judgment is not replaced by automatic scoring. The browser may verify only explicit mechanical invariants and artifact presence; the rubric owns analytical quality.
+- Learners can export a versioned `.analystcase` submission containing their SQL, Python, notes, evidence, captured outputs, runtime metadata, and file hashes. The public instructor viewer opens it locally without an account; see [`docs/submission_format.md`](docs/submission_format.md).

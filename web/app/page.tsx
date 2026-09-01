@@ -2,11 +2,14 @@
 
 import { useEffect, useState } from 'react';
 import Editor, { type BeforeMount } from '@monaco-editor/react';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   BookOpen,
   CircleCheck,
   Clock3,
   Database,
+  Download,
   FileChartColumn,
   Inbox,
   PanelRightOpen,
@@ -27,6 +30,12 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { type QueryRow, useDuckDB } from '@/hooks/use-duckdb';
+import { type PythonRunResult, usePython } from '@/hooks/use-python';
+import {
+  buildMondayCase,
+  downloadAnalystCase,
+  type EvidenceRecord,
+} from '@/lib/analyst-case';
 import { scenarios } from '@/lib/scenarios';
 
 const defaultQuery = `SELECT
@@ -39,12 +48,44 @@ FROM support.csat_response
 GROUP BY 1, 2
 ORDER BY responses DESC;`;
 
+const defaultPython = `import pandas as pd
+import matplotlib.pyplot as plt
+
+csat = pd.read_parquet("/data/support/csat_response.parquet")
+
+profile = (
+    csat.groupby(["survey_source_code", "scale_max"])
+        .agg(responses=("score_raw", "size"),
+             mean_raw_score=("score_raw", "mean"),
+             mean_normalized=("score_normalized", "mean"))
+        .reset_index()
+)
+
+profile`;
+
 const initialRows: QueryRow[] = [
   { survey_source_code: 'CARE_SURVEY', scale_max: 5, mean_score: 3, responses: 38_248, share_pct: 79.7 },
   { survey_source_code: 'LEGACY_SURVEY', scale_max: 10, mean_score: 6, responses: 9_752, share_pct: 20.3 },
 ];
 
 const initialColumns = ['survey_source_code', 'scale_max', 'mean_score', 'responses', 'share_pct'];
+
+const initialEvidence: EvidenceRecord[] = [
+  {
+    id: 'E-001',
+    statement: 'Two survey scales coexist in the extract.',
+    source: 'QUERY_01',
+    state: 'verified',
+    recordedAt: '2026-12-02T09:28:00.000Z',
+  },
+  {
+    id: 'E-002',
+    statement: 'Board figure may use unnormalized legacy scores.',
+    source: 'WORKING NOTE',
+    state: 'review',
+    recordedAt: '2026-12-02T09:31:00.000Z',
+  },
+];
 
 const workflow = [
   { seq: '01', label: 'Inbox', icon: Inbox, count: '3', active: false },
@@ -63,24 +104,65 @@ const sources = [
 
 export default function Home() {
   const { status, error: engineError, run } = useDuckDB();
+  const python = usePython();
+  const [workspaceLanguage, setWorkspaceLanguage] = useState<'sql' | 'python' | 'notes'>('sql');
   const [query, setQuery] = useState(defaultQuery);
+  const [pythonCode, setPythonCode] = useState(defaultPython);
+  const [notes, setNotes] = useState('');
+  const [pythonResult, setPythonResult] = useState<PythonRunResult | null>(null);
+  const [pythonError, setPythonError] = useState<string | null>(null);
   const [columns, setColumns] = useState(initialColumns);
   const [rows, setRows] = useState<QueryRow[]>(initialRows);
   const [elapsedMs, setElapsedMs] = useState(84);
+  const [sqlRunCount, setSqlRunCount] = useState(0);
+  const [pythonRunCount, setPythonRunCount] = useState(0);
+  const [sqlCapturedAt, setSqlCapturedAt] = useState<string | null>(null);
+  const [pythonCapturedAt, setPythonCapturedAt] = useState<string | null>(null);
+  const [lastSqlResult, setLastSqlResult] = useState<{ columns: string[]; rows: QueryRow[]; elapsedMs: number } | null>(null);
   const [queryError, setQueryError] = useState<string | null>(null);
-  const [evidenceCount, setEvidenceCount] = useState(2);
+  const [evidence, setEvidence] = useState<EvidenceRecord[]>(initialEvidence);
+  const [evidenceDraft, setEvidenceDraft] = useState('');
+  const [evidenceComposerOpen, setEvidenceComposerOpen] = useState(false);
+  const [isExporting, setIsExporting] = useState(false);
   const [ledgerOpen, setLedgerOpen] = useState(false);
+  const evidenceCount = evidence.length;
 
+  // Hydrate drafts after mount because browser storage is intentionally local-only.
+  /* oxlint-disable react/react-compiler */
   useEffect(() => {
     const saved = window.localStorage.getItem('the-analyst:monday-scorecard:query');
     if (saved) setQuery(saved);
-    const savedEvidence = Number(window.localStorage.getItem('the-analyst:monday-scorecard:evidence-count'));
-    if (savedEvidence > 0) setEvidenceCount(savedEvidence);
+    const savedPython = window.localStorage.getItem('the-analyst:monday-scorecard:python');
+    if (savedPython) setPythonCode(savedPython);
+    const savedNotes = window.localStorage.getItem('the-analyst:monday-scorecard:notes');
+    if (savedNotes) setNotes(savedNotes);
+    const savedEvidence = window.localStorage.getItem('the-analyst:monday-scorecard:evidence');
+    if (savedEvidence) {
+      try {
+        const parsed = JSON.parse(savedEvidence) as EvidenceRecord[];
+        if (Array.isArray(parsed) && parsed.length > 0) setEvidence(parsed);
+      } catch {
+        // A damaged local draft should not prevent the workbench from opening.
+      }
+    }
   }, []);
+  /* oxlint-enable react/react-compiler */
 
   useEffect(() => {
     window.localStorage.setItem('the-analyst:monday-scorecard:query', query);
   }, [query]);
+
+  useEffect(() => {
+    window.localStorage.setItem('the-analyst:monday-scorecard:python', pythonCode);
+  }, [pythonCode]);
+
+  useEffect(() => {
+    window.localStorage.setItem('the-analyst:monday-scorecard:notes', notes);
+  }, [notes]);
+
+  useEffect(() => {
+    window.localStorage.setItem('the-analyst:monday-scorecard:evidence', JSON.stringify(evidence));
+  }, [evidence]);
 
   const beforeMount: BeforeMount = (monaco) => {
     monaco.editor.defineTheme('meridian-sql', {
@@ -112,24 +194,93 @@ export default function Home() {
       setColumns(result.columns);
       setRows(result.rows);
       setElapsedMs(result.elapsedMs);
+      setLastSqlResult({ columns: result.columns, rows: result.rows, elapsedMs: result.elapsedMs });
+      setSqlCapturedAt(new Date().toISOString());
+      setSqlRunCount((count) => count + 1);
     } catch (cause) {
       setQueryError(cause instanceof Error ? cause.message : 'Query execution failed.');
     }
   }
 
-  function addEvidence() {
-    const next = evidenceCount + 1;
-    setEvidenceCount(next);
-    window.localStorage.setItem('the-analyst:monday-scorecard:evidence-count', String(next));
+  async function runPython() {
+    setPythonError(null);
+    try {
+      const result = await python.run(pythonCode);
+      setPythonResult(result);
+      setPythonCapturedAt(new Date().toISOString());
+      setPythonRunCount((count) => count + 1);
+    } catch (cause) {
+      setPythonError(cause instanceof Error ? cause.message : 'Python execution failed.');
+    }
   }
 
-  const engineLabel = status === 'booting'
-    ? 'STARTING ENGINE'
+  function selectLanguage(language: 'sql' | 'python' | 'notes') {
+    setWorkspaceLanguage(language);
+    if (language === 'python' && python.status === 'idle') {
+      void python.start().catch((cause) => {
+        setPythonError(cause instanceof Error ? cause.message : 'Python could not start.');
+      });
+    }
+  }
+
+  function addEvidence() {
+    const statement = evidenceDraft.trim();
+    if (!statement) return;
+    const nextId = `E-${String(evidence.length + 1).padStart(3, '0')}`;
+    setEvidence((records) => [...records, {
+      id: nextId,
+      statement,
+      source: workspaceLanguage === 'sql' ? 'SQL WORKSHEET' : workspaceLanguage === 'python' ? 'PYTHON WORKSHEET' : 'SCRATCH NOTES',
+      state: 'review',
+      recordedAt: new Date().toISOString(),
+    }]);
+    setEvidenceDraft('');
+    setEvidenceComposerOpen(false);
+  }
+
+  async function exportCase() {
+    setIsExporting(true);
+    try {
+      const caseFile = await buildMondayCase({
+        sql: query,
+        python: pythonCode,
+        notes,
+        evidence,
+        sqlRunCount,
+        pythonRunCount,
+        sqlCapturedAt,
+        pythonCapturedAt,
+        sqlResult: lastSqlResult,
+        pythonResult,
+      });
+      downloadAnalystCase(caseFile);
+    } finally {
+      setIsExporting(false);
+    }
+  }
+
+  const sqlEngineLabel = status === 'booting'
+    ? 'STARTING DUCKDB'
     : status === 'running'
-      ? 'QUERY RUNNING'
+      ? 'SQL QUERY RUNNING'
       : status === 'error'
-        ? 'ENGINE ERROR'
-        : 'LOCAL ENGINE READY';
+        ? 'DUCKDB ERROR'
+        : 'DUCKDB READY';
+  const pythonEngineLabel = python.status === 'idle'
+    ? 'PYTHON IDLE'
+    : python.status === 'booting'
+      ? 'STARTING PYTHON'
+      : python.status === 'loading_data'
+        ? 'MOUNTING CASE DATA'
+        : python.status === 'running'
+          ? 'PYTHON RUNNING'
+          : python.status === 'error'
+            ? 'PYTHON ERROR'
+            : 'PYTHON READY';
+  const engineLabel = workspaceLanguage === 'sql' ? sqlEngineLabel : workspaceLanguage === 'python' ? pythonEngineLabel : 'LOCAL NOTES';
+  const activeError = workspaceLanguage === 'sql'
+    ? queryError || engineError
+    : workspaceLanguage === 'python' ? pythonError || python.error : null;
 
   return (
     <main className="workbench-shell">
@@ -171,7 +322,7 @@ export default function Home() {
         <aside className="work-queue">
           <div className="queue-heading">
             <span>WORK QUEUE</span>
-            <span>04 CASES</span>
+            <span>09 CASES</span>
           </div>
           <div className="current-case-block">
             <div className="case-code-line">
@@ -199,7 +350,9 @@ export default function Home() {
               <button key={caseFile.id} title="Case pack is being connected to the workbench">
                 <span className="font-mono text-[9px] text-[#78878e]">{caseFile.id}</span>
                 <span className="mt-1 block text-[11px] text-[#c5ced0]">{caseFile.title}</span>
-                <span className="mt-1 block font-mono text-[8px] tracking-[0.08em] text-[#66757c]">{caseFile.status.toUpperCase()}</span>
+                <span className="mt-1 block font-mono text-[8px] tracking-[0.08em] text-[#66757c]">
+                  {caseFile.status.replaceAll('_', ' ').toUpperCase()}
+                </span>
               </button>
             ))}
           </div>
@@ -253,81 +406,167 @@ export default function Home() {
 
           <div className="analysis-workarea">
             <div className="workarea-tabs" role="tablist" aria-label="Investigation tools">
-              <button className="active" role="tab" aria-selected="true">SQL WORKSHEET</button>
-              <button role="tab" aria-selected="false">QUERY HISTORY</button>
-              <button role="tab" aria-selected="false">SCRATCH NOTES</button>
+              <button
+                className={workspaceLanguage === 'sql' ? 'active' : ''}
+                role="tab"
+                aria-selected={workspaceLanguage === 'sql'}
+                onClick={() => selectLanguage('sql')}
+              >
+                SQL WORKSHEET
+              </button>
+              <button
+                className={workspaceLanguage === 'python' ? 'active' : ''}
+                role="tab"
+                aria-selected={workspaceLanguage === 'python'}
+                onClick={() => selectLanguage('python')}
+              >
+                PYTHON WORKSHEET
+              </button>
+              <button
+                className={workspaceLanguage === 'notes' ? 'active' : ''}
+                role="tab"
+                aria-selected={workspaceLanguage === 'notes'}
+                onClick={() => selectLanguage('notes')}
+              >
+                SCRATCH NOTES
+              </button>
               <span className="ml-auto hidden sm:block">SESSION 241202-A</span>
             </div>
 
             <div className="editor-toolbar">
-              <div className="worksheet-name"><TerminalSquare /> query_01.sql <span>MODIFIED</span></div>
+              <div className="worksheet-name">
+                <TerminalSquare />
+                {workspaceLanguage === 'sql' ? 'query_01.sql' : workspaceLanguage === 'python' ? 'analysis_01.py' : 'scratch_notes.md'}
+                <span>MODIFIED</span>
+              </div>
               <button aria-label="Search query"><Search /></button>
-              <div className="engine-state"><span className={status === 'error' ? 'is-error' : ''} /> {engineLabel}</div>
-              <Button
-                size="sm"
-                className="run-control"
-                disabled={status === 'booting' || status === 'running' || status === 'error'}
-                onClick={() => void runQuery()}
-              >
-                <Play data-icon="inline-start" /> {status === 'running' ? 'RUNNING' : 'EXECUTE'}
-              </Button>
+              <div className="engine-state">
+                <span className={(workspaceLanguage === 'sql' ? status === 'error' : workspaceLanguage === 'python' && python.status === 'error') ? 'is-error' : ''} />
+                {engineLabel}
+              </div>
+              {workspaceLanguage !== 'notes' && (
+                <Button
+                  size="sm"
+                  className="run-control"
+                  disabled={workspaceLanguage === 'sql'
+                    ? status === 'booting' || status === 'running' || status === 'error'
+                    : python.status === 'booting' || python.status === 'loading_data' || python.status === 'error'}
+                  onClick={() => {
+                    if (workspaceLanguage === 'python' && python.status === 'running') {
+                      python.stop();
+                      return;
+                    }
+                    void (workspaceLanguage === 'sql' ? runQuery() : runPython());
+                  }}
+                >
+                  <Play data-icon="inline-start" />
+                  {workspaceLanguage === 'python' && python.status === 'running'
+                    ? 'STOP'
+                    : workspaceLanguage === 'sql' && status === 'running'
+                      ? 'RUNNING'
+                      : 'EXECUTE'}
+                </Button>
+              )}
             </div>
 
-            <Editor
-              height="258px"
-              language="sql"
-              theme="meridian-sql"
-              value={query}
-              beforeMount={beforeMount}
-              onChange={(value) => setQuery(value ?? '')}
-              options={{
-                accessibilitySupport: 'auto',
-                minimap: { enabled: false },
-                fontFamily: 'var(--font-geist-mono), monospace',
-                fontSize: 12,
-                lineHeight: 22,
-                lineNumbersMinChars: 3,
-                padding: { top: 12, bottom: 12 },
-                renderLineHighlight: 'line',
-                scrollBeyondLastLine: false,
-                wordWrap: 'off',
-              }}
-            />
-
-            {(queryError || engineError) && (
-              <div role="alert" className="query-alert">{queryError || engineError}</div>
+            {workspaceLanguage === 'notes' ? (
+              <textarea
+                className="notes-editor"
+                value={notes}
+                onChange={(event) => setNotes(event.target.value)}
+                placeholder="Record assumptions, open questions, definitions, and the reasoning you will need to defend in the handoff."
+                spellCheck="true"
+                aria-label="Scratch notes"
+              />
+            ) : (
+              <Editor
+                height="258px"
+                language={workspaceLanguage}
+                theme="meridian-sql"
+                value={workspaceLanguage === 'sql' ? query : pythonCode}
+                beforeMount={beforeMount}
+                onChange={(value) => {
+                  if (workspaceLanguage === 'sql') setQuery(value ?? '');
+                  else setPythonCode(value ?? '');
+                }}
+                options={{
+                  accessibilitySupport: 'auto',
+                  minimap: { enabled: false },
+                  fontFamily: 'var(--font-geist-mono), monospace',
+                  fontSize: 12,
+                  lineHeight: 22,
+                  lineNumbersMinChars: 3,
+                  padding: { top: 12, bottom: 12 },
+                  renderLineHighlight: 'line',
+                  scrollBeyondLastLine: false,
+                  wordWrap: 'off',
+                }}
+              />
             )}
 
-            <div className="result-pane">
+            {activeError && (
+              <div role="alert" className="query-alert">{activeError}</div>
+            )}
+
+            {workspaceLanguage !== 'notes' && <div className="result-pane">
               <div className="result-toolbar">
-                <span>RESULT SET / 01</span>
-                <span>{rows.length} ROWS RETURNED</span>
-                <span>{elapsedMs} MS</span>
-                <span className="result-status"><CircleCheck /> {status === 'running' ? 'RUNNING' : 'COMPLETE'}</span>
+                <span>{workspaceLanguage === 'sql' ? 'RESULT SET / 01' : 'PYTHON OUTPUT / 01'}</span>
+                <span>
+                  {workspaceLanguage === 'sql'
+                    ? `${rows.length} ROWS RETURNED`
+                    : pythonResult
+                      ? `${pythonResult.stdout.length} STDOUT LINES`
+                      : python.detail.toUpperCase()}
+                </span>
+                <span>{workspaceLanguage === 'sql' ? elapsedMs : pythonResult?.elapsedMs ?? 0} MS</span>
+                <span className="result-status">
+                  <CircleCheck />
+                  {workspaceLanguage === 'sql'
+                    ? status === 'running' ? 'RUNNING' : 'COMPLETE'
+                    : python.status === 'running' ? 'RUNNING' : python.status === 'ready' ? 'READY' : 'WAITING'}
+                </span>
               </div>
               <div className="result-scroll">
-                <Table className="results-grid">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="row-index-head">#</TableHead>
-                      {columns.map((heading) => <TableHead key={heading}>{heading}</TableHead>)}
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {rows.map((row, rowIndex) => (
-                      <TableRow key={rowIndex}>
-                        <TableCell className="row-index">{String(rowIndex + 1).padStart(2, '0')}</TableCell>
-                        {columns.map((column, index) => (
-                          <TableCell key={column} className={index === 0 ? 'key-cell' : ''}>
-                            {row[column] == null ? <span className="null-cell">NULL</span> : String(row[column])}
-                          </TableCell>
-                        ))}
+                {workspaceLanguage === 'sql' ? (
+                  <Table className="results-grid">
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="row-index-head">#</TableHead>
+                        {columns.map((heading) => <TableHead key={heading}>{heading}</TableHead>)}
                       </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {rows.map((row, rowIndex) => (
+                        <TableRow key={rowIndex}>
+                          <TableCell className="row-index">{String(rowIndex + 1).padStart(2, '0')}</TableCell>
+                          {columns.map((column, index) => (
+                            <TableCell key={column} className={index === 0 ? 'key-cell' : ''}>
+                              {row[column] == null ? <span className="null-cell">NULL</span> : String(row[column])}
+                            </TableCell>
+                          ))}
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                ) : (
+                  <div className="python-output">
+                    {!pythonResult && (
+                      <p className="python-empty">
+                        {python.status === 'ready'
+                          ? 'Runtime ready. Execute the worksheet to produce output.'
+                          : python.detail}
+                      </p>
+                    )}
+                    {pythonResult?.stdout.map((line, index) => <pre key={`stdout-${index}`}>{line}</pre>)}
+                    {pythonResult?.stderr.map((line, index) => <pre className="stderr" key={`stderr-${index}`}>{line}</pre>)}
+                    {pythonResult?.display && <pre className="python-display">{pythonResult.display}</pre>}
+                    {pythonResult?.figures.map((figure, index) => (
+                      <Image key={`figure-${index}`} src={figure} alt={`Python output figure ${index + 1}`} width={1000} height={600} unoptimized />
                     ))}
-                  </TableBody>
-                </Table>
+                  </div>
+                )}
               </div>
-            </div>
+            </div>}
           </div>
 
           <footer className="trace-footer">
@@ -335,6 +574,7 @@ export default function Home() {
             <span>CATALOG SNAPSHOT: 15 JAN 2026</span>
             <span>QUERY STATE: SAVED</span>
             <span className="ml-auto">NO DATA UPLOADED</span>
+            <Link href="/teach" rel="nofollow" prefetch={false}>INSTRUCTOR NOTES</Link>
           </footer>
         </section>
 
@@ -366,18 +606,29 @@ export default function Home() {
           <section className="ledger-section evidence-section">
             <div className="ledger-section-head"><span>EVIDENCE REGISTER</span><b>{String(evidenceCount).padStart(2, '0')} ITEMS</b></div>
             <ol>
-              <li>
-                <span className="evidence-id">E-001</span>
-                <p>Two survey scales coexist in the extract.</p>
-                <small>QUERY_01 / 09:28 / VERIFIED</small>
-              </li>
-              <li>
-                <span className="evidence-id">E-002</span>
-                <p>Board figure may use unnormalized legacy scores.</p>
-                <small>WORKING NOTE / 09:31 / REVIEW</small>
-              </li>
+              {evidence.map((record) => (
+                <li key={record.id}>
+                  <span className="evidence-id">{record.id}</span>
+                  <p>{record.statement}</p>
+                  <small>{record.source} / {new Date(record.recordedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} / {record.state.toUpperCase()}</small>
+                </li>
+              ))}
             </ol>
-            <button className="add-evidence" onClick={addEvidence}><span>+</span> APPEND EVIDENCE RECORD</button>
+            {evidenceComposerOpen ? (
+              <div className="evidence-composer">
+                <textarea
+                  value={evidenceDraft}
+                  onChange={(event) => setEvidenceDraft(event.target.value)}
+                  placeholder="State one finding you can trace to the work."
+                />
+                <div>
+                  <button onClick={() => setEvidenceComposerOpen(false)}>CANCEL</button>
+                  <button onClick={addEvidence} disabled={!evidenceDraft.trim()}>RECORD</button>
+                </div>
+              </div>
+            ) : (
+              <button className="add-evidence" onClick={() => setEvidenceComposerOpen(true)}><span>+</span> APPEND EVIDENCE RECORD</button>
+            )}
           </section>
 
           <section className="ledger-section handoff-section">
@@ -389,6 +640,12 @@ export default function Home() {
               <li><span /> Executive response</li>
             </ul>
             <p>Completion records artifact presence only. Analytical judgment is reviewed by the instructor.</p>
+            <button className="download-case" onClick={() => void exportCase()} disabled={isExporting}>
+              <Download />
+              <span>{isExporting ? 'PACKAGING CASE FILE' : 'DOWNLOAD SUBMISSION'}</span>
+              <small>.ANALYSTCASE</small>
+            </button>
+            <p className="download-case-note">Includes SQL, Python, notes, evidence, captured outputs, hashes, and runtime versions. No account required.</p>
           </section>
         </aside>
         {ledgerOpen && <button className="ledger-scrim" onClick={() => setLedgerOpen(false)} aria-label="Close case ledger overlay" />}

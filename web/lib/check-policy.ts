@@ -15,9 +15,9 @@ export type MechanicalCheckDefinition = {
 export const mondayScorecardChecks: MechanicalCheckDefinition[] = [
   {
     id: 'query.executed',
-    label: 'A read-only query executed',
+    label: 'A SQL query executed',
     state: 'recorded',
-    verifies: 'The browser engine accepted and ran at least one read-only query.',
+    verifies: 'The browser engine accepted and ran at least one query.',
     doesNotVerify: 'That the query used the right cohort, grain, denominator, or interpretation.',
   },
   {

@@ -16,17 +16,10 @@ function serializable(value: unknown): QueryValue {
   if (typeof value === 'bigint') return Number(value);
   if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return value;
   if (value instanceof Date) return value.toISOString();
-  return String(value);
-}
-
-function assertReadOnly(sql: string) {
-  const withoutComments = sql
-    .replace(/--.*$/gm, '')
-    .replace(/\/\*[\s\S]*?\*\//g, '')
-    .trim()
-    .toUpperCase();
-  if (!/^(SELECT|WITH|EXPLAIN|DESCRIBE|SHOW)\b/.test(withoutComments)) {
-    throw new Error('This workbench is read-only. Start with SELECT, WITH, EXPLAIN, DESCRIBE, or SHOW.');
+  try {
+    return JSON.stringify(value, (_, nested) => typeof nested === 'bigint' ? Number(nested) : nested);
+  } catch {
+    return Object.prototype.toString.call(value);
   }
 }
 
@@ -113,7 +106,6 @@ export function useDuckDB() {
   }, []);
 
   const run = useCallback(async (sql: string) => {
-    assertReadOnly(sql);
     const connection = connectionRef.current;
     if (!connection) throw new Error('The local query engine is still starting.');
     setStatus('running');
