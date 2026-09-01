@@ -3,7 +3,6 @@
 import { useEffect, useState } from 'react';
 import Editor, { type BeforeMount } from '@monaco-editor/react';
 import Image from 'next/image';
-import Link from 'next/link';
 import {
   BookOpen,
   CircleCheck,
@@ -21,6 +20,7 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { SiteLink } from '@/components/site-link';
 import {
   Table,
   TableBody,
@@ -574,7 +574,7 @@ export default function Home() {
             <span>CATALOG SNAPSHOT: 15 JAN 2026</span>
             <span>QUERY STATE: SAVED</span>
             <span className="ml-auto">NO DATA UPLOADED</span>
-            <Link href="/teach" rel="nofollow" prefetch={false}>INSTRUCTOR NOTES</Link>
+            <SiteLink path="/teach" rel="nofollow">INSTRUCTOR NOTES</SiteLink>
           </footer>
         </section>
 

@@ -1,13 +1,13 @@
 {
   "status": "PASS",
-  "elapsed_seconds": 1.45,
+  "elapsed_seconds": 2.688,
   "summary": {
     "schemas": 16,
     "tables": 96,
     "rows": 16548418,
-    "relationships": 166,
+    "relationships": 168,
     "anomalies": 10,
-    "checks": 368,
+    "checks": 381,
     "failed": 0
   },
   "checks": [
@@ -927,7 +927,7 @@
       "check": "parquet readable and catalog-aligned: supply.inventory_movement",
       "passed": true,
       "severity": "error",
-      "detail": "rows=520,000; columns=11"
+      "detail": "rows=520,000; columns=13"
     },
     {
       "check": "primary key valid: supply.inventory_movement",
@@ -1968,6 +1968,18 @@
       "detail": "orphans=0"
     },
     {
+      "check": "foreign key resolves: supply.inventory_movement -> supply.goods_receipt",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
+      "check": "foreign key resolves: supply.inventory_movement -> supply.inventory_movement",
+      "passed": true,
+      "severity": "error",
+      "detail": "orphans=0"
+    },
+    {
       "check": "foreign key resolves: supply.inventory_movement -> supply.warehouse",
       "passed": true,
       "severity": "error",
@@ -2202,16 +2214,82 @@
       "detail": "matching records/groups=61"
     },
     {
-      "check": "scanner retry defect is discoverable",
+      "check": "scanner replay rows are discoverable",
       "passed": true,
       "severity": "error",
-      "detail": "matching records/groups=2,293"
+      "detail": "matching records/groups=2,400"
     },
     {
       "check": "winter-storm records are discoverable",
       "passed": true,
       "severity": "error",
       "detail": "matching records/groups=1,008"
+    },
+    {
+      "check": "scanner replay rows form exact one-to-one linked pairs",
+      "passed": true,
+      "severity": "error",
+      "detail": "replay_rows=2,400; distinct_originals=2,400; physical_rows=517,600; opening_balance_rows=2,160; invalid_pairs=0; flag_link_disagreements=0"
+    },
+    {
+      "check": "receipts include valid partial and rejected events",
+      "passed": true,
+      "severity": "error",
+      "detail": "receipt_rows=82,000; rejected_rows=11,573; invalid_rejections=0; split_lines=16,080"
+    },
+    {
+      "check": "purchase-order status reconciles to accepted receipts",
+      "passed": true,
+      "severity": "error",
+      "detail": "status_mismatches=0"
+    },
+    {
+      "check": "accepted goods receipts post once to the physical ledger",
+      "passed": true,
+      "severity": "error",
+      "detail": "receipt_rows=82,000; mismatches=0"
+    },
+    {
+      "check": "purchase-order products are approved for the header vendor",
+      "passed": true,
+      "severity": "error",
+      "detail": "unapproved_lines=0"
+    },
+    {
+      "check": "realized supplier lead times vary around promise",
+      "passed": true,
+      "severity": "error",
+      "detail": "received_lines=65,920; early_lines=20,214; more_than_week_late=12,478; distinct_realized_leads=81; range_days=1..83"
+    },
+    {
+      "check": "inventory positions have a unique business grain",
+      "passed": true,
+      "severity": "error",
+      "detail": "rows=330,000; distinct_business_grain=330,000"
+    },
+    {
+      "check": "sampled on-hand positions reconcile to physical ledger history",
+      "passed": true,
+      "severity": "error",
+      "detail": "snapshot_rows=330,000; mismatches=0"
+    },
+    {
+      "check": "position demand and receipt windows reconcile to physical movements",
+      "passed": true,
+      "severity": "error",
+      "detail": "snapshot_rows=330,000; mismatches=0"
+    },
+    {
+      "check": "intermittent products issue only on their deterministic active days",
+      "passed": true,
+      "severity": "error",
+      "detail": "issue_rows=47,403; active_calendar_dates=1,095; inactive_day_violations=0"
+    },
+    {
+      "check": "seasonal product families have strong realized peak demand",
+      "passed": true,
+      "severity": "error",
+      "detail": "winter_peak_mean=16.037; winter_off_peak_mean=5.330; summer_peak_mean=14.674; summer_off_peak_mean=5.534"
     },
     {
       "check": "feature-store leakage exercise is explicit",

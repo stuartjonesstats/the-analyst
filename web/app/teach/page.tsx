@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 
+import { SiteLink } from '@/components/site-link';
 import { complexityDimensions, scenarios } from '@/lib/scenarios';
+
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: 'Instructor Planning Desk — The Analyst',
@@ -23,7 +25,7 @@ export default function TeachPage() {
     <main className="teaching-page">
       <header className="teaching-header">
         <div className="teaching-brand"><span>MA</span><strong>MERIDIAN / INSTRUCTOR PLANNING DESK</strong></div>
-        <Link href="/" prefetch={false}>RETURN TO LEARNER WORKBENCH</Link>
+        <SiteLink path="/">RETURN TO LEARNER WORKBENCH</SiteLink>
       </header>
 
       <section className="teaching-intro">
@@ -128,8 +130,8 @@ export default function TeachPage() {
           </p>
         </div>
         <nav aria-label="Instructor utilities">
-          <Link href="/teach/replay" rel="nofollow" prefetch={false}>OPEN A LEARNER SUBMISSION →</Link>
-          <Link href="/teach/spoilers" rel="nofollow" prefetch={false}>OPEN SPOILER-SEPARATED CASE NOTES →</Link>
+          <SiteLink path="/teach/replay" rel="nofollow">OPEN A LEARNER SUBMISSION →</SiteLink>
+          <SiteLink path="/teach/spoilers" rel="nofollow">OPEN SPOILER-SEPARATED CASE NOTES →</SiteLink>
         </nav>
       </section>
     </main>

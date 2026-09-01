@@ -3,8 +3,8 @@
 import { useState } from 'react';
 import { FileArchive, ShieldCheck, Upload } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 
+import { SiteLink } from '@/components/site-link';
 import {
   parseAnalystCase,
   type AnalystCaseFile,
@@ -48,7 +48,7 @@ export default function SubmissionViewer() {
     <main className="teaching-page replay-page">
       <header className="teaching-header">
         <div className="teaching-brand"><span>MA</span><strong>MERIDIAN / SUBMISSION VIEWER</strong></div>
-        <Link href="/teach" prefetch={false}>RETURN TO PLANNING DESK</Link>
+        <SiteLink path="/teach">RETURN TO PLANNING DESK</SiteLink>
       </header>
 
       <section className="replay-intro">

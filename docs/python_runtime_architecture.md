@@ -169,9 +169,11 @@ or process memory.
 
 ## Data and runtime asset delivery
 
-Cloudflare Workers static assets have a 25 MiB individual-file limit. The data
-estate and potentially large Python wheels therefore belong in R2, preferably
-behind a production custom domain such as `data.theanalyst.dev`.
+GitHub Pages is appropriate for the static workbench and small, scenario-specific
+starter packs; the full estate and large pinned Python wheels should not be
+committed to or served from the application repository. Those assets belong in
+versioned public object storage, preferably behind a stable production data
+domain such as `data.theanalyst.dev`.
 
 Deployment should:
 

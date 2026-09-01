@@ -23,6 +23,8 @@ async function initialize(files = []) {
   sendStatus('booting', 'Loading CPython runtime');
   const { loadPyodide } = await import(`${PYODIDE_INDEX_URL}pyodide.mjs`);
   pyodide = await loadPyodide({ indexURL: PYODIDE_INDEX_URL });
+  sendStatus('booting', 'Loading core analysis packages');
+  await pyodide.loadPackage(['pandas', 'matplotlib', 'pyarrow']);
 
   if (files.length) {
     sendStatus('loading_data', `Mounting ${files.length} scenario files`);

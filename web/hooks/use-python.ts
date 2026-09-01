@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { sitePath } from '@/lib/site-path';
+
 export type PythonStatus = 'idle' | 'booting' | 'loading_data' | 'ready' | 'running' | 'error';
 
 export type PythonDataFile = {
@@ -27,17 +29,17 @@ type PendingRun = {
 const mondayFiles: PythonDataFile[] = [
   {
     path: '/data/support/csat_response.parquet',
-    url: '/data/support/csat_response.parquet',
+    url: sitePath('/data/support/csat_response.parquet'),
     label: 'support.csat_response',
   },
   {
     path: '/data/support/ticket.parquet',
-    url: '/data/support/ticket.parquet',
+    url: sitePath('/data/support/ticket.parquet'),
     label: 'support.ticket',
   },
   {
     path: '/data/crm/account.parquet',
-    url: '/data/crm/account.parquet',
+    url: sitePath('/data/crm/account.parquet'),
     label: 'crm.account',
   },
 ];
@@ -68,7 +70,7 @@ export function usePython() {
     setError(null);
     setStatus('booting');
 
-    const worker = new Worker('/workers/python-worker.mjs', { type: 'module' });
+    const worker = new Worker(sitePath('/workers/python-worker.mjs'), { type: 'module' });
     workerRef.current = worker;
     const id = crypto.randomUUID();
 

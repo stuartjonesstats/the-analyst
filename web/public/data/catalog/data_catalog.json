@@ -7977,11 +7977,14 @@
     "owner": "Warehouse Operations",
     "lifecycle": "active",
     "sensitivity": "internal",
-    "reliability": "verified",
+    "reliability": "caution",
     "freshness": "frozen-snapshot",
     "use_when": "",
     "do_not_use_when": "",
-    "quality_notes": [],
+    "quality_notes": [
+      "received_quantity is gross quantity presented; rejected_quantity is the rejected subset.",
+      "Some lines arrive in multiple partial receipt events; accepted quantity is received minus rejected."
+    ],
     "row_count": 82000,
     "column_count": 8,
     "columns": [
@@ -8036,7 +8039,7 @@
     "fully_qualified_name": "supply.inventory_movement",
     "asset_type": "parquet-table",
     "description": "Signed stock movements from purchasing, field usage, transfers, and adjustments.",
-    "grain": "One posted inventory movement event; replayed scanner events remain separate records.",
+    "grain": "One posted technical inventory event; replay rows link to the original physical movement.",
     "primary_key": [
       "inventory_movement_id"
     ],
@@ -8062,6 +8065,28 @@
         ],
         "nullable": false,
         "warning": null
+      },
+      {
+        "columns": [
+          "replay_of_inventory_movement_id"
+        ],
+        "references": "supply.inventory_movement",
+        "referenced_columns": [
+          "inventory_movement_id"
+        ],
+        "nullable": true,
+        "warning": "Only scanner replay rows populate this self-reference."
+      },
+      {
+        "columns": [
+          "goods_receipt_id"
+        ],
+        "references": "supply.goods_receipt",
+        "referenced_columns": [
+          "goods_receipt_id"
+        ],
+        "nullable": true,
+        "warning": null
       }
     ],
     "owner": "Warehouse Operations",
@@ -8072,10 +8097,12 @@
     "use_when": "",
     "do_not_use_when": "",
     "quality_notes": [
-      "A November 2025 handheld retry defect replayed a subset of otherwise identical business movements."
+      "November 2025 scanner replays are exact technical duplicates linked through replay_of_inventory_movement_id.",
+      "Exclude scanner_replay_flag rows when reconstructing physical stock; source events remain for auditability.",
+      "RECEIPT quantity_delta equals accepted goods quantity, not gross presented quantity."
     ],
     "row_count": 520000,
-    "column_count": 11,
+    "column_count": 13,
     "columns": [
       {
         "name": "inventory_movement_id",
@@ -8104,7 +8131,7 @@
       },
       {
         "name": "quantity_delta",
-        "type": "int64",
+        "type": "int32",
         "nullable": true
       },
       {
@@ -8128,6 +8155,16 @@
         "nullable": true
       },
       {
+        "name": "replay_of_inventory_movement_id",
+        "type": "int64",
+        "nullable": true
+      },
+      {
+        "name": "goods_receipt_id",
+        "type": "int64",
+        "nullable": true
+      },
+      {
         "name": "posted_at",
         "type": "timestamp[s]",
         "nullable": true
@@ -8142,7 +8179,7 @@
     "table": "inventory_position_daily",
     "fully_qualified_name": "supply.inventory_position_daily",
     "asset_type": "parquet-table",
-    "description": "Sampled daily product/warehouse inventory positions with trailing operational metrics.",
+    "description": "Sampled daily product/warehouse positions reconciled to physical ledger movements.",
     "grain": "One sampled product, warehouse, and snapshot-date position.",
     "primary_key": [
       "inventory_position_daily_id"
@@ -8179,7 +8216,9 @@
     "use_when": "",
     "do_not_use_when": "",
     "quality_notes": [
-      "The v0 extract is a dense analytical sample, not a complete warehouse-product date spine."
+      "The extract is a unique sparse sample, not a complete warehouse-product date spine.",
+      "on_hand_quantity and trailing demand/receipt units reconcile exactly after scanner replays are excluded.",
+      "stockout_hours fields are operational shortfall estimates rather than a physical ledger identity."
     ],
     "row_count": 330000,
     "column_count": 25,
@@ -8221,7 +8260,7 @@
       },
       {
         "name": "backorder_quantity",
-        "type": "int16",
+        "type": "int32",
         "nullable": true
       },
       {
@@ -8612,7 +8651,7 @@
       },
       {
         "name": "cancelled_quantity",
-        "type": "int16",
+        "type": "int32",
         "nullable": true
       }
     ],

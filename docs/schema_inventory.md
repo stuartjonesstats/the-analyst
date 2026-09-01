@@ -140,8 +140,8 @@ Schemas: **16**
 
 | Table | Grain | Rows | Columns | Reliability |
 |---|---|---:|---:|---|
-| `goods_receipt` | One receipt event for one PO line. | 82,000 | 8 | verified |
-| `inventory_movement` | One posted inventory movement event; replayed scanner events remain separate records. | 520,000 | 11 | caution |
+| `goods_receipt` | One receipt event for one PO line. | 82,000 | 8 | caution |
+| `inventory_movement` | One posted technical inventory event; replay rows link to the original physical movement. | 520,000 | 13 | caution |
 | `inventory_position_daily` | One sampled product, warehouse, and snapshot-date position. | 330,000 | 25 | caution |
 | `product_vendor` | One product-vendor sourcing relationship. | 1,440 | 10 | verified |
 | `purchase_order` | One purchase order. | 24,000 | 10 | verified |

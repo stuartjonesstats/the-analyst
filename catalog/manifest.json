@@ -3,7 +3,7 @@
   "master_seed": 20260831,
   "table_count": 96,
   "total_rows": 16548418,
-  "total_bytes": 592093499,
+  "total_bytes": 563729004,
   "files": [
     {
       "table": "billing.invoice",
@@ -585,24 +585,24 @@
       "table": "supply.goods_receipt",
       "rows": 82000,
       "columns": 8,
-      "bytes": 1397883,
-      "sha256": "4ec0b695f8985e54fca3de8d6951dde735a9fbb6f0559cce484b599e97fe4882",
+      "bytes": 1102363,
+      "sha256": "e3c52f576b72e407b6ce34775f83bc11cc98746fa9a0fe2ff1c08a9a90e6d768",
       "path": "parquet/supply/goods_receipt.parquet"
     },
     {
       "table": "supply.inventory_movement",
       "rows": 520000,
-      "columns": 11,
-      "bytes": 11804243,
-      "sha256": "eacfcb0f501d335edaeb73a45527198b125a47dcfcc0fe0756c01d02ca74d86b",
+      "columns": 13,
+      "bytes": 11515028,
+      "sha256": "12d203ede9355bd839427fa1ffea06c7b0078608f0f56fef4e3952e9f74bcc6f",
       "path": "parquet/supply/inventory_movement.parquet"
     },
     {
       "table": "supply.inventory_position_daily",
       "rows": 330000,
       "columns": 25,
-      "bytes": 32496209,
-      "sha256": "0e2401566511aec5067374d30fb02acb4ab97bcfef3ee92f37b5c245e9a48c0e",
+      "bytes": 5270104,
+      "sha256": "e5843a4d0f24db6d37c7d9f2c487931d15eaeb168f0a326d4e6c8a6313ea13f8",
       "path": "parquet/supply/inventory_position_daily.parquet"
     },
     {
@@ -617,16 +617,16 @@
       "table": "supply.purchase_order",
       "rows": 24000,
       "columns": 10,
-      "bytes": 416745,
-      "sha256": "6f69782a72dec01c64228544aee5fa895a856b497b65dd70d76deb18b64e44c4",
+      "bytes": 417051,
+      "sha256": "2cdd6fe7dfb1e362efed6b9d55c2925069899509af5cb0a2266b10896df1990c",
       "path": "parquet/supply/purchase_order.parquet"
     },
     {
       "table": "supply.purchase_order_line",
       "rows": 96000,
       "columns": 9,
-      "bytes": 2012604,
-      "sha256": "c0c61cb56fcebbb2b4bb031529ff0bcfa744d5c0e8c45bcafa5dab86daf24666",
+      "bytes": 1458643,
+      "sha256": "17d5d393f1b3e1d9aac1dd329f442636b7954a8850f8ad77e62e5310c32aae70",
       "path": "parquet/supply/purchase_order_line.parquet"
     },
     {

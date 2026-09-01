@@ -7,6 +7,14 @@ from builder import nullable, random_dates, random_timestamps, rng_for
 from config import SCALE
 
 
+SUPPLY_MOVEMENT_ROWS = 520_000
+SUPPLY_SCANNER_REPLAY_PAIRS = 2_400
+SUPPLY_OPENING_BALANCE_ROWS = SCALE["products"] * 3
+SUPPLY_POSITION_ROWS = 330_000
+SUPPLY_INTERMITTENT_CYCLE_DAYS = 19
+SUPPLY_INTERMITTENT_ACTIVE_DAYS = 2
+
+
 def _fk(column, references, referenced_column=None, *, nullable_fk=False, warning=None):
     return {
         "columns": [column],
@@ -44,6 +52,42 @@ def _site_region(context, site_ids):
     service_area = _aligned(context, "postal_area_id", "postal_service_area", site_postal)
     branch = _aligned(context, "service_area_id", "service_area_branch", service_area)
     return _aligned(context, "branch_id", "branch_region", branch)
+
+
+def _grouped_time_sums(event_keys, event_days, event_values, query_keys, query_days, windows=()):
+    """Return per-key cumulative and trailing sums at sparse query dates."""
+    event_keys = np.asarray(event_keys, dtype=np.int32)
+    event_days = np.asarray(event_days, dtype=np.int32)
+    event_values = np.asarray(event_values, dtype=np.int64)
+    query_keys = np.asarray(query_keys, dtype=np.int32)
+    query_days = np.asarray(query_days, dtype=np.int32)
+
+    event_order = np.lexsort((event_days, event_keys))
+    sorted_event_keys = event_keys[event_order]
+    sorted_event_days = event_days[event_order]
+    sorted_event_values = event_values[event_order]
+    query_order = np.lexsort((query_days, query_keys))
+    sorted_query_keys = query_keys[query_order]
+    sorted_query_days = query_days[query_order]
+
+    cumulative_result = np.zeros(len(query_keys), dtype=np.int64)
+    trailing_results = {window: np.zeros(len(query_keys), dtype=np.int64) for window in windows}
+    for key in np.unique(sorted_query_keys):
+        event_left = np.searchsorted(sorted_event_keys, key, side="left")
+        event_right = np.searchsorted(sorted_event_keys, key, side="right")
+        query_left = np.searchsorted(sorted_query_keys, key, side="left")
+        query_right = np.searchsorted(sorted_query_keys, key, side="right")
+        query_positions = query_order[query_left:query_right]
+        days = sorted_event_days[event_left:event_right]
+        values = sorted_event_values[event_left:event_right]
+        cumulative = np.concatenate((np.array([0], dtype=np.int64), np.cumsum(values, dtype=np.int64)))
+        target_days = sorted_query_days[query_left:query_right]
+        end = np.searchsorted(days, target_days, side="right")
+        cumulative_result[query_positions] = cumulative[end]
+        for window in windows:
+            start = np.searchsorted(days, target_days - window + 1, side="left")
+            trailing_results[window][query_positions] = cumulative[end] - cumulative[start]
+    return cumulative_result, trailing_results
 
 
 def generate_operations(builder):
@@ -707,11 +751,129 @@ def _generate_support(builder):
 def _generate_supply_facts(builder):
     c = builder.context
     rng = rng_for("supply_facts")
+
+    # Purchase orders have four real line numbers apiece, and every ordered
+    # product is approved for the header vendor in product_vendor.
     n_po = 24_000
     po_id = np.arange(1, n_po + 1, dtype=np.int64)
-    vendor_id = rng.choice(c["vendor_id"], n_po)
-    warehouse_id = rng.choice(c["warehouse_id"], n_po)
-    ordered_at = random_timestamps(rng, n_po)
+    po_vendor_idx = rng.integers(0, len(c["vendor_id"]), n_po)
+    vendor_id = c["vendor_id"][po_vendor_idx]
+    po_warehouse_idx = rng.integers(0, len(c["warehouse_id"]), n_po)
+    warehouse_id = c["warehouse_id"][po_warehouse_idx]
+    ordered_at = random_timestamps(rng, n_po, "2023-01-01", "2025-09-30T23:59:59")
+    po_status = _enum(
+        rng,
+        ["RECEIVED", "PARTIAL", "OPEN", "CANCELLED"],
+        n_po,
+        [0.46, 0.23, 0.28, 0.03],
+    )
+
+    n_lines = 96_000
+    line_id = np.arange(1, n_lines + 1, dtype=np.int64)
+    line_po_pos = np.repeat(np.arange(n_po, dtype=np.int32), 4)
+    line_po = po_id[line_po_pos]
+    line_number = np.tile(np.arange(1, 5, dtype=np.int16), n_po)
+    line_product = np.empty(n_lines, dtype=c["product_id"].dtype)
+    pv_products = np.asarray(c["product_vendor_product"])
+    pv_vendors = np.asarray(c["product_vendor_vendor"])
+    vendor_product_pools = {
+        vendor: np.unique(pv_products[pv_vendors == vendor]) for vendor in c["vendor_id"]
+    }
+    for po_position, vendor in enumerate(vendor_id):
+        pool = vendor_product_pools[vendor]
+        if not len(pool):
+            pool = c["product_id"]
+        start = po_position * 4
+        line_product[start:start + 4] = rng.choice(pool, 4, replace=len(pool) < 4)
+
+    contract_lookup = {}
+    for product, vendor, cost, lead in zip(
+        c["product_vendor_product"],
+        c["product_vendor_vendor"],
+        c["product_vendor_contract_unit_cost_cents"],
+        c["product_vendor_contract_lead_time_days"],
+    ):
+        contract_lookup.setdefault((product, vendor), (int(cost), int(lead)))
+    contract_pairs = [contract_lookup[(product, vendor_id[po_pos])] for product, po_pos in zip(line_product, line_po_pos)]
+    unit_cost = np.fromiter((pair[0] for pair in contract_pairs), dtype=np.int64, count=n_lines)
+    contract_lead_days = np.fromiter((pair[1] for pair in contract_pairs), dtype=np.int16, count=n_lines)
+    ordered_qty = rng.integers(2, 241, n_lines, dtype=np.int32)
+    cancelled_quantity = np.where(po_status[line_po_pos] == "CANCELLED", ordered_qty, 0).astype(np.int32)
+    net_ordered_quantity = ordered_qty - cancelled_quantity
+    line_order_day = ordered_at[line_po_pos].astype("datetime64[D]")
+    promised_date = line_order_day + contract_lead_days.astype("timedelta64[D]")
+
+    # Realized lead time varies around contract by supplier risk and occasional
+    # disruption. It is deliberately not a deterministic copy of promise time.
+    risk = np.asarray(c["vendor_risk_tier"])[po_vendor_idx[line_po_pos]]
+    risk_mean = np.select([risk == "low", risk == "medium", risk == "high"], [0.0, 3.0, 8.0])
+    risk_std = np.select([risk == "low", risk == "medium", risk == "high"], [3.0, 5.0, 8.0])
+    lead_variation = np.rint(rng.normal(risk_mean, risk_std)).astype(np.int16)
+    disruption = rng.random(n_lines) < 0.08
+    lead_variation += np.where(disruption, rng.integers(5, 22, n_lines), 0).astype(np.int16)
+    realized_lead_days = np.clip(contract_lead_days.astype(np.int32) + lead_variation, 1, 90)
+    final_receipt_at = (
+        line_order_day.astype("datetime64[s]")
+        + realized_lead_days.astype("timedelta64[D]")
+        + rng.integers(0, 24, n_lines).astype("timedelta64[h]")
+    )
+
+    accepted_target = np.zeros(n_lines, dtype=np.int32)
+    received_line = po_status[line_po_pos] == "RECEIVED"
+    partial_line = po_status[line_po_pos] == "PARTIAL"
+    accepted_target[received_line] = net_ordered_quantity[received_line]
+    partial_fraction = rng.uniform(0.30, 0.86, partial_line.sum())
+    accepted_target[partial_line] = np.clip(
+        np.floor(net_ordered_quantity[partial_line] * partial_fraction).astype(np.int32),
+        1,
+        net_ordered_quantity[partial_line] - 1,
+    )
+
+    receipt_line_positions = np.flatnonzero(accepted_target > 0)
+    n_receipts = 82_000
+    n_split = n_receipts - len(receipt_line_positions)
+    split_candidates = receipt_line_positions[
+        (accepted_target[receipt_line_positions] >= 2)
+        & (realized_lead_days[receipt_line_positions] >= 3)
+    ]
+    if n_split < 0 or n_split > len(split_candidates):
+        raise RuntimeError(
+            f"Cannot construct {n_receipts:,} receipts from {len(receipt_line_positions):,} receiving lines"
+        )
+    split_lines = rng.choice(split_candidates, n_split, replace=False)
+    is_split = np.zeros(n_lines, dtype=bool)
+    is_split[split_lines] = True
+    first_accepted = accepted_target.copy()
+    first_accepted[split_lines] = (
+        np.floor(rng.random(n_split) * (accepted_target[split_lines] - 1)).astype(np.int32) + 1
+    )
+    second_accepted = accepted_target[split_lines] - first_accepted[split_lines]
+    receipt_line_pos = np.concatenate((receipt_line_positions, split_lines))
+    receipt_accepted = np.concatenate((first_accepted[receipt_line_positions], second_accepted)).astype(np.int32)
+    first_receipt_at = final_receipt_at[receipt_line_positions].copy()
+    split_base_mask = is_split[receipt_line_positions]
+    max_early_days = np.maximum(realized_lead_days[receipt_line_positions[split_base_mask]] - 1, 1)
+    early_days = (
+        np.floor(rng.random(split_base_mask.sum()) * np.minimum(max_early_days, 7)).astype(np.int16) + 1
+    )
+    first_receipt_at[split_base_mask] -= early_days.astype("timedelta64[D]")
+    receipt_at = np.concatenate((first_receipt_at, final_receipt_at[split_lines]))
+    receipt_rejected = np.where(
+        rng.random(n_receipts) < 0.14,
+        rng.integers(1, 8, n_receipts),
+        0,
+    ).astype(np.int16)
+    receipt_received = receipt_accepted + receipt_rejected.astype(np.int32)
+    goods_receipt_id = np.arange(1, n_receipts + 1, dtype=np.int64)
+    inspection_code = np.where(
+        receipt_rejected > 0,
+        "PARTIAL_REJECT",
+        _enum(rng, ["PASS", "WAIVED", "PENDING"], n_receipts, [0.91, 0.07, 0.02]),
+    )
+
+    expected_day_number = promised_date.astype(np.int64)
+    expected_by_po = np.full(n_po, expected_day_number.min(), dtype=np.int64)
+    np.maximum.at(expected_by_po, line_po_pos, expected_day_number)
     builder.write(
         "supply", "purchase_order",
         {
@@ -720,8 +882,8 @@ def _generate_supply_facts(builder):
             "vendor_id": vendor_id,
             "warehouse_id": warehouse_id,
             "ordered_at": ordered_at,
-            "expected_date": (ordered_at + rng.integers(2, 45, n_po).astype("timedelta64[D]")).astype("datetime64[D]"),
-            "status_code": _enum(rng, ["RECEIVED", "PARTIAL", "OPEN", "CANCELLED"], n_po, [0.73, 0.11, 0.13, 0.03]),
+            "expected_date": expected_by_po.astype("datetime64[D]"),
+            "status_code": po_status,
             "currency_code": _enum(rng, ["USD", "CAD", "EUR"], n_po, [0.94, 0.04, 0.02]),
             "buyer_employee_id": rng.choice(c["employee_id"], n_po),
             "source_system_code": _enum(rng, ["ERP", "LEGACY_ERP"], n_po, [0.89, 0.11]),
@@ -731,111 +893,372 @@ def _generate_supply_facts(builder):
         foreign_keys=[_fk("vendor_id", "supply.vendor"), _fk("warehouse_id", "supply.warehouse"), _fk("buyer_employee_id", "workforce.employee", "employee_id")],
         owner="Procurement", sensitivity="confidential",
     )
-    n_lines = 96_000
-    line_id = np.arange(1, n_lines + 1, dtype=np.int64)
-    line_po = rng.choice(po_id, n_lines).astype(np.int64)
-    line_product = rng.choice(c["product_id"], n_lines)
-    ordered_qty = rng.integers(1, 240, n_lines, dtype=np.int32)
-    unit_cost = rng.integers(250, 160_000, n_lines, dtype=np.int64)
     builder.write(
         "supply", "purchase_order_line",
         {
             "purchase_order_line_id": line_id,
             "purchase_order_id": line_po,
-            "line_number": rng.integers(1, 24, n_lines, dtype=np.int16),
+            "line_number": line_number,
             "product_id": line_product,
             "ordered_quantity": ordered_qty,
             "unit_cost_cents": unit_cost,
             "extended_cost_cents": ordered_qty.astype(np.int64) * unit_cost,
-            "promised_date": (ordered_at[line_po - 1] + rng.integers(2, 50, n_lines).astype("timedelta64[D]")).astype("datetime64[D]"),
-            "cancelled_quantity": np.where(rng.random(n_lines) < 0.04, rng.integers(1, 5, n_lines), 0).astype(np.int16),
+            "promised_date": promised_date,
+            "cancelled_quantity": cancelled_quantity,
         },
         description="Products and quantities ordered on purchase orders.", grain="One line item on a purchase order.",
         primary_key=["purchase_order_line_id"],
         foreign_keys=[_fk("purchase_order_id", "supply.purchase_order"), _fk("product_id", "catalog.product")],
         owner="Procurement", sensitivity="confidential",
     )
-    n_receipts = 82_000
-    receipt_line = rng.choice(line_id, n_receipts).astype(np.int64)
-    receipt_po = line_po[receipt_line - 1]
-    receipt_at = ordered_at[receipt_po - 1] + rng.integers(1, 70, n_receipts).astype("timedelta64[D]")
+    receipt_line = line_id[receipt_line_pos]
+    receipt_po_pos = line_po_pos[receipt_line_pos]
     builder.write(
         "supply", "goods_receipt",
         {
-            "goods_receipt_id": np.arange(1, n_receipts + 1, dtype=np.int64),
+            "goods_receipt_id": goods_receipt_id,
             "purchase_order_line_id": receipt_line,
-            "warehouse_id": warehouse_id[receipt_po - 1],
+            "warehouse_id": warehouse_id[receipt_po_pos],
             "received_at": receipt_at,
-            "received_quantity": rng.integers(1, 160, n_receipts, dtype=np.int32),
-            "rejected_quantity": rng.poisson(0.35, n_receipts).astype(np.int16),
-            "lot_number": np.array([f"LOT-{x % 19000:06d}" for x in range(n_receipts)]),
-            "inspection_code": _enum(rng, ["PASS", "FAIL", "WAIVED", "PENDING"], n_receipts, [0.88, 0.025, 0.075, 0.02]),
+            "received_quantity": receipt_received,
+            "rejected_quantity": receipt_rejected,
+            "lot_number": np.array([f"LOT-{x % 19000:06d}" for x in goods_receipt_id]),
+            "inspection_code": inspection_code,
         },
         description="Warehouse receipts against individual purchase-order lines.", grain="One receipt event for one PO line.",
         primary_key=["goods_receipt_id"],
         foreign_keys=[_fk("purchase_order_line_id", "supply.purchase_order_line"), _fk("warehouse_id", "supply.warehouse")],
-        owner="Warehouse Operations", sensitivity="internal",
+        owner="Warehouse Operations", sensitivity="internal", reliability="caution",
+        quality_notes=[
+            "received_quantity is gross quantity presented; rejected_quantity is the rejected subset.",
+            "Some lines arrive in multiple partial receipt events; accepted quantity is received minus rejected.",
+        ],
     )
-    n_move = 520_000
-    movement_id = np.arange(1, n_move + 1, dtype=np.int64)
-    movement_time = random_timestamps(rng, n_move)
-    scanner_issue = (movement_time >= np.datetime64("2025-11-01")) & (movement_time < np.datetime64("2025-12-01"))
-    move_qty = rng.integers(1, 30, n_move, dtype=np.int32)
-    move_type = _enum(rng, ["RECEIPT", "ISSUE", "TRANSFER_IN", "TRANSFER_OUT", "ADJUSTMENT", "RETURN"], n_move)
-    signed_qty = move_qty * np.where(np.isin(move_type, ["ISSUE", "TRANSFER_OUT"]), -1, 1)
+
+    # Build the physical stock ledger first, then append technical scanner
+    # replays linked to their acknowledged original event.
+    n_products = len(c["product_id"])
+    n_warehouses = len(c["warehouse_id"])
+    n_inventory_keys = n_products * n_warehouses
+    n_opening = n_inventory_keys
+    if n_opening != SUPPLY_OPENING_BALANCE_ROWS:
+        raise RuntimeError(
+            f"Expected {SUPPLY_OPENING_BALANCE_ROWS:,} warehouse-product opening balances; got {n_opening:,}"
+        )
+    n_operational = SUPPLY_MOVEMENT_ROWS - SUPPLY_SCANNER_REPLAY_PAIRS - n_opening - n_receipts
+
+    receipt_product_pos = _positions(c, "product_id", line_product[receipt_line_pos]).astype(np.int32)
+    receipt_warehouse_pos = po_warehouse_idx[receipt_po_pos].astype(np.int32)
+    receipt_key = receipt_warehouse_pos * n_products + receipt_product_pos
+
+    operational_product_pos = rng.integers(0, n_products, n_operational, dtype=np.int32)
+    operational_warehouse_pos = rng.integers(0, n_warehouses, n_operational, dtype=np.int32)
+    operational_time = random_timestamps(rng, n_operational, "2023-01-02", "2025-12-31T23:59:59")
+    operational_type = _enum(
+        rng,
+        ["ISSUE", "TRANSFER_IN", "TRANSFER_OUT", "ADJUSTMENT", "RETURN"],
+        n_operational,
+        [0.55, 0.13, 0.13, 0.11, 0.08],
+    )
+
+    issue = operational_type == "ISSUE"
+    intermittent = issue & (operational_product_pos % 5 == 0)
+    day = operational_time.astype("datetime64[D]")
+    seconds = operational_time - day.astype("datetime64[s]")
+    day_number = (day - np.datetime64("2023-01-01", "D")).astype(np.int32)
+    intermittent_remainder = (
+        day_number + operational_product_pos * 3
+    ) % SUPPLY_INTERMITTENT_CYCLE_DAYS
+    shift_forward = np.where(
+        intermittent_remainder < SUPPLY_INTERMITTENT_ACTIVE_DAYS,
+        0,
+        SUPPLY_INTERMITTENT_CYCLE_DAYS - intermittent_remainder,
+    )
+    shifted_day = day + shift_forward.astype("timedelta64[D]")
+    world_end_day = np.datetime64("2025-12-31", "D")
+    shift_backward = np.maximum(intermittent_remainder - (SUPPLY_INTERMITTENT_ACTIVE_DAYS - 1), 0)
+    shifted_day = np.where(
+        shifted_day <= world_end_day,
+        shifted_day,
+        day - shift_backward.astype("timedelta64[D]"),
+    )
+    operational_time[intermittent] = (
+        shifted_day[intermittent].astype("datetime64[s]") + seconds[intermittent]
+    )
+
+    operational_qty = rng.integers(1, 30, n_operational, dtype=np.int32)
+    demand_base = (rng.poisson(5.5, n_operational) + 1).astype(np.float64)
+    movement_month = operational_time.astype("datetime64[M]").astype(np.int64) % 12 + 1
+    winter_seasonal = issue & (operational_product_pos % 5 == 1)
+    summer_seasonal = issue & (operational_product_pos % 5 == 2)
+    winter_peak = np.isin(movement_month, [11, 12, 1, 2])
+    summer_peak = np.isin(movement_month, [6, 7, 8])
+    demand_factor = np.ones(n_operational, dtype=np.float64)
+    demand_factor[winter_seasonal] = np.where(winter_peak[winter_seasonal], 2.45, 0.82)
+    demand_factor[summer_seasonal] = np.where(summer_peak[summer_seasonal], 2.25, 0.86)
+    demand_factor[intermittent] = rng.uniform(1.8, 3.8, intermittent.sum())
+    operational_qty[issue] = np.maximum(
+        1, np.rint(demand_base[issue] * demand_factor[issue]).astype(np.int32)
+    )
+    operational_sign = np.ones(n_operational, dtype=np.int32)
+    operational_sign[np.isin(operational_type, ["ISSUE", "TRANSFER_OUT"])] = -1
+    adjustment = operational_type == "ADJUSTMENT"
+    operational_sign[adjustment] = rng.choice(np.array([-1, 1], dtype=np.int32), adjustment.sum())
+    operational_delta = operational_qty * operational_sign
+    operational_key = operational_warehouse_pos * n_products + operational_product_pos
+
+    ordinary_key = np.concatenate((receipt_key, operational_key))
+    ordinary_time = np.concatenate((receipt_at, operational_time))
+    ordinary_delta = np.concatenate((receipt_accepted, operational_delta)).astype(np.int32)
+    ordinary_order = np.lexsort((ordinary_time, ordinary_key))
+    sorted_key = ordinary_key[ordinary_order]
+    sorted_delta = ordinary_delta[ordinary_order]
+    opening_quantity = np.full(n_inventory_keys, 250, dtype=np.int32)
+    for key in range(n_inventory_keys):
+        left = np.searchsorted(sorted_key, key, side="left")
+        right = np.searchsorted(sorted_key, key, side="right")
+        if left == right:
+            continue
+        minimum = int(np.cumsum(sorted_delta[left:right], dtype=np.int64).min())
+        opening_quantity[key] = max(250, 50 - minimum)
+
+    opening_key = np.arange(n_inventory_keys, dtype=np.int32)
+    opening_warehouse_pos = opening_key // n_products
+    opening_product_pos = opening_key % n_products
+    physical_warehouse_pos = np.concatenate((opening_warehouse_pos, receipt_warehouse_pos, operational_warehouse_pos))
+    physical_product_pos = np.concatenate((opening_product_pos, receipt_product_pos, operational_product_pos))
+    physical_time = np.concatenate(
+        (
+            np.full(n_opening, np.datetime64("2023-01-01T00:00:00", "s")),
+            receipt_at,
+            operational_time,
+        )
+    )
+    physical_type = np.concatenate(
+        (
+            np.full(n_opening, "OPENING_BALANCE"),
+            np.full(n_receipts, "RECEIPT"),
+            operational_type,
+        )
+    )
+    physical_delta = np.concatenate((opening_quantity, receipt_accepted, operational_delta)).astype(np.int32)
+    physical_reference_type = np.concatenate(
+        (
+            np.full(n_opening, "COUNT"),
+            np.full(n_receipts, "PO"),
+            np.select(
+                [
+                    operational_type == "ISSUE",
+                    np.isin(operational_type, ["TRANSFER_IN", "TRANSFER_OUT"]),
+                    operational_type == "ADJUSTMENT",
+                    operational_type == "RETURN",
+                ],
+                ["WORK_ORDER", "TRANSFER", "COUNT", "RETURN"],
+                default="COUNT",
+            ),
+        )
+    )
+    opening_reference = np.array(
+        [
+            f"OPEN-{c['warehouse_id'][warehouse]}-{c['product_id'][product]}"
+            for warehouse, product in zip(opening_warehouse_pos, opening_product_pos)
+        ]
+    )
+    receipt_reference = np.array([f"GR-{receipt_id:08d}" for receipt_id in goods_receipt_id])
+    operational_reference = np.array([f"MOV-{index:09d}" for index in range(1, n_operational + 1)])
+    physical_reference = np.concatenate((opening_reference, receipt_reference, operational_reference))
+    physical_scanner = np.concatenate(
+        (
+            np.full(n_opening, "SYSTEM"),
+            np.array([f"SCN-{receipt_id % 380:04d}" for receipt_id in goods_receipt_id]),
+            np.array([f"SCN-{index % 380:04d}" for index in range(1, n_operational + 1)]),
+        )
+    )
+    physical_goods_receipt_id = np.concatenate(
+        (
+            np.zeros(n_opening, dtype=np.int64),
+            goods_receipt_id,
+            np.zeros(n_operational, dtype=np.int64),
+        )
+    )
+    physical_posted_at = physical_time + rng.integers(0, 97, len(physical_time)).astype("timedelta64[h]")
+    physical_id = np.arange(1, len(physical_time) + 1, dtype=np.int64)
+
+    november_candidate = np.flatnonzero(
+        (physical_time >= np.datetime64("2025-11-01T00:00:00"))
+        & (physical_time < np.datetime64("2025-12-01T00:00:00"))
+        & (physical_scanner != "SYSTEM")
+    )
+    if len(november_candidate) < SUPPLY_SCANNER_REPLAY_PAIRS:
+        raise RuntimeError("Not enough November scanner events to build replay pairs")
+    replay_source = np.sort(
+        rng.choice(november_candidate, SUPPLY_SCANNER_REPLAY_PAIRS, replace=False)
+    )
+    movement_id = np.arange(1, SUPPLY_MOVEMENT_ROWS + 1, dtype=np.int64)
+    movement_warehouse_pos = np.concatenate((physical_warehouse_pos, physical_warehouse_pos[replay_source]))
+    movement_product_pos = np.concatenate((physical_product_pos, physical_product_pos[replay_source]))
+    movement_time = np.concatenate((physical_time, physical_time[replay_source]))
+    move_type = np.concatenate((physical_type, physical_type[replay_source]))
+    signed_qty = np.concatenate((physical_delta, physical_delta[replay_source]))
+    reference_type = np.concatenate((physical_reference_type, physical_reference_type[replay_source]))
+    reference_number = np.concatenate((physical_reference, physical_reference[replay_source]))
+    scanner_device = np.concatenate((physical_scanner, physical_scanner[replay_source]))
+    goods_receipt_link = np.concatenate(
+        (physical_goods_receipt_id, physical_goods_receipt_id[replay_source])
+    )
+    replay_of = np.concatenate(
+        (
+            np.zeros(len(physical_id), dtype=np.int64),
+            physical_id[replay_source],
+        )
+    )
+    scanner_replay = replay_of > 0
+    posted_at = np.concatenate(
+        (
+            physical_posted_at,
+            physical_posted_at[replay_source]
+            + rng.integers(1, 73, SUPPLY_SCANNER_REPLAY_PAIRS).astype("timedelta64[h]"),
+        )
+    )
     builder.write(
         "supply", "inventory_movement",
         {
             "inventory_movement_id": movement_id,
-            "warehouse_id": rng.choice(c["warehouse_id"], n_move),
-            "product_id": rng.choice(c["product_id"], n_move),
+            "warehouse_id": c["warehouse_id"][movement_warehouse_pos],
+            "product_id": c["product_id"][movement_product_pos],
             "movement_at": movement_time,
             "movement_type_code": move_type,
             "quantity_delta": signed_qty,
-            "reference_type_code": _enum(rng, ["PO", "WORK_ORDER", "TRANSFER", "COUNT", "RETURN"], n_move),
-            "reference_number": np.array([f"REF-{x % 180000:09d}" for x in movement_id]),
-            "scanner_device_code": np.array([f"SCN-{x % 380:04d}" for x in movement_id]),
-            "scanner_replay_flag": scanner_issue & (rng.random(n_move) < 0.16),
-            "posted_at": movement_time + rng.integers(0, 96, n_move).astype("timedelta64[h]"),
+            "reference_type_code": reference_type,
+            "reference_number": reference_number,
+            "scanner_device_code": scanner_device,
+            "scanner_replay_flag": scanner_replay,
+            "replay_of_inventory_movement_id": nullable(replay_of, replay_of == 0),
+            "goods_receipt_id": nullable(goods_receipt_link, goods_receipt_link == 0),
+            "posted_at": posted_at,
         },
         description="Signed stock movements from purchasing, field usage, transfers, and adjustments.",
-        grain="One posted inventory movement event; replayed scanner events remain separate records.",
+        grain="One posted technical inventory event; replay rows link to the original physical movement.",
         primary_key=["inventory_movement_id"],
-        foreign_keys=[_fk("warehouse_id", "supply.warehouse"), _fk("product_id", "catalog.product")],
+        foreign_keys=[
+            _fk("warehouse_id", "supply.warehouse"),
+            _fk("product_id", "catalog.product"),
+            _fk(
+                "replay_of_inventory_movement_id",
+                "supply.inventory_movement",
+                "inventory_movement_id",
+                nullable_fk=True,
+                warning="Only scanner replay rows populate this self-reference.",
+            ),
+            _fk("goods_receipt_id", "supply.goods_receipt", nullable_fk=True),
+        ],
         owner="Warehouse Operations", reliability="caution",
-        quality_notes=["A November 2025 handheld retry defect replayed a subset of otherwise identical business movements."],
+        quality_notes=[
+            "November 2025 scanner replays are exact technical duplicates linked through replay_of_inventory_movement_id.",
+            "Exclude scanner_replay_flag rows when reconstructing physical stock; source events remain for auditability.",
+            "RECEIPT quantity_delta equals accepted goods quantity, not gross presented quantity.",
+        ],
     )
-    n_daily = 330_000
-    date = random_dates(rng, n_daily)
+
+    # Positions are a unique sparse sample, but every sampled on-hand value and
+    # trailing demand/receipt measure reconciles to the physical movement ledger.
+    position_start = np.datetime64("2024-01-01", "D")
+    position_end = np.datetime64("2025-12-31", "D")
+    n_position_days = int((position_end - position_start) / np.timedelta64(1, "D")) + 1
+    sampled_combo = np.sort(
+        rng.choice(n_inventory_keys * n_position_days, SUPPLY_POSITION_ROWS, replace=False)
+    )
+    position_key = (sampled_combo // n_position_days).astype(np.int32)
+    position_day_offset = (sampled_combo % n_position_days).astype(np.int32)
+    date = position_start + position_day_offset.astype("timedelta64[D]")
+    position_warehouse_pos = position_key // n_products
+    position_product_pos = position_key % n_products
+
+    physical_key = physical_warehouse_pos * n_products + physical_product_pos
+    physical_day_number = physical_time.astype("datetime64[D]").astype(np.int32)
+    position_day_number = date.astype(np.int32)
+    on_hand, _ = _grouped_time_sums(
+        physical_key,
+        physical_day_number,
+        physical_delta,
+        position_key,
+        position_day_number,
+    )
+    demand_event = physical_type == "ISSUE"
+    _, demand_by_window = _grouped_time_sums(
+        physical_key[demand_event],
+        physical_day_number[demand_event],
+        -physical_delta[demand_event],
+        position_key,
+        position_day_number,
+        windows=(7, 14, 30, 60, 90),
+    )
+    receipt_event = physical_type == "RECEIPT"
+    _, receipt_by_window = _grouped_time_sums(
+        physical_key[receipt_event],
+        physical_day_number[receipt_event],
+        physical_delta[receipt_event],
+        position_key,
+        position_day_number,
+        windows=(7, 14, 30, 60, 90),
+    )
+
+    line_key = po_warehouse_idx[line_po_pos] * n_products + _positions(c, "product_id", line_product)
+    order_event_keys = np.concatenate((line_key, receipt_key))
+    order_event_days = np.concatenate(
+        (line_order_day.astype(np.int32), receipt_at.astype("datetime64[D]").astype(np.int32))
+    )
+    order_event_values = np.concatenate((net_ordered_quantity, -receipt_accepted)).astype(np.int64)
+    on_order, _ = _grouped_time_sums(
+        order_event_keys,
+        order_event_days,
+        order_event_values,
+        position_key,
+        position_day_number,
+    )
+    if np.any(on_hand < 0) or np.any(on_order < 0):
+        raise RuntimeError("Reconciled supply position produced a negative balance")
+
+    allocated_quantity = np.floor(on_hand * rng.uniform(0.02, 0.34, SUPPLY_POSITION_ROWS)).astype(np.int32)
+    available_quantity = np.maximum(on_hand - allocated_quantity, 0)
+    backorder_quantity = np.maximum(demand_by_window[7] - available_quantity, 0).astype(np.int32)
     cols = {
-        "inventory_position_daily_id": np.arange(1, n_daily + 1, dtype=np.int64),
+        "inventory_position_daily_id": np.arange(1, SUPPLY_POSITION_ROWS + 1, dtype=np.int64),
         "snapshot_date": date,
-        "warehouse_id": rng.choice(c["warehouse_id"], n_daily),
-        "product_id": rng.choice(c["product_id"], n_daily),
-        "on_hand_quantity": rng.gamma(4, 18, n_daily).astype(np.int32),
-        "allocated_quantity": rng.gamma(2, 7, n_daily).astype(np.int32),
-        "on_order_quantity": rng.gamma(2, 14, n_daily).astype(np.int32),
-        "backorder_quantity": rng.poisson(1.6, n_daily).astype(np.int16),
-        "unit_cost_cents": rng.integers(250, 160_000, n_daily, dtype=np.int64),
-        "last_count_date": date - rng.integers(0, 120, n_daily).astype("timedelta64[D]"),
+        "warehouse_id": c["warehouse_id"][position_warehouse_pos],
+        "product_id": c["product_id"][position_product_pos],
+        "on_hand_quantity": on_hand.astype(np.int32),
+        "allocated_quantity": allocated_quantity,
+        "on_order_quantity": on_order.astype(np.int32),
+        "backorder_quantity": backorder_quantity,
+        "unit_cost_cents": c["product_unit_cost_cents"][position_product_pos],
+        "last_count_date": date - rng.integers(0, 120, SUPPLY_POSITION_ROWS).astype("timedelta64[D]"),
     }
     for window in (7, 14, 30, 60, 90):
-        cols[f"demand_units_{window}d"] = rng.gamma(2.5, window / 3, n_daily).astype(np.float32)
-        cols[f"receipt_units_{window}d"] = rng.gamma(2.1, window / 4, n_daily).astype(np.float32)
-        cols[f"stockout_hours_{window}d"] = rng.gamma(1.2, window / 6, n_daily).astype(np.float32)
+        demand_units = demand_by_window[window]
+        cols[f"demand_units_{window}d"] = demand_units.astype(np.float32)
+        cols[f"receipt_units_{window}d"] = receipt_by_window[window].astype(np.float32)
+        estimated_shortfall = np.maximum(demand_units - available_quantity, 0)
+        cols[f"stockout_hours_{window}d"] = np.minimum(
+            estimated_shortfall * 6, 24 * window
+        ).astype(np.float32)
     builder.write(
         "supply", "inventory_position_daily", cols,
-        description="Sampled daily product/warehouse inventory positions with trailing operational metrics.",
+        description="Sampled daily product/warehouse positions reconciled to physical ledger movements.",
         grain="One sampled product, warehouse, and snapshot-date position.", primary_key=["inventory_position_daily_id"],
         foreign_keys=[_fk("warehouse_id", "supply.warehouse"), _fk("product_id", "catalog.product")],
         owner="Supply Analytics", reliability="caution",
-        quality_notes=["The v0 extract is a dense analytical sample, not a complete warehouse-product date spine."],
+        quality_notes=[
+            "The extract is a unique sparse sample, not a complete warehouse-product date spine.",
+            "on_hand_quantity and trailing demand/receipt units reconcile exactly after scanner replays are excluded.",
+            "stockout_hours fields are operational shortfall estimates rather than a physical ledger identity.",
+        ],
     )
     builder.add_anomaly(
         anomaly_id="A12", name="Warehouse scanner retry replay",
         affected_tables=["supply.inventory_movement"], date_range="2025-11-01/2025-11-30",
         mechanism="Offline handhelds replayed acknowledged movements after reconnecting.",
-        breadcrumb="scanner_replay_flag and repeated reference/device/quantity combinations.",
+        breadcrumb="scanner_replay_flag and replay_of_inventory_movement_id identify linked technical duplicates.",
         learning_objective="Distinguish technical event identity from physical stock movement identity.",
     )
 

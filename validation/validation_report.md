@@ -2,7 +2,7 @@
 
 **Status: PASS**
 
-96 tables / 16,548,418 rows / 166 declared relationships / 10 documented anomalies.
+96 tables / 16,548,418 rows / 168 declared relationships / 10 documented anomalies.
 
 | Result | Check | Detail |
 |---|---|---|
@@ -158,7 +158,7 @@
 | PASS | primary key valid: platform.source_registry | rows=16; distinct_keys=16; null_keys=0 |
 | PASS | parquet readable and catalog-aligned: supply.goods_receipt | rows=82,000; columns=8 |
 | PASS | primary key valid: supply.goods_receipt | rows=82,000; distinct_keys=82,000; null_keys=0 |
-| PASS | parquet readable and catalog-aligned: supply.inventory_movement | rows=520,000; columns=11 |
+| PASS | parquet readable and catalog-aligned: supply.inventory_movement | rows=520,000; columns=13 |
 | PASS | primary key valid: supply.inventory_movement | rows=520,000; distinct_keys=520,000; null_keys=0 |
 | PASS | parquet readable and catalog-aligned: supply.inventory_position_daily | rows=330,000; columns=25 |
 | PASS | primary key valid: supply.inventory_position_daily | rows=330,000; distinct_keys=330,000; null_keys=0 |
@@ -332,6 +332,8 @@
 | PASS | foreign key resolves: supply.goods_receipt -> supply.purchase_order_line | orphans=0 |
 | PASS | foreign key resolves: supply.goods_receipt -> supply.warehouse | orphans=0 |
 | PASS | foreign key resolves: supply.inventory_movement -> catalog.product | orphans=0 |
+| PASS | foreign key resolves: supply.inventory_movement -> supply.goods_receipt | orphans=0 |
+| PASS | foreign key resolves: supply.inventory_movement -> supply.inventory_movement | orphans=0 |
 | PASS | foreign key resolves: supply.inventory_movement -> supply.warehouse | orphans=0 |
 | PASS | foreign key resolves: supply.inventory_position_daily -> catalog.product | orphans=0 |
 | PASS | foreign key resolves: supply.inventory_position_daily -> supply.warehouse | orphans=0 |
@@ -371,6 +373,17 @@
 | PASS | foreign key resolves: workforce.skill_certification -> workforce.employee | orphans=0 |
 | PASS | foreign key resolves: workforce.training_completion -> workforce.employee | orphans=0 |
 | PASS | dual-write duplicates are discoverable | matching records/groups=61 |
-| PASS | scanner retry defect is discoverable | matching records/groups=2,293 |
+| PASS | scanner replay rows are discoverable | matching records/groups=2,400 |
 | PASS | winter-storm records are discoverable | matching records/groups=1,008 |
+| PASS | scanner replay rows form exact one-to-one linked pairs | replay_rows=2,400; distinct_originals=2,400; physical_rows=517,600; opening_balance_rows=2,160; invalid_pairs=0; flag_link_disagreements=0 |
+| PASS | receipts include valid partial and rejected events | receipt_rows=82,000; rejected_rows=11,573; invalid_rejections=0; split_lines=16,080 |
+| PASS | purchase-order status reconciles to accepted receipts | status_mismatches=0 |
+| PASS | accepted goods receipts post once to the physical ledger | receipt_rows=82,000; mismatches=0 |
+| PASS | purchase-order products are approved for the header vendor | unapproved_lines=0 |
+| PASS | realized supplier lead times vary around promise | received_lines=65,920; early_lines=20,214; more_than_week_late=12,478; distinct_realized_leads=81; range_days=1..83 |
+| PASS | inventory positions have a unique business grain | rows=330,000; distinct_business_grain=330,000 |
+| PASS | sampled on-hand positions reconcile to physical ledger history | snapshot_rows=330,000; mismatches=0 |
+| PASS | position demand and receipt windows reconcile to physical movements | snapshot_rows=330,000; mismatches=0 |
+| PASS | intermittent products issue only on their deterministic active days | issue_rows=47,403; active_calendar_dates=1,095; inactive_day_violations=0 |
+| PASS | seasonal product families have strong realized peak demand | winter_peak_mean=16.037; winter_off_peak_mean=5.330; summer_peak_mean=14.674; summer_off_peak_mean=5.534 |
 | PASS | feature-store leakage exercise is explicit | present=['eventual_lifetime_value_cents', 'future_90d_cancelled_flag', 'future_90d_payment_failure_count'] |

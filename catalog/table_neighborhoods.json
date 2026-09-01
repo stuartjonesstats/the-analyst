@@ -4,7 +4,7 @@
   "generated_from": "builder.catalog",
   "neighborhood_count": 16,
   "asset_count": 96,
-  "relationship_count": 166,
+  "relationship_count": 168,
   "neighborhoods": [
     {
       "id": "schema:billing",
@@ -5061,8 +5061,8 @@
         "internal": 5
       },
       "reliability_summary": {
-        "caution": 2,
-        "verified": 6
+        "caution": 3,
+        "verified": 5
       },
       "freshness_summary": {
         "frozen-snapshot": 8
@@ -5070,7 +5070,7 @@
       "anchor_assets": [
         "supply.warehouse",
         "supply.vendor",
-        "supply.purchase_order"
+        "supply.inventory_movement"
       ],
       "assets": [
         {
@@ -5087,13 +5087,17 @@
           "owner": "Warehouse Operations",
           "lifecycle": "active",
           "sensitivity": "internal",
-          "reliability": "verified",
+          "reliability": "caution",
           "freshness": "frozen-snapshot",
           "use_when": "",
           "do_not_use_when": "",
-          "quality_notes": [],
-          "relationship_degree": 2,
+          "quality_notes": [
+            "received_quantity is gross quantity presented; rejected_quantity is the rejected subset.",
+            "Some lines arrive in multiple partial receipt events; accepted quantity is received minus rejected."
+          ],
+          "relationship_degree": 3,
           "related_assets": [
+            "supply.inventory_movement",
             "supply.purchase_order_line",
             "supply.warehouse"
           ]
@@ -5103,9 +5107,9 @@
           "fully_qualified_name": "supply.inventory_movement",
           "table": "inventory_movement",
           "description": "Signed stock movements from purchasing, field usage, transfers, and adjustments.",
-          "grain": "One posted inventory movement event; replayed scanner events remain separate records.",
+          "grain": "One posted technical inventory event; replay rows link to the original physical movement.",
           "row_count": 520000,
-          "column_count": 11,
+          "column_count": 13,
           "primary_key": [
             "inventory_movement_id"
           ],
@@ -5117,11 +5121,15 @@
           "use_when": "",
           "do_not_use_when": "",
           "quality_notes": [
-            "A November 2025 handheld retry defect replayed a subset of otherwise identical business movements."
+            "November 2025 scanner replays are exact technical duplicates linked through replay_of_inventory_movement_id.",
+            "Exclude scanner_replay_flag rows when reconstructing physical stock; source events remain for auditability.",
+            "RECEIPT quantity_delta equals accepted goods quantity, not gross presented quantity."
           ],
-          "relationship_degree": 2,
+          "relationship_degree": 4,
           "related_assets": [
             "catalog.product",
+            "supply.goods_receipt",
+            "supply.inventory_movement",
             "supply.warehouse"
           ]
         },
@@ -5129,7 +5137,7 @@
           "asset_id": "tbl:supply.inventory_position_daily",
           "fully_qualified_name": "supply.inventory_position_daily",
           "table": "inventory_position_daily",
-          "description": "Sampled daily product/warehouse inventory positions with trailing operational metrics.",
+          "description": "Sampled daily product/warehouse positions reconciled to physical ledger movements.",
           "grain": "One sampled product, warehouse, and snapshot-date position.",
           "row_count": 330000,
           "column_count": 25,
@@ -5144,7 +5152,9 @@
           "use_when": "",
           "do_not_use_when": "",
           "quality_notes": [
-            "The v0 extract is a dense analytical sample, not a complete warehouse-product date spine."
+            "The extract is a unique sparse sample, not a complete warehouse-product date spine.",
+            "on_hand_quantity and trailing demand/receipt units reconcile exactly after scanner replays are excluded.",
+            "stockout_hours fields are operational shortfall estimates rather than a physical ledger identity."
           ],
           "relationship_degree": 2,
           "related_assets": [
@@ -5317,6 +5327,34 @@
           "nullable": false,
           "temporal_condition": null,
           "warning": null
+        },
+        {
+          "from_table": "supply.inventory_movement",
+          "from_columns": [
+            "goods_receipt_id"
+          ],
+          "to_table": "supply.goods_receipt",
+          "to_columns": [
+            "goods_receipt_id"
+          ],
+          "cardinality": "many-to-one",
+          "nullable": true,
+          "temporal_condition": null,
+          "warning": null
+        },
+        {
+          "from_table": "supply.inventory_movement",
+          "from_columns": [
+            "replay_of_inventory_movement_id"
+          ],
+          "to_table": "supply.inventory_movement",
+          "to_columns": [
+            "inventory_movement_id"
+          ],
+          "cardinality": "many-to-one",
+          "nullable": true,
+          "temporal_condition": null,
+          "warning": "Only scanner replay rows populate this self-reference."
         },
         {
           "from_table": "supply.inventory_movement",

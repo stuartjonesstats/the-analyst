@@ -1066,17 +1066,31 @@ def generate_foundation(builder: WorldBuilder) -> None:
     vendor_id = codes("VEN", n_vendors, 4)
     rng = rng_for("foundation.supply.vendor")
     vendor_region = rng.choice(region_id, n_vendors)
+    vendor_type = rng.choice(
+        np.array(["manufacturer", "distributor", "service_provider", "logistics"]),
+        n_vendors,
+        p=[0.42, 0.34, 0.14, 0.1],
+    )
+    vendor_payment_terms_days = rng.choice(
+        np.array([15, 30, 45, 60]), n_vendors, p=[0.1, 0.55, 0.25, 0.1]
+    )
+    vendor_standard_lead_time_days = rng.integers(2, 46, n_vendors, dtype=np.int16)
+    vendor_risk_tier = rng.choice(
+        np.array(["low", "medium", "high"]),
+        n_vendors,
+        p=[0.58, 0.34, 0.08],
+    )
     builder.write(
         "supply",
         "vendor",
         {
             "vendor_id": vendor_id,
             "vendor_name": np.array([f"Synthetic Supplier {i + 1:03d}" for i in range(n_vendors)]),
-            "vendor_type": rng.choice(np.array(["manufacturer", "distributor", "service_provider", "logistics"]), n_vendors, p=[0.42, 0.34, 0.14, 0.1]),
+            "vendor_type": vendor_type,
             "home_region_id": vendor_region,
-            "payment_terms_days": rng.choice(np.array([15, 30, 45, 60]), n_vendors, p=[0.1, 0.55, 0.25, 0.1]),
-            "standard_lead_time_days": rng.integers(2, 46, n_vendors, dtype=np.int16),
-            "risk_tier": rng.choice(np.array(["low", "medium", "high"]), n_vendors, p=[0.58, 0.34, 0.08]),
+            "payment_terms_days": vendor_payment_terms_days,
+            "standard_lead_time_days": vendor_standard_lead_time_days,
+            "risk_tier": vendor_risk_tier,
             "active_from": random_dates(rng, n_vendors, "2017-01-01", "2022-12-31"),
             "active_to": pa.nulls(n_vendors, type=pa.date32()),
         },
@@ -1125,6 +1139,10 @@ def generate_foundation(builder: WorldBuilder) -> None:
     product_vendor_rows = n_products * 2
     pv_product_idx = np.repeat(np.arange(n_products), 2)
     pv_vendor_idx = rng.integers(0, n_vendors, product_vendor_rows)
+    pv_contract_unit_cost_cents = np.round(
+        product_cost[pv_product_idx] * rng.uniform(0.88, 1.12, product_vendor_rows)
+    ).astype(np.int64)
+    pv_contract_lead_time_days = rng.integers(2, 46, product_vendor_rows, dtype=np.int16)
     builder.write(
         "supply",
         "product_vendor",
@@ -1134,8 +1152,8 @@ def generate_foundation(builder: WorldBuilder) -> None:
             "vendor_id": vendor_id[pv_vendor_idx],
             "vendor_product_code": np.array([f"VP-{pv_vendor_idx[i] + 1:03d}-{pv_product_idx[i] + 1:05d}" for i in range(product_vendor_rows)]),
             "is_primary_vendor": np.tile(np.array([True, False]), n_products),
-            "contract_unit_cost_cents": np.round(product_cost[pv_product_idx] * rng.uniform(0.88, 1.12, product_vendor_rows)).astype(np.int64),
-            "contract_lead_time_days": rng.integers(2, 46, product_vendor_rows, dtype=np.int16),
+            "contract_unit_cost_cents": pv_contract_unit_cost_cents,
+            "contract_lead_time_days": pv_contract_lead_time_days,
             "minimum_order_quantity": rng.choice(np.array([1, 5, 10, 25, 50]), product_vendor_rows),
             "effective_from": np.full(product_vendor_rows, np.datetime64("2023-01-01", "D")),
             "effective_to": pa.nulls(product_vendor_rows, type=pa.date32()),
@@ -1334,6 +1352,12 @@ def generate_foundation(builder: WorldBuilder) -> None:
             "vehicle_id": np.asarray(vehicle_id),
             "vehicle_branch": np.asarray(vehicle_branch),
             "vendor_id": np.asarray(vendor_id),
+            "vendor_standard_lead_time_days": np.asarray(vendor_standard_lead_time_days),
+            "vendor_risk_tier": np.asarray(vendor_risk_tier),
+            "product_vendor_product": np.asarray(product_id[pv_product_idx]),
+            "product_vendor_vendor": np.asarray(vendor_id[pv_vendor_idx]),
+            "product_vendor_contract_unit_cost_cents": np.asarray(pv_contract_unit_cost_cents),
+            "product_vendor_contract_lead_time_days": np.asarray(pv_contract_lead_time_days),
             "warehouse_id": np.asarray(warehouse_id),
             "warehouse_region": np.asarray(region_id[warehouse_region_idx]),
             "warehouse_postal": np.asarray(postal_area_id[warehouse_postal_idx]),

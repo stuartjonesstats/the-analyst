@@ -98,17 +98,6 @@
     "learning_objective": "Define a business key and reconcile duplicates without deleting legitimate repeat contacts."
   },
   {
-    "anomaly_id": "A12",
-    "name": "Warehouse scanner retry replay",
-    "affected_tables": [
-      "supply.inventory_movement"
-    ],
-    "date_range": "2025-11-01/2025-11-30",
-    "mechanism": "Offline handhelds replayed acknowledged movements after reconnecting.",
-    "breadcrumb": "scanner_replay_flag and repeated reference/device/quantity combinations.",
-    "learning_objective": "Distinguish technical event identity from physical stock movement identity."
-  },
-  {
     "anomaly_id": "A10",
     "name": "Dispatch optimizer regime change",
     "affected_tables": [
@@ -145,5 +134,16 @@
     "mechanism": "A convenience export places realized outcomes beside point-in-time features.",
     "breadcrumb": "Columns prefixed future_ and eventual_ appear at the end of the table.",
     "learning_objective": "Build an explicit predictor allow-list and reason about observation availability."
+  },
+  {
+    "anomaly_id": "A12",
+    "name": "Warehouse scanner retry replay",
+    "affected_tables": [
+      "supply.inventory_movement"
+    ],
+    "date_range": "2025-11-01/2025-11-30",
+    "mechanism": "Offline handhelds replayed acknowledged movements after reconnecting.",
+    "breadcrumb": "scanner_replay_flag and replay_of_inventory_movement_id identify linked technical duplicates.",
+    "learning_objective": "Distinguish technical event identity from physical stock movement identity."
   }
 ]

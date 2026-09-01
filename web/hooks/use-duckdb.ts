@@ -6,6 +6,8 @@ import type {
   AsyncDuckDBConnection,
 } from '@duckdb/duckdb-wasm';
 
+import { sitePath } from '@/lib/site-path';
+
 export type QueryValue = string | number | boolean | null;
 export type QueryRow = Record<string, QueryValue>;
 
@@ -49,19 +51,19 @@ export function useDuckDB() {
 
         await db.registerFileURL(
           'support_csat_response.parquet',
-          `${origin}/data/support/csat_response.parquet`,
+          `${origin}${sitePath('/data/support/csat_response.parquet')}`,
           duckdb.DuckDBDataProtocol.HTTP,
           false,
         );
         await db.registerFileURL(
           'support_ticket.parquet',
-          `${origin}/data/support/ticket.parquet`,
+          `${origin}${sitePath('/data/support/ticket.parquet')}`,
           duckdb.DuckDBDataProtocol.HTTP,
           false,
         );
         await db.registerFileURL(
           'crm_account.parquet',
-          `${origin}/data/crm/account.parquet`,
+          `${origin}${sitePath('/data/crm/account.parquet')}`,
           duckdb.DuckDBDataProtocol.HTTP,
           false,
         );

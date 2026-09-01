@@ -1794,6 +1794,34 @@
   {
     "from_table": "supply.inventory_movement",
     "from_columns": [
+      "goods_receipt_id"
+    ],
+    "to_table": "supply.goods_receipt",
+    "to_columns": [
+      "goods_receipt_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": null
+  },
+  {
+    "from_table": "supply.inventory_movement",
+    "from_columns": [
+      "replay_of_inventory_movement_id"
+    ],
+    "to_table": "supply.inventory_movement",
+    "to_columns": [
+      "inventory_movement_id"
+    ],
+    "cardinality": "many-to-one",
+    "nullable": true,
+    "temporal_condition": null,
+    "warning": "Only scanner replay rows populate this self-reference."
+  },
+  {
+    "from_table": "supply.inventory_movement",
+    "from_columns": [
       "warehouse_id"
     ],
     "to_table": "supply.warehouse",

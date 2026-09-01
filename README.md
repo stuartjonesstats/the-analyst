@@ -11,7 +11,7 @@ The second phase has now begun under the product name **The Analyst** (`theanaly
 - 96 Parquet tables
 - 16,548,418 rows
 - 16 schemas
-- 166 declared relationships
+- 168 declared relationships
 - 10 documented causal/data-quality anomalies
 - 564.7 MiB compressed
 - largest event table: `growth.web_event` at 1,303,974 rows
@@ -34,12 +34,18 @@ The estate covers:
 - [Simulation contract](docs/simulation_contract.md): the portable authoring/runtime boundary.
 - [Assessment rubric](docs/assessment_rubric.md): judgment-focused evaluation, including responsible refusal.
 - [Checking policy](docs/checking_policy.md): the deterministic-only standard for any automated verification.
+- [Supply generator invariants](docs/supply_data_invariants.md): exact ledger, receipt, replay, demand, and lead-time guarantees.
 
-## Flagship simulations
+## Nine-case progression
 
 - [The Monday Scorecard](docs/scenarios/01-the-monday-scorecard.md) — reconcile conflicting support and satisfaction scorecards under executive pressure.
+- [The Quarter That Moved](docs/scenarios/05-the-quarter-that-moved.md) — certify a quarter after an acquisition creates identifier, clock, and grain traps.
+- [The Navigation Vote](docs/scenarios/06-the-navigation-vote.md) — audit a product experiment without confusing deeper sessions with better customer outcomes.
 - [Rollback Before Dawn](docs/scenarios/02-rollback-before-dawn.md) — determine whether firmware, weather, or their interaction explains an apparent device incident.
+- [The 7:30 Capacity Call](docs/scenarios/07-the-730-capacity-call.md) — build a point-in-time appointment risk operation under storm capacity constraints.
+- [Forty-Eight Hours of Stock](docs/scenarios/09-forty-eight-hours-of-stock.md) — forecast intermittent demand and convert inventory risk into constrained supply actions.
 - [The Orion Renewal](docs/scenarios/03-the-orion-renewal.md) — evaluate a dispatch optimizer without confusing policy-induced selection with productivity.
+- [The Queue Nobody Owns](docs/scenarios/08-the-queue-nobody-owns.md) — determine whether a support-routing model is valid enough even for shadow use.
 - [Too Good to Ship](docs/scenarios/04-too-good-to-ship.md) — audit a suspiciously excellent account-risk model for temporal and outcome leakage.
 
 The authoring schema is [simulation.schema.json](scenarios/schema/simulation.schema.json). Instructor-only truth is part of source authoring but must be stripped from learner manifests before delivery.
@@ -97,6 +103,13 @@ npm run dev
 ```
 
 The connected Monday workbench currently serves only `support.csat_response`, `support.ticket`, and `crm.account` to the browser. DuckDB runs locally in WebAssembly inside a disposable learner workspace; source Parquets remain unchanged, while learner-created local tables and views may be rebuilt on refresh. The complete estate is not downloaded on startup. All nine case files are represented in the learner-safe registry; the remaining case-specific data packs and staged runtime content are the next implementation layer.
+
+The public site is built as a static export and deployed from
+`.github/workflows/pages.yml`. It needs no application server or learner account.
+For the project-site URL, the workflow sets the repository path for chunks,
+Parquets, workers, and internal links, then prepares `web/dist/client` as the
+Pages artifact. The eventual `theanalyst.dev` domain can switch those path values
+to the domain root without changing the application architecture.
 
 ## Why the data are messy
 

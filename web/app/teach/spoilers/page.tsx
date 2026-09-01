@@ -1,7 +1,9 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 
+import { SiteLink } from '@/components/site-link';
 import { instructorNotes } from '@/lib/instructor-notes';
+
+export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: 'Instructor Case Notes — The Analyst',
@@ -16,7 +18,7 @@ export default function SpoilerPack() {
     <main className="teaching-page spoiler-page">
       <header className="teaching-header">
         <div className="teaching-brand"><span>MA</span><strong>MERIDIAN / INSTRUCTOR CASE NOTES</strong></div>
-        <Link href="/teach" prefetch={false}>RETURN TO PLANNING DESK</Link>
+        <SiteLink path="/teach">RETURN TO PLANNING DESK</SiteLink>
       </header>
 
       <section className="spoiler-warning">
