@@ -33,6 +33,7 @@ The estate covers:
 - [Validation report](validation/validation_report.md): structural, key, relationship, and scenario-probe checks.
 - [Simulation contract](docs/simulation_contract.md): the portable authoring/runtime boundary.
 - [Assessment rubric](docs/assessment_rubric.md): judgment-focused evaluation, including responsible refusal.
+- [Checking policy](docs/checking_policy.md): the deterministic-only standard for any automated verification.
 
 ## Flagship simulations
 
@@ -95,7 +96,7 @@ npm install
 npm run dev
 ```
 
-The pilot serves only `support.csat_response`, `support.ticket`, and `crm.account` to the browser. DuckDB runs locally in WebAssembly and learner SQL is restricted to read-only statements. The complete estate is not downloaded on startup.
+The workbench currently serves only `support.csat_response`, `support.ticket`, and `crm.account` to the browser. DuckDB runs locally in WebAssembly and learner SQL is restricted to read-only statements. The complete estate is not downloaded on startup. All four case files are now represented in the learner-safe scenario registry; the remaining three data packs and staged runtime content are the next implementation layer.
 
 ## Why the data are messy
 
@@ -119,4 +120,4 @@ Every planted issue has a mechanism, date range, breadcrumb, and learning object
 - The accounting ledger is structurally realistic but is not guaranteed to balance by journal.
 - Dense analytical snapshots may be sampled rather than complete date spines.
 - The catalog is the contract; filenames and convenient columns alone are not sufficient semantics.
-- Student missions, role-based permissions, narrative branches, scoring, and a browser runtime are later layers and should be designed around this estate rather than baked into it prematurely.
+- Instructor judgment is not replaced by automatic scoring. The browser may verify only explicit mechanical invariants and artifact presence; the rubric owns analytical quality.
