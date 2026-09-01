@@ -47,13 +47,13 @@ export default function SubmissionViewer() {
   return (
     <main className="teaching-page replay-page">
       <header className="teaching-header">
-        <div className="teaching-brand"><span>MA</span><strong>MERIDIAN / SUBMISSION VIEWER</strong></div>
+        <div className="teaching-brand"><strong>THE ANALYST / SUBMISSION VIEWER</strong></div>
         <SiteLink path="/teach">RETURN TO PLANNING DESK</SiteLink>
       </header>
 
       <section className="replay-intro">
         <p className="document-kicker">LOCAL REVIEW UTILITY</p>
-        <h1>Open a learner’s case file.</h1>
+        <h1>Open a learner submission.</h1>
         <p>
           The submission is read in this browser. The viewer checks file integrity and presents the recorded
           workspace, evidence, and outputs; it does not grade the learner’s judgment or silently execute code.
@@ -76,7 +76,7 @@ export default function SubmissionViewer() {
       {caseFile && (
         <section className="submission-review">
           <header className="submission-manifest">
-            <div><span>CASE</span><strong>{caseFile.scenario.id} / {caseFile.scenario.title}</strong></div>
+            <div><span>ASSIGNMENT</span><strong>{caseFile.scenario.id} / {caseFile.scenario.title}</strong></div>
             <div><span>EXPORTED</span><strong>{new Date(caseFile.exportedAt).toLocaleString()}</strong></div>
             <div><span>FORMAT</span><strong>{caseFile.version}</strong></div>
             <div className={allHashesMatch ? 'integrity-good' : 'integrity-bad'}>

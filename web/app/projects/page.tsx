@@ -9,7 +9,7 @@ export const dynamic = 'force-static';
 const audienceByBand = {
   Brief: 'New analysts and learners building foundations',
   Investigation: 'Learners comfortable with joins and dataframe work',
-  'Decision case': 'Intermediate analysts ready for statistical judgment',
+  Decision: 'Intermediate analysts ready for statistical judgment',
   Practicum: 'Advanced learners and professional development groups',
 } as const;
 
@@ -18,11 +18,11 @@ export default function ProjectsPage() {
     <PublicShell>
       <main className="public-main">
         <header className="public-page-head">
-          <p className="public-kicker">CASE FILE REGISTER / 09 ACTIVE</p>
-          <h1>Nine shifts inside one company.</h1>
-          <p>Each case has its own role, decision pressure, source neighborhood, Python purpose, deliverables, and legitimate outcome space. Work them in sequence or assign them by capability in a course, lab, training program, or independent study plan.</p>
+          <p className="public-kicker">ASSIGNMENT REGISTER / 09 ACTIVE</p>
+          <h1>Nine assignments. One company.</h1>
+          <p>Each assignment places the learner in a defined role at Meridian, with its own business moment, decision pressure, source neighborhood, analytical purpose, and handoff. Work them in sequence or assign them by capability in a course, lab, training program, or independent study plan.</p>
         </header>
-        <section className="project-register" aria-label="Project summaries">
+        <section className="project-register" aria-label="Assignment summaries">
           {scenarios.map((scenario) => (
             <article key={scenario.id} className="project-record">
               <header>
@@ -51,7 +51,7 @@ export default function ProjectsPage() {
               <footer>
                 <div><span>SQL</span><p>{scenario.sqlCore}</p></div>
                 <div><span>PYTHON</span><p>{scenario.pythonCore}</p></div>
-                <SiteLink path={`/workbench/?case=${scenario.slug}`}>OPEN CASE <ArrowRight /></SiteLink>
+                <SiteLink path={`/workbench/?case=${scenario.slug}`}>OPEN ASSIGNMENT <ArrowRight /></SiteLink>
               </footer>
             </article>
           ))}
@@ -59,7 +59,7 @@ export default function ProjectsPage() {
         <section className="section-lead split" aria-labelledby="projects-instructor-note">
           <div>
             <span className="public-kicker" id="projects-instructor-note">PLANNING A SEQUENCE?</span>
-            <p>The instructor desk compares prerequisites, workload ranges, scaffolding options, and review boundaries across all nine cases without placing solution material in the learner path.</p>
+            <p>The instructor desk compares prerequisites, workload ranges, scaffolding options, and review boundaries across all nine assignments without placing solution material in the learner path.</p>
           </div>
           <SiteLink path="/teach" rel="nofollow">OPEN INSTRUCTOR DESK <ArrowRight /></SiteLink>
         </section>

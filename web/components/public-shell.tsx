@@ -11,12 +11,13 @@ export function PublicShell({ children }: PublicShellProps) {
     <div className="public-shell">
       <header className="public-header">
         <SiteLink path="/" className="public-brand" aria-label="The Analyst home">
-          <span>TA</span>
-          <strong>THE ANALYST</strong>
-          <small>APPLIED CASE SYSTEM</small>
+          <div>
+            <strong>THE ANALYST</strong>
+            <small>ANALYTICAL WORK SIMULATIONS</small>
+          </div>
         </SiteLink>
         <nav aria-label="Primary navigation">
-          <SiteLink path="/projects">CASE FILES</SiteLink>
+          <SiteLink path="/projects">ASSIGNMENTS</SiteLink>
           <SiteLink path="/approach">APPROACH</SiteLink>
           <SiteLink path="/guide">FIELD GUIDE</SiteLink>
           <SiteLink path="/data">DATA REGISTER</SiteLink>
@@ -30,7 +31,7 @@ export function PublicShell({ children }: PublicShellProps) {
           <span>Judgment under operational conditions.</span>
         </div>
         <nav aria-label="Footer navigation">
-          <SiteLink path="/projects">Cases</SiteLink>
+          <SiteLink path="/projects">Assignments</SiteLink>
           <SiteLink path="/data">Data dictionary</SiteLink>
           <SiteLink path="/guide">How to use</SiteLink>
           <SiteLink path="/teach" rel="nofollow">Instructor desk</SiteLink>
@@ -40,4 +41,3 @@ export function PublicShell({ children }: PublicShellProps) {
     </div>
   );
 }
-

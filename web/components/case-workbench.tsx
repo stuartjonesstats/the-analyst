@@ -38,6 +38,7 @@ import {
 } from '@/lib/analyst-case';
 import { type CaseDefinition, formatRowCount } from '@/lib/case-definition';
 import { caseDefinitions } from '@/lib/case-definitions';
+import { migrateLegacyPythonWorksheet } from '@/lib/python-worksheet-migration';
 
 const caseTimeFormatter = new Intl.DateTimeFormat('en-US', {
   timeZone: 'America/New_York',
@@ -92,7 +93,9 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
     const saved = window.localStorage.getItem(`${definition.persistenceKey}:query`);
     if (saved) setQuery(saved);
     const savedPython = window.localStorage.getItem(`${definition.persistenceKey}:python`);
-    if (savedPython) setPythonCode(savedPython);
+    if (savedPython) {
+      setPythonCode(migrateLegacyPythonWorksheet(savedPython, definition.dataFiles));
+    }
     const savedNotes = window.localStorage.getItem(`${definition.persistenceKey}:notes`);
     if (savedNotes) setNotes(savedNotes);
     const savedFinalBrief = window.localStorage.getItem(`${definition.persistenceKey}:final`);
@@ -107,7 +110,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
       }
     }
     setHydrated(true);
-  }, [definition.persistenceKey]);
+  }, [definition.dataFiles, definition.persistenceKey]);
   /* oxlint-enable react/react-compiler */
 
   useEffect(() => {
@@ -244,7 +247,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
     : python.status === 'booting'
       ? 'STARTING PYTHON'
       : python.status === 'loading_data'
-        ? 'MOUNTING CASE DATA'
+        ? 'MOUNTING ASSIGNMENT DATA'
         : python.status === 'running'
           ? 'PYTHON RUNNING'
           : python.status === 'error'
@@ -265,14 +268,13 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
     <main className="workbench-shell">
       <header className="system-bar">
         <div className="brand-lockup">
-          <span className="brand-mark">MA</span>
           <div>
-            <span className="brand-word">MERIDIAN</span>
-            <span className="ml-2 font-mono text-[10px] tracking-[0.08em] text-[#a8b5ba]">ANALYST DESK</span>
+            <span className="brand-word">THE ANALYST</span>
+            <span className="ml-2 font-mono text-[10px] tracking-[0.08em] text-[#a8b5ba]">MERIDIAN WORKBENCH</span>
           </div>
         </div>
         <div className="system-breadcrumb">
-          <span className="text-[#d4dcdd]">CASEWORK</span>
+          <span className="text-[#d4dcdd]">ASSIGNMENTS</span>
           <span>/</span>
           <span>{definition.id}</span>
           <span className="hidden md:inline">/ {definition.businessUnit.toUpperCase()}</span>
@@ -301,7 +303,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
         <aside className="work-queue">
           <div className="queue-heading">
             <span>WORK QUEUE</span>
-            <span>{String(caseDefinitions.length).padStart(2, '0')} CASES</span>
+            <span>{String(caseDefinitions.length).padStart(2, '0')} ASSIGNMENTS</span>
           </div>
           <div className="current-case-block">
             <div className="case-code-line">
@@ -312,7 +314,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             <p>{definition.queueSubtitle}</p>
           </div>
 
-          <nav className="workflow-list" aria-label="Case workflow">
+          <nav className="workflow-list" aria-label="Assignment workflow">
             {workflow.map(({ seq, label, icon: Icon, count, active }) => (
               <button key={seq} className={active ? 'active' : ''}>
                 <span className="workflow-seq">{seq}</span>
@@ -324,7 +326,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           </nav>
 
           <div className="queue-register">
-            <p className="queue-section-label">OTHER CASE FILES</p>
+            <p className="queue-section-label">OTHER ASSIGNMENTS</p>
             {caseDefinitions.filter((caseFile) => caseFile.slug !== definition.slug).map((caseFile) => (
               <button key={caseFile.id} onClick={() => onSelectCase(caseFile.slug)}>
                 <span className="font-mono text-[10px] text-[#a8b5ba]">{caseFile.id}</span>
@@ -337,7 +339,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           </div>
 
           <div className="queue-footer">
-            <div><span>CASE PROGRESS</span><strong>02 / 05</strong></div>
+            <div><span>ASSIGNMENT PROGRESS</span><strong>02 / 05</strong></div>
             <div className="progress-track"><span /></div>
             <p>Autosave / local device</p>
           </div>
@@ -347,8 +349,8 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           <div className="case-command-strip">
             <div className="case-command-id">
               <span className="status-bar" />
-              <span>CASE {definition.id}</span>
-              <strong>ACTIVE INVESTIGATION</strong>
+              <span>ASSIGNMENT {definition.id}</span>
+              <strong>ACTIVE ANALYSIS</strong>
             </div>
             <div className="case-command-facts">
               <span><b>PRIORITY</b> {definition.priority}</span>
@@ -356,13 +358,15 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
               <span><b>DUE</b> {definition.dueLabel}</span>
             </div>
             <button className="ledger-trigger" onClick={() => setLedgerOpen(true)}>
-              <PanelRightOpen /> CASE LEDGER <span>{evidenceCount}</span>
+              <PanelRightOpen /> ASSIGNMENT RECORD <span>{evidenceCount}</span>
             </button>
           </div>
 
           <article className="briefing-document">
             <div className="briefing-fields">
               <dl>
+                <div><dt>EMPLOYER</dt><dd>Meridian Living Systems</dd></div>
+                <div><dt>YOUR ROLE</dt><dd>{definition.role}</dd></div>
                 <div><dt>FROM</dt><dd>{definition.requester}</dd></div>
                 <div><dt>RECEIVED</dt><dd>{definition.received}</dd></div>
                 <div><dt>RESPONSE DUE</dt><dd>{definition.responseDue}</dd></div>
@@ -583,10 +587,10 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           </footer>
         </section>
 
-        <aside className={`case-ledger ${ledgerOpen ? 'is-open' : ''}`} aria-label="Case ledger">
-          <button className="ledger-close" onClick={() => setLedgerOpen(false)} aria-label="Close case ledger"><X /></button>
+        <aside className={`case-ledger ${ledgerOpen ? 'is-open' : ''}`} aria-label="Assignment record">
+          <button className="ledger-close" onClick={() => setLedgerOpen(false)} aria-label="Close assignment record"><X /></button>
           <div className="ledger-head">
-            <p>CASE LEDGER / {definition.id}</p>
+            <p>ASSIGNMENT RECORD / {definition.id}</p>
             <div className="sla-block">
               <span><Clock3 /> RESPONSE WINDOW</span>
               <strong>{definition.responseWindow}</strong>
@@ -644,13 +648,13 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             <p>Completion records artifact presence only. Analytical judgment is reviewed by the instructor.</p>
             <button className="download-case" onClick={() => void exportCase()} disabled={isExporting}>
               <Download />
-              <span>{isExporting ? 'PACKAGING CASE FILE' : 'DOWNLOAD SUBMISSION'}</span>
+              <span>{isExporting ? 'PACKAGING SUBMISSION' : 'DOWNLOAD SUBMISSION'}</span>
               <small>.ANALYSTCASE</small>
             </button>
             <p className="download-case-note">Includes SQL, Python, working notes, final brief, evidence, captured outputs, hashes, and runtime versions. No account required.</p>
           </section>
         </aside>
-        {ledgerOpen && <button className="ledger-scrim" onClick={() => setLedgerOpen(false)} aria-label="Close case ledger overlay" />}
+        {ledgerOpen && <button className="ledger-scrim" onClick={() => setLedgerOpen(false)} aria-label="Close assignment record overlay" />}
       </div>
     </main>
   );

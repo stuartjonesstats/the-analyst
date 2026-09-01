@@ -24,7 +24,7 @@ export const mondayScorecardChecks: MechanicalCheckDefinition[] = [
     id: 'analysis.saved',
     label: 'Reproducible analysis saved',
     state: 'recorded',
-    verifies: 'A non-empty SQL or notebook artifact exists in the case handoff.',
+    verifies: 'A non-empty SQL or notebook artifact exists in the assignment handoff.',
     doesNotVerify: 'That the analysis is logically or statistically sound.',
   },
   {

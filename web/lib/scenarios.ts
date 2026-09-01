@@ -1,4 +1,4 @@
-export type WorkloadBand = 'Brief' | 'Investigation' | 'Decision case' | 'Practicum';
+export type WorkloadBand = 'Brief' | 'Investigation' | 'Decision' | 'Practicum';
 export type ScenarioStatus = 'connected' | 'authoring' | 'data_repair';
 
 export type ComplexityProfile = {
@@ -91,7 +91,7 @@ export const scenarios: LearnerScenario[] = [
     request: 'Determine whether a mobile-navigation experiment warrants rollout.',
     preparedHours: '8–12',
     newcomerHours: '12–18',
-    band: 'Decision case',
+    band: 'Decision',
     prerequisites: ['Probability and sampling', 'Confidence intervals', 'SQL cohort construction'],
     sqlCore: 'Build one row per assignment and reconcile exposure, sessions, events, and orders.',
     pythonCore: 'Run balance checks, estimate effects and uncertainty, inspect distributions, and separate confirmatory from exploratory slices.',
@@ -112,7 +112,7 @@ export const scenarios: LearnerScenario[] = [
     request: 'Recommend global rollback, scoped containment, or monitored continuation during a storm.',
     preparedHours: '6–9',
     newcomerHours: '10–16',
-    band: 'Decision case',
+    band: 'Decision',
     prerequisites: ['Missing-data mechanisms', 'Time-aware joins', 'Exploratory visualization'],
     sqlCore: 'Build point-in-time asset, telemetry, alert, weather, and field-operation evidence lanes.',
     pythonCore: 'Diagnose missingness, compare regions and periods, quantify counterevidence, and visualize decision thresholds.',
@@ -133,7 +133,7 @@ export const scenarios: LearnerScenario[] = [
     request: 'Build a morning risk view for appointments likely to miss their service window.',
     preparedHours: '10–16',
     newcomerHours: '18–26',
-    band: 'Decision case',
+    band: 'Decision',
     prerequisites: ['Supervised learning', 'Feature pipelines', 'Temporal validation', 'Classification metrics'],
     sqlCore: 'Create a point-in-time appointment feature mart at a stable entity and scoring time.',
     pythonCore: 'Build sklearn pipelines, compare a baseline, use forward validation, inspect calibration/errors, and design an intervention threshold.',
@@ -175,7 +175,7 @@ export const scenarios: LearnerScenario[] = [
     request: 'Audit a claimed 12% optimizer gain and make a procurement recommendation.',
     preparedHours: '10–16',
     newcomerHours: '18–28',
-    band: 'Decision case',
+    band: 'Decision',
     prerequisites: ['Metric design', 'Join reconciliation', 'Quasi-experimental reasoning'],
     sqlCore: 'Define stable route, stop, work-order, visit, and workforce outcomes without fanout.',
     pythonCore: 'Plot trends and heterogeneity, run sensitivity/placebo analyses, and build the board-ready evidence package.',

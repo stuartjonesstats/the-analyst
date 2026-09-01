@@ -187,12 +187,12 @@ export function downloadAnalystCase(caseFile: AnalystCaseFile) {
 
 export function parseAnalystCase(value: string): AnalystCaseFile {
   const parsed: unknown = JSON.parse(value);
-  if (!parsed || typeof parsed !== 'object') throw new Error('This file does not contain a case submission.');
+  if (!parsed || typeof parsed !== 'object') throw new Error('This file does not contain a valid submission.');
   const candidate = parsed as Partial<AnalystCaseFile>;
-  if (candidate.format !== ANALYST_CASE_FORMAT) throw new Error('Unrecognized case submission format.');
-  if (candidate.version !== ANALYST_CASE_VERSION) throw new Error(`Unsupported case version: ${candidate.version ?? 'missing'}.`);
+  if (candidate.format !== ANALYST_CASE_FORMAT) throw new Error('Unrecognized submission format.');
+  if (candidate.version !== ANALYST_CASE_VERSION) throw new Error(`Unsupported submission version: ${candidate.version ?? 'missing'}.`);
   if (!candidate.scenario || !candidate.learnerWorkspace || !candidate.capturedRuns || !candidate.verification) {
-    throw new Error('The case submission is incomplete.');
+    throw new Error('The submission is incomplete.');
   }
   return candidate as AnalystCaseFile;
 }

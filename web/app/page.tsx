@@ -12,51 +12,81 @@ export default function HomePage() {
       <main className="public-main">
         <section className="public-hero">
           <div className="hero-rail">
-            <span>MERIDIAN LIVING SYSTEMS</span>
+            <span>SIMULATION WORLD / MERIDIAN LIVING SYSTEMS</span>
             <span>FROZEN ENTERPRISE ESTATE / REV 2026.09</span>
           </div>
           <div className="hero-copy">
-            <p className="public-kicker">AN APPLIED DATA-SCIENCE CASE SYSTEM</p>
+            <p className="public-kicker">ANALYTICAL WORK, UNDER OPERATING CONDITIONS</p>
             <h1>Do the work.<br />Defend the decision.</h1>
             <p className="hero-deck">
-              Nine browser-based simulations built around the part of analytics that clean tutorials remove:
-              unclear requests, competing clocks, unreliable grains, operational limits, and accountable handoffs—for
-              college and university courses, workforce programs, professional training, or serious self-study.
+              The Analyst places you inside Meridian Living Systems, a fictional products-and-services company. Across
+              nine assignments, you step into different analyst roles and confront what clean tutorials remove: unclear
+              requests, competing clocks, unreliable grains, operational limits, and accountable handoffs.
             </p>
             <div className="hero-actions">
-              <SiteLink path="/workbench" className="action-primary">ENTER CASEWORK <ArrowRight /></SiteLink>
+              <SiteLink path="/workbench" className="action-primary">OPEN ASSIGNMENT DESK <ArrowRight /></SiteLink>
               <SiteLink path="/guide" className="action-secondary">READ THE FIELD GUIDE</SiteLink>
             </div>
           </div>
           <div className="hero-instrument" aria-label="System inventory">
-            <div><span>CASE FILES</span><strong>09</strong><small>brief to practicum</small></div>
+            <div><span>ASSIGNMENTS</span><strong>09</strong><small>brief to practicum</small></div>
             <div><span>ENTERPRISE SCHEMAS</span><strong>16</strong><small>96 documented tables</small></div>
             <div><span>FULL ESTATE</span><strong>16.5M</strong><small>synthetic source rows</small></div>
             <div><span>RUNTIME</span><strong>LOCAL</strong><small>SQL + Python in browser</small></div>
           </div>
         </section>
 
+        <section className="world-brief" aria-labelledby="meridian-world-title">
+          <div className="section-index">01 / THE SIMULATION WORLD</div>
+          <div className="world-brief-copy">
+            <p className="public-kicker">YOUR EMPLOYER, FOR THE DURATION OF THE WORK</p>
+            <h2 id="meridian-world-title">Welcome to Meridian. Your inbox is already full.</h2>
+            <p>
+              <strong>The Analyst</strong> is the training environment. <strong>Meridian Living Systems</strong> is the
+              fictional company inside it: a multi-region operator selling connected-home products and subscriptions,
+              dispatching field service, running warehouses and commerce, and supporting customers after the sale.
+            </p>
+            <p>
+              Meridian has grown through acquisitions, platform migrations, new models, and operational change. Its
+              data reflects that history. Across nine assignments, you move between teams and moments in the same
+              company. The systems, customers, devices, branches, definitions, and consequences belong to one connected
+              estate—not nine unrelated classroom datasets.
+            </p>
+          </div>
+          <aside className="world-brief-note" aria-label="Your place in the simulation">
+            <span>YOUR PLACE IN THE WORLD</span>
+            <strong>You are the analyst on duty.</strong>
+            <p>A stakeholder has a decision to make. The request is incomplete, the clock is running, and your work must survive another analyst’s review.</p>
+            <dl>
+              <div><dt>COMPANY</dt><dd>Meridian Living Systems</dd></div>
+              <div><dt>ENVIRONMENT</dt><dd>The Analyst</dd></div>
+              <div><dt>WORK UNIT</dt><dd>Analyst assignment</dd></div>
+              <div><dt>OUTPUT</dt><dd>Defensible handoff</dd></div>
+            </dl>
+          </aside>
+        </section>
+
         <section className="operating-principles" aria-labelledby="what-this-is">
-          <div className="section-index">01 / OPERATING MODEL</div>
+          <div className="section-index">02 / OPERATING MODEL</div>
           <div className="section-lead">
             <h2 id="what-this-is">A workbench, not a walkthrough.</h2>
             <p>Learners receive a role, an imperfect request, a governed data neighborhood, and a deadline. The system supplies tools and evidence—not a hidden preferred conclusion.</p>
           </div>
           <div className="principle-register">
             <article><Database /><span>01</span><h3>Interrogate the estate</h3><p>Use SQL to establish grain, point-in-time availability, and reconciled evidence before reaching for a model.</p></article>
-            <article><FileCode2 /><span>02</span><h3>Analyze in Python</h3><p>Profile, visualize, test, backtest, simulate, or model with the package profile appropriate to the case.</p></article>
+            <article><FileCode2 /><span>02</span><h3>Analyze in Python</h3><p>Profile, visualize, test, backtest, simulate, or model with the package profile appropriate to the assignment.</p></article>
             <article><ShieldCheck /><span>03</span><h3>Leave an audit trail</h3><p>Export the exact SQL, Python, working notes, final brief, evidence, captured outputs, versions, and hashes in one portable submission.</p></article>
           </div>
         </section>
 
         <section className="case-preview" aria-labelledby="case-preview-title">
-          <div className="section-index">02 / CASE SEQUENCE</div>
+          <div className="section-index">03 / ASSIGNMENT SEQUENCE</div>
           <div className="section-lead split">
             <div>
               <h2 id="case-preview-title">Built to progress.</h2>
-              <p>The sequence moves from metric reconciliation to production-grade model risk. Complexity rises, but judgment begins in case one.</p>
+              <p>The sequence moves from metric reconciliation to production-grade model risk. Complexity rises, but judgment begins in assignment one.</p>
             </div>
-            <SiteLink path="/projects">VIEW ALL NINE CASES <ArrowRight /></SiteLink>
+            <SiteLink path="/projects">VIEW ALL NINE ASSIGNMENTS <ArrowRight /></SiteLink>
           </div>
           <div className="case-preview-list">
             {scenarios.slice(0, 4).map((scenario) => (
@@ -80,7 +110,7 @@ export default function HomePage() {
         </section>
 
         <section className="public-cta">
-          <div><span>NO SETUP ACCOUNT REQUIRED</span><h2>The first case is already on your desk.</h2></div>
+          <div><span>MONDAY / 08:05 / CUSTOMER CARE</span><h2>Your first assignment is already on the desk.</h2></div>
           <SiteLink path="/workbench">OPEN CC-241202 <ArrowRight /></SiteLink>
         </section>
       </main>

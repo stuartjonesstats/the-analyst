@@ -7,7 +7,7 @@ export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: 'Instructor Planning Desk — The Analyst',
-  description: 'Sequence, prerequisites, workload, scaffolding, and technical requirements for The Analyst case curriculum.',
+  description: 'Sequence, prerequisites, workload, scaffolding, and technical requirements for The Analyst assignment curriculum.',
   robots: { index: false, follow: false },
   openGraph: { images: [] },
   twitter: { images: [] },
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
 const bandDescriptions = [
   ['Brief', 'One focused decision with a supplied neighborhood; approximately 3–5 prepared-learner hours.'],
   ['Investigation', 'Several assets and competing explanations; approximately 6–12 hours.'],
-  ['Decision case', 'Multi-stage evidence and several professional artifacts; approximately 10–18 hours.'],
+  ['Decision', 'Multi-stage evidence and several professional artifacts; approximately 10–18 hours.'],
   ['Practicum', 'End-to-end build, audit, forecasting, or deployment work; approximately 16–30+ newcomer hours.'],
 ];
 
@@ -24,16 +24,16 @@ export default function TeachPage() {
   return (
     <main className="teaching-page">
       <header className="teaching-header">
-        <div className="teaching-brand"><span>MA</span><strong>MERIDIAN / INSTRUCTOR PLANNING DESK</strong></div>
+        <div className="teaching-brand"><strong>THE ANALYST / INSTRUCTOR PLANNING DESK</strong></div>
         <SiteLink path="/workbench">RETURN TO LEARNER WORKBENCH</SiteLink>
       </header>
 
       <section className="teaching-intro">
-        <p className="document-kicker">THE ANALYST / NINE-CASE CURRICULUM</p>
-        <h1>Plan a progression, not a pile of projects.</h1>
+        <p className="document-kicker">THE ANALYST / NINE-ASSIGNMENT SEQUENCE</p>
+        <h1>Plan a progression through the work.</h1>
         <p>
-          This area exposes workload, prerequisites, tool emphasis, scaffolding, and teaching sequence.
-          It contains no case solutions. Prepared-hour estimates assume a learner can work independently;
+          This desk helps instructors sequence nine workplace assignments across SQL, Python, data judgment, and professional handoff.
+          It contains no sample conclusions. Prepared-hour estimates assume a learner can work independently;
           newcomer ranges assume active instructor support.
         </p>
       </section>
@@ -62,7 +62,7 @@ export default function TeachPage() {
             <thead>
               <tr>
                 <th>#</th>
-                <th>Case</th>
+                <th>Assignment</th>
                 <th>Band</th>
                 <th>Prepared</th>
                 <th>Newcomer</th>
@@ -89,7 +89,7 @@ export default function TeachPage() {
         </div>
       </section>
 
-      <section className="case-planning-grid" aria-label="Case planning details">
+      <section className="case-planning-grid" aria-label="Assignment planning details">
         {scenarios.map((scenario) => (
           <article className="planning-card" key={scenario.id}>
             <header>
@@ -131,7 +131,7 @@ export default function TeachPage() {
         </div>
         <nav aria-label="Instructor utilities">
           <SiteLink path="/teach/replay" rel="nofollow">OPEN A LEARNER SUBMISSION →</SiteLink>
-          <SiteLink path="/teach/spoilers" rel="nofollow">OPEN SPOILER-SEPARATED CASE NOTES →</SiteLink>
+          <SiteLink path="/teach/spoilers" rel="nofollow">OPEN SPOILER-SEPARATED INSTRUCTOR NOTES →</SiteLink>
         </nav>
       </section>
     </main>

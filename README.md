@@ -4,7 +4,7 @@ This repository is the data foundation for a hands-on, open-world data-science s
 
 The first deliverable was deliberately **data-first**: a reproducible generator, linked Parquet files, machine-readable catalog, relationship map, anomaly ledger, world guide, and validation suite.
 
-The browser product is **The Analyst** (`theanalyst.dev`). All nine cases now run in `web/` with Monaco, DuckDB-Wasm, Pyodide, case-specific relational Parquet packs, local drafts, and portable submissions. The complete generated estate remains local and reproducible rather than being committed to Git; the public site ships compact decision populations built from it.
+The browser product is **The Analyst** (`theanalyst.dev`). All nine assignments now run in `web/` with Monaco, DuckDB-Wasm, Pyodide, assignment-specific relational Parquet packs, local drafts, and portable submissions. The complete generated estate remains local and reproducible rather than being committed to Git; the public site ships compact decision populations built from it.
 
 ## Current footprint
 
@@ -36,7 +36,7 @@ The estate covers:
 - [Checking policy](docs/checking_policy.md): the deterministic-only standard for any automated verification.
 - [Supply generator invariants](docs/supply_data_invariants.md): exact ledger, receipt, replay, demand, and lead-time guarantees.
 
-## Nine-case progression
+## Nine-assignment progression
 
 - [The Monday Scorecard](docs/scenarios/01-the-monday-scorecard.md) — reconcile conflicting support and satisfaction scorecards under executive pressure.
 - [The Quarter That Moved](docs/scenarios/05-the-quarter-that-moved.md) — certify a quarter after an acquisition creates identifier, clock, and grain traps.
@@ -102,9 +102,9 @@ npm install
 npm run dev
 ```
 
-The public front door includes a nine-case progression register, pedagogical approach, learner field guide, and a searchable dictionary for all 96 source tables. Each case mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
+The public front door includes a nine-assignment progression register, pedagogical approach, learner field guide, and a searchable dictionary for all 96 source tables. Each assignment mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
 
-The case-pack builders, manifests, and exact validators live in `generator/case_packs/`. Together the browser packs contain more than five million rows in about 110 MiB while preserving each case's authored mechanisms. The checks cover hashes, row/column contracts, relationship closure, cutoffs, and planted mechanical invariants—not the quality of a learner's conclusion.
+The assignment-pack builders, manifests, and exact validators live in `generator/case_packs/`. Together the browser packs contain more than five million rows in about 110 MiB while preserving each assignment's authored mechanisms. The checks cover hashes, row/column contracts, relationship closure, cutoffs, and planted mechanical invariants—not the quality of a learner's conclusion.
 
 The public site is built as a static export and deployed from
 `.github/workflows/pages.yml`. It needs no application server or learner account.

@@ -20,7 +20,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL(publicSiteUrl),
-  title: 'The Analyst — Applied Data Science Casework',
+  title: 'The Analyst — Applied Data Science Work Simulations',
   description:
     'Nine browser-based data science simulations where analysts investigate a living company, make defensible decisions, and show their work.',
   openGraph: {

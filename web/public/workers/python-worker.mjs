@@ -62,14 +62,14 @@ def __analyst_resolve_table(name):
     )
     hint = f" Did you mean: {', '.join(suggestions)}?" if suggestions else ""
     available = ", ".join(__analyst_case_registry) or "(none)"
-    raise KeyError(f'Unknown case table "{requested}".{hint} Available tables: {available}')
+    raise KeyError(f'Unknown assignment table "{requested}".{hint} Available tables: {available}')
 
 def __analyst_table_path(name):
-    """Return the mounted browser-filesystem path for a case table."""
+    """Return the mounted browser-filesystem path for an assignment table."""
     return __analyst_resolve_table(name)[1]
 
 def __analyst_load_table(name, **kwargs):
-    """Load a named case table as a pandas DataFrame."""
+    """Load a named assignment table as a pandas DataFrame."""
     import pandas as pd
 
     _, file_path = __analyst_resolve_table(name)
@@ -86,14 +86,14 @@ def __analyst_load_table(name, **kwargs):
         return pd.read_json(file_path, **kwargs)
     if suffix in {".feather", ".arrow"}:
         return pd.read_feather(file_path, **kwargs)
-    raise ValueError(f'Unsupported case-table format for "{file_path}".')
+    raise ValueError(f'Unsupported assignment-table format for "{file_path}".')
 
 def __analyst_available_tables():
-    """Return the table names available in this case."""
+    """Return the table names available in this assignment."""
     return tuple(__analyst_case_registry)
 
 __analyst_module = __analyst_types.ModuleType("analyst")
-__analyst_module.__doc__ = "Storage-independent access to the current case datasets."
+__analyst_module.__doc__ = "Storage-independent access to the current assignment datasets."
 __analyst_module.table = __analyst_load_table
 __analyst_module.load_table = __analyst_load_table
 __analyst_module.path = __analyst_table_path

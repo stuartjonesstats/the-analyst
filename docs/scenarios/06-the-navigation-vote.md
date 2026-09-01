@@ -20,7 +20,7 @@
 
 | Dimension | Profile |
 |---|---|
-| Workload band | **Decision case** -- a predeclared experiment, multiple plausible outcomes, uncertainty analysis, and a consequential rollout recommendation |
+| Workload band | **Decision** -- a predeclared experiment, multiple plausible outcomes, uncertainty analysis, and a consequential rollout recommendation |
 | Expected effort | 8-12 prepared hours; 12-18 beginner hours |
 | Core data breadth | Six assets across growth, commerce, and CRM |
 | Technical mode | SQL for the analysis mart; Python for inference, visualization, sensitivity, and power |

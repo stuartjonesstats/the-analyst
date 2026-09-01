@@ -4,7 +4,7 @@ import { SiteLink } from '@/components/site-link';
 export const dynamic = 'force-static';
 
 const principles = [
-  ['01', 'Bound the assignment, not the answer', 'Every case supplies a role, cutoff, decision, source neighborhood, and handoff. Learners still own definitions, methods, uncertainty, and recommendations.'],
+  ['01', 'Bound the assignment, not the answer', 'Every assignment supplies a role, cutoff, decision, source neighborhood, and handoff. Learners still own definitions, methods, uncertainty, and recommendations.'],
   ['02', 'Make Python earn its place', 'SQL establishes governed evidence. Python handles work that benefits from programmatic analysis: visualization, inference, temporal validation, simulation, modeling, and error analysis.'],
   ['03', 'Preserve useful mess', 'The estate contains declared source behavior—multiple clocks, sparse observations, fanout risk, delayed labels, technical replays, selection effects, and shifting populations. These are mechanisms, not random corruption.'],
   ['04', 'Permit responsible refusal', 'A defensible result may be hold, monitor, shadow, collect better labels, or decline deployment. The simulation never requires false certainty to feel complete.'],
@@ -19,7 +19,7 @@ export default function ApproachPage() {
         <header className="public-page-head approach-head">
           <p className="public-kicker">PEDAGOGICAL OPERATING STANDARD</p>
           <h1>Practice judgment before the stakes rise.</h1>
-          <p>The Analyst occupies the missing middle between a guided lesson and fully open-ended work: the world is controlled enough to teach from, but the analytical choices remain real. It can support college and university courses, workforce programs, professional training, or structured self-study without assuming one calendar or credential.</p>
+          <p>The Analyst is the simulation; Meridian Living Systems is the fictional employer that makes the work cohere. Each assignment changes the role and decision while the organization, source systems, definitions, and operating history remain consistent. The world is controlled enough to teach from, but the analytical choices remain real. It can support college and university courses, workforce programs, professional training, or structured self-study.</p>
         </header>
         <section className="approach-register">
           {principles.map(([index, title, body]) => (
@@ -39,7 +39,7 @@ export default function ApproachPage() {
         <section className="section-lead split" aria-labelledby="approach-instructor-note">
           <div>
             <span className="public-kicker" id="approach-instructor-note">TEACHING AND ASSESSMENT</span>
-            <p>The low-profile instructor desk holds sequencing guidance, the human-review boundary, a local submission viewer, and spoiler-separated case notes. None of those materials are required for self-directed use.</p>
+            <p>The low-profile instructor desk holds sequencing guidance, the human-review boundary, a local submission viewer, and spoiler-separated assignment notes. None of those materials are required for self-directed use.</p>
           </div>
           <SiteLink path="/teach" rel="nofollow">OPEN INSTRUCTOR DESK →</SiteLink>
         </section>

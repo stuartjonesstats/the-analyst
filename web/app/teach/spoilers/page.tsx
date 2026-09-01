@@ -6,8 +6,8 @@ import { instructorNotes } from '@/lib/instructor-notes';
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Instructor Case Notes — The Analyst',
-  description: 'Spoiler-separated instructor truths and review cautions for The Analyst case curriculum.',
+  title: 'Instructor Notes — The Analyst',
+  description: 'Spoiler-separated instructor truths and review cautions for The Analyst assignment curriculum.',
   robots: { index: false, follow: false },
   openGraph: { images: [] },
   twitter: { images: [] },
@@ -17,13 +17,13 @@ export default function SpoilerPack() {
   return (
     <main className="teaching-page spoiler-page">
       <header className="teaching-header">
-        <div className="teaching-brand"><span>MA</span><strong>MERIDIAN / INSTRUCTOR CASE NOTES</strong></div>
+        <div className="teaching-brand"><strong>THE ANALYST / INSTRUCTOR NOTES</strong></div>
         <SiteLink path="/teach">RETURN TO PLANNING DESK</SiteLink>
       </header>
 
       <section className="spoiler-warning">
         <p className="document-kicker">SPOILER-SEPARATED / PUBLIC RESOURCE</p>
-        <h1>This page discloses the cases’ planted mechanisms.</h1>
+        <h1>This page discloses the assignments’ planted mechanisms.</h1>
         <p>
           Keep learners in the workbench. These notes establish what the data generator actually encodes,
           where refusal is valid, and what not to grade toward. They are review guidance—not answer keys.

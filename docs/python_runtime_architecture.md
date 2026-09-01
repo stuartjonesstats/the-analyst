@@ -469,7 +469,7 @@ Semantic authoring validation should additionally confirm that:
   corrupted IndexedDB, low-memory conditions, and interrupted imports.
 - Establish performance budgets for shell load, DuckDB readiness, Python
   readiness, result preview, Arrow transfer, and scenario switching.
-- Consider opt-in offline case packs only after storage behavior is measured on
+- Consider opt-in offline assignment packs only after storage behavior is measured on
   representative student hardware.
 
 ## Acceptance criteria for the runtime foundation

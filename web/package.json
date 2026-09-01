@@ -9,6 +9,7 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "pages:prepare": "node scripts/prepare-pages.mjs",
+    "test:migration": "node --experimental-strip-types scripts/test-python-worksheet-migration.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },
