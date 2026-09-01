@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Editor, { type BeforeMount } from '@monaco-editor/react';
 import Image from 'next/image';
 import {
@@ -52,6 +52,7 @@ type CaseWorkbenchProps = {
 };
 
 type WorkspaceLanguage = 'sql' | 'python' | 'notes' | 'final';
+type WorkflowStep = 'inbox' | 'investigate' | 'data-register' | 'evidence' | 'handoff';
 
 export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) {
   const { status, error: engineError, run } = useDuckDB(definition.dataFiles);
@@ -78,14 +79,21 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
   const [isExporting, setIsExporting] = useState(false);
   const [ledgerOpen, setLedgerOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
+  const [activeWorkflowStep, setActiveWorkflowStep] = useState<WorkflowStep>('investigate');
+  const inboxRef = useRef<HTMLElement>(null);
+  const investigateRef = useRef<HTMLDivElement>(null);
+  const dataRegisterRef = useRef<HTMLElement>(null);
+  const evidenceRef = useRef<HTMLElement>(null);
+  const handoffRef = useRef<HTMLElement>(null);
   const evidenceCount = evidence.length;
   const workflow = [
-    { seq: '01', label: 'Inbox', icon: Inbox, count: null, active: false },
-    { seq: '02', label: 'Investigate', icon: TerminalSquare, count: null, active: true },
-    { seq: '03', label: 'Data register', icon: Database, count: null, active: false },
-    { seq: '04', label: 'Evidence', icon: BookOpen, count: String(evidenceCount), active: false },
-    { seq: '05', label: 'Handoff', icon: FileChartColumn, count: null, active: false },
+    { id: 'inbox' as const, seq: '01', label: 'Inbox', icon: Inbox, count: null },
+    { id: 'investigate' as const, seq: '02', label: 'Investigate', icon: TerminalSquare, count: null },
+    { id: 'data-register' as const, seq: '03', label: 'Data register', icon: Database, count: null },
+    { id: 'evidence' as const, seq: '04', label: 'Evidence', icon: BookOpen, count: String(evidenceCount) },
+    { id: 'handoff' as const, seq: '05', label: 'Handoff', icon: FileChartColumn, count: null },
   ];
+  const activeWorkflowIndex = workflow.findIndex(({ id }) => id === activeWorkflowStep);
 
   // Hydrate drafts after mount because browser storage is intentionally local-only.
   /* oxlint-disable react/react-compiler */
@@ -192,6 +200,25 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
     }
   }
 
+  function openWorkflowStep(step: WorkflowStep) {
+    setActiveWorkflowStep(step);
+
+    if (step === 'inbox' || step === 'investigate') {
+      setLedgerOpen(false);
+      const target = step === 'inbox' ? inboxRef.current : investigateRef.current;
+      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      return;
+    }
+
+    setLedgerOpen(true);
+    const target = step === 'data-register'
+      ? dataRegisterRef.current
+      : step === 'evidence'
+        ? evidenceRef.current
+        : handoffRef.current;
+    window.requestAnimationFrame(() => target?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+  }
+
   function addEvidence() {
     const statement = evidenceDraft.trim();
     if (!statement) return;
@@ -292,8 +319,14 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
       </header>
 
       <nav className="mobile-workflow" aria-label="Mobile workflow">
-        {workflow.map(({ seq, label, active }) => (
-          <button key={seq} className={active ? 'is-active' : ''}>
+        {workflow.map(({ id, seq, label }) => (
+          <button
+            key={seq}
+            type="button"
+            className={id === activeWorkflowStep ? 'is-active' : ''}
+            aria-current={id === activeWorkflowStep ? 'step' : undefined}
+            onClick={() => openWorkflowStep(id)}
+          >
             <span>{seq}</span> {label}
           </button>
         ))}
@@ -315,8 +348,14 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           </div>
 
           <nav className="workflow-list" aria-label="Assignment workflow">
-            {workflow.map(({ seq, label, icon: Icon, count, active }) => (
-              <button key={seq} className={active ? 'active' : ''}>
+            {workflow.map(({ id, seq, label, icon: Icon, count }) => (
+              <button
+                key={seq}
+                type="button"
+                className={id === activeWorkflowStep ? 'active' : ''}
+                aria-current={id === activeWorkflowStep ? 'step' : undefined}
+                onClick={() => openWorkflowStep(id)}
+              >
                 <span className="workflow-seq">{seq}</span>
                 <Icon aria-hidden="true" />
                 <span>{label}</span>
@@ -339,8 +378,8 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
           </div>
 
           <div className="queue-footer">
-            <div><span>ASSIGNMENT PROGRESS</span><strong>02 / 05</strong></div>
-            <div className="progress-track"><span /></div>
+            <div><span>ASSIGNMENT PROGRESS</span><strong>{String(activeWorkflowIndex + 1).padStart(2, '0')} / 05</strong></div>
+            <div className="progress-track"><span style={{ width: `${(activeWorkflowIndex + 1) * 20}%` }} /></div>
             <p>Autosave / local device</p>
           </div>
         </aside>
@@ -362,7 +401,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             </button>
           </div>
 
-          <article className="briefing-document">
+          <article className="briefing-document" ref={inboxRef}>
             <div className="briefing-fields">
               <dl>
                 <div><dt>EMPLOYER</dt><dd>Meridian Living Systems</dd></div>
@@ -384,7 +423,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             </div>
           </article>
 
-          <div className="analysis-workarea">
+          <div className="analysis-workarea" ref={investigateRef}>
             <div className="workarea-tabs" role="tablist" aria-label="Investigation tools">
               <button
                 className={workspaceLanguage === 'sql' ? 'active' : ''}
@@ -598,7 +637,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             </div>
           </div>
 
-          <section className="ledger-section">
+          <section className="ledger-section" ref={dataRegisterRef}>
             <div className="ledger-section-head"><span>SOURCE REGISTER</span><SiteLink path="/data">OPEN CATALOG</SiteLink></div>
             <div className="source-register">
               <div className="source-register-head"><span>TABLE</span><span>ROWS</span><span>STATE</span></div>
@@ -612,7 +651,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             </div>
           </section>
 
-          <section className="ledger-section evidence-section">
+          <section className="ledger-section evidence-section" ref={evidenceRef}>
             <div className="ledger-section-head"><span>EVIDENCE REGISTER</span><b>{String(evidenceCount).padStart(2, '0')} ITEMS</b></div>
             <ol>
               {evidence.map((record) => (
@@ -640,7 +679,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             )}
           </section>
 
-          <section className="ledger-section handoff-section">
+          <section className="ledger-section handoff-section" ref={handoffRef}>
             <div className="ledger-section-head"><span>REQUIRED HANDOFF</span><b>0 / {definition.requiredArtifacts.length}</b></div>
             <ul>
               {definition.requiredArtifacts.map((artifact) => <li key={artifact}><span /> {artifact}</li>)}
