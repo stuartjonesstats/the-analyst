@@ -4,7 +4,7 @@ This repository is the data foundation for a hands-on, open-world data-science s
 
 The first deliverable was deliberately **data-first**: a reproducible generator, linked Parquet files, machine-readable catalog, relationship map, anomaly ledger, world guide, and validation suite.
 
-The second phase has now begun under the product name **The Analyst** (`theanalyst.dev`). The first browser vertical slice lives in `web/` and runs a real Monaco + DuckDB-Wasm SQL workbench against a small scenario-specific Parquet pack. The complete generated estate remains local and reproducible rather than being committed to Git.
+The browser product is **The Analyst** (`theanalyst.dev`). All nine cases now run in `web/` with Monaco, DuckDB-Wasm, Pyodide, case-specific relational Parquet packs, local drafts, and portable submissions. The complete generated estate remains local and reproducible rather than being committed to Git; the public site ships compact decision populations built from it.
 
 ## Current footprint
 
@@ -102,13 +102,15 @@ npm install
 npm run dev
 ```
 
-The connected Monday workbench currently serves only `support.csat_response`, `support.ticket`, and `crm.account` to the browser. DuckDB runs locally in WebAssembly inside a disposable learner workspace; source Parquets remain unchanged, while learner-created local tables and views may be rebuilt on refresh. The complete estate is not downloaded on startup. All nine case files are represented in the learner-safe registry; the remaining case-specific data packs and staged runtime content are the next implementation layer.
+The public front door includes a nine-case progression register, pedagogical approach, learner field guide, and a searchable dictionary for all 96 source tables. Each case mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; source Parquets remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
+
+The case-pack builders, manifests, and exact validators live in `generator/case_packs/`. Together the browser packs contain more than five million rows in about 110 MiB while preserving each case's authored mechanisms. The checks cover hashes, row/column contracts, relationship closure, cutoffs, and planted mechanical invariants—not the quality of a learner's conclusion.
 
 The public site is built as a static export and deployed from
 `.github/workflows/pages.yml`. It needs no application server or learner account.
 For the project-site URL, the workflow sets the repository path for chunks,
 Parquets, workers, and internal links, then prepares `web/dist/client` as the
-Pages artifact. The eventual `theanalyst.dev` domain can switch those path values
+Pages artifact. The `theanalyst.dev` domain can switch those path values
 to the domain root without changing the application architecture.
 
 ## Why the data are messy

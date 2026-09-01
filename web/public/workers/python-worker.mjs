@@ -18,13 +18,13 @@ async function loadDataFile(file) {
   pyodide.FS.writeFile(file.path, bytes);
 }
 
-async function initialize(files = []) {
+async function initialize(files = [], packages = []) {
   if (pyodide) return;
   sendStatus('booting', 'Loading CPython runtime');
   const { loadPyodide } = await import(`${PYODIDE_INDEX_URL}pyodide.mjs`);
   pyodide = await loadPyodide({ indexURL: PYODIDE_INDEX_URL });
   sendStatus('booting', 'Loading core analysis packages');
-  await pyodide.loadPackage(['pandas', 'matplotlib', 'pyarrow']);
+  await pyodide.loadPackage([...new Set(['pandas', 'matplotlib', 'pyarrow', ...packages])]);
 
   if (files.length) {
     sendStatus('loading_data', `Mounting ${files.length} scenario files`);
@@ -40,9 +40,11 @@ async function runCell(id, code) {
   sendStatus('running', 'Executing Python worksheet');
 
   try {
+    // Resolve opportunistic imports before capturing learner output so package
+    // loader diagnostics do not appear as worksheet stdout.
+    await pyodide.loadPackagesFromImports(code);
     pyodide.setStdout({ batched: (message) => stdout.push(message) });
     pyodide.setStderr({ batched: (message) => stderr.push(message) });
-    await pyodide.loadPackagesFromImports(code);
     pyodide.globals.set('__analyst_source', code);
 
     const serialized = await pyodide.runPythonAsync(`
@@ -119,12 +121,12 @@ self.onmessage = async (event) => {
   const message = event.data;
   try {
     if (message.type === 'init') {
-      await initialize(message.files);
+      await initialize(message.files, message.packages);
       self.postMessage({ type: 'initialized', id: message.id });
       return;
     }
     if (message.type === 'run') {
-      await initialize(message.files);
+      await initialize(message.files, message.packages);
       await runCell(message.id, message.code);
     }
   } catch (error) {

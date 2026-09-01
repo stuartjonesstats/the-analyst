@@ -6,6 +6,7 @@ import type {
   AsyncDuckDBConnection,
 } from '@duckdb/duckdb-wasm';
 
+import type { CaseDataFile } from '@/lib/case-definition';
 import { sitePath } from '@/lib/site-path';
 
 export type QueryValue = string | number | boolean | null;
@@ -13,8 +14,19 @@ export type QueryRow = Record<string, QueryValue>;
 
 type EngineStatus = 'booting' | 'ready' | 'running' | 'error';
 
-function serializable(value: unknown): QueryValue {
+function serializable(value: unknown, typeName = ''): QueryValue {
   if (value == null) return null;
+  if (/Timestamp/i.test(typeName) && (typeof value === 'number' || typeof value === 'bigint')) {
+    const raw = Number(value);
+    const milliseconds = Math.abs(raw) > 1e17 ? raw / 1_000_000 : Math.abs(raw) > 1e14 ? raw / 1_000 : raw;
+    return new Date(milliseconds).toISOString();
+  }
+  if (/Date32/i.test(typeName) && typeof value === 'number') {
+    return new Date(value * 86_400_000).toISOString().slice(0, 10);
+  }
+  if (/Date64/i.test(typeName) && (typeof value === 'number' || typeof value === 'bigint')) {
+    return new Date(Number(value)).toISOString().slice(0, 10);
+  }
   if (typeof value === 'bigint') return Number(value);
   if (typeof value === 'string' || typeof value === 'number' || typeof value === 'boolean') return value;
   if (value instanceof Date) return value.toISOString();
@@ -25,7 +37,11 @@ function serializable(value: unknown): QueryValue {
   }
 }
 
-export function useDuckDB() {
+function quoteIdentifier(value: string) {
+  return `"${value.replaceAll('"', '""')}"`;
+}
+
+export function useDuckDB(dataFiles: CaseDataFile[]) {
   const dbRef = useRef<AsyncDuckDB | null>(null);
   const connectionRef = useRef<AsyncDuckDBConnection | null>(null);
   const [status, setStatus] = useState<EngineStatus>('booting');
@@ -36,6 +52,8 @@ export function useDuckDB() {
 
     async function boot() {
       try {
+        setStatus('booting');
+        setError(null);
         const duckdb = await import('@duckdb/duckdb-wasm');
         const origin = window.location.origin;
         const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
@@ -49,36 +67,27 @@ export function useDuckDB() {
         const db = new duckdb.AsyncDuckDB(logger, worker);
         await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
 
-        await db.registerFileURL(
-          'support_csat_response.parquet',
-          `${origin}${sitePath('/data/support/csat_response.parquet')}`,
-          duckdb.DuckDBDataProtocol.HTTP,
-          false,
-        );
-        await db.registerFileURL(
-          'support_ticket.parquet',
-          `${origin}${sitePath('/data/support/ticket.parquet')}`,
-          duckdb.DuckDBDataProtocol.HTTP,
-          false,
-        );
-        await db.registerFileURL(
-          'crm_account.parquet',
-          `${origin}${sitePath('/data/crm/account.parquet')}`,
-          duckdb.DuckDBDataProtocol.HTTP,
-          false,
-        );
+        for (const [index, source] of dataFiles.entries()) {
+          await db.registerFileURL(
+            `case_source_${index}.parquet`,
+            `${origin}${sitePath(source.url)}`,
+            duckdb.DuckDBDataProtocol.HTTP,
+            false,
+          );
+        }
 
         const connection = await db.connect();
-        await connection.query(`
-          CREATE SCHEMA IF NOT EXISTS support;
-          CREATE SCHEMA IF NOT EXISTS crm;
-          CREATE OR REPLACE VIEW support.csat_response AS
-            SELECT * FROM read_parquet('support_csat_response.parquet');
-          CREATE OR REPLACE VIEW support.ticket AS
-            SELECT * FROM read_parquet('support_ticket.parquet');
-          CREATE OR REPLACE VIEW crm.account AS
-            SELECT * FROM read_parquet('crm_account.parquet');
-        `);
+        for (const [index, source] of dataFiles.entries()) {
+          const [schema, table, ...rest] = source.table.split('.');
+          if (!schema || !table || rest.length > 0) {
+            throw new Error(`Invalid case table name: ${source.table}`);
+          }
+          await connection.query(`CREATE SCHEMA IF NOT EXISTS ${quoteIdentifier(schema)}`);
+          await connection.query(`
+            CREATE OR REPLACE VIEW ${quoteIdentifier(schema)}.${quoteIdentifier(table)} AS
+            SELECT * FROM read_parquet('case_source_${index}.parquet')
+          `);
+        }
 
         if (!active) {
           await connection.close();
@@ -105,7 +114,7 @@ export function useDuckDB() {
       if (connection) void connection.close();
       if (db) void db.terminate();
     };
-  }, []);
+  }, [dataFiles]);
 
   const run = useCallback(async (sql: string) => {
     const connection = connectionRef.current;
@@ -116,8 +125,9 @@ export function useDuckDB() {
     try {
       const table = await connection.query(sql);
       const columns = table.schema.fields.map((field) => field.name);
+      const fieldTypes = Object.fromEntries(table.schema.fields.map((field) => [field.name, field.type.toString()]));
       const rows = table.toArray().slice(0, 1000).map((row) =>
-        Object.fromEntries(columns.map((column) => [column, serializable(row[column])] as const)),
+        Object.fromEntries(columns.map((column) => [column, serializable(row[column], fieldTypes[column])] as const)),
       );
       setStatus('ready');
       return {

@@ -78,7 +78,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 5,
     packageProfile: 'core-analysis',
     complexity: { sql: 3, python: 3, data: 3, statistics: 2, ambiguity: 3, deliverables: 3 },
-    status: 'authoring',
+    status: 'connected',
   },
   {
     sequence: 3,
@@ -99,7 +99,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 5,
     packageProfile: 'statistics',
     complexity: { sql: 3, python: 4, data: 3, statistics: 4, ambiguity: 4, deliverables: 4 },
-    status: 'authoring',
+    status: 'connected',
   },
   {
     sequence: 4,
@@ -120,7 +120,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 5,
     packageProfile: 'statistics',
     complexity: { sql: 4, python: 4, data: 5, statistics: 4, ambiguity: 5, deliverables: 4 },
-    status: 'authoring',
+    status: 'connected',
   },
   {
     sequence: 5,
@@ -141,7 +141,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 7,
     packageProfile: 'modeling',
     complexity: { sql: 4, python: 5, data: 4, statistics: 4, ambiguity: 4, deliverables: 5 },
-    status: 'authoring',
+    status: 'connected',
   },
   {
     sequence: 6,
@@ -162,7 +162,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 8,
     packageProfile: 'statistics',
     complexity: { sql: 4, python: 5, data: 5, statistics: 5, ambiguity: 5, deliverables: 5 },
-    status: 'authoring',
+    status: 'connected',
   },
   {
     sequence: 7,
@@ -183,7 +183,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 5,
     packageProfile: 'statistics',
     complexity: { sql: 5, python: 4, data: 5, statistics: 5, ambiguity: 5, deliverables: 5 },
-    status: 'authoring',
+    status: 'connected',
   },
   {
     sequence: 8,
@@ -204,7 +204,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 8,
     packageProfile: 'nlp',
     complexity: { sql: 4, python: 5, data: 4, statistics: 4, ambiguity: 5, deliverables: 5 },
-    status: 'authoring',
+    status: 'connected',
   },
   {
     sequence: 9,
@@ -225,7 +225,7 @@ export const scenarios: LearnerScenario[] = [
     artifactCount: 5,
     packageProfile: 'modeling',
     complexity: { sql: 3, python: 5, data: 5, statistics: 5, ambiguity: 5, deliverables: 5 },
-    status: 'authoring',
+    status: 'connected',
   },
 ];
 

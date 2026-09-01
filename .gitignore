@@ -3,6 +3,8 @@
 __pycache__/
 *.pyc
 .DS_Store
+.playwright-cli/
+*.tsbuildinfo
 
 # The full estate is deterministic and is regenerated locally. Keeping the
 # 565 MiB snapshot out of Git avoids repository/LFS coupling; the browser pilot

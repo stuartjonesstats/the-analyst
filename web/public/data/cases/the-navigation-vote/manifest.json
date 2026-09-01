@@ -1,0 +1,260 @@
+{
+  "format": "theanalyst.browser-case-pack",
+  "version": "1.0.0",
+  "revision": "2026.09.01",
+  "caseId": "GX-250505",
+  "slug": "the-navigation-vote",
+  "selectionPolicy": "Complete decision-window population plus every linked child row; no sampling.",
+  "totals": {
+    "files": 9,
+    "rows": 264967,
+    "bytes": 6490665
+  },
+  "files": [
+    {
+      "table": "growth.experiment",
+      "file": "growth_experiment.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/growth_experiment.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/growth_experiment.parquet",
+      "rows": 1,
+      "bytes": 2264,
+      "sha256": "757f7f0950d627156b5094cf12db692e967f00f7132e2dc55e1eadd626ce1b0a",
+      "columns": [
+        "experiment_id",
+        "experiment_name",
+        "start_date",
+        "end_date",
+        "primary_metric",
+        "assignment_unit",
+        "status"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/growth/experiment.parquet"
+        ],
+        "selection": "experiment_id = EXP005",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "growth.experiment_assignment",
+      "file": "growth_experiment_assignment.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/growth_experiment_assignment.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/growth_experiment_assignment.parquet",
+      "rows": 42000,
+      "bytes": 1202049,
+      "sha256": "3fcc83131f4ce22dca85b8ba0897363e72197580196e13c09dd9a49f402651ba",
+      "columns": [
+        "assignment_id",
+        "experiment_id",
+        "session_id",
+        "account_id",
+        "variant",
+        "assigned_at",
+        "first_exposed_at",
+        "source_recorded_at",
+        "warehouse_available_at"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/growth/experiment_assignment.parquet"
+        ],
+        "selection": "experiment_id = EXP005; complete assignment population",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "growth.session",
+      "file": "growth_session.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/growth_session.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/growth_session.parquet",
+      "rows": 42000,
+      "bytes": 1396987,
+      "sha256": "c317792a2ffde5212297ee3cd15f9f10d6140ee2c38513468337edab6ee414a8",
+      "columns": [
+        "session_id",
+        "visitor_id",
+        "account_id",
+        "site_id",
+        "acquisition_channel",
+        "device_type",
+        "event_count",
+        "session_duration_seconds",
+        "converted_order_id",
+        "started_at",
+        "source_recorded_at",
+        "warehouse_available_at"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/growth/session.parquet"
+        ],
+        "selection": "session_id belongs to EXP005 assignment population",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "growth.web_event",
+      "file": "growth_web_event.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/growth_web_event.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/growth_web_event.parquet",
+      "rows": 140670,
+      "bytes": 2801683,
+      "sha256": "31f6f6460d07b607a6e4936986166944316b8e32fbbb00b1ab51cc0086204af4",
+      "columns": [
+        "web_event_id",
+        "session_id",
+        "event_sequence",
+        "event_type",
+        "page_path",
+        "occurred_at",
+        "source_recorded_at",
+        "warehouse_available_at"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/growth/web_event.parquet"
+        ],
+        "selection": "session_id belongs to EXP005 assignment population",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "commerce.order",
+      "file": "commerce_order.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/commerce_order.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/commerce_order.parquet",
+      "rows": 15518,
+      "bytes": 673176,
+      "sha256": "7befb317ec592179c7be4bed20578dcfb4054a9f41c26e1a228541d10025920f",
+      "columns": [
+        "order_id",
+        "source_order_id",
+        "account_id",
+        "site_id",
+        "order_status",
+        "sales_channel",
+        "currency",
+        "line_count",
+        "subtotal_cents",
+        "tax_cents",
+        "order_total_cents",
+        "created_at",
+        "source_recorded_at",
+        "warehouse_available_at",
+        "source_system"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/commerce/order.parquet"
+        ],
+        "selection": "order_id appears as converted_order_id on a selected session",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "crm.account",
+      "file": "crm_account.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/crm_account.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/crm_account.parquet",
+      "rows": 24773,
+      "bytes": 403151,
+      "sha256": "cd32589413eefcb107abda67bf7deef854a2505e5574e6cddda7199123f3a6c8",
+      "columns": [
+        "account_id",
+        "account_number",
+        "primary_customer_id",
+        "home_branch_id",
+        "opened_date",
+        "account_type",
+        "current_status",
+        "lifecycle_segment",
+        "acquisition_channel",
+        "paperless_billing"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/crm/account.parquet"
+        ],
+        "selection": "account_id appears on a selected assignment or session",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "casefiles.navigation_readout",
+      "file": "navigation_readout.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/navigation_readout.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/navigation_readout.parquet",
+      "rows": 2,
+      "bytes": 3076,
+      "sha256": "7997d20555fc2567940fd3efc38441216258f6c95844036867c98db35856f278",
+      "columns": [
+        "variant",
+        "metric_name",
+        "mean_pages_per_session",
+        "dashboard_label"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/growth/experiment_assignment.parquet",
+          "parquet/growth/session.parquet"
+        ],
+        "selection": "Variant summary for EXP005",
+        "transformation": "Opening dashboard extract: unrounded means, no distributions, denominators, or uncertainty."
+      }
+    },
+    {
+      "table": "casefiles.finance_conversion_check",
+      "file": "finance_conversion_check.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/finance_conversion_check.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/finance_conversion_check.parquet",
+      "rows": 2,
+      "bytes": 3089,
+      "sha256": "7d46089804d0d36294a06c9e8175e19e2ee9f05d40682ff9c4191def2bfcb8a0",
+      "columns": [
+        "variant",
+        "attributable_orders",
+        "window_label",
+        "denominator_status"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/growth/experiment_assignment.parquet",
+          "parquet/growth/session.parquet"
+        ],
+        "selection": "Raw attributable-order counts by EXP005 variant",
+        "transformation": "Opening Finance extract intentionally omits assignment denominators and intervals."
+      }
+    },
+    {
+      "table": "casefiles.experiment_intake",
+      "file": "experiment_intake.parquet",
+      "publicUrl": "/data/cases/the-navigation-vote/experiment_intake.parquet",
+      "pythonPath": "/data/cases/the-navigation-vote/experiment_intake.parquet",
+      "rows": 1,
+      "bytes": 5190,
+      "sha256": "ab09df3d5fb8d2be70ec5dc345af1a05c9631db469a103784603dceb440fd85a",
+      "columns": [
+        "working_title",
+        "experiment_name",
+        "start_date",
+        "end_date",
+        "primary_metric",
+        "assignment_unit",
+        "eligibility_note"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/growth/experiment.parquet",
+          "opening brief specification"
+        ],
+        "selection": "Registered EXP005 metadata plus intake wording",
+        "transformation": "One-row intake attachment; it does not infer eligibility from the experiment name."
+      }
+    }
+  ],
+  "validation": {
+    "passed": true,
+    "checkCount": 12
+  }
+}

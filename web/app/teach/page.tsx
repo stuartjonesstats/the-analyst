@@ -25,7 +25,7 @@ export default function TeachPage() {
     <main className="teaching-page">
       <header className="teaching-header">
         <div className="teaching-brand"><span>MA</span><strong>MERIDIAN / INSTRUCTOR PLANNING DESK</strong></div>
-        <SiteLink path="/">RETURN TO LEARNER WORKBENCH</SiteLink>
+        <SiteLink path="/workbench">RETURN TO LEARNER WORKBENCH</SiteLink>
       </header>
 
       <section className="teaching-intro">

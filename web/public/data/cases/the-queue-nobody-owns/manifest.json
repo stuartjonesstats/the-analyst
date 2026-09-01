@@ -1,0 +1,89 @@
+{
+  "case_slug": "the-queue-nobody-owns",
+  "title": "The Queue Nobody Owns",
+  "revision": "2026.09.01.casepack.1",
+  "catalog_snapshot": "2026-01-15",
+  "extract_boundary": "Historical conversation starts end before the learner-safe unlabeled backlog cohort; the routing snapshot is 2024-12-03 08:20 ET.",
+  "file_count": 7,
+  "total_rows": 373804,
+  "total_bytes": 5322556,
+  "files": [
+    {
+      "table": "support.conversation",
+      "file": "conversation.parquet",
+      "public_path": "/data/cases/the-queue-nobody-owns/conversation.parquet",
+      "source_table": "support.conversation",
+      "selection": "historical conversations started 2023-07-01 through 2024-10-31",
+      "rows": 50387,
+      "columns": 6,
+      "bytes": 564624,
+      "sha256": "14088e2be11666c246b5b092d97e3f12e278f0fd5ce759d4c47b1adc7839c31b"
+    },
+    {
+      "table": "support.ticket",
+      "file": "ticket.parquet",
+      "public_path": "/data/cases/the-queue-nobody-owns/ticket.parquet",
+      "source_table": "support.ticket",
+      "selection": "tickets attached to the historical conversation cohort",
+      "rows": 30311,
+      "columns": 18,
+      "bytes": 812382,
+      "sha256": "b57e9b83a83aebce3c64302a8492195984f740be535a8a887be470dbef78b7ab"
+    },
+    {
+      "table": "support.message",
+      "file": "message.parquet",
+      "public_path": "/data/cases/the-queue-nobody-owns/message.parquet",
+      "source_table": "support.message",
+      "selection": "complete frozen message histories for the historical cohort; intake filtering is learner-owned",
+      "rows": 161911,
+      "columns": 9,
+      "bytes": 2402497,
+      "sha256": "7b94dfc835a7bd21fdf018c0e2e465a6dc024bc02198acc944369ec85e81c201"
+    },
+    {
+      "table": "support.ticket_status_event",
+      "file": "ticket_status_event.parquet",
+      "public_path": "/data/cases/the-queue-nobody-owns/ticket_status_event.parquet",
+      "source_table": "support.ticket_status_event",
+      "selection": "complete frozen status histories for the historical cohort",
+      "rows": 130347,
+      "columns": 7,
+      "bytes": 1517730,
+      "sha256": "92dc222119e88c2257bf6eda4f9849619d6e72a2bd517efd52f66da81391b5b4"
+    },
+    {
+      "table": "case_input.scoring_queue",
+      "file": "scoring_queue.parquet",
+      "public_path": "/data/cases/the-queue-nobody-owns/scoring_queue.parquet",
+      "source_table": null,
+      "selection": "learner-safe unlabeled 818-item backlog at 2024-12-03 08:20; later text and outcome fields removed",
+      "rows": 818,
+      "columns": 12,
+      "bytes": 19784,
+      "sha256": "1c2f3443ae1d4f7367cfb6fbcc5aa066d02e9f56aeae554503f1be3d4b6c37fa"
+    },
+    {
+      "table": "case_reference.routing_team",
+      "file": "routing_team.parquet",
+      "public_path": "/data/cases/the-queue-nobody-owns/routing_team.parquet",
+      "source_table": null,
+      "selection": "five receiving teams and hourly review capacity",
+      "rows": 5,
+      "columns": 3,
+      "bytes": 2916,
+      "sha256": "a4183832533de303d1402bebfb6b64a768dcc3ea17f21bfe2e4af0e4c5be261f"
+    },
+    {
+      "table": "case_reference.misroute_cost",
+      "file": "misroute_cost.parquet",
+      "public_path": "/data/cases/the-queue-nobody-owns/misroute_cost.parquet",
+      "source_table": null,
+      "selection": "supplied asymmetric business-harm matrix",
+      "rows": 25,
+      "columns": 3,
+      "bytes": 2623,
+      "sha256": "ad5eaea1922c8852da0e868c2b1f9e68b6d1e5facbbb745f802f73d4c95d8b2e"
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "format": "theanalyst.browser-case-pack",
+  "version": "1.0.0",
+  "revision": "2026.09.01",
+  "caseId": "CM-240708",
+  "slug": "the-quarter-that-moved",
+  "selectionPolicy": "Complete decision-window population plus every linked child row; no sampling.",
+  "totals": {
+    "files": 9,
+    "rows": 212431,
+    "bytes": 6013419
+  },
+  "files": [
+    {
+      "table": "commerce.order",
+      "file": "commerce_order.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/commerce_order.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/commerce_order.parquet",
+      "rows": 18167,
+      "bytes": 785908,
+      "sha256": "0b7bf4080d81c45a15bcbaa17ad8b4b826072053f8309f95c84e6133136eea7b",
+      "columns": [
+        "order_id",
+        "source_order_id",
+        "account_id",
+        "site_id",
+        "order_status",
+        "sales_channel",
+        "currency",
+        "line_count",
+        "subtotal_cents",
+        "tax_cents",
+        "order_total_cents",
+        "created_at",
+        "source_recorded_at",
+        "warehouse_available_at",
+        "source_system"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/commerce/order.parquet"
+        ],
+        "selection": "created_at in [2024-04-01, 2024-07-01)",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "commerce.order_line",
+      "file": "commerce_order_line.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/commerce_order_line.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/commerce_order_line.parquet",
+      "rows": 32466,
+      "bytes": 941671,
+      "sha256": "a8b3204648d9e6e10307267f109133b969b529f047140c6185721e4740f6ec1e",
+      "columns": [
+        "order_line_id",
+        "order_id",
+        "product_id",
+        "quantity",
+        "unit_price_cents",
+        "discount_cents",
+        "tax_cents",
+        "line_total_cents",
+        "created_at",
+        "source_recorded_at",
+        "warehouse_available_at"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/commerce/order_line.parquet"
+        ],
+        "selection": "order_id belongs to selected Q2 order population",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "commerce.order_event",
+      "file": "commerce_order_event.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/commerce_order_event.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/commerce_order_event.parquet",
+      "rows": 54501,
+      "bytes": 1152627,
+      "sha256": "5c3620c575e7f14d129a45719882c25e3802d708ede5a74c50cdeb5c690470cf",
+      "columns": [
+        "order_event_id",
+        "order_id",
+        "event_type",
+        "event_sequence",
+        "occurred_at",
+        "source_recorded_at",
+        "warehouse_available_at",
+        "source_system"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/commerce/order_event.parquet"
+        ],
+        "selection": "order_id belongs to selected Q2 order population",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "commerce.shipment_event",
+      "file": "commerce_shipment_event.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/commerce_shipment_event.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/commerce_shipment_event.parquet",
+      "rows": 51036,
+      "bytes": 1242278,
+      "sha256": "b46e745ece260db2f4c75d0997059520bb43022d6bbf4588fc70b5d88bbeeff7",
+      "columns": [
+        "shipment_event_id",
+        "order_id",
+        "site_id",
+        "event_type",
+        "carrier_code",
+        "occurred_at",
+        "source_recorded_at",
+        "warehouse_available_at"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/commerce/shipment_event.parquet"
+        ],
+        "selection": "order_id belongs to selected Q2 order population",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "crm.account",
+      "file": "crm_account.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/crm_account.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/crm_account.parquet",
+      "rows": 15601,
+      "bytes": 257698,
+      "sha256": "b915598e1c50ebe9125d89405860cddd75da1d783708fa3a8b33672b09a91883",
+      "columns": [
+        "account_id",
+        "account_number",
+        "primary_customer_id",
+        "home_branch_id",
+        "opened_date",
+        "account_type",
+        "current_status",
+        "lifecycle_segment",
+        "acquisition_channel",
+        "paperless_billing"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/crm/account.parquet"
+        ],
+        "selection": "account_id belongs to selected Q2 order population",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "catalog.product_price_history",
+      "file": "catalog_product_price_history.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/catalog_product_price_history.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/catalog_product_price_history.parquet",
+      "rows": 4320,
+      "bytes": 54607,
+      "sha256": "cbc3b9443973ccf09c376b016d4330d83f69a96973a5dc6cdab66e4565ba4590",
+      "columns": [
+        "product_price_id",
+        "product_id",
+        "channel_code",
+        "effective_from",
+        "effective_to",
+        "list_price_cents",
+        "minimum_price_cents",
+        "currency_code"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/catalog/product_price_history.parquet"
+        ],
+        "selection": "product_id appears on a selected Q2 order line",
+        "transformation": "Source columns preserved; rows sorted deterministically."
+      }
+    },
+    {
+      "table": "casefiles.q2_commercial_close",
+      "file": "q2_commercial_close.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/q2_commercial_close.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/q2_commercial_close.parquet",
+      "rows": 18167,
+      "bytes": 699347,
+      "sha256": "b5cee9c72ec52153e68a882c9e72e8e077d096326a64a030e47c4126ce977e12",
+      "columns": [
+        "finance_extract_row",
+        "source_order_id",
+        "account_id",
+        "source_system",
+        "sales_channel",
+        "order_status",
+        "line_count",
+        "subtotal_cents",
+        "tax_cents",
+        "order_total_cents",
+        "created_at",
+        "source_recorded_at",
+        "warehouse_available_at"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/commerce/order.parquet"
+        ],
+        "selection": "Finance-style projection of selected Q2 orders; canonical order_id intentionally absent",
+        "transformation": "Flat attachment retains source key, captured amounts, and all three exposed clocks."
+      }
+    },
+    {
+      "table": "casefiles.q2_fulfillment_review",
+      "file": "q2_fulfillment_review.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/q2_fulfillment_review.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/q2_fulfillment_review.parquet",
+      "rows": 18167,
+      "bytes": 875651,
+      "sha256": "c6f3f00247729d98c583f00f6caaac69f4b289c2d2690abd0cb496d5c0e38043",
+      "columns": [
+        "order_id",
+        "source_order_id",
+        "source_system",
+        "created_at",
+        "source_recorded_at",
+        "warehouse_available_at",
+        "fulfillment_source_recorded_at",
+        "fulfillment_warehouse_available_at",
+        "delivery_source_recorded_at",
+        "delivery_warehouse_available_at",
+        "reported_processing_minutes",
+        "reported_fulfillment_minutes"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "parquet/commerce/order.parquet",
+          "parquet/commerce/order_event.parquet",
+          "parquet/commerce/shipment_event.parquet"
+        ],
+        "selection": "Selected Q2 orders with first recorded fulfillment and delivery milestones",
+        "transformation": "Attachment reproduces source-clock duration fields while retaining component timestamps for audit."
+      }
+    },
+    {
+      "table": "casefiles.harborhome_transition_mapping",
+      "file": "harborhome_transition_mapping.parquet",
+      "publicUrl": "/data/cases/the-quarter-that-moved/harborhome_transition_mapping.parquet",
+      "pythonPath": "/data/cases/the-quarter-that-moved/harborhome_transition_mapping.parquet",
+      "rows": 6,
+      "bytes": 3632,
+      "sha256": "95539774209c969b28c4e34f02d12db2f72d77d0b426320fae27635ff95ccbb7",
+      "columns": [
+        "legacy_field",
+        "corporate_field",
+        "mapping_state",
+        "transition_note"
+      ],
+      "sourceMapping": {
+        "paths": [
+          "authoring specification"
+        ],
+        "selection": "Opening transition workbook sheet",
+        "transformation": "Six-row field-map attachment; it is context, not a warehouse source of truth."
+      }
+    }
+  ],
+  "validation": {
+    "passed": true,
+    "checkCount": 13
+  }
+}

@@ -26,7 +26,7 @@ if (await exists(nestedAssets)) {
   await access(finalAssets, constants.R_OK);
 }
 
-for (const route of ['teach', 'teach/replay', 'teach/spoilers']) {
+for (const route of ['workbench', 'projects', 'approach', 'guide', 'data', 'teach', 'teach/replay', 'teach/spoilers']) {
   const source = path.join(outputRoot, `${route}.html`);
   const destinationDirectory = path.join(outputRoot, route);
   const destination = path.join(destinationDirectory, 'index.html');

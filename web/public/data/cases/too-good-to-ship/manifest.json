@@ -1,0 +1,144 @@
+{
+  "case_slug": "too-good-to-ship",
+  "title": "Too Good to Ship",
+  "revision": "2026.09.01.casepack.1",
+  "catalog_snapshot": "2026-01-15",
+  "extract_boundary": "A deterministic 12,000-account cohort retaining every snapshot, all 213 feature columns, and related event clocks.",
+  "file_count": 12,
+  "total_rows": 630425,
+  "total_bytes": 27431829,
+  "files": [
+    {
+      "table": "platform.account_feature_snapshot",
+      "file": "account_feature_snapshot.parquet",
+      "public_path": "/data/cases/too-good-to-ship/account_feature_snapshot.parquet",
+      "source_table": "platform.account_feature_snapshot",
+      "selection": "complete snapshots for a deterministic 12,000-account cohort; all 213 columns retained",
+      "rows": 33156,
+      "columns": 213,
+      "bytes": 15082436,
+      "sha256": "61371d0843e1d8ea07c4119e116b8a7afc6ff28d71fb1af3af6cbde01a2a703d"
+    },
+    {
+      "table": "platform.model_registry",
+      "file": "model_registry.parquet",
+      "public_path": "/data/cases/too-good-to-ship/model_registry.parquet",
+      "source_table": "platform.model_registry",
+      "selection": "complete registry",
+      "rows": 18,
+      "columns": 8,
+      "bytes": 1974,
+      "sha256": "ef3d693e5f76d8c85d48edca869122f7c9729d48ea94ea7862319ca57372927e"
+    },
+    {
+      "table": "platform.model_version",
+      "file": "model_version.parquet",
+      "public_path": "/data/cases/too-good-to-ship/model_version.parquet",
+      "source_table": "platform.model_version",
+      "selection": "complete version history",
+      "rows": 76,
+      "columns": 11,
+      "bytes": 4328,
+      "sha256": "43fdfb170f8a432fe90b0c4014435a007bff2acbed36fe3b324755c4696a375e"
+    },
+    {
+      "table": "platform.pipeline",
+      "file": "pipeline.parquet",
+      "public_path": "/data/cases/too-good-to-ship/pipeline.parquet",
+      "source_table": "platform.pipeline",
+      "selection": "complete pipeline registry",
+      "rows": 72,
+      "columns": 9,
+      "bytes": 2555,
+      "sha256": "7b3649ad83bb05b1fef3558c599f8a16ce654146f0d428af8de17518d3b4e038"
+    },
+    {
+      "table": "platform.pipeline_run",
+      "file": "pipeline_run.parquet",
+      "public_path": "/data/cases/too-good-to-ship/pipeline_run.parquet",
+      "source_table": "platform.pipeline_run",
+      "selection": "pipeline runs contemporaneous with the candidate feature history",
+      "rows": 61301,
+      "columns": 11,
+      "bytes": 1622716,
+      "sha256": "7573b19cd08813e52443ad6dbc51f6a9b8dff154ab94cdf83f7c33cc25b1b4be"
+    },
+    {
+      "table": "platform.data_quality_result",
+      "file": "data_quality_result.parquet",
+      "public_path": "/data/cases/too-good-to-ship/data_quality_result.parquet",
+      "source_table": "platform.data_quality_result",
+      "selection": "quality checks attached to included pipeline runs",
+      "rows": 173210,
+      "columns": 11,
+      "bytes": 3958647,
+      "sha256": "1667655532f2957b9f9f18e6b40376df04056553fe717672ec6ce3b358c75ffb"
+    },
+    {
+      "table": "crm.account",
+      "file": "account.parquet",
+      "public_path": "/data/cases/too-good-to-ship/account.parquet",
+      "source_table": "crm.account",
+      "selection": "account records for the feature cohort",
+      "rows": 12000,
+      "columns": 10,
+      "bytes": 114315,
+      "sha256": "c099dd8e7cc8c3f4fdb88048265b8100db4e6acb5e6622ac289476dbd49698c6"
+    },
+    {
+      "table": "crm.account_status_event",
+      "file": "account_status_event.parquet",
+      "public_path": "/data/cases/too-good-to-ship/account_status_event.parquet",
+      "source_table": "crm.account_status_event",
+      "selection": "status-event histories for the feature cohort",
+      "rows": 14175,
+      "columns": 6,
+      "bytes": 69204,
+      "sha256": "d6b56caf8f1d34c626ca10da4129a83277f4e69de4bcb1ae875c059e18c1e884"
+    },
+    {
+      "table": "billing.subscription",
+      "file": "subscription.parquet",
+      "public_path": "/data/cases/too-good-to-ship/subscription.parquet",
+      "source_table": "billing.subscription",
+      "selection": "subscriptions belonging to the feature cohort",
+      "rows": 12084,
+      "columns": 10,
+      "bytes": 342874,
+      "sha256": "f8cad1e286017583cb30ef8495b2529c6cf104d5d36afcc3c2dc5647f5f2b9af"
+    },
+    {
+      "table": "billing.subscription_event",
+      "file": "subscription_event.parquet",
+      "public_path": "/data/cases/too-good-to-ship/subscription_event.parquet",
+      "source_table": "billing.subscription_event",
+      "selection": "complete event histories for included subscriptions",
+      "rows": 60420,
+      "columns": 8,
+      "bytes": 1077366,
+      "sha256": "03e59b1f43b9722dfd26c635e327fcc4c1216e0d135b9a69b2e0f292d17942ad"
+    },
+    {
+      "table": "billing.payment_attempt",
+      "file": "payment_attempt.parquet",
+      "public_path": "/data/cases/too-good-to-ship/payment_attempt.parquet",
+      "source_table": "billing.payment_attempt",
+      "selection": "payment attempts for the feature cohort, with occurrence and availability clocks",
+      "rows": 230757,
+      "columns": 12,
+      "bytes": 5114544,
+      "sha256": "bbf6fde92bc1cc8622445c3ca48fa5e3859ea8d190fb1e373cc3a49fd7abe5da"
+    },
+    {
+      "table": "case_input.beacon_submitted_split",
+      "file": "beacon_submitted_split.parquet",
+      "public_path": "/data/cases/too-good-to-ship/beacon_submitted_split.parquet",
+      "source_table": null,
+      "selection": "reproducible row-level 80/20 split supplied with the contractor submission",
+      "rows": 33156,
+      "columns": 2,
+      "bytes": 40870,
+      "sha256": "1543a06f489e69c53576ae4de077f58129c00f29e8b587f36a39bc1c5bfed3f5"
+    }
+  ]
+}

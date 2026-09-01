@@ -1,7 +1,8 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import type { CaseDataFile } from '@/lib/case-definition';
 import { sitePath } from '@/lib/site-path';
 
 export type PythonStatus = 'idle' | 'booting' | 'loading_data' | 'ready' | 'running' | 'error';
@@ -26,25 +27,12 @@ type PendingRun = {
   timeout: ReturnType<typeof setTimeout>;
 };
 
-const mondayFiles: PythonDataFile[] = [
-  {
-    path: '/data/support/csat_response.parquet',
-    url: sitePath('/data/support/csat_response.parquet'),
-    label: 'support.csat_response',
-  },
-  {
-    path: '/data/support/ticket.parquet',
-    url: sitePath('/data/support/ticket.parquet'),
-    label: 'support.ticket',
-  },
-  {
-    path: '/data/crm/account.parquet',
-    url: sitePath('/data/crm/account.parquet'),
-    label: 'crm.account',
-  },
-];
-
-export function usePython() {
+export function usePython(dataFiles: CaseDataFile[], packages: string[]) {
+  const files = useMemo<PythonDataFile[]>(() => dataFiles.map((file) => ({
+    path: file.pythonPath,
+    url: sitePath(file.url),
+    label: file.table,
+  })), [dataFiles]);
   const workerRef = useRef<Worker | null>(null);
   const pendingRef = useRef(new Map<string, PendingRun>());
   const readyRef = useRef<Promise<void> | null>(null);
@@ -130,11 +118,11 @@ export function usePython() {
         reject(new Error(message));
       };
 
-      worker.postMessage({ type: 'init', id, files: mondayFiles });
+      worker.postMessage({ type: 'init', id, files, packages });
     });
 
     return readyRef.current;
-  }, []);
+  }, [files, packages]);
 
   const run = useCallback(async (code: string) => {
     await start();
@@ -151,9 +139,9 @@ export function usePython() {
         reject(new Error('Python exceeded the two-minute execution limit and the runtime was reset.'));
       }, 120_000);
       pendingRef.current.set(id, { resolve, reject, timeout });
-      worker.postMessage({ type: 'run', id, code, files: mondayFiles });
+      worker.postMessage({ type: 'run', id, code, files, packages });
     });
-  }, [start, stop]);
+  }, [files, packages, start, stop]);
 
   useEffect(() => () => stop(), [stop]);
 

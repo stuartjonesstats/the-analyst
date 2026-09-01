@@ -1,5 +1,6 @@
 import type { QueryRow } from '@/hooks/use-duckdb';
 import type { PythonRunResult } from '@/hooks/use-python';
+import type { CaseDefinition } from '@/lib/case-definition';
 
 export const ANALYST_CASE_FORMAT = 'theanalyst.case';
 export const ANALYST_CASE_VERSION = '1.0.0';
@@ -66,7 +67,7 @@ export type AnalystCaseFile = {
   };
 };
 
-type BuildCaseInput = {
+export type BuildCaseInput = {
   sql: string;
   python: string;
   notes: string;
@@ -85,7 +86,7 @@ async function sha256(content: string) {
   return Array.from(new Uint8Array(digest), (byte) => byte.toString(16).padStart(2, '0')).join('');
 }
 
-export async function buildMondayCase(input: BuildCaseInput): Promise<AnalystCaseFile> {
+export async function buildAnalystCase(definition: CaseDefinition, input: BuildCaseInput): Promise<AnalystCaseFile> {
   const exportedAt = new Date().toISOString();
   const files = [
     { path: 'workspace/query_01.sql', language: 'sql' as const, content: input.sql },
@@ -104,11 +105,11 @@ export async function buildMondayCase(input: BuildCaseInput): Promise<AnalystCas
       'Open this file from the Instructor Planning Desk submission viewer.',
     ].join('\n'),
     scenario: {
-      id: 'CC-241202',
-      slug: 'the-monday-scorecard',
-      title: 'The Monday Scorecard',
-      revision: '2026.09.01',
-      catalogSnapshot: '2026-01-15',
+      id: definition.id,
+      slug: definition.slug,
+      title: definition.title,
+      revision: definition.revision,
+      catalogSnapshot: definition.catalogSnapshot,
     },
     learnerWorkspace: {
       files: await Promise.all(files.map(async (file) => ({ ...file, sha256: await sha256(file.content) }))),
@@ -130,12 +131,7 @@ export async function buildMondayCase(input: BuildCaseInput): Promise<AnalystCas
       } : null,
     },
     handoff: {
-      requiredArtifacts: [
-        'Reproducible analysis',
-        'Metric definition note',
-        'Updated scorecard',
-        'Executive response',
-      ].map((label) => ({ label, present: false })),
+      requiredArtifacts: definition.requiredArtifacts.map((label) => ({ label, present: false })),
     },
     runtime: {
       sql: 'DuckDB-Wasm',
@@ -164,6 +160,11 @@ export async function buildMondayCase(input: BuildCaseInput): Promise<AnalystCas
       ],
     },
   };
+}
+
+export async function buildMondayCase(input: BuildCaseInput): Promise<AnalystCaseFile> {
+  const { mondayScorecard } = await import('@/lib/case-definitions/monday-scorecard');
+  return buildAnalystCase(mondayScorecard, input);
 }
 
 export function downloadAnalystCase(caseFile: AnalystCaseFile) {

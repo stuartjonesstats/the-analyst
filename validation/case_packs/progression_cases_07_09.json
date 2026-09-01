@@ -1,0 +1,355 @@
+{
+  "suite": "progression_cases_07_09",
+  "revision": "2026.09.01.casepack.1",
+  "checks": 28,
+  "passed": 28,
+  "failed": 0,
+  "status": "PASS",
+  "results": [
+    {
+      "case": "the-orion-renewal",
+      "check_id": "manifest_integrity",
+      "passed": true,
+      "value": {
+        "files": 17,
+        "rows": 2027178,
+        "bytes": 39782942
+      },
+      "requirement": "every manifest row, byte count, schema width, and SHA-256 matches the generated file"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "github_file_limit",
+      "passed": true,
+      "value": 8756468,
+      "requirement": "every browser Parquet is below GitHub's 100 MB per-file limit"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "manifest_integrity",
+      "passed": true,
+      "value": {
+        "files": 7,
+        "rows": 373804,
+        "bytes": 5322556
+      },
+      "requirement": "every manifest row, byte count, schema width, and SHA-256 matches the generated file"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "github_file_limit",
+      "passed": true,
+      "value": 2402497,
+      "requirement": "every browser Parquet is below GitHub's 100 MB per-file limit"
+    },
+    {
+      "case": "too-good-to-ship",
+      "check_id": "manifest_integrity",
+      "passed": true,
+      "value": {
+        "files": 12,
+        "rows": 630425,
+        "bytes": 27431829
+      },
+      "requirement": "every manifest row, byte count, schema width, and SHA-256 matches the generated file"
+    },
+    {
+      "case": "too-good-to-ship",
+      "check_id": "github_file_limit",
+      "passed": true,
+      "value": 15082436,
+      "requirement": "every browser Parquet is below GitHub's 100 MB per-file limit"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "global_regime_transition",
+      "passed": true,
+      "value": [
+        "2025-04-30",
+        "2025-05-01",
+        "36",
+        "36"
+      ],
+      "requirement": "legacy ends 2025-04-30, ORION-2 starts 2025-05-01, and all 36 branches appear in both regimes"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "no_untreated_region",
+      "passed": true,
+      "value": [
+        [
+          "REG001",
+          "2025-05-01",
+          "2025-04-30"
+        ],
+        [
+          "REG002",
+          "2025-05-01",
+          "2025-04-30"
+        ],
+        [
+          "REG003",
+          "2025-05-01",
+          "2025-04-30"
+        ],
+        [
+          "REG004",
+          "2025-05-01",
+          "2025-04-30"
+        ],
+        [
+          "REG005",
+          "2025-05-01",
+          "2025-04-30"
+        ],
+        [
+          "REG006",
+          "2025-05-01",
+          "2025-04-30"
+        ]
+      ],
+      "requirement": "all six regions transition on the same date"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "reschedule_multiplicity",
+      "passed": true,
+      "value": {
+        "multi_route_work_orders": 63708,
+        "route_assignments": 177439
+      },
+      "requirement": "substantial work-order rescheduling survives extraction"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "relational_closure",
+      "passed": true,
+      "value": {
+        "stop_to_route": 0,
+        "stop_to_work_order": 0,
+        "status_to_work_order": 0,
+        "part_to_work_order": 0,
+        "visit_to_work_order": 0
+      },
+      "requirement": "every extracted operational child resolves to its included parent"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "fanout_trap_retained",
+      "passed": true,
+      "value": {
+        "naive_join_rows": 2777418,
+        "distinct_work_orders": 88263,
+        "multiplier": 31.47
+      },
+      "requirement": "a naive stop/status/part join materially multiplies the work-order grain"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "vendor_denominator_unavailable",
+      "passed": true,
+      "value": [
+        "route_id",
+        "route_date",
+        "vehicle_id",
+        "technician_employee_id",
+        "branch_id",
+        "planned_stop_count",
+        "planned_distance_km",
+        "actual_distance_km",
+        "optimizer_version",
+        "route_state_code"
+      ],
+      "requirement": "the route extract does not contain a clean planned-route-hours denominator"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "traffic_revisions_retained",
+      "passed": true,
+      "value": 13974,
+      "requirement": "provider revisions remain available for an explicit as-of policy"
+    },
+    {
+      "case": "the-orion-renewal",
+      "check_id": "workforce_coverage",
+      "passed": true,
+      "value": {
+        "route_technicians": 320,
+        "shift_technicians": 320
+      },
+      "requirement": "all routed technicians have scheduled-capacity history"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "safe_queue_grain",
+      "passed": true,
+      "value": [
+        818,
+        818,
+        "2024-11-17 19:31:48",
+        "2024-12-03 07:59:26",
+        0
+      ],
+      "requirement": "the scoring queue is 818 unique conversations with non-empty opening text available by the snapshot"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "safe_queue_projection",
+      "passed": true,
+      "value": [
+        "channel_code",
+        "contains_synthetic_pii_flag",
+        "conversation_id",
+        "decision_at",
+        "eligible_customer_message_count",
+        "first_customer_at",
+        "language_code",
+        "opening_customer_text",
+        "redaction_review_flag",
+        "started_at",
+        "subject",
+        "urgent_review_flag"
+      ],
+      "requirement": "the learner scoring queue excludes identifiers, labels, outcomes, and later-message metadata"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "opening_text_provenance",
+      "passed": true,
+      "value": 818,
+      "requirement": "each opening text traces to an eligible customer message and matching ticket subject"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "cohort_separation",
+      "passed": true,
+      "value": [
+        "2024-10-31 23:37:45",
+        "2024-11-01 00:00:45"
+      ],
+      "requirement": "historical conversation starts precede the scoring cohort"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "relational_closure",
+      "passed": true,
+      "value": {
+        "message_to_conversation": 0,
+        "conversation_to_ticket": 0,
+        "status_to_ticket": 0
+      },
+      "requirement": "historical message, conversation, ticket, and status relationships are closed"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "dual_write_groups_retained",
+      "passed": true,
+      "value": {
+        "duplicate_interactions": 136,
+        "tickets": 272
+      },
+      "requirement": "distinct source tickets still share business-interaction fingerprints"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "text_and_handling_mechanisms",
+      "passed": true,
+      "value": {
+        "templates": 5,
+        "non_customer": 95489,
+        "review_required": 2396,
+        "pii_flagged": 2951,
+        "pre_start_inconsistencies": 3798
+      },
+      "requirement": "repetitive text, post-route senders, handling flags, and timestamp inconsistencies all survive"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "weak_clean_text_signal",
+      "passed": true,
+      "value": 0.207624,
+      "requirement": "even an in-sample majority lookup by the five clean templates remains below 25% accuracy"
+    },
+    {
+      "case": "the-queue-nobody-owns",
+      "check_id": "mandatory_review_slices",
+      "passed": true,
+      "value": {
+        "redaction_review": 12,
+        "pii_flagged": 11,
+        "urgent": 25,
+        "non_english_or_unknown": 124
+      },
+      "requirement": "the unlabeled queue contains every policy-relevant mandatory-review slice"
+    },
+    {
+      "case": "too-good-to-ship",
+      "check_id": "wide_snapshot_and_future_tail",
+      "passed": true,
+      "value": {
+        "columns": 213,
+        "final_columns": [
+          "future_90d_cancelled_flag",
+          "future_90d_payment_failure_count",
+          "eventual_lifetime_value_cents"
+        ]
+      },
+      "requirement": "the 213-column snapshot retains the three realized future outcomes in their documented tail positions"
+    },
+    {
+      "case": "too-good-to-ship",
+      "check_id": "entity_and_availability_structure",
+      "passed": true,
+      "value": {
+        "rows": 33156,
+        "accounts": 12000,
+        "repeat_snapshots": 21156,
+        "positive_rate": 0.080981,
+        "max_watermark_lag_hours": 95
+      },
+      "requirement": "the compact cohort retains repeated entities, both target classes, and availability lag"
+    },
+    {
+      "case": "too-good-to-ship",
+      "check_id": "submitted_split_failures",
+      "passed": true,
+      "value": {
+        "train_rows": 26600,
+        "validation_rows": 6556,
+        "accounts_on_both_sides": 4450,
+        "train_window": [
+          "2024-01-01 00:08:38",
+          "2025-12-30 21:55:49"
+        ],
+        "validation_window": [
+          "2024-01-01 03:19:50",
+          "2025-12-30 21:33:18"
+        ]
+      },
+      "requirement": "the supplied row split has substantial account overlap and overlapping calendar windows"
+    },
+    {
+      "case": "too-good-to-ship",
+      "check_id": "submitted_result_reproduces",
+      "passed": true,
+      "value": {
+        "numeric_wildcard_columns": 207,
+        "direct_target_selected": true,
+        "validation_auc": 1.0
+      },
+      "requirement": "the exact wildcard and row-split mechanism reproducibly yields an implausibly perfect result"
+    },
+    {
+      "case": "too-good-to-ship",
+      "check_id": "relational_closure",
+      "passed": true,
+      "value": {
+        "status_to_account": 0,
+        "subscription_to_account": 0,
+        "event_to_subscription": 0,
+        "payment_to_account": 0
+      },
+      "requirement": "all related account, subscription, event, and payment records resolve inside the cohort"
+    }
+  ]
+}
