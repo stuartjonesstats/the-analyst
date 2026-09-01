@@ -19,7 +19,7 @@ export default function GuidePage() {
         <header className="public-page-head">
           <p className="public-kicker">FIELD GUIDE / LEARNER WORKFLOW</p>
           <h1>Arrive, investigate, hand off.</h1>
-          <p>No account or local setup is required. Whether the work is self-directed or facilitated, a current desktop browser is recommended; all assignment data and code execution remain on the learner’s device.</p>
+          <p>No account or local setup is required. A current laptop or desktop browser is required to complete an assignment; phones are suitable only for previewing the brief. All assignment data and code execution remain on the learner’s device.</p>
         </header>
         <section className="guide-sequence">
           {steps.map(([index, title, body]) => (

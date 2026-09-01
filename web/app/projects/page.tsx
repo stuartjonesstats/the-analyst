@@ -22,6 +22,10 @@ export default function ProjectsPage() {
           <h1>Nine assignments. One company.</h1>
           <p>Each assignment places the learner in a defined role at Meridian, with its own business moment, decision pressure, source neighborhood, analytical purpose, and handoff. Work them in sequence or assign them by capability in a course, lab, training program, or independent study plan.</p>
         </header>
+        <aside className="device-requirement" role="note">
+          <strong>WORKBENCH REQUIREMENT</strong>
+          <span>Completing an assignment requires a current laptop or desktop browser. Phones may preview briefs, but the SQL, Python, evidence, and submission workspace is not supported on mobile.</span>
+        </aside>
         <section className="project-register" aria-label="Assignment summaries">
           {scenarios.map((scenario) => (
             <article key={scenario.id} className="project-record">

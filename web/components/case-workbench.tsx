@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Editor, { type BeforeMount } from '@monaco-editor/react';
 import Image from 'next/image';
 import {
+  ArrowRight,
   BookOpen,
   CircleCheck,
   Clock3,
@@ -79,21 +80,18 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
   const [isExporting, setIsExporting] = useState(false);
   const [ledgerOpen, setLedgerOpen] = useState(false);
   const [hydrated, setHydrated] = useState(false);
-  const [activeWorkflowStep, setActiveWorkflowStep] = useState<WorkflowStep>('investigate');
-  const inboxRef = useRef<HTMLElement>(null);
-  const investigateRef = useRef<HTMLDivElement>(null);
-  const dataRegisterRef = useRef<HTMLElement>(null);
-  const evidenceRef = useRef<HTMLElement>(null);
-  const handoffRef = useRef<HTMLElement>(null);
+  const [activeWorkflowStep, setActiveWorkflowStep] = useState<WorkflowStep>('inbox');
+  const workflowStageRef = useRef<HTMLDivElement>(null);
   const evidenceCount = evidence.length;
   const workflow = [
-    { id: 'inbox' as const, seq: '01', label: 'Inbox', icon: Inbox, count: null },
-    { id: 'investigate' as const, seq: '02', label: 'Investigate', icon: TerminalSquare, count: null },
-    { id: 'data-register' as const, seq: '03', label: 'Data register', icon: Database, count: null },
-    { id: 'evidence' as const, seq: '04', label: 'Evidence', icon: BookOpen, count: String(evidenceCount) },
-    { id: 'handoff' as const, seq: '05', label: 'Handoff', icon: FileChartColumn, count: null },
+    { id: 'inbox' as const, seq: '01', label: 'Inbox', icon: Inbox, count: null, detail: 'Read the request, operating context, deadline, and decision standard before touching the data.' },
+    { id: 'investigate' as const, seq: '02', label: 'Investigate', icon: TerminalSquare, count: null, detail: 'Work in SQL, Python, scratch notes, and the final-brief draft without leaving the browser.' },
+    { id: 'data-register' as const, seq: '03', label: 'Data register', icon: Database, count: null, detail: 'Inspect the mounted source neighborhood, row counts, trust state, and table-specific cautions.' },
+    { id: 'evidence' as const, seq: '04', label: 'Evidence', icon: BookOpen, count: String(evidenceCount), detail: 'Review and append findings that can be traced to the analysis rather than intuition.' },
+    { id: 'handoff' as const, seq: '05', label: 'Handoff', icon: FileChartColumn, count: null, detail: 'Polish the decision brief, check the required artifacts, and package the complete submission.' },
   ];
   const activeWorkflowIndex = workflow.findIndex(({ id }) => id === activeWorkflowStep);
+  const activeWorkflow = workflow[activeWorkflowIndex];
 
   // Hydrate drafts after mount because browser storage is intentionally local-only.
   /* oxlint-disable react/react-compiler */
@@ -202,21 +200,8 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
 
   function openWorkflowStep(step: WorkflowStep) {
     setActiveWorkflowStep(step);
-
-    if (step === 'inbox' || step === 'investigate') {
-      setLedgerOpen(false);
-      const target = step === 'inbox' ? inboxRef.current : investigateRef.current;
-      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      return;
-    }
-
-    setLedgerOpen(true);
-    const target = step === 'data-register'
-      ? dataRegisterRef.current
-      : step === 'evidence'
-        ? evidenceRef.current
-        : handoffRef.current;
-    window.requestAnimationFrame(() => target?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    setLedgerOpen(false);
+    window.requestAnimationFrame(() => workflowStageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
   }
 
   function addEvidence() {
@@ -332,6 +317,11 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
         ))}
       </nav>
 
+      <aside className="workbench-device-notice" role="note">
+        <strong>DESKTOP WORKSPACE REQUIRED</strong>
+        <span>Phones may preview the assignment brief, but completing SQL, Python, evidence, and submission work requires a laptop or desktop browser.</span>
+      </aside>
+
       <div className="workbench-grid">
         <aside className="work-queue">
           <div className="queue-heading">
@@ -389,7 +379,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             <div className="case-command-id">
               <span className="status-bar" />
               <span>ASSIGNMENT {definition.id}</span>
-              <strong>ACTIVE ANALYSIS</strong>
+              <strong>{activeWorkflow.label.toUpperCase()}</strong>
             </div>
             <div className="case-command-facts">
               <span><b>PRIORITY</b> {definition.priority}</span>
@@ -401,7 +391,16 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             </button>
           </div>
 
-          <article className="briefing-document" ref={inboxRef}>
+          <div className="workflow-stage" ref={workflowStageRef}>
+            <header className="workflow-stage-head">
+              <div>
+                <span>STEP {activeWorkflow.seq} / ASSIGNMENT WORKFLOW</span>
+                <h1>{activeWorkflow.label}</h1>
+              </div>
+              <p>{activeWorkflow.detail}</p>
+            </header>
+
+          {activeWorkflowStep === 'inbox' && <article className="briefing-document">
             <div className="briefing-fields">
               <dl>
                 <div><dt>EMPLOYER</dt><dd>Meridian Living Systems</dd></div>
@@ -421,9 +420,9 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
                 <p>{definition.decisionStandard}</p>
               </div>
             </div>
-          </article>
+          </article>}
 
-          <div className="analysis-workarea" ref={investigateRef}>
+          {activeWorkflowStep === 'investigate' && <div className="analysis-workarea">
             <div className="workarea-tabs" role="tablist" aria-label="Investigation tools">
               <button
                 className={workspaceLanguage === 'sql' ? 'active' : ''}
@@ -615,6 +614,106 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
                 )}
               </div>
             </div>}
+          </div>}
+
+          {activeWorkflowStep === 'data-register' && (
+            <section className="workflow-stage-panel workflow-data-stage" aria-labelledby="data-register-title">
+              <div className="workflow-panel-intro">
+                <span>REGISTERED SOURCES / {String(definition.dataFiles.length).padStart(2, '0')}</span>
+                <h2 id="data-register-title">Know what is mounted before you query it.</h2>
+                <p>These are the tables available to both SQL and Python for this assignment. Trust labels describe the source state—not whether a particular analytical interpretation is correct.</p>
+                <SiteLink path="/data">OPEN FULL DATA DICTIONARY <ArrowRight /></SiteLink>
+              </div>
+              <div className="workflow-source-scroll">
+                <table className="workflow-source-table">
+                  <caption className="sr-only">Assignment source register</caption>
+                  <thead>
+                    <tr className="workflow-source-head">
+                      <th>TABLE</th>
+                      <th>ROWS</th>
+                      <th>STATE</th>
+                      <th>REGISTER NOTE</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {definition.dataFiles.map((source) => (
+                      <tr className="workflow-source-row" key={source.table}>
+                        <th scope="row">{source.table}</th>
+                        <td>{formatRowCount(source.rows)}</td>
+                        <td className={source.trust === 'VERIFIED' ? 'verified' : 'review'}>{source.trust}</td>
+                        <td>{source.note}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          )}
+
+          {activeWorkflowStep === 'evidence' && (
+            <section className="workflow-stage-panel workflow-evidence-stage" aria-labelledby="evidence-register-title">
+              <div className="workflow-panel-intro">
+                <span>EVIDENCE REGISTER / {String(evidenceCount).padStart(2, '0')} ITEMS</span>
+                <h2 id="evidence-register-title">Keep the claims you can trace.</h2>
+                <p>Evidence records should be concise findings with a visible analytical source. They are included in the downloaded submission and remain editable only on this device.</p>
+              </div>
+              <ol className="workflow-evidence-list">
+                {evidence.map((record) => (
+                  <li key={record.id}>
+                    <span>{record.id}</span>
+                    <div>
+                      <p>{record.statement}</p>
+                      <small>{record.source} / {caseTimeFormatter.format(new Date(record.recordedAt))} / {record.state.toUpperCase()}</small>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <button
+                className="workflow-primary-action"
+                type="button"
+                onClick={() => {
+                  setEvidenceComposerOpen(true);
+                  setLedgerOpen(true);
+                }}
+              >
+                <BookOpen /> APPEND EVIDENCE IN ASSIGNMENT RECORD
+              </button>
+            </section>
+          )}
+
+          {activeWorkflowStep === 'handoff' && (
+            <section className="workflow-stage-panel workflow-handoff-stage" aria-labelledby="handoff-title">
+              <div className="workflow-panel-intro">
+                <span>REQUIRED HANDOFF / 0 OF {definition.requiredArtifacts.length} ARTIFACTS</span>
+                <h2 id="handoff-title">Leave a decision another person can act on.</h2>
+                <p>Polish the conclusion here, then package the code, queries, notes, evidence, outputs, and runtime record into one submission file.</p>
+              </div>
+              <div className="workflow-handoff-grid">
+                <div>
+                  <label htmlFor="handoff-final-brief">FINAL BRIEF</label>
+                  <textarea
+                    id="handoff-final-brief"
+                    value={finalBrief}
+                    onChange={(event) => setFinalBrief(event.target.value)}
+                    placeholder={`Recommendation or decision:\n\nEvidence that matters:\n\nUncertainty and limitations:\n\nRisks, owners, and next action:`}
+                    spellCheck="true"
+                  />
+                </div>
+                <div className="workflow-artifact-list">
+                  <span>SUBMISSION CONTENTS</span>
+                  <ul>
+                    {definition.requiredArtifacts.map((artifact) => <li key={artifact}><CircleCheck /> {artifact}</li>)}
+                  </ul>
+                  <p>Presence is recorded automatically; analytical quality remains a human-review judgment.</p>
+                  <button className="download-case" onClick={() => void exportCase()} disabled={isExporting}>
+                    <Download />
+                    <span>{isExporting ? 'PACKAGING SUBMISSION' : 'DOWNLOAD SUBMISSION'}</span>
+                    <small>.ANALYSTCASE</small>
+                  </button>
+                </div>
+              </div>
+            </section>
+          )}
           </div>
 
           <footer className="trace-footer">
@@ -637,7 +736,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             </div>
           </div>
 
-          <section className="ledger-section" ref={dataRegisterRef}>
+          <section className="ledger-section">
             <div className="ledger-section-head"><span>SOURCE REGISTER</span><SiteLink path="/data">OPEN CATALOG</SiteLink></div>
             <div className="source-register">
               <div className="source-register-head"><span>TABLE</span><span>ROWS</span><span>STATE</span></div>
@@ -651,7 +750,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             </div>
           </section>
 
-          <section className="ledger-section evidence-section" ref={evidenceRef}>
+          <section className="ledger-section evidence-section">
             <div className="ledger-section-head"><span>EVIDENCE REGISTER</span><b>{String(evidenceCount).padStart(2, '0')} ITEMS</b></div>
             <ol>
               {evidence.map((record) => (
@@ -679,7 +778,7 @@ export function CaseWorkbench({ definition, onSelectCase }: CaseWorkbenchProps) 
             )}
           </section>
 
-          <section className="ledger-section handoff-section" ref={handoffRef}>
+          <section className="ledger-section handoff-section">
             <div className="ledger-section-head"><span>REQUIRED HANDOFF</span><b>0 / {definition.requiredArtifacts.length}</b></div>
             <ul>
               {definition.requiredArtifacts.map((artifact) => <li key={artifact}><span /> {artifact}</li>)}
