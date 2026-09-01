@@ -76,16 +76,22 @@ const initialEvidence: EvidenceRecord[] = [
     statement: 'Two survey scales coexist in the extract.',
     source: 'QUERY_01',
     state: 'verified',
-    recordedAt: '2026-12-02T09:28:00.000Z',
+    recordedAt: '2026-12-02T14:28:00.000Z',
   },
   {
     id: 'E-002',
     statement: 'Board figure may use unnormalized legacy scores.',
     source: 'WORKING NOTE',
     state: 'review',
-    recordedAt: '2026-12-02T09:31:00.000Z',
+    recordedAt: '2026-12-02T14:31:00.000Z',
   },
 ];
+
+const caseTimeFormatter = new Intl.DateTimeFormat('en-US', {
+  timeZone: 'America/New_York',
+  hour: '2-digit',
+  minute: '2-digit',
+});
 
 const workflow = [
   { seq: '01', label: 'Inbox', icon: Inbox, count: '3', active: false },
@@ -610,7 +616,7 @@ export default function Home() {
                 <li key={record.id}>
                   <span className="evidence-id">{record.id}</span>
                   <p>{record.statement}</p>
-                  <small>{record.source} / {new Date(record.recordedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} / {record.state.toUpperCase()}</small>
+                  <small>{record.source} / {caseTimeFormatter.format(new Date(record.recordedAt))} / {record.state.toUpperCase()}</small>
                 </li>
               ))}
             </ol>
