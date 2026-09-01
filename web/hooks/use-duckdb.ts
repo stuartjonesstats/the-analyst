@@ -4,7 +4,6 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import type {
   AsyncDuckDB,
   AsyncDuckDBConnection,
-  DuckDBBundles,
 } from '@duckdb/duckdb-wasm';
 
 export type QueryValue = string | number | boolean | null;
@@ -44,15 +43,13 @@ export function useDuckDB() {
       try {
         const duckdb = await import('@duckdb/duckdb-wasm');
         const origin = window.location.origin;
-        const bundles: DuckDBBundles = {
-          mvp: {
-            mainModule: `${origin}/vendor/duckdb/duckdb-mvp.wasm`,
-            mainWorker: `${origin}/vendor/duckdb/duckdb-browser-mvp.worker.js`,
-          },
-        };
-        const bundle = await duckdb.selectBundle(bundles);
+        const bundle = await duckdb.selectBundle(duckdb.getJsDelivrBundles());
         if (!bundle.mainWorker) throw new Error('No compatible DuckDB worker bundle was found.');
-        const worker = new Worker(bundle.mainWorker);
+        const workerUrl = URL.createObjectURL(
+          new Blob([`importScripts("${bundle.mainWorker}");`], { type: 'text/javascript' }),
+        );
+        const worker = new Worker(workerUrl);
+        URL.revokeObjectURL(workerUrl);
         const logger = new duckdb.ConsoleLogger(duckdb.LogLevel.WARNING);
         const db = new duckdb.AsyncDuckDB(logger, worker);
         await db.instantiate(bundle.mainModule, bundle.pthreadWorker);
