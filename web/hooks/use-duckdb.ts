@@ -34,12 +34,12 @@ type EngineStatus = 'booting' | 'ready' | 'running' | 'error';
 function serializable(value: unknown, typeName = ''): QueryValue {
   if (value == null) return null;
   if (/Timestamp/i.test(typeName) && (typeof value === 'number' || typeof value === 'bigint')) {
-    const raw = Number(value);
-    const milliseconds = Math.abs(raw) > 1e17 ? raw / 1_000_000 : Math.abs(raw) > 1e14 ? raw / 1_000 : raw;
-    return new Date(milliseconds).toISOString();
+    // Arrow JS exposes temporal vector values as epoch milliseconds even when
+    // the Parquet logical type records microseconds or nanoseconds.
+    return new Date(Number(value)).toISOString();
   }
   if (/Date32/i.test(typeName) && typeof value === 'number') {
-    return new Date(value * 86_400_000).toISOString().slice(0, 10);
+    return new Date(value).toISOString().slice(0, 10);
   }
   if (/Date64/i.test(typeName) && (typeof value === 'number' || typeof value === 'bigint')) {
     return new Date(Number(value)).toISOString().slice(0, 10);
