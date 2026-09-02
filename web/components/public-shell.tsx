@@ -4,13 +4,13 @@ import { SiteLink } from '@/components/site-link';
 
 type PublicShellProps = {
   children: ReactNode;
-  currentPath?: '/' | '/projects' | '/approach' | '/guide' | '/data';
+  currentPath?: '/' | '/projects' | '/self-guided' | '/approach' | '/guide' | '/data';
 };
 
 const primaryNavigation = [
   { path: '/projects', label: 'ASSIGNMENTS' },
+  { path: '/self-guided', label: 'SELF-GUIDED' },
   { path: '/approach', label: 'APPROACH' },
-  { path: '/guide', label: 'FIELD GUIDE' },
   { path: '/data', label: 'DATA REGISTER' },
 ] as const;
 
@@ -49,8 +49,9 @@ export function PublicShell({ children, currentPath }: PublicShellProps) {
         </div>
         <nav aria-label="Footer navigation">
           <SiteLink path="/projects">Assignments</SiteLink>
+          <SiteLink path="/self-guided">Self-guided manual</SiteLink>
           <SiteLink path="/data">Data dictionary</SiteLink>
-          <SiteLink path="/guide">How to use</SiteLink>
+          <SiteLink path="/guide">Workbench guide</SiteLink>
           <a href="https://github.com/stuartjonesstats/the-analyst" aria-label="Open source code on GitHub (external site)">
             Open source <span aria-hidden="true">↗</span>
           </a>

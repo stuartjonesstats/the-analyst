@@ -6,7 +6,7 @@ import { SiteLink } from '@/components/site-link';
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
-  title: 'Learner Field Guide — The Analyst',
+  title: 'Workbench Guide — The Analyst',
   description: 'A practical workflow for investigating Meridian data in SQL and Python, preserving evidence, and exporting an analytical handoff.',
 };
 
@@ -24,7 +24,7 @@ export default function GuidePage() {
     <PublicShell currentPath="/guide">
       <main className="public-main" id="main-content" tabIndex={-1}>
         <header className="public-page-head">
-          <p className="public-kicker">FIELD GUIDE / LEARNER WORKFLOW</p>
+          <p className="public-kicker">WORKBENCH GUIDE / LEARNER WORKFLOW</p>
           <h1>Arrive, investigate, hand off.</h1>
           <p>No account or local setup is required. A current laptop or desktop browser is required to complete an assignment; phones are suitable only for previewing the brief. All assignment data and code execution remain on the learner’s device.</p>
         </header>

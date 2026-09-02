@@ -115,10 +115,11 @@ export default function ApproachPage() {
           </article>
         </section>
         <p className="scaffold-disclosure">
-          These are instructor delivery patterns, not automatic workbench
-          settings. The current public workbench supplies starter code and
-          assignment context; instructors remove, retain, or supplement
-          scaffolds for their cohort.
+          These are selectable workbench settings. Supported mode supplies
+          assignment-specific starters, Guided mode supplies a general
+          investigation frame, and Independent mode opens with a nearly blank
+          worksheet. Each mode keeps a separate local draft so a learner can
+          make a deliberate fresh attempt without overwriting earlier work.
         </p>
         <section
           className="section-lead split"

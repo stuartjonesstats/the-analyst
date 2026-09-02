@@ -35,8 +35,8 @@ export default function HomePage() {
               <SiteLink path="/workbench" className="action-primary">
                 OPEN ASSIGNMENT DESK <ArrowRight />
               </SiteLink>
-              <SiteLink path="/guide" className="action-secondary">
-                READ THE FIELD GUIDE
+              <SiteLink path="/self-guided" className="action-secondary">
+                SELF-GUIDED MANUAL
               </SiteLink>
             </div>
             <p className="hero-device-note">WORKSPACE NOTE / Complete assignments in a current laptop or desktop browser.</p>
@@ -157,6 +157,17 @@ export default function HomePage() {
               </SiteLink>
             ))}
           </div>
+        </section>
+
+        <section className="section-lead split home-self-guided" aria-labelledby="home-self-guided-title">
+          <div>
+            <span className="public-kicker">FOR INDEPENDENT LEARNERS</span>
+            <h2 id="home-self-guided-title">Run a serious course of study—without pretending you have an instructor.</h2>
+            <p>The self-guided manual supplies readiness gates, honest workload routes, a repeatable assignment cadence, stuck protocols, and a spoiler-controlled way to review your own work.</p>
+          </div>
+          <SiteLink path="/self-guided">
+            OPEN SELF-GUIDED MANUAL <ArrowRight />
+          </SiteLink>
         </section>
 
         <section className="section-lead split" aria-labelledby="home-instructor-note">
