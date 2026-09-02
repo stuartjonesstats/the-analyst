@@ -1,45 +1,73 @@
 import type { Metadata } from 'next';
 
 import { SiteLink } from '@/components/site-link';
+import {
+  classroomPreflight,
+  courseRoutes,
+  rubricDimensions,
+  scoreBands,
+  teachingBoundaries,
+} from '@/lib/instructor-planning';
 import { complexityDimensions, scenarios } from '@/lib/scenarios';
 
 export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: 'Instructor Planning Desk — The Analyst',
-  description: 'Sequence, prerequisites, workload, scaffolding, and technical requirements for The Analyst assignment curriculum.',
+  description:
+    'Sequence, prerequisites, workload, scaffolding, and technical requirements for The Analyst assignment curriculum.',
   robots: { index: false, follow: false },
   openGraph: { images: [] },
   twitter: { images: [] },
 };
 
 const bandDescriptions = [
-  ['Brief', 'One focused decision with a supplied neighborhood; approximately 3–5 prepared-learner hours.'],
-  ['Investigation', 'Several assets and competing explanations; approximately 6–12 hours.'],
-  ['Decision', 'Multi-stage evidence and several professional artifacts; approximately 10–18 hours.'],
-  ['Practicum', 'End-to-end build, audit, forecasting, or deployment work; approximately 16–30+ newcomer hours.'],
+  [
+    'Brief',
+    'One focused decision with a supplied neighborhood; approximately 3–5 prepared-learner hours.',
+  ],
+  [
+    'Investigation',
+    'Several assets and competing explanations; approximately 6–12 hours.',
+  ],
+  [
+    'Decision',
+    'Multi-stage evidence and several professional artifacts; approximately 10–18 hours.',
+  ],
+  [
+    'Practicum',
+    'End-to-end build, audit, forecasting, or deployment work; approximately 16–30+ newcomer hours.',
+  ],
 ];
 
 export default function TeachPage() {
   return (
     <main className="teaching-page">
       <header className="teaching-header">
-        <div className="teaching-brand"><strong>THE ANALYST / INSTRUCTOR PLANNING DESK</strong></div>
+        <div className="teaching-brand">
+          <strong>THE ANALYST / INSTRUCTOR PLANNING DESK</strong>
+        </div>
         <SiteLink path="/workbench">RETURN TO LEARNER WORKBENCH</SiteLink>
       </header>
 
       <section className="teaching-intro">
-        <p className="document-kicker">THE ANALYST / NINE-ASSIGNMENT SEQUENCE</p>
+        <p className="document-kicker">
+          THE ANALYST / NINE-ASSIGNMENT SEQUENCE
+        </p>
         <h1>Plan a progression through the work.</h1>
         <p>
-          This desk helps instructors sequence nine workplace assignments across SQL, Python, data judgment, and professional handoff.
-          It contains no sample conclusions. Prepared-hour estimates assume a learner can work independently;
-          newcomer ranges assume active instructor support.
+          This desk helps instructors sequence nine workplace assignments across
+          SQL, Python, data judgment, and professional handoff. It contains no
+          sample conclusions. Prepared-hour estimates assume a learner can work
+          independently; newcomer ranges assume active instructor support.
         </p>
       </section>
 
       <section className="band-register" aria-labelledby="band-heading">
-        <div className="teaching-section-title"><span id="band-heading">WORKLOAD BANDS</span><b>NOT GRADES</b></div>
+        <div className="teaching-section-title">
+          <span id="band-heading">WORKLOAD BANDS</span>
+          <b>NOT GRADES</b>
+        </div>
         <div className="band-grid">
           {bandDescriptions.map(([band, description], index) => (
             <article key={band}>
@@ -51,10 +79,55 @@ export default function TeachPage() {
         </div>
       </section>
 
-      <section className="curriculum-register" aria-labelledby="sequence-heading">
+      <section
+        className="course-route-register"
+        aria-labelledby="route-heading"
+      >
+        <div className="teaching-section-title">
+          <span id="route-heading">COURSE ROUTES</span>
+          <b>HONEST LOAD, NOT COVERAGE THEATER</b>
+        </div>
+        <div className="course-route-grid">
+          {courseRoutes.map((route, index) => (
+            <article key={route.title}>
+              <header>
+                <span>ROUTE {String(index + 1).padStart(2, '0')}</span>
+                <strong>{route.title}</strong>
+              </header>
+              <p>{route.audience}</p>
+              <dl>
+                <div>
+                  <dt>ASSIGNMENTS</dt>
+                  <dd>{route.assignments}</dd>
+                </div>
+                <div>
+                  <dt>WORKLOAD</dt>
+                  <dd>{route.load}</dd>
+                </div>
+              </dl>
+              <ol>
+                {route.milestones.map((milestone) => (
+                  <li key={milestone}>{milestone}</li>
+                ))}
+              </ol>
+            </article>
+          ))}
+        </div>
+        <p className="route-caveat">
+          Hours are investigation time, not a promise of mastery. Add explicit
+          instruction, debugging, feedback, and revision time. A 16-week course
+          should normally choose an advanced elective; a 24-week course can
+          sustain two. All nine is an intensive studio.
+        </p>
+      </section>
+
+      <section
+        className="curriculum-register"
+        aria-labelledby="sequence-heading"
+      >
         <div className="teaching-section-title">
           <span id="sequence-heading">RECOMMENDED SEQUENCE</span>
-          <b>24-WEEK PROGRAM / 16-WEEK SEMESTER</b>
+          <b>REFERENCE ORDER / CHOOSE A ROUTE ABOVE</b>
         </div>
 
         <div className="curriculum-table-wrap">
@@ -75,13 +148,32 @@ export default function TeachPage() {
               {scenarios.map((scenario) => (
                 <tr key={scenario.id}>
                   <td>{String(scenario.sequence).padStart(2, '0')}</td>
-                  <td><strong>{scenario.title}</strong><small>{scenario.role}</small></td>
+                  <td>
+                    <strong>{scenario.title}</strong>
+                    <small>{scenario.role}</small>
+                  </td>
                   <td>{scenario.band}</td>
                   <td>{scenario.preparedHours}h</td>
                   <td>{scenario.newcomerHours}h</td>
-                  <td><span className="mini-meter"><i style={{ width: `${scenario.complexity.sql * 20}%` }} /></span>{scenario.complexity.sql}/5</td>
-                  <td><span className="mini-meter python"><i style={{ width: `${scenario.complexity.python * 20}%` }} /></span>{scenario.complexity.python}/5</td>
-                  <td className={`state-${scenario.status}`}>{scenario.status.replaceAll('_', ' ')}</td>
+                  <td>
+                    <span className="mini-meter">
+                      <i
+                        style={{ width: `${scenario.complexity.sql * 20}%` }}
+                      />
+                    </span>
+                    {scenario.complexity.sql}/5
+                  </td>
+                  <td>
+                    <span className="mini-meter python">
+                      <i
+                        style={{ width: `${scenario.complexity.python * 20}%` }}
+                      />
+                    </span>
+                    {scenario.complexity.python}/5
+                  </td>
+                  <td className={`state-${scenario.status}`}>
+                    {scenario.status.replaceAll('_', ' ')}
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -89,20 +181,40 @@ export default function TeachPage() {
         </div>
       </section>
 
-      <section className="case-planning-grid" aria-label="Assignment planning details">
+      <section
+        className="case-planning-grid"
+        aria-label="Assignment planning details"
+      >
         {scenarios.map((scenario) => (
           <article className="planning-card" key={scenario.id}>
             <header>
-              <span>{String(scenario.sequence).padStart(2, '0')} / {scenario.id}</span>
+              <span>
+                {String(scenario.sequence).padStart(2, '0')} / {scenario.id}
+              </span>
               <b>{scenario.band}</b>
             </header>
             <h2>{scenario.title}</h2>
             <p className="planning-request">{scenario.request}</p>
             <dl>
-              <div><dt>SQL CORE</dt><dd>{scenario.sqlCore}</dd></div>
-              <div><dt>PYTHON CORE</dt><dd>{scenario.pythonCore}</dd></div>
-              <div><dt>PREREQUISITES</dt><dd>{scenario.prerequisites.join(' · ')}</dd></div>
-              <div><dt>HANDOFF</dt><dd>{scenario.artifactCount} professional artifacts · {scenario.packageProfile} runtime</dd></div>
+              <div>
+                <dt>SQL CORE</dt>
+                <dd>{scenario.sqlCore}</dd>
+              </div>
+              <div>
+                <dt>PYTHON CORE</dt>
+                <dd>{scenario.pythonCore}</dd>
+              </div>
+              <div>
+                <dt>PREREQUISITES</dt>
+                <dd>{scenario.prerequisites.join(' · ')}</dd>
+              </div>
+              <div>
+                <dt>HANDOFF</dt>
+                <dd>
+                  {scenario.artifactCount} professional artifacts ·{' '}
+                  {scenario.packageProfile} runtime
+                </dd>
+              </div>
             </dl>
             <div className="complexity-profile">
               {complexityDimensions.map(({ key, label }) => (
@@ -119,19 +231,123 @@ export default function TeachPage() {
         ))}
       </section>
 
+      <section
+        className="classroom-operations"
+        aria-labelledby="preflight-heading"
+      >
+        <div className="teaching-section-title">
+          <span id="preflight-heading">CLASSROOM PREFLIGHT</span>
+          <b>RUN BEFORE WEEK ONE</b>
+        </div>
+        <div className="preflight-grid">
+          {classroomPreflight.map(([label, guidance]) => (
+            <article key={label}>
+              <span>{label}</span>
+              <p>{guidance}</p>
+            </article>
+          ))}
+        </div>
+        <div className="boundary-card">
+          <h2>Operating and assessment boundaries</h2>
+          <ul>
+            {teachingBoundaries.map((boundary) => (
+              <li key={boundary}>{boundary}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section className="rubric-register" aria-labelledby="rubric-heading">
+        <div className="teaching-section-title">
+          <span id="rubric-heading">100-POINT JUDGMENT RUBRIC</span>
+          <b>HUMAN REVIEW</b>
+        </div>
+        <div className="rubric-intro">
+          <div>
+            <p className="document-kicker">
+              ONE RUBRIC / MULTIPLE DEFENSIBLE OUTCOMES
+            </p>
+            <h2>
+              Score the evidence and decision, not resemblance to an answer key.
+            </h2>
+            <p>
+              For each dimension, select level 0–4. Points equal the dimension
+              weight multiplied by the level and divided by four. When evidence
+              falls between levels, use the lower level and state what was
+              missing. A qualified conclusion or responsible refusal can earn
+              full credit.
+            </p>
+          </div>
+          <aside>
+            <strong>Every review returns</strong>
+            <span>Strongest demonstrated practice</span>
+            <span>Most decision-material weakness</span>
+            <span>One concrete next improvement</span>
+            <span>Whether the position was proportionate</span>
+          </aside>
+        </div>
+        <div className="rubric-dimensions">
+          {rubricDimensions.map((dimension, index) => (
+            <details key={dimension.name} open={index === 0}>
+              <summary>
+                <span>{String(index + 1).padStart(2, '0')}</span>
+                <strong>
+                  {dimension.name}
+                  <small>{dimension.question}</small>
+                </strong>
+                <b>{dimension.weight} PTS</b>
+              </summary>
+              <div className="rubric-levels">
+                {dimension.levels.map((descriptor, level) => (
+                  <div key={descriptor}>
+                    <span>LEVEL {level}</span>
+                    <p>{descriptor}</p>
+                  </div>
+                ))}
+              </div>
+            </details>
+          ))}
+        </div>
+        <div className="score-band-grid">
+          {scoreBands.map(([score, interpretation]) => (
+            <div key={score}>
+              <strong>{score}</strong>
+              <span>{interpretation}</span>
+            </div>
+          ))}
+        </div>
+        <div className="refusal-standard">
+          <h3>Responsible-refusal pathway</h3>
+          <p>
+            Full-credit refusal is not a shortcut. It names the exact
+            unsupported boundary, shows why it matters with proportionate
+            evidence, delivers what can responsibly be concluded now, and
+            proposes the smallest ethical next step that could close the gap or
+            reduce risk.
+          </p>
+        </div>
+      </section>
+
       <section className="teaching-policy">
         <div>
           <p className="document-kicker">ASSESSMENT BOUNDARY</p>
-          <h2>Machines verify mechanics. Instructors evaluate judgment.</h2>
+          <h2>The viewer records mechanics. Instructors evaluate judgment.</h2>
           <p>
-            Execution, artifact presence, declared schemas, hashes, and exact scenario-authored invariants may be
-            verified. Metric quality, causal language, modeling choices, uncertainty, and recommendations remain
-            human-reviewed.
+            The current release captures successful browser runs with
+            executed-code hashes, flags outputs that predate later worksheet
+            edits, checks exported workspace files against their saved hashes,
+            and records whether an explicitly bound handoff file is non-empty.
+            It does not verify artifact quality, analytical grain, cutoff
+            validity, inference, or recommendation quality.
           </p>
         </div>
         <nav aria-label="Instructor utilities">
-          <SiteLink path="/teach/replay" rel="nofollow">OPEN A LEARNER SUBMISSION →</SiteLink>
-          <SiteLink path="/teach/spoilers" rel="nofollow">OPEN SPOILER-SEPARATED INSTRUCTOR NOTES →</SiteLink>
+          <SiteLink path="/teach/replay" rel="nofollow">
+            OPEN A LEARNER SUBMISSION →
+          </SiteLink>
+          <SiteLink path="/teach/spoilers" rel="nofollow">
+            OPEN SPOILER-SEPARATED INSTRUCTOR NOTES →
+          </SiteLink>
         </nav>
       </section>
     </main>

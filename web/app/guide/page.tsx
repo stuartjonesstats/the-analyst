@@ -1,7 +1,14 @@
+import type { Metadata } from 'next';
+
 import { PublicShell } from '@/components/public-shell';
 import { SiteLink } from '@/components/site-link';
 
 export const dynamic = 'force-static';
+
+export const metadata: Metadata = {
+  title: 'Learner Field Guide — The Analyst',
+  description: 'A practical workflow for investigating Meridian data in SQL and Python, preserving evidence, and exporting an analytical handoff.',
+};
 
 const steps = [
   ['01', 'Open the brief', 'Read the requester, cutoff, response window, decision standard, and required handoff before touching the data.'],
@@ -14,8 +21,8 @@ const steps = [
 
 export default function GuidePage() {
   return (
-    <PublicShell>
-      <main className="public-main">
+    <PublicShell currentPath="/guide">
+      <main className="public-main" id="main-content" tabIndex={-1}>
         <header className="public-page-head">
           <p className="public-kicker">FIELD GUIDE / LEARNER WORKFLOW</p>
           <h1>Arrive, investigate, hand off.</h1>
@@ -23,25 +30,50 @@ export default function GuidePage() {
         </header>
         <section className="guide-sequence">
           {steps.map(([index, title, body]) => (
-            <article key={index}><span>{index}</span><div><h2>{title}</h2><p>{body}</p></div></article>
+            <article key={index}>
+              <span>{index}</span>
+              <div>
+                <h2>{title}</h2>
+                <p>{body}</p>
+              </div>
+            </article>
           ))}
         </section>
         <section className="guide-technical">
-          <div><span>SUPPORTED</span><strong>Current Chrome, Edge, Firefox, or Safari on a laptop/desktop</strong></div>
-          <div><span>STORAGE</span><strong>Drafts autosave to this browser only</strong></div>
-          <div><span>PRIVACY</span><strong>Execution is local; no learner dataset or code upload</strong></div>
-          <div><span>RECOVERY</span><strong>Download submissions regularly when working across devices</strong></div>
+          <div>
+            <span>SUPPORTED</span>
+            <strong>Current Chrome, Edge, Firefox, or Safari on a laptop/desktop</strong>
+          </div>
+          <div>
+            <span>STORAGE</span>
+            <strong>Drafts autosave to this browser only</strong>
+          </div>
+          <div>
+            <span>PRIVACY</span>
+            <strong>Execution is local; no learner dataset or code upload</strong>
+          </div>
+          <div>
+            <span>RECOVERY</span>
+            <strong>Download submissions regularly when working across devices</strong>
+          </div>
         </section>
         <section className="public-cta compact">
-          <div><span>READY FOR THE FIRST ASSIGNMENT</span><h2>Start with the Monday scorecard.</h2></div>
+          <div>
+            <span>READY FOR THE FIRST ASSIGNMENT</span>
+            <h2>Start with the Monday scorecard.</h2>
+          </div>
           <SiteLink path="/workbench">OPEN WORKBENCH →</SiteLink>
         </section>
         <section className="section-lead split" aria-labelledby="guide-instructor-note">
           <div>
-            <span className="public-kicker" id="guide-instructor-note">FACILITATING THE WORK?</span>
+            <span className="public-kicker" id="guide-instructor-note">
+              FACILITATING THE WORK?
+            </span>
             <p>Setup expectations, time ranges, scaffolding guidance, grading boundaries, and the local submission viewer are collected in the instructor desk, separate from the working interface.</p>
           </div>
-          <SiteLink path="/teach" rel="nofollow">OPEN INSTRUCTOR DESK →</SiteLink>
+          <SiteLink path="/teach" rel="nofollow">
+            OPEN INSTRUCTOR DESK →
+          </SiteLink>
         </section>
       </main>
     </PublicShell>

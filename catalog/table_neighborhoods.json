@@ -5672,7 +5672,7 @@
           "use_when": "",
           "do_not_use_when": "",
           "quality_notes": [
-            "Scores use both 1-5 and 1-10 scales; normalized_score is the comparable field."
+            "Scores use both 1-5 and 1-10 scales; score_normalized is the comparable field."
           ],
           "relationship_degree": 1,
           "related_assets": [

@@ -105,14 +105,21 @@ class WorldBuilder:
 
         fks = foreign_keys or []
         fq_name = f"{schema}.{name}"
-        column_catalog = [
-            {
-                "name": field.name,
-                "type": str(field.type),
-                "nullable": field.nullable,
-            }
-            for field in table.schema
-        ]
+        # ``pa.table`` uses Arrow's permissive schema default, which marks every
+        # field nullable even when the released snapshot contains no nulls.  The
+        # catalog describes this frozen release, so profile the actual arrays
+        # rather than repeating that schema-construction default.
+        column_catalog = []
+        for index, field in enumerate(table.schema):
+            null_count = table.column(index).null_count
+            column_catalog.append(
+                {
+                    "name": field.name,
+                    "type": str(field.type),
+                    "nullable": null_count > 0,
+                    "null_count": null_count,
+                }
+            )
         entry = {
             "asset_id": f"tbl:{fq_name}",
             "company": COMPANY_NAME,

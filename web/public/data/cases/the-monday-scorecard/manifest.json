@@ -1,0 +1,36 @@
+{
+  "case_slug": "the-monday-scorecard",
+  "title": "The Monday Scorecard",
+  "revision": "2026.09.01",
+  "analysis_cutoff": "2024-12-02T08:05:00-05:00",
+  "catalog_snapshot": "2026-01-15",
+  "selectionPolicy": "Full released snapshots for the three mounted source tables; no assignment-specific row sampling. The learner owns the response cohort and point-in-time filters.",
+  "file_count": 3,
+  "total_rows": 213000,
+  "files": [
+    {
+      "table": "support.csat_response",
+      "source_table": "support.csat_response",
+      "path": "/data/support/csat_response.parquet",
+      "rows": 48000,
+      "selection": "Complete released satisfaction-response snapshot",
+      "note": "The mounted table includes submissions after the assignment cutoff; time eligibility is learner-owned."
+    },
+    {
+      "table": "support.ticket",
+      "source_table": "support.ticket",
+      "path": "/data/support/ticket.parquet",
+      "rows": 100000,
+      "selection": "Complete released support-ticket snapshot",
+      "note": "Current-state fields do not reconstruct historical state at the assignment cutoff."
+    },
+    {
+      "table": "crm.account",
+      "source_table": "crm.account",
+      "path": "/data/crm/account.parquet",
+      "rows": 65000,
+      "selection": "Complete released account snapshot",
+      "note": "Mounted for coverage analysis; account attributes do not make survey response representative."
+    }
+  ]
+}

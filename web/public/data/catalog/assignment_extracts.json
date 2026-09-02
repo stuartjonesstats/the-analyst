@@ -1,0 +1,1032 @@
+{
+  "catalog_snapshot": "2026-01-15",
+  "row_count_definition": "Mounted rows are the rows exposed to the assignment. Enterprise rows are the rows in the corresponding released Meridian estate table. Scenario-supplied tables have no enterprise-row comparator.",
+  "assignments": [
+    {
+      "sequence": 1,
+      "id": "CC-241202",
+      "slug": "the-monday-scorecard",
+      "title": "The Monday Scorecard",
+      "analysis_cutoff": "2024-12-02 08:05 ET",
+      "closure_policy": "No assignment-specific closure: all rows from the three released source snapshots are mounted. Learners must define the eligible response cohort and enforce the historical cutoff.",
+      "manifest_path": "/data/cases/the-monday-scorecard/manifest.json",
+      "selection_policy": "Full released snapshots for the three mounted source tables; no assignment-specific row sampling. The learner owns the response cohort and point-in-time filters.",
+      "mounted_file_count": 3,
+      "mounted_row_count": 213000,
+      "files": [
+        {
+          "table": "support.csat_response",
+          "source_table": "support.csat_response",
+          "mounted_rows": 48000,
+          "enterprise_rows": 48000,
+          "selection": "Complete released satisfaction-response snapshot",
+          "transformation": null,
+          "note": "The mounted table includes submissions after the assignment cutoff; time eligibility is learner-owned."
+        },
+        {
+          "table": "support.ticket",
+          "source_table": "support.ticket",
+          "mounted_rows": 100000,
+          "enterprise_rows": 100000,
+          "selection": "Complete released support-ticket snapshot",
+          "transformation": null,
+          "note": "Current-state fields do not reconstruct historical state at the assignment cutoff."
+        },
+        {
+          "table": "crm.account",
+          "source_table": "crm.account",
+          "mounted_rows": 65000,
+          "enterprise_rows": 65000,
+          "selection": "Complete released account snapshot",
+          "transformation": null,
+          "note": "Mounted for coverage analysis; account attributes do not make survey response representative."
+        }
+      ]
+    },
+    {
+      "sequence": 2,
+      "id": "CM-240708",
+      "slug": "the-quarter-that-moved",
+      "title": "The Quarter That Moved",
+      "analysis_cutoff": "2024-07-08 08:30 ET",
+      "closure_policy": "The complete Q2 decision-window order population is retained with every linked child row; no sampling. Later warehouse arrivals remain visible for explicit close-policy treatment.",
+      "manifest_path": "/data/cases/the-quarter-that-moved/manifest.json",
+      "selection_policy": "Complete decision-window population plus every linked child row; no sampling.",
+      "mounted_file_count": 9,
+      "mounted_row_count": 212431,
+      "files": [
+        {
+          "table": "commerce.order",
+          "source_table": "commerce.order",
+          "mounted_rows": 18167,
+          "enterprise_rows": 220000,
+          "selection": "created_at in [2024-04-01, 2024-07-01)",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "commerce.order_line",
+          "source_table": "commerce.order_line",
+          "mounted_rows": 32466,
+          "enterprise_rows": 394054,
+          "selection": "order_id belongs to selected Q2 order population",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "commerce.order_event",
+          "source_table": "commerce.order_event",
+          "mounted_rows": 54501,
+          "enterprise_rows": 660000,
+          "selection": "order_id belongs to selected Q2 order population",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "commerce.shipment_event",
+          "source_table": "commerce.shipment_event",
+          "mounted_rows": 51036,
+          "enterprise_rows": 611004,
+          "selection": "order_id belongs to selected Q2 order population",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "crm.account",
+          "source_table": "crm.account",
+          "mounted_rows": 15601,
+          "enterprise_rows": 65000,
+          "selection": "account_id belongs to selected Q2 order population",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "catalog.product_price_history",
+          "source_table": "catalog.product_price_history",
+          "mounted_rows": 4320,
+          "enterprise_rows": 4320,
+          "selection": "product_id appears on a selected Q2 order line",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "casefiles.q2_commercial_close",
+          "source_table": null,
+          "mounted_rows": 18167,
+          "enterprise_rows": null,
+          "selection": "Finance-style projection of selected Q2 orders; canonical order_id intentionally absent",
+          "transformation": "Flat attachment retains source key, captured amounts, and all three exposed clocks.",
+          "note": null
+        },
+        {
+          "table": "casefiles.q2_fulfillment_review",
+          "source_table": null,
+          "mounted_rows": 18167,
+          "enterprise_rows": null,
+          "selection": "Selected Q2 orders with first recorded fulfillment and delivery milestones",
+          "transformation": "Attachment reproduces source-clock duration fields while retaining component timestamps for audit.",
+          "note": null
+        },
+        {
+          "table": "casefiles.harborhome_transition_mapping",
+          "source_table": null,
+          "mounted_rows": 6,
+          "enterprise_rows": null,
+          "selection": "Opening transition workbook sheet",
+          "transformation": "Six-row field-map attachment; it is context, not a warehouse source of truth.",
+          "note": null
+        }
+      ]
+    },
+    {
+      "sequence": 3,
+      "id": "GX-250505",
+      "slug": "the-navigation-vote",
+      "title": "The Navigation Vote",
+      "analysis_cutoff": "2025-05-05 09:00 ET",
+      "closure_policy": "The complete EXP005 assignment population is retained with linked sessions, events, orders, and accounts; no sampling. Exposure and attribution rules remain learner-owned.",
+      "manifest_path": "/data/cases/the-navigation-vote/manifest.json",
+      "selection_policy": "Complete decision-window population plus every linked child row; no sampling.",
+      "mounted_file_count": 9,
+      "mounted_row_count": 264967,
+      "files": [
+        {
+          "table": "growth.experiment",
+          "source_table": "growth.experiment",
+          "mounted_rows": 1,
+          "enterprise_rows": 8,
+          "selection": "experiment_id = EXP005",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "growth.experiment_assignment",
+          "source_table": "growth.experiment_assignment",
+          "mounted_rows": 42000,
+          "enterprise_rows": 321706,
+          "selection": "experiment_id = EXP005; complete assignment population",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "growth.session",
+          "source_table": "growth.session",
+          "mounted_rows": 42000,
+          "enterprise_rows": 450000,
+          "selection": "session_id belongs to EXP005 assignment population",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "growth.web_event",
+          "source_table": "growth.web_event",
+          "mounted_rows": 140670,
+          "enterprise_rows": 1303974,
+          "selection": "session_id belongs to EXP005 assignment population",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "commerce.order",
+          "source_table": "commerce.order",
+          "mounted_rows": 15518,
+          "enterprise_rows": 220000,
+          "selection": "order_id appears as converted_order_id on a selected session",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "crm.account",
+          "source_table": "crm.account",
+          "mounted_rows": 24773,
+          "enterprise_rows": 65000,
+          "selection": "account_id appears on a selected assignment or session",
+          "transformation": "Source columns preserved; rows sorted deterministically.",
+          "note": null
+        },
+        {
+          "table": "casefiles.navigation_readout",
+          "source_table": null,
+          "mounted_rows": 2,
+          "enterprise_rows": null,
+          "selection": "Variant summary for EXP005",
+          "transformation": "Opening dashboard extract: unrounded means, no distributions, denominators, or uncertainty.",
+          "note": null
+        },
+        {
+          "table": "casefiles.finance_conversion_check",
+          "source_table": null,
+          "mounted_rows": 2,
+          "enterprise_rows": null,
+          "selection": "Raw attributable-order counts by EXP005 variant",
+          "transformation": "Opening Finance extract intentionally omits assignment denominators and intervals.",
+          "note": null
+        },
+        {
+          "table": "casefiles.experiment_intake",
+          "source_table": null,
+          "mounted_rows": 1,
+          "enterprise_rows": null,
+          "selection": "Registered EXP005 metadata plus intake wording",
+          "transformation": "One-row intake attachment; it does not infer eligibility from the experiment name.",
+          "note": null
+        }
+      ]
+    },
+    {
+      "sequence": 4,
+      "id": "OP-250320",
+      "slug": "rollback-before-dawn",
+      "title": "Rollback Before Dawn",
+      "analysis_cutoff": "2025-03-20 11:40 ET",
+      "closure_policy": "A deterministic regional asset cohort and its telemetry, alert, weather, and field-operation neighborhood are mounted. The frozen extract intentionally retains later rows and outcomes, so each evidence lane must enforce knowledge time.",
+      "manifest_path": "/data/cases/rollback-before-dawn/manifest.json",
+      "selection_policy": "asset cohort: 3,000 lexicographically first eligible assets per region; asset count: 18000; telemetry window: 2025-01-15 \u2192 2025-04-20; weather window: 2025-02-01 \u2192 2025-04-01",
+      "mounted_file_count": 14,
+      "mounted_row_count": 193898,
+      "files": [
+        {
+          "table": "scenario.asset_cohort",
+          "source_table": null,
+          "mounted_rows": 18000,
+          "enterprise_rows": null,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Stable asset denominator by incident region, including devices with no received reading in a period."
+        },
+        {
+          "table": "iot.asset",
+          "source_table": "iot.asset",
+          "mounted_rows": 21823,
+          "enterprise_rows": 55000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Asset master; current site and state are not historical facts."
+        },
+        {
+          "table": "iot.asset_installation_history",
+          "source_table": "iot.asset_installation_history",
+          "mounted_rows": 16640,
+          "enterprise_rows": 72000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Effective installation periods for historical site assignment."
+        },
+        {
+          "table": "iot.sensor",
+          "source_table": "iot.sensor",
+          "mounted_rows": 27549,
+          "enterprise_rows": 72000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Expected channel frequency supplies the telemetry denominator."
+        },
+        {
+          "table": "iot.sensor_reading",
+          "source_table": "iot.sensor_reading",
+          "mounted_rows": 41224,
+          "enterprise_rows": 1200000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Observed, recorded, and warehouse-available clocks are separate; v5 changes measurement behavior."
+        },
+        {
+          "table": "iot.device_alert",
+          "source_table": "iot.device_alert",
+          "mounted_rows": 6297,
+          "enterprise_rows": 180000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Generated alerts are not confirmed physical failures and can repeat by asset."
+        },
+        {
+          "table": "iot.asset_health_daily",
+          "source_table": "iot.asset_health_daily",
+          "mounted_rows": 24810,
+          "enterprise_rows": 360000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Sampled analytical rows include delayed 30-day outcomes unavailable at the incident cutoff."
+        },
+        {
+          "table": "external.weather_station",
+          "source_table": "external.weather_station",
+          "mounted_rows": 12,
+          "enterprise_rows": 12,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Station-to-region bridge; several stations may describe one region."
+        },
+        {
+          "table": "external.weather_hourly",
+          "source_table": "external.weather_hourly",
+          "mounted_rows": 17280,
+          "enterprise_rows": 315648,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Hourly regional exposure evidence, not device-level causal proof."
+        },
+        {
+          "table": "field_ops.work_order",
+          "source_table": "field_ops.work_order",
+          "mounted_rows": 2886,
+          "enterprise_rows": 120000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Frozen extract mixes request-time facts and eventual operational outcomes."
+        },
+        {
+          "table": "field_ops.work_order_status_event",
+          "source_table": "field_ops.work_order_status_event",
+          "mounted_rows": 17316,
+          "enterprise_rows": 720000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Status history requires source-recorded cutoffs and pre-aggregation."
+        },
+        {
+          "table": "core.region",
+          "source_table": "core.region",
+          "mounted_rows": 6,
+          "enterprise_rows": 6,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Stable corporate region reference."
+        },
+        {
+          "table": "core.branch",
+          "source_table": "core.branch",
+          "mounted_rows": 36,
+          "enterprise_rows": 36,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Branch-to-region and timezone reference."
+        },
+        {
+          "table": "core.world_event",
+          "source_table": "core.world_event",
+          "mounted_rows": 19,
+          "enterprise_rows": 180,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Registered context is useful but not a complete causal label."
+        }
+      ]
+    },
+    {
+      "sequence": 5,
+      "id": "FO-250320",
+      "slug": "the-730-capacity-call",
+      "title": "The 7:30 Capacity Call",
+      "analysis_cutoff": "2025-03-20 07:30 ET",
+      "closure_policy": "All appointments for the selected branch are retained with their relational neighborhood. Historical source extracts contain realized outcomes; only the outcome-withheld current roster is eligible for current scoring.",
+      "manifest_path": "/data/cases/the-730-capacity-call/manifest.json",
+      "selection_policy": "branch id: BR0020; branch region: REG001; appointment population: all appointments assigned to BR0020; current roster rule: scheduled_end_at >= 2025-03-20 07:30 on the selected local date",
+      "mounted_file_count": 15,
+      "mounted_row_count": 91946,
+      "files": [
+        {
+          "table": "scenario.current_appointment_roster",
+          "source_table": null,
+          "mounted_rows": 7,
+          "enterprise_rows": null,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Outcome-withheld remaining appointment roster for the 07:30 decision."
+        },
+        {
+          "table": "scenario.capacity_bulletin",
+          "source_table": null,
+          "mounted_rows": 1,
+          "enterprise_rows": null,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Approved 07:25 current-weather, aggregate-capacity, cost, and action limits."
+        },
+        {
+          "table": "scenario.appointment_geography",
+          "source_table": null,
+          "mounted_rows": 3517,
+          "enterprise_rows": null,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Privacy-minimized appointment-to-service-area bridge; raw address and coordinates are excluded."
+        },
+        {
+          "table": "field_ops.appointment",
+          "source_table": "field_ops.appointment",
+          "mounted_rows": 3517,
+          "enterprise_rows": 120000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Historical and current service windows; realized storm flag is a forbidden outcome feature."
+        },
+        {
+          "table": "field_ops.work_order",
+          "source_table": "field_ops.work_order",
+          "mounted_rows": 3517,
+          "enterprise_rows": 120000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Frozen source includes final fields unavailable at historical morning cutoffs."
+        },
+        {
+          "table": "field_ops.work_order_status_event",
+          "source_table": "field_ops.work_order_status_event",
+          "mounted_rows": 21102,
+          "enterprise_rows": 720000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Reconstruct state with occurred and source-recorded clocks before aggregating."
+        },
+        {
+          "table": "field_ops.visit",
+          "source_table": "field_ops.visit",
+          "mounted_rows": 3517,
+          "enterprise_rows": 120000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "First arrival creates the matured breach label; all visit facts are post-decision."
+        },
+        {
+          "table": "workforce.shift",
+          "source_table": "workforce.shift",
+          "mounted_rows": 9687,
+          "enterprise_rows": 297500,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Scheduled branch capacity; final shift status is not proof of morning availability."
+        },
+        {
+          "table": "workforce.employee_role_history",
+          "source_table": "workforce.employee_role_history",
+          "mounted_rows": 28,
+          "enterprise_rows": 1122,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Restricted effective role history for aggregate feasibility checks only."
+        },
+        {
+          "table": "external.weather_station",
+          "source_table": "external.weather_station",
+          "mounted_rows": 2,
+          "enterprise_rows": 12,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Region-to-weather-station bridge."
+        },
+        {
+          "table": "external.weather_hourly",
+          "source_table": "external.weather_hourly",
+          "mounted_rows": 38848,
+          "enterprise_rows": 315648,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Historical weather through the cutoff; later same-day conditions are omitted."
+        },
+        {
+          "table": "external.traffic_area_hourly",
+          "source_table": "external.traffic_area_hourly",
+          "mounted_rows": 7103,
+          "enterprise_rows": 380000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Provider revisions are retained; historical availability is not universally known."
+        },
+        {
+          "table": "core.branch",
+          "source_table": "core.branch",
+          "mounted_rows": 1,
+          "enterprise_rows": 36,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Selected branch, region, and timezone."
+        },
+        {
+          "table": "core.service_area",
+          "source_table": "core.service_area",
+          "mounted_rows": 3,
+          "enterprise_rows": 120,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Service-area operational geography for traffic aggregation."
+        },
+        {
+          "table": "core.business_calendar",
+          "source_table": "core.business_calendar",
+          "mounted_rows": 1096,
+          "enterprise_rows": 1096,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Complete date reference for temporal folds and day features."
+        }
+      ]
+    },
+    {
+      "sequence": 6,
+      "id": "SP-251201",
+      "slug": "forty-eight-hours-of-stock",
+      "title": "Forty-Eight Hours of Stock",
+      "analysis_cutoff": "2025-12-01 06:45 ET",
+      "closure_policy": "The full supply domain is mounted, plus a deterministic 30-pair watchlist and scenario constraints. Post-origin movements and receipts remain present and must be excluded from model selection and forecasting inputs.",
+      "manifest_path": "/data/cases/forty-eight-hours-of-stock/manifest.json",
+      "selection_policy": "supply domain: full supply domain retained; non-supply world tables omitted; watchlist: six lowest naive-cover pairs from each of five deterministic product strata; watchlist rows: 30; watchlist products: 27",
+      "mounted_file_count": 14,
+      "mounted_row_count": 1056905,
+      "files": [
+        {
+          "table": "scenario.supply_watchlist",
+          "source_table": null,
+          "mounted_rows": 30,
+          "enterprise_rows": null,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Thirty review pairs selected across several demand histories; workbook calculations are claims, not answers."
+        },
+        {
+          "table": "scenario.opening_balance",
+          "source_table": null,
+          "mounted_rows": 81,
+          "enterprise_rows": null,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Controller-approved opening quantity for each watchlist product at all three donor/recipient warehouses."
+        },
+        {
+          "table": "scenario.action_constraints",
+          "source_table": null,
+          "mounted_rows": 10,
+          "enterprise_rows": null,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Published portfolio budget, review, donor-reserve, and transfer-lane limits."
+        },
+        {
+          "table": "supply.inventory_movement",
+          "source_table": "supply.inventory_movement",
+          "mounted_rows": 520000,
+          "enterprise_rows": 520000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Full technical movement ledger, including linked scanner replays and later rows."
+        },
+        {
+          "table": "supply.inventory_position_daily",
+          "source_table": "supply.inventory_position_daily",
+          "mounted_rows": 330000,
+          "enterprise_rows": 330000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Full sparse sampled position history with reconciled trailing fields."
+        },
+        {
+          "table": "supply.purchase_order",
+          "source_table": "supply.purchase_order",
+          "mounted_rows": 24000,
+          "enterprise_rows": 24000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Full PO header population; current status must not be projected backward."
+        },
+        {
+          "table": "supply.purchase_order_line",
+          "source_table": "supply.purchase_order_line",
+          "mounted_rows": 96000,
+          "enterprise_rows": 96000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Full PO line population; ordered and cancelled quantity remain at line grain."
+        },
+        {
+          "table": "supply.goods_receipt",
+          "source_table": "supply.goods_receipt",
+          "mounted_rows": 82000,
+          "enterprise_rows": 82000,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Full split and rejected receipt-event population."
+        },
+        {
+          "table": "supply.product_vendor",
+          "source_table": "supply.product_vendor",
+          "mounted_rows": 1440,
+          "enterprise_rows": 1440,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Effective approved vendor-product relationships, costs, lead times, and MOQs."
+        },
+        {
+          "table": "supply.vendor",
+          "source_table": "supply.vendor",
+          "mounted_rows": 85,
+          "enterprise_rows": 85,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Vendor terms and risk tiers for transparent uncertainty pooling."
+        },
+        {
+          "table": "supply.warehouse",
+          "source_table": "supply.warehouse",
+          "mounted_rows": 3,
+          "enterprise_rows": 3,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Three warehouse locations, regions, capacity, and timezone."
+        },
+        {
+          "table": "catalog.product",
+          "source_table": "catalog.product",
+          "mounted_rows": 720,
+          "enterprise_rows": 720,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Real synthetic SKU names, types, lifecycle state, and unit costs."
+        },
+        {
+          "table": "catalog.product_substitution",
+          "source_table": "catalog.product_substitution",
+          "mounted_rows": 1440,
+          "enterprise_rows": 1440,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Effective substitution options and customer-approval requirements."
+        },
+        {
+          "table": "core.business_calendar",
+          "source_table": "core.business_calendar",
+          "mounted_rows": 1096,
+          "enterprise_rows": 1096,
+          "selection": "Governed by the assignment selection policy above; no separate file-level rule is declared.",
+          "transformation": null,
+          "note": "Complete date spine for explicit zero-demand days."
+        }
+      ]
+    },
+    {
+      "sequence": 7,
+      "id": "PR-260119",
+      "slug": "the-orion-renewal",
+      "title": "The Orion Renewal",
+      "analysis_cutoff": "Frozen estate extracted 2026-01-15; operating window ends 2025-12-31",
+      "closure_policy": "Routes dated 2024-01-01 through 2025-12-31 are retained with their complete relational neighborhood. Route, stop, work-order, visit, and workforce grains are not collapsed during extraction.",
+      "manifest_path": "/data/cases/the-orion-renewal/manifest.json",
+      "selection_policy": "Routes dated 2024-01-01 through 2025-12-31 and their complete relational neighborhood.",
+      "mounted_file_count": 17,
+      "mounted_row_count": 2027178,
+      "files": [
+        {
+          "table": "core.region",
+          "source_table": "core.region",
+          "mounted_rows": 6,
+          "enterprise_rows": 6,
+          "selection": "complete dimension",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "core.branch",
+          "source_table": "core.branch",
+          "mounted_rows": 36,
+          "enterprise_rows": 36,
+          "selection": "complete dimension",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "core.service_area",
+          "source_table": "core.service_area",
+          "mounted_rows": 120,
+          "enterprise_rows": 120,
+          "selection": "complete dimension",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "core.business_calendar",
+          "source_table": "core.business_calendar",
+          "mounted_rows": 731,
+          "enterprise_rows": 1096,
+          "selection": "2024-01-01 through 2025-12-31",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "fleet.route",
+          "source_table": "fleet.route",
+          "mounted_rows": 73350,
+          "enterprise_rows": 110000,
+          "selection": "complete 24-month pre/post route window",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "fleet.route_stop",
+          "source_table": "fleet.route_stop",
+          "mounted_rows": 213566,
+          "enterprise_rows": 320000,
+          "selection": "all stops belonging to included routes",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "field_ops.work_order",
+          "source_table": "field_ops.work_order",
+          "mounted_rows": 99832,
+          "enterprise_rows": 120000,
+          "selection": "all work orders referenced by included route stops",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "field_ops.work_order_status_event",
+          "source_table": "field_ops.work_order_status_event",
+          "mounted_rows": 598992,
+          "enterprise_rows": 720000,
+          "selection": "complete status histories for included work orders",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "field_ops.visit",
+          "source_table": "field_ops.visit",
+          "mounted_rows": 99832,
+          "enterprise_rows": 120000,
+          "selection": "all visits for included work orders",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "field_ops.work_order_part",
+          "source_table": "field_ops.work_order_part",
+          "mounted_rows": 216316,
+          "enterprise_rows": 260000,
+          "selection": "all recorded parts for included work orders; one-to-many by design",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "field_ops.appointment",
+          "source_table": "field_ops.appointment",
+          "mounted_rows": 99832,
+          "enterprise_rows": 120000,
+          "selection": "appointments associated with included work orders",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "workforce.shift",
+          "source_table": "workforce.shift",
+          "mounted_rows": 156695,
+          "enterprise_rows": 297500,
+          "selection": "included technicians' scheduled shifts in the route window",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "workforce.employee_role_history",
+          "source_table": "workforce.employee_role_history",
+          "mounted_rows": 425,
+          "enterprise_rows": 1122,
+          "selection": "complete effective-dated histories for included technicians",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "workforce.absence",
+          "source_table": "workforce.absence",
+          "mounted_rows": 3996,
+          "enterprise_rows": 7650,
+          "selection": "absence episodes attached to included shifts",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "external.traffic_area_hourly",
+          "source_table": "external.traffic_area_hourly",
+          "mounted_rows": 252909,
+          "enterprise_rows": 380000,
+          "selection": "complete service-area hourly history for the route window, including revisions",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "external.weather_station",
+          "source_table": "external.weather_station",
+          "mounted_rows": 12,
+          "enterprise_rows": 12,
+          "selection": "complete weather-station dimension",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "external.weather_hourly",
+          "source_table": "external.weather_hourly",
+          "mounted_rows": 210528,
+          "enterprise_rows": 315648,
+          "selection": "complete station-hour history for the route window",
+          "transformation": null,
+          "note": null
+        }
+      ]
+    },
+    {
+      "sequence": 8,
+      "id": "NL-241203",
+      "slug": "the-queue-nobody-owns",
+      "title": "The Queue Nobody Owns",
+      "analysis_cutoff": "2024-12-03 08:20 ET",
+      "closure_policy": "Historical conversations begin before the unlabeled backlog and retain complete frozen message/status histories. The current 818-item backlog withholds later text and outcomes; intake-time feature closure is learner-owned.",
+      "manifest_path": "/data/cases/the-queue-nobody-owns/manifest.json",
+      "selection_policy": "Historical conversation starts end before the learner-safe unlabeled backlog cohort; the routing snapshot is 2024-12-03 08:20 ET.",
+      "mounted_file_count": 7,
+      "mounted_row_count": 373804,
+      "files": [
+        {
+          "table": "support.conversation",
+          "source_table": "support.conversation",
+          "mounted_rows": 50387,
+          "enterprise_rows": 112000,
+          "selection": "historical conversations started 2023-07-01 through 2024-10-31",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "support.ticket",
+          "source_table": "support.ticket",
+          "mounted_rows": 30311,
+          "enterprise_rows": 100000,
+          "selection": "tickets attached to the historical conversation cohort",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "support.message",
+          "source_table": "support.message",
+          "mounted_rows": 161911,
+          "enterprise_rows": 360000,
+          "selection": "complete frozen message histories for the historical cohort; intake filtering is learner-owned",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "support.ticket_status_event",
+          "source_table": "support.ticket_status_event",
+          "mounted_rows": 130347,
+          "enterprise_rows": 430000,
+          "selection": "complete frozen status histories for the historical cohort",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "case_input.scoring_queue",
+          "source_table": null,
+          "mounted_rows": 818,
+          "enterprise_rows": null,
+          "selection": "learner-safe unlabeled 818-item backlog at 2024-12-03 08:20; later text and outcome fields removed",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "case_reference.routing_team",
+          "source_table": null,
+          "mounted_rows": 5,
+          "enterprise_rows": null,
+          "selection": "five receiving teams and hourly review capacity",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "case_reference.misroute_cost",
+          "source_table": null,
+          "mounted_rows": 25,
+          "enterprise_rows": null,
+          "selection": "supplied asymmetric business-harm matrix",
+          "transformation": null,
+          "note": null
+        }
+      ]
+    },
+    {
+      "sequence": 9,
+      "id": "MR-260120",
+      "slug": "too-good-to-ship",
+      "title": "Too Good to Ship",
+      "analysis_cutoff": "Frozen estate extracted 2026-01-15; predictor availability is evaluated at each proposed decision time",
+      "closure_policy": "A deterministic 12,000-account cohort retains every feature snapshot, all 213 feature columns, linked status/subscription/payment history, and the submitted split. Inclusion in the extract does not establish point-in-time predictor eligibility.",
+      "manifest_path": "/data/cases/too-good-to-ship/manifest.json",
+      "selection_policy": "A deterministic 12,000-account cohort retaining every snapshot, all 213 feature columns, and related event clocks.",
+      "mounted_file_count": 12,
+      "mounted_row_count": 630425,
+      "files": [
+        {
+          "table": "platform.account_feature_snapshot",
+          "source_table": "platform.account_feature_snapshot",
+          "mounted_rows": 33156,
+          "enterprise_rows": 165000,
+          "selection": "complete snapshots for a deterministic 12,000-account cohort; all 213 columns retained",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "platform.model_registry",
+          "source_table": "platform.model_registry",
+          "mounted_rows": 18,
+          "enterprise_rows": 18,
+          "selection": "complete registry",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "platform.model_version",
+          "source_table": "platform.model_version",
+          "mounted_rows": 76,
+          "enterprise_rows": 76,
+          "selection": "complete version history",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "platform.pipeline",
+          "source_table": "platform.pipeline",
+          "mounted_rows": 72,
+          "enterprise_rows": 72,
+          "selection": "complete pipeline registry",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "platform.pipeline_run",
+          "source_table": "platform.pipeline_run",
+          "mounted_rows": 61301,
+          "enterprise_rows": 92000,
+          "selection": "pipeline runs contemporaneous with the candidate feature history",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "platform.data_quality_result",
+          "source_table": "platform.data_quality_result",
+          "mounted_rows": 173210,
+          "enterprise_rows": 260000,
+          "selection": "quality checks attached to included pipeline runs",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "crm.account",
+          "source_table": "crm.account",
+          "mounted_rows": 12000,
+          "enterprise_rows": 65000,
+          "selection": "account records for the feature cohort",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "crm.account_status_event",
+          "source_table": "crm.account_status_event",
+          "mounted_rows": 14175,
+          "enterprise_rows": 76806,
+          "selection": "status-event histories for the feature cohort",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "billing.subscription",
+          "source_table": "billing.subscription",
+          "mounted_rows": 12084,
+          "enterprise_rows": 40000,
+          "selection": "subscriptions belonging to the feature cohort",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "billing.subscription_event",
+          "source_table": "billing.subscription_event",
+          "mounted_rows": 60420,
+          "enterprise_rows": 200000,
+          "selection": "complete event histories for included subscriptions",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "billing.payment_attempt",
+          "source_table": "billing.payment_attempt",
+          "mounted_rows": 230757,
+          "enterprise_rows": 764039,
+          "selection": "payment attempts for the feature cohort, with occurrence and availability clocks",
+          "transformation": null,
+          "note": null
+        },
+        {
+          "table": "case_input.beacon_submitted_split",
+          "source_table": null,
+          "mounted_rows": 33156,
+          "enterprise_rows": null,
+          "selection": "reproducible row-level 80/20 split supplied with the contractor submission",
+          "transformation": null,
+          "note": null
+        }
+      ]
+    }
+  ]
+}

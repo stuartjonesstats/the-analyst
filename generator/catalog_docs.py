@@ -188,7 +188,7 @@ manifest, and anomaly metadata for the generated learning estate.
 | `quality_notes` | Known caveats that require interpretation. |
 | `row_count` | Rows in the released snapshot. |
 | `column_count` | Columns in the released snapshot. |
-| `columns` | Physical field names, Arrow types, and nullable flags. |
+| `columns` | Physical field names, Arrow types, and observed null profiles for the released snapshot. |
 | `relative_path` | Project-relative path to the generated Parquet file. |
 
 Descriptions, grain, `use_when`, and `do_not_use_when` should be understandable
@@ -201,7 +201,12 @@ The generated catalog currently records:
 
 - `name`
 - `type`
-- `nullable`
+- `null_count` (the exact count observed in the released snapshot)
+- `nullable` (a compatibility boolean derived from `null_count > 0`)
+
+These values describe the frozen release, not an upstream database constraint or
+a promise about future extracts. A column with `nullable: false` has zero nulls
+in this snapshot; it is not necessarily declared `NOT NULL` in a source system.
 
 When richer semantic metadata is added, prefer these fields:
 

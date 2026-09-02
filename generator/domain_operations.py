@@ -704,7 +704,7 @@ def _generate_support(builder):
         description="Post-resolution satisfaction surveys retaining original rating scale.", grain="One returned survey per ticket.",
         primary_key=["csat_response_id"], foreign_keys=[_fk("ticket_id", "support.ticket")],
         owner="Customer Insights", sensitivity="confidential", reliability="caution",
-        quality_notes=["Scores use both 1-5 and 1-10 scales; normalized_score is the comparable field."],
+        quality_notes=["Scores use both 1-5 and 1-10 scales; score_normalized is the comparable field."],
     )
 
     n_articles = 520

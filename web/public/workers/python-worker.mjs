@@ -2,6 +2,7 @@ const PYODIDE_VERSION = '314.0.6';
 const PYODIDE_INDEX_URL = `https://cdn.jsdelivr.net/pyodide/v${PYODIDE_VERSION}/full/`;
 
 let pyodide = null;
+let mountedFiles = [];
 
 function sendStatus(status, detail) {
   self.postMessage({ type: 'status', status, detail });
@@ -134,8 +135,22 @@ async function initialize(files = [], packages = []) {
     sendStatus('loading_data', `Mounting ${files.length} scenario files`);
     for (const file of files) await loadDataFile(file);
   }
-  await installCaseDataHelpers(files);
+  mountedFiles = [...files];
+  await installCaseDataHelpers(mountedFiles);
   sendStatus('ready', `Python ${pyodide.runPython('import sys; sys.version.split()[0]')}`);
+}
+
+async function mountWorkspaceTable(id, table, path, bytes) {
+  if (!pyodide) throw new Error('Start Python before publishing a workspace table.');
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`;
+  const directory = normalizedPath.slice(0, normalizedPath.lastIndexOf('/')) || '/';
+  pyodide.FS.mkdirTree(directory);
+  pyodide.FS.writeFile(normalizedPath, new Uint8Array(bytes));
+  const record = { table, label: table, path: normalizedPath, url: '' };
+  mountedFiles = [...mountedFiles.filter((file) => file.table !== table), record];
+  await installCaseDataHelpers(mountedFiles);
+  self.postMessage({ type: 'workspace_mounted', id, table, path: normalizedPath });
+  sendStatus('ready', `${table} available to Python`);
 }
 
 async function runCell(id, code) {
@@ -252,6 +267,11 @@ self.onmessage = async (event) => {
     if (message.type === 'run') {
       await initialize(message.files, message.packages);
       await runCell(message.id, message.code);
+      return;
+    }
+    if (message.type === 'mount_workspace_table') {
+      await initialize(message.files, message.packages);
+      await mountWorkspaceTable(message.id, message.table, message.path, message.bytes);
     }
   } catch (error) {
     self.postMessage({
