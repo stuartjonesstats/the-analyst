@@ -64,6 +64,25 @@ class Pack:
         destination.parent.mkdir(parents=True, exist_ok=True)
 
         arrow_table = pa.Table.from_pandas(frame.reset_index(drop=True), preserve_index=False)
+        if source_table is not None:
+            source_schema_name, source_name = source_table.split(".", 1)
+            source_schema = pq.ParquetFile(
+                SOURCE / source_schema_name / f"{source_name}.parquet"
+            ).schema_arrow
+            missing = sorted(set(arrow_table.column_names) - set(source_schema.names))
+            if missing:
+                raise ValueError(
+                    f"{table_name}: source contract {source_table} lacks columns {missing}"
+                )
+            # pandas widens nullable integers to float, turns all-null dates
+            # into Arrow null/integer columns, and promotes dates to ns
+            # timestamps.  Reapply the authoritative source schema before
+            # writing so browser extracts behave exactly like the enterprise
+            # tables they represent.
+            target_schema = pa.schema(
+                [source_schema.field(column) for column in arrow_table.column_names]
+            )
+            arrow_table = arrow_table.cast(target_schema, safe=True)
         pq.write_table(
             arrow_table,
             destination,

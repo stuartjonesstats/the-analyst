@@ -6,11 +6,11 @@
 
 | Result | Case | Check | Detail |
 |---|---|---|---|
-| PASS | `rollback-before-dawn` | manifest hashes, row counts, and byte counts match every Parquet | files=14; rows=193,898; bytes=7,205,974 |
+| PASS | `rollback-before-dawn` | manifest hashes, row counts, and byte counts match every Parquet | files=14; rows=193,898; bytes=7,153,488 |
 | PASS | `rollback-before-dawn` | DuckDB and Python mappings resolve to the same public files | mapped_tables=14 |
-| PASS | `the-730-capacity-call` | manifest hashes, row counts, and byte counts match every Parquet | files=15; rows=91,946; bytes=3,064,869 |
+| PASS | `the-730-capacity-call` | manifest hashes, row counts, and byte counts match every Parquet | files=15; rows=91,946; bytes=3,023,374 |
 | PASS | `the-730-capacity-call` | DuckDB and Python mappings resolve to the same public files | mapped_tables=15 |
-| PASS | `forty-eight-hours-of-stock` | manifest hashes, row counts, and byte counts match every Parquet | files=14; rows=1,056,905; bytes=19,783,206 |
+| PASS | `forty-eight-hours-of-stock` | manifest hashes, row counts, and byte counts match every Parquet | files=14; rows=1,056,905; bytes=19,772,271 |
 | PASS | `forty-eight-hours-of-stock` | DuckDB and Python mappings resolve to the same public files | mapped_tables=14 |
 | PASS | `rollback-before-dawn` | asset denominator is balanced, unique, and independent of received telemetry | assets=18,000; per_region={'REG001': 3000, 'REG002': 3000, 'REG003': 3000, 'REG004': 3000, 'REG005': 3000, 'REG006': 3000} |
 | PASS | `rollback-before-dawn` | asset, sensor, reading, and alert keys close without orphans | assets=21,823; sensors=27,549; readings=41,224; alerts=6,297 |

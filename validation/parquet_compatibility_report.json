@@ -1,0 +1,7077 @@
+{
+  "status": "PASS",
+  "scope": "all",
+  "duckdb_version": "1.5.5",
+  "summary": {
+    "files": 196,
+    "enterprise_files": 96,
+    "public_files": 100,
+    "physical_rows": 21612972,
+    "bytes": 707678226,
+    "failed": 0,
+    "warned": 0,
+    "inventory_errors": 0,
+    "elapsed_seconds": 6.735
+  },
+  "inventory_errors": [],
+  "files": [
+    {
+      "scope": "enterprise",
+      "label": "billing.invoice",
+      "path": "parquet/billing/invoice.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 21618907,
+      "sha256": "93937d8f05b3a282528351cff59ff4a102dada1d6db908b1e1fab12de57514c5",
+      "arrow": {
+        "rows": 719302,
+        "columns": 12,
+        "row_groups": 11,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 719302,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 1.106
+    },
+    {
+      "scope": "enterprise",
+      "label": "billing.payment_attempt",
+      "path": "parquet/billing/payment_attempt.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 18455311,
+      "sha256": "17863d5f6f31876206f44105dd936c1c664b6d9400d80646a07c376f97a6a33a",
+      "arrow": {
+        "rows": 764039,
+        "columns": 12,
+        "row_groups": 12,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 764039,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.191
+    },
+    {
+      "scope": "enterprise",
+      "label": "billing.subscription",
+      "path": "parquet/billing/subscription.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1126262,
+      "sha256": "3c321565d96e850b5ac40dd14edaf379ed966307e524b7c972ec2bcfb369b499",
+      "arrow": {
+        "rows": 40000,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 40000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.019
+    },
+    {
+      "scope": "enterprise",
+      "label": "billing.subscription_event",
+      "path": "parquet/billing/subscription_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3942551,
+      "sha256": "1a6a96222deab27c2e412cfa104f134a1a6f8e49df3ad1a7c937a80ccf5e806a",
+      "arrow": {
+        "rows": 200000,
+        "columns": 8,
+        "row_groups": 4,
+        "types": [
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 200000,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.046
+    },
+    {
+      "scope": "enterprise",
+      "label": "catalog.plan_price_history",
+      "path": "parquet/catalog/plan_price_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2354,
+      "sha256": "210a807244cba88b25ff3ed65db1de31a1543f163459510793a5716d20272997",
+      "arrow": {
+        "rows": 54,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 54,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "catalog.product",
+      "path": "parquet/catalog/product.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 19575,
+      "sha256": "c2cbe0e8860aad58f14f8f8197727fbc0b888ad2df1bd9aa1903d3f9d0c675ca",
+      "arrow": {
+        "rows": 720,
+        "columns": 13,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 720,
+        "columns": 13,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "catalog.product_category",
+      "path": "parquet/catalog/product_category.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2025,
+      "sha256": "a124424f20f50c693ccf9ae9b533ce450602cc913daa9664de30ece5432551d1",
+      "arrow": {
+        "rows": 55,
+        "columns": 5,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 55,
+        "columns": 5,
+        "types": [
+          "BOOLEAN",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "catalog.product_price_history",
+      "path": "parquet/catalog/product_price_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 50723,
+      "sha256": "66d98110945add7c655707a347dc514522f709e2c9aebf04cf2174874dce23a9",
+      "arrow": {
+        "rows": 4320,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 4320,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "catalog.product_substitution",
+      "path": "parquet/catalog/product_substitution.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 10644,
+      "sha256": "a90c92b042b465d7645ad0b3b40da1ab15f2a5f077375864d0312d2437bb33e4",
+      "arrow": {
+        "rows": 1440,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1440,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "catalog.service_plan",
+      "path": "parquet/catalog/service_plan.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3120,
+      "sha256": "060a18cb8dfdd6b7d948d0c9b08266403a0f4b21c7f20e79545808062999ae26",
+      "arrow": {
+        "rows": 18,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int64",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 18,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "commerce.order",
+      "path": "parquet/commerce/order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 8962973,
+      "sha256": "cf9ec2d118fa4b30ffb88ee8d73218ef7c0385a2aac00b93ced06407f7431146",
+      "arrow": {
+        "rows": 220000,
+        "columns": 15,
+        "row_groups": 4,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 220000,
+        "columns": 15,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.092
+    },
+    {
+      "scope": "enterprise",
+      "label": "commerce.order_event",
+      "path": "parquet/commerce/order_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 14380939,
+      "sha256": "b390e557c2789207ad24feb7e8ae506e4ed478f3fe72354562070d85d49b8b04",
+      "arrow": {
+        "rows": 660000,
+        "columns": 8,
+        "row_groups": 11,
+        "types": [
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 660000,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.127
+    },
+    {
+      "scope": "enterprise",
+      "label": "commerce.order_line",
+      "path": "parquet/commerce/order_line.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 11271813,
+      "sha256": "e0f57922d0f8b54153af5cf3eaeffc5e949e14ab5ed71275429953938975fdee",
+      "arrow": {
+        "rows": 394054,
+        "columns": 11,
+        "row_groups": 7,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 394054,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.082
+    },
+    {
+      "scope": "enterprise",
+      "label": "commerce.shipment_event",
+      "path": "parquet/commerce/shipment_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 15196986,
+      "sha256": "5b966ef123e4a8811088b543cad26fb95b54e03917fa6defa959ddc2d0815c12",
+      "arrow": {
+        "rows": 611004,
+        "columns": 8,
+        "row_groups": 10,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 611004,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.137
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.branch",
+      "path": "parquet/core/branch.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 4021,
+      "sha256": "b81e03642a32a71769992fca0b7923406ad7c931aab1549f1423c614f03ef513",
+      "arrow": {
+        "rows": 36,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 36,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.business_calendar",
+      "path": "parquet/core/business_calendar.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7643,
+      "sha256": "361736b119a9311ebf04aa6e5998d79c15846ff45aa1683366e179f2a92f1b18",
+      "arrow": {
+        "rows": 1096,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1096,
+        "columns": 11,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.legacy_id_xref",
+      "path": "parquet/core/legacy_id_xref.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 762135,
+      "sha256": "9c207d18e5f6372f07cf1e0bc268c05a8b4b334a58314089e1349ff041fd3cf9",
+      "arrow": {
+        "rows": 74825,
+        "columns": 8,
+        "row_groups": 2,
+        "types": [
+          "date32[day]",
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 74825,
+        "columns": 8,
+        "types": [
+          "DATE",
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.02
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.org_unit",
+      "path": "parquet/core/org_unit.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3830,
+      "sha256": "cb56a57aec96a8339b327aba86c614c461a7371b5d65a90962f0db0e7c3399bb",
+      "arrow": {
+        "rows": 90,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 90,
+        "columns": 8,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.postal_area",
+      "path": "parquet/core/postal_area.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 20333,
+      "sha256": "00a58cb33aa7ad4540170d67ad5524cba3ca3a7f511f64a445522ce3223b0eb9",
+      "arrow": {
+        "rows": 800,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 800,
+        "columns": 8,
+        "types": [
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.region",
+      "path": "parquet/core/region.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1992,
+      "sha256": "1b58eb4d5d1d174ff2d444b752eea23302b548e80d981f647992431faf174a6c",
+      "arrow": {
+        "rows": 6,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 6,
+        "columns": 6,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.service_area",
+      "path": "parquet/core/service_area.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3316,
+      "sha256": "e36460fb8a2152f7e888643239e42a51a8b3316418b2838fcd083e81539e04ed",
+      "arrow": {
+        "rows": 120,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 120,
+        "columns": 8,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "core.world_event",
+      "path": "parquet/core/world_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7289,
+      "sha256": "6a5aec99bad1b31ed0947df58c6733e019dc4f5535f43713d56db62728e5a325",
+      "arrow": {
+        "rows": 180,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 180,
+        "columns": 10,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "crm.account",
+      "path": "parquet/crm/account.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 841528,
+      "sha256": "9ec3d10efd963164b4cc54632b6887fe184d469fa8851dd7915c455919147093",
+      "arrow": {
+        "rows": 65000,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 65000,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.028
+    },
+    {
+      "scope": "enterprise",
+      "label": "crm.account_member",
+      "path": "parquet/crm/account_member.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 916824,
+      "sha256": "183f34b0d406e2e55d5ac7debd3a7b5a0eb307f75c8e673c4362765873c7f54f",
+      "arrow": {
+        "rows": 79300,
+        "columns": 7,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 79300,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.021
+    },
+    {
+      "scope": "enterprise",
+      "label": "crm.account_status_event",
+      "path": "parquet/crm/account_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 544610,
+      "sha256": "3c286386e30fef6d07f8de79dad89d19a498b6425a62840532b6ba74766ec524",
+      "arrow": {
+        "rows": 76806,
+        "columns": 6,
+        "row_groups": 2,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 76806,
+        "columns": 6,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.02
+    },
+    {
+      "scope": "enterprise",
+      "label": "crm.consent_event",
+      "path": "parquet/crm/consent_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1419738,
+      "sha256": "4129b12e15c4bf9f2763e8922eaede7a358b592839b793c7f5ad2dfe22adfec3",
+      "arrow": {
+        "rows": 110000,
+        "columns": 9,
+        "row_groups": 2,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 110000,
+        "columns": 9,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.034
+    },
+    {
+      "scope": "enterprise",
+      "label": "crm.contact_point",
+      "path": "parquet/crm/contact_point.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1187138,
+      "sha256": "22642db732c933d05ba856ba9164ee2fc94cb43ad77b6a58b342ee1d253b793c",
+      "arrow": {
+        "rows": 82800,
+        "columns": 8,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 82800,
+        "columns": 8,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.025
+    },
+    {
+      "scope": "enterprise",
+      "label": "crm.customer",
+      "path": "parquet/crm/customer.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 533633,
+      "sha256": "668bb1f159a1fda1325fdff2dbcfda510c1d51d306c32072a5cb6108ffd1ffc4",
+      "arrow": {
+        "rows": 60000,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 60000,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.022
+    },
+    {
+      "scope": "enterprise",
+      "label": "crm.service_site",
+      "path": "parquet/crm/service_site.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2211911,
+      "sha256": "51d396a7af4bb60b643d4352daed903891c1cd78b01c00ac2cd74558516992e9",
+      "arrow": {
+        "rows": 80000,
+        "columns": 12,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "date32[day]",
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 80000,
+        "columns": 12,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.035
+    },
+    {
+      "scope": "enterprise",
+      "label": "external.energy_price_daily",
+      "path": "parquet/external/energy_price_daily.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 192640,
+      "sha256": "5c73387ac0b9d6f0720a9bff67f2315142e497996c5f063df33809aa1bf16e3b",
+      "arrow": {
+        "rows": 19728,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "float",
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 19728,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "FLOAT",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.005
+    },
+    {
+      "scope": "enterprise",
+      "label": "external.holiday_calendar",
+      "path": "parquet/external/holiday_calendar.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 6091,
+      "sha256": "5a877dacf6e46e50fd8120adb4757a8594d32eef2ce07793f82e85c5c361dbfe",
+      "arrow": {
+        "rows": 540,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 540,
+        "columns": 6,
+        "types": [
+          "DATE",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "external.postal_demographic_annual",
+      "path": "parquet/external/postal_demographic_annual.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 92312,
+      "sha256": "31819afe17dadcb7aaf1de7965e0d3456ae18731c8145cc92fc058294053812e",
+      "arrow": {
+        "rows": 2400,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "float",
+          "int16",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 2400,
+        "columns": 10,
+        "types": [
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "external.traffic_area_hourly",
+      "path": "parquet/external/traffic_area_hourly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 9148332,
+      "sha256": "e48deb1d54dbc847fabc2db883aedce88bb187a4e1e02c4a0440b93a7818db2c",
+      "arrow": {
+        "rows": 380000,
+        "columns": 8,
+        "row_groups": 6,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 380000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.037
+    },
+    {
+      "scope": "enterprise",
+      "label": "external.weather_hourly",
+      "path": "parquet/external/weather_hourly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 15527855,
+      "sha256": "0dd7f62c0e92bf5696bbcd4e256b0b522fb84a97a30f05333f07663f40ce572e",
+      "arrow": {
+        "rows": 315648,
+        "columns": 14,
+        "row_groups": 5,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 315648,
+        "columns": 14,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.06
+    },
+    {
+      "scope": "enterprise",
+      "label": "external.weather_station",
+      "path": "parquet/external/weather_station.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3106,
+      "sha256": "b60f62c257f03dd98a8a82209c6929c20cbd260673f1547cae7c6862f4d9906b",
+      "arrow": {
+        "rows": 12,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 12,
+        "columns": 8,
+        "types": [
+          "DOUBLE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "field_ops.appointment",
+      "path": "parquet/field_ops/appointment.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3856387,
+      "sha256": "ea5e3d6aac60302de4d1e4e91986f7dc03f07e2d0dc4bdb2cade1b99fcbc7d76",
+      "arrow": {
+        "rows": 120000,
+        "columns": 10,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 120000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.037
+    },
+    {
+      "scope": "enterprise",
+      "label": "field_ops.visit",
+      "path": "parquet/field_ops/visit.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3698286,
+      "sha256": "104447018e3c0f97e4f2e4d90cff3453f04c38a64a85fec46f0d22d45315cb26",
+      "arrow": {
+        "rows": 120000,
+        "columns": 11,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 120000,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.032
+    },
+    {
+      "scope": "enterprise",
+      "label": "field_ops.work_order",
+      "path": "parquet/field_ops/work_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 6240802,
+      "sha256": "a61934c4ada15bf076c6c63502f5951d64353bc59fc894823ab3c8012adddfe0",
+      "arrow": {
+        "rows": 120000,
+        "columns": 20,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 120000,
+        "columns": 20,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.068
+    },
+    {
+      "scope": "enterprise",
+      "label": "field_ops.work_order_analytics",
+      "path": "parquet/field_ops/work_order_analytics.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 13822605,
+      "sha256": "ef4afd28bf1ca67aa07cb873a9ee9ef666f47cbe39bec09e7a2d1c7c007a5351",
+      "arrow": {
+        "rows": 120000,
+        "columns": 38,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 120000,
+        "columns": 38,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.074
+    },
+    {
+      "scope": "enterprise",
+      "label": "field_ops.work_order_note",
+      "path": "parquet/field_ops/work_order_note.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3415271,
+      "sha256": "95b7003cea79d1877882edf866f93987642de7f61ece300a0e85936a9afcdd84",
+      "arrow": {
+        "rows": 210000,
+        "columns": 7,
+        "row_groups": 4,
+        "types": [
+          "bool",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 210000,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.037
+    },
+    {
+      "scope": "enterprise",
+      "label": "field_ops.work_order_part",
+      "path": "parquet/field_ops/work_order_part.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 6137762,
+      "sha256": "211bf2e8834ab6b53792cba0f6e1feca055eff474efef5578d1554c760a4fedc",
+      "arrow": {
+        "rows": 260000,
+        "columns": 7,
+        "row_groups": 4,
+        "types": [
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 260000,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.035
+    },
+    {
+      "scope": "enterprise",
+      "label": "field_ops.work_order_status_event",
+      "path": "parquet/field_ops/work_order_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 12302981,
+      "sha256": "7a5f2626c6b56a9fa823b6cfe712487ce7b1c1503071887c5865be1537f6b836",
+      "arrow": {
+        "rows": 720000,
+        "columns": 7,
+        "row_groups": 11,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 720000,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.099
+    },
+    {
+      "scope": "enterprise",
+      "label": "finance.budget_monthly",
+      "path": "parquet/finance/budget_monthly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 286813,
+      "sha256": "85c385c8857d9c5cfd0d392c002fea7930eaf8d9f193b6a5c40aa04c82f856e4",
+      "arrow": {
+        "rows": 17280,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 17280,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.005
+    },
+    {
+      "scope": "enterprise",
+      "label": "finance.chart_of_account",
+      "path": "parquet/finance/chart_of_account.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3130,
+      "sha256": "f4dab548c0e889b0dcaf36355551ab0c1d293a4c6485458f36c31a01185f1815",
+      "arrow": {
+        "rows": 96,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 96,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "finance.cost_center",
+      "path": "parquet/finance/cost_center.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3669,
+      "sha256": "e72662d4f5736a968d47efa36be693204fbd76cb61fdbc519611b56e7f44eb0f",
+      "arrow": {
+        "rows": 120,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 120,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "finance.journal_entry",
+      "path": "parquet/finance/journal_entry.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2477455,
+      "sha256": "f9ca56f6da67bfb5595289b513bff1801adeb66c4aa1b10a290dee707c1134fe",
+      "arrow": {
+        "rows": 145000,
+        "columns": 10,
+        "row_groups": 3,
+        "types": [
+          "date32[day]",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 145000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.045
+    },
+    {
+      "scope": "enterprise",
+      "label": "finance.journal_line",
+      "path": "parquet/finance/journal_line.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7966768,
+      "sha256": "19ede726577e273ee5fbc1f09ab062849d619f9a4c1ddcc2597f9b17081f3bb9",
+      "arrow": {
+        "rows": 460000,
+        "columns": 11,
+        "row_groups": 8,
+        "types": [
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 460000,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.076
+    },
+    {
+      "scope": "enterprise",
+      "label": "fleet.fuel_charge",
+      "path": "parquet/fleet/fuel_charge.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1416796,
+      "sha256": "f2c16797b26dec7289d5c425a726fc427d3f7465e626ecbdfbe6ed73ed3fb974",
+      "arrow": {
+        "rows": 58000,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "float",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 58000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "scope": "enterprise",
+      "label": "fleet.gps_ping",
+      "path": "parquet/fleet/gps_ping.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 22806624,
+      "sha256": "deac299585c7e1f379dec00bb6720e67a510f73378e2af072a77b6b2b1aab22d",
+      "arrow": {
+        "rows": 540000,
+        "columns": 10,
+        "row_groups": 9,
+        "types": [
+          "bool",
+          "double",
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 540000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DOUBLE",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.076
+    },
+    {
+      "scope": "enterprise",
+      "label": "fleet.maintenance_event",
+      "path": "parquet/fleet/maintenance_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 247441,
+      "sha256": "1bb480c521bc2b58dabcc2edd6326cf640c97643be2808af874e9e10382541bc",
+      "arrow": {
+        "rows": 11000,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "float",
+          "int32",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 11000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "FLOAT",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "enterprise",
+      "label": "fleet.route",
+      "path": "parquet/fleet/route.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2140281,
+      "sha256": "7970888ade934363fbff936db9647c9fc1e40a9045a22d4cb0b684effeccc1b7",
+      "arrow": {
+        "rows": 110000,
+        "columns": 10,
+        "row_groups": 2,
+        "types": [
+          "date32[day]",
+          "float",
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 110000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "FLOAT",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.021
+    },
+    {
+      "scope": "enterprise",
+      "label": "fleet.route_stop",
+      "path": "parquet/fleet/route_stop.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 8760046,
+      "sha256": "f79df0a4c6e88555fb86e583e154f0b1440101c54ac92bd528ff72659f2d3e7d",
+      "arrow": {
+        "rows": 320000,
+        "columns": 8,
+        "row_groups": 5,
+        "types": [
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 320000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.046
+    },
+    {
+      "scope": "enterprise",
+      "label": "fleet.vehicle",
+      "path": "parquet/fleet/vehicle.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5938,
+      "sha256": "ed3a276332d80def26523b05c50d59cc0def620652718856252175de0ef4adea",
+      "arrow": {
+        "rows": 220,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 220,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "INTEGER",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "fleet.vehicle_assignment_history",
+      "path": "parquet/fleet/vehicle_assignment_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7397,
+      "sha256": "d2cdb2460a0fd03c394d3079d4743ad0afe758cbef33c99ab449743685bbda97",
+      "arrow": {
+        "rows": 519,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 519,
+        "columns": 6,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "growth.experiment",
+      "path": "parquet/growth/experiment.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2528,
+      "sha256": "f40cfcebefeebdd801b2eb8ba0b3bb6e8f7f9397c1d575879738f0aae8044c90",
+      "arrow": {
+        "rows": 8,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 8,
+        "columns": 7,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "growth.experiment_assignment",
+      "path": "parquet/growth/experiment_assignment.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 9301773,
+      "sha256": "e6195bd2d706b850b027e4890214e3aa48088ca114d09f0682d457caec8587a6",
+      "arrow": {
+        "rows": 321706,
+        "columns": 9,
+        "row_groups": 5,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 321706,
+        "columns": 9,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.088
+    },
+    {
+      "scope": "enterprise",
+      "label": "growth.session",
+      "path": "parquet/growth/session.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 14863220,
+      "sha256": "33f0d6590d12e313fa74da2698b2914abf08b5299f031eb7c77154a851ec2619",
+      "arrow": {
+        "rows": 450000,
+        "columns": 12,
+        "row_groups": 7,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 450000,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.148
+    },
+    {
+      "scope": "enterprise",
+      "label": "growth.web_event",
+      "path": "parquet/growth/web_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 26222284,
+      "sha256": "608e972a2992fa58aafd9dfaaabb5b7a19545d30988bbcc6a7adf72a6f5dbb62",
+      "arrow": {
+        "rows": 1303974,
+        "columns": 8,
+        "row_groups": 20,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1303974,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.268
+    },
+    {
+      "scope": "enterprise",
+      "label": "iot.asset",
+      "path": "parquet/iot/asset.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1600090,
+      "sha256": "73493d697d745eee5d5c2f0725e7271502392073124465b5894ce91687454180",
+      "arrow": {
+        "rows": 55000,
+        "columns": 12,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int32",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 55000,
+        "columns": 12,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.028
+    },
+    {
+      "scope": "enterprise",
+      "label": "iot.asset_health_daily",
+      "path": "parquet/iot/asset_health_daily.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 40824456,
+      "sha256": "84d8ade5fe99b0be7efb90a0d447d11fce05f54cc680ab89c8eee9924cabbcb5",
+      "arrow": {
+        "rows": 360000,
+        "columns": 38,
+        "row_groups": 6,
+        "types": [
+          "bool",
+          "date32[day]",
+          "float",
+          "int16",
+          "int32",
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 360000,
+        "columns": 38,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.139
+    },
+    {
+      "scope": "enterprise",
+      "label": "iot.asset_installation_history",
+      "path": "parquet/iot/asset_installation_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1897269,
+      "sha256": "ea774c39bab54348879cd32c2f815eef6ef52f4d35a9c9178fceeb20fdabdd1f",
+      "arrow": {
+        "rows": 72000,
+        "columns": 7,
+        "row_groups": 2,
+        "types": [
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 72000,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.019
+    },
+    {
+      "scope": "enterprise",
+      "label": "iot.device_alert",
+      "path": "parquet/iot/device_alert.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 4580872,
+      "sha256": "0e4b3d8139c348f02965f81b616190e86978fc16b2d3089b37e42920f909507b",
+      "arrow": {
+        "rows": 180000,
+        "columns": 9,
+        "row_groups": 3,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 180000,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.034
+    },
+    {
+      "scope": "enterprise",
+      "label": "iot.sensor",
+      "path": "parquet/iot/sensor.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1146850,
+      "sha256": "b8c6c0b1c2e8f914d9e78426fa0acb44a28f9a6108d6ef572f23f73da0b50387",
+      "arrow": {
+        "rows": 72000,
+        "columns": 6,
+        "row_groups": 2,
+        "types": [
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 72000,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.013
+    },
+    {
+      "scope": "enterprise",
+      "label": "iot.sensor_reading",
+      "path": "parquet/iot/sensor_reading.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 44473605,
+      "sha256": "0416591fbdd0161fc01636b9d5043d2759b74f27f7ee8344a3337a125fba868a",
+      "arrow": {
+        "rows": 1200000,
+        "columns": 10,
+        "row_groups": 19,
+        "types": [
+          "float",
+          "int32",
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1200000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "INTEGER",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.193
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.account_feature_snapshot",
+      "path": "parquet/platform/account_feature_snapshot.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 112549517,
+      "sha256": "b13917ec1de2eb7ce1365092caa976928cbae30d6a815152b4205e3df5941ce4",
+      "arrow": {
+        "rows": 165000,
+        "columns": 213,
+        "row_groups": 3,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 165000,
+        "columns": 213,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.43
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.data_quality_result",
+      "path": "parquet/platform/data_quality_result.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 8393497,
+      "sha256": "bc3e1052b4fb2e8762bd3aa57aac3c3620b6970daa05f823a2eab50b6062c19c",
+      "arrow": {
+        "rows": 260000,
+        "columns": 11,
+        "row_groups": 4,
+        "types": [
+          "float",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 260000,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.071
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.model_prediction",
+      "path": "parquet/platform/model_prediction.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 13565206,
+      "sha256": "879344ccac455de5d37fde6678abebe4fbb5b44e6aa8da6a067236e089418c71",
+      "arrow": {
+        "rows": 370000,
+        "columns": 14,
+        "row_groups": 6,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 370000,
+        "columns": 14,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.104
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.model_registry",
+      "path": "parquet/platform/model_registry.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3094,
+      "sha256": "dbada560e588b64dfd078354d691e95409507897272dff33939f5f61e41ff110",
+      "arrow": {
+        "rows": 18,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 18,
+        "columns": 8,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.model_version",
+      "path": "parquet/platform/model_version.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 6159,
+      "sha256": "25400b52fd1dac6a66cc05cdceb5cc9d6c2e82e80c32eecb321bf90fb80642d3",
+      "arrow": {
+        "rows": 76,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "float",
+          "int16",
+          "int32",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 76,
+        "columns": 11,
+        "types": [
+          "DATE",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.pipeline",
+      "path": "parquet/platform/pipeline.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3639,
+      "sha256": "e65a7e0c96a0ef4c43719919f92a3492faddc80a9c5a8bd657056857e387f840",
+      "arrow": {
+        "rows": 72,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int16",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 72,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "INTEGER",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.pipeline_run",
+      "path": "parquet/platform/pipeline_run.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3108990,
+      "sha256": "f330c5b31ed5b5c11db83b50e3578b4676c04cc3ca088211a1b5487f058d5152",
+      "arrow": {
+        "rows": 92000,
+        "columns": 11,
+        "row_groups": 2,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 92000,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.028
+    },
+    {
+      "scope": "enterprise",
+      "label": "platform.source_registry",
+      "path": "parquet/platform/source_registry.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2506,
+      "sha256": "7b6f168a4c5169ac3b1a462283e0df3d1faa8beda12239f48ee0c870f2cfd6c3",
+      "arrow": {
+        "rows": 16,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int16",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 16,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "INTEGER",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.goods_receipt",
+      "path": "parquet/supply/goods_receipt.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1102363,
+      "sha256": "e3c52f576b72e407b6ce34775f83bc11cc98746fa9a0fe2ff1c08a9a90e6d768",
+      "arrow": {
+        "rows": 82000,
+        "columns": 8,
+        "row_groups": 2,
+        "types": [
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 82000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.inventory_movement",
+      "path": "parquet/supply/inventory_movement.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 11515028,
+      "sha256": "12d203ede9355bd839427fa1ffea06c7b0078608f0f56fef4e3952e9f74bcc6f",
+      "arrow": {
+        "rows": 520000,
+        "columns": 13,
+        "row_groups": 8,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 520000,
+        "columns": 13,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.12
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.inventory_position_daily",
+      "path": "parquet/supply/inventory_position_daily.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5270104,
+      "sha256": "e5843a4d0f24db6d37c7d9f2c487931d15eaeb168f0a326d4e6c8a6313ea13f8",
+      "arrow": {
+        "rows": 330000,
+        "columns": 25,
+        "row_groups": 6,
+        "types": [
+          "date32[day]",
+          "float",
+          "int32",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 330000,
+        "columns": 25,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "FLOAT",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.051
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.product_vendor",
+      "path": "parquet/supply/product_vendor.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 23614,
+      "sha256": "6c6f3832366dc05c3895605ef75ca18b3b2d96d19a01a415db32e45f7325cedd",
+      "arrow": {
+        "rows": 1440,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1440,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.purchase_order",
+      "path": "parquet/supply/purchase_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 417051,
+      "sha256": "2cdd6fe7dfb1e362efed6b9d55c2925069899509af5cb0a2266b10896df1990c",
+      "arrow": {
+        "rows": 24000,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 24000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.01
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.purchase_order_line",
+      "path": "parquet/supply/purchase_order_line.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1458643,
+      "sha256": "17d5d393f1b3e1d9aac1dd329f442636b7954a8850f8ad77e62e5310c32aae70",
+      "arrow": {
+        "rows": 96000,
+        "columns": 9,
+        "row_groups": 2,
+        "types": [
+          "date32[day]",
+          "int16",
+          "int32",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 96000,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "INTEGER",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.013
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.vendor",
+      "path": "parquet/supply/vendor.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3863,
+      "sha256": "b22299406e55079deffbbdbd99af568fe09e3fc99ee6384ec544a67abb9e1392",
+      "arrow": {
+        "rows": 85,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 85,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "supply.warehouse",
+      "path": "parquet/supply/warehouse.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3250,
+      "sha256": "bda166e24fcad1912db3be0acd781e318a25122191cd75c45974913f1891b350",
+      "arrow": {
+        "rows": 3,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "support.conversation",
+      "path": "parquet/support/conversation.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1708324,
+      "sha256": "ea7fdfc2018b9a59663b07a13438e9fbe00db7e380e7991d7a4d80aed4ab5d60",
+      "arrow": {
+        "rows": 112000,
+        "columns": 6,
+        "row_groups": 2,
+        "types": [
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 112000,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.018
+    },
+    {
+      "scope": "enterprise",
+      "label": "support.csat_response",
+      "path": "parquet/support/csat_response.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 801616,
+      "sha256": "54056a19fd3a18f025959d05b793e5ccc7a553c534cb7ae79c2fd8dac9b0d7ac",
+      "arrow": {
+        "rows": 48000,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 48000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.011
+    },
+    {
+      "scope": "enterprise",
+      "label": "support.knowledge_article",
+      "path": "parquet/support/knowledge_article.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 8286,
+      "sha256": "699eaba2ef737d52d8bb46b7fe00f5620b5860871de3e85f3dfe0902a651b529",
+      "arrow": {
+        "rows": 520,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 520,
+        "columns": 7,
+        "types": [
+          "DATE",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "enterprise",
+      "label": "support.knowledge_article_view",
+      "path": "parquet/support/knowledge_article_view.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2746331,
+      "sha256": "54bc69c568ac2398ff44651030efe95753d24781a84120d36be3e6e0a435b257",
+      "arrow": {
+        "rows": 190000,
+        "columns": 6,
+        "row_groups": 3,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 190000,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.03
+    },
+    {
+      "scope": "enterprise",
+      "label": "support.message",
+      "path": "parquet/support/message.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7441408,
+      "sha256": "cd2cb11fd4edb4faac4e8c229464796f1740346eb55a0c606a9c5e2b8f57b5d7",
+      "arrow": {
+        "rows": 360000,
+        "columns": 9,
+        "row_groups": 6,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 360000,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.069
+    },
+    {
+      "scope": "enterprise",
+      "label": "support.ticket",
+      "path": "parquet/support/ticket.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3294392,
+      "sha256": "aec99b75f466140473b1994ddce73e879d14e1833b0ad113a39fcbc6351b9fc9",
+      "arrow": {
+        "rows": 100000,
+        "columns": 18,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 100000,
+        "columns": 18,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.058
+    },
+    {
+      "scope": "enterprise",
+      "label": "support.ticket_status_event",
+      "path": "parquet/support/ticket_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 6619244,
+      "sha256": "8d1da2a0ed9e5091b33034c1f529153b3a55cb6b762197340255ceda50018fb0",
+      "arrow": {
+        "rows": 430000,
+        "columns": 7,
+        "row_groups": 7,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 430000,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.076
+    },
+    {
+      "scope": "enterprise",
+      "label": "trust.consent_event",
+      "path": "parquet/trust/consent_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3369026,
+      "sha256": "7df906995e735c262000dd2b04c5ba49f5967a770ba3c215e047ca2a5fff72fb",
+      "arrow": {
+        "rows": 190000,
+        "columns": 9,
+        "row_groups": 3,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 190000,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.056
+    },
+    {
+      "scope": "enterprise",
+      "label": "trust.data_access_log",
+      "path": "parquet/trust/data_access_log.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7885785,
+      "sha256": "4e227cbae0c5edd498406e25b83704b9d87aa1cf21ecf2acdd3b29241337720d",
+      "arrow": {
+        "rows": 540000,
+        "columns": 10,
+        "row_groups": 9,
+        "types": [
+          "bool",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 540000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.115
+    },
+    {
+      "scope": "enterprise",
+      "label": "trust.privacy_request",
+      "path": "parquet/trust/privacy_request.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 299726,
+      "sha256": "b362f4ef75b569fc452f3917b7806aabdee4876161576276d7ef21b1989c22b6",
+      "arrow": {
+        "rows": 9500,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 9500,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "enterprise",
+      "label": "workforce.absence",
+      "path": "parquet/workforce/absence.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 146139,
+      "sha256": "5b8d40ff59121c2d5ea668479da5ca4da1e6471866addafdfa4d28e4940f18d6",
+      "arrow": {
+        "rows": 7650,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 7650,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.005
+    },
+    {
+      "scope": "enterprise",
+      "label": "workforce.employee",
+      "path": "parquet/workforce/employee.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 15180,
+      "sha256": "6054fb3bf6960ec6fd96c85c2c5126bafd81b943274c7fa5f45d7399602d20b0",
+      "arrow": {
+        "rows": 850,
+        "columns": 12,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 850,
+        "columns": 12,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "workforce.employee_role_history",
+      "path": "parquet/workforce/employee_role_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 14196,
+      "sha256": "f8f23b4c124d9a8ebef8dbc2d06afed87ec7416771958be9f3976424f57ed8d3",
+      "arrow": {
+        "rows": 1122,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1122,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "workforce.shift",
+      "path": "parquet/workforce/shift.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2892546,
+      "sha256": "116b5436226a1a32bfaba5bbc2cddb3b6934c7a5b461d1905b8e0eeb78eb51cb",
+      "arrow": {
+        "rows": 297500,
+        "columns": 8,
+        "row_groups": 5,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 297500,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.055
+    },
+    {
+      "scope": "enterprise",
+      "label": "workforce.skill_certification",
+      "path": "parquet/workforce/skill_certification.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 21557,
+      "sha256": "47e7321740174df053ad71670bcc87257e04512b8bd141fc176f79d748167f0e",
+      "arrow": {
+        "rows": 1600,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1600,
+        "columns": 7,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "enterprise",
+      "label": "workforce.training_completion",
+      "path": "parquet/workforce/training_completion.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 48865,
+      "sha256": "ab7b305e6733311c49f02b4d8a679b670beba39b3287754c004575bc96ad439b",
+      "arrow": {
+        "rows": 7650,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 7650,
+        "columns": 6,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:scenario.supply_watchlist",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/scenario/supply_watchlist.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 9150,
+      "sha256": "870e13b01b6d977da212cfdd40a264be81a61581c4adf5316f5e288cc499037d",
+      "arrow": {
+        "rows": 30,
+        "columns": 12,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "double",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 30,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "DOUBLE",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:scenario.opening_balance",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/scenario/opening_balance.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 4417,
+      "sha256": "a97f87354ce91f79028aeb982a7d9dce6c6d312774e3b06d47e28e410793e912",
+      "arrow": {
+        "rows": 81,
+        "columns": 5,
+        "row_groups": 1,
+        "types": [
+          "int32",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 81,
+        "columns": 5,
+        "types": [
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:scenario.action_constraints",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/scenario/action_constraints.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 4293,
+      "sha256": "ec33588730ceda139068010c289d47e7adbf7368517c106c948c49f7c1078761",
+      "arrow": {
+        "rows": 10,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 10,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.inventory_movement",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/inventory_movement.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 11579090,
+      "sha256": "c4523507922d321df6ac8eda094578442b050de3d3d70dd3bb663acce77a8f35",
+      "arrow": {
+        "rows": 520000,
+        "columns": 13,
+        "row_groups": 11,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 520000,
+        "columns": 13,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.inventory_movement",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.121
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.inventory_position_daily",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/inventory_position_daily.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5276945,
+      "sha256": "b7d248ecd2729c035b2881852ac3a8b2401e59e384ee0573bc2992051a57f8a3",
+      "arrow": {
+        "rows": 330000,
+        "columns": 25,
+        "row_groups": 7,
+        "types": [
+          "date32[day]",
+          "float",
+          "int32",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 330000,
+        "columns": 25,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "FLOAT",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.inventory_position_daily",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.052
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.purchase_order",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/purchase_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 401897,
+      "sha256": "0694c557ce87486cbbb97884dc69353d9c7da20f5d03aa94935dee941b991cec",
+      "arrow": {
+        "rows": 24000,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 24000,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.purchase_order",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.011
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.purchase_order_line",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/purchase_order_line.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1384281,
+      "sha256": "355803826d8365ff036fc6a3b1ab4f7a85fea90328000587c1987da76cef6fbe",
+      "arrow": {
+        "rows": 96000,
+        "columns": 9,
+        "row_groups": 2,
+        "types": [
+          "date32[day]",
+          "int16",
+          "int32",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 96000,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "INTEGER",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.purchase_order_line",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.011
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.goods_receipt",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/goods_receipt.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1044814,
+      "sha256": "a5be0c4856b728e210549249b37fc3fea5d0497026d4b2220813a73e0be4034a",
+      "arrow": {
+        "rows": 82000,
+        "columns": 8,
+        "row_groups": 2,
+        "types": [
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 82000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.goods_receipt",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.product_vendor",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/product_vendor.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 22356,
+      "sha256": "56caaf6d285dde77b5304d996593c99ae88222b333dbd0188724f495cc6c63c8",
+      "arrow": {
+        "rows": 1440,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1440,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.product_vendor",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.vendor",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/vendor.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3863,
+      "sha256": "b22299406e55079deffbbdbd99af568fe09e3fc99ee6384ec544a67abb9e1392",
+      "arrow": {
+        "rows": 85,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 85,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.vendor",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:supply.warehouse",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/supply/warehouse.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3250,
+      "sha256": "bda166e24fcad1912db3be0acd781e318a25122191cd75c45974913f1891b350",
+      "arrow": {
+        "rows": 3,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "supply.warehouse",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:catalog.product",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/catalog/product.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 19574,
+      "sha256": "e2bc0c21b9ea7c664e316b1e7af2311cceb23cb3a468730bf0a717fbe38b06f9",
+      "arrow": {
+        "rows": 720,
+        "columns": 13,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 720,
+        "columns": 13,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "catalog.product",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:catalog.product_substitution",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/catalog/product_substitution.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 10704,
+      "sha256": "4dbcf46ec7d578f347f17a2a875746fce80ef794da804391c82ef42acad8723b",
+      "arrow": {
+        "rows": 1440,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1440,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "catalog.product_substitution",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "forty-eight-hours-of-stock:core.business_calendar",
+      "path": "web/public/data/cases/forty-eight-hours-of-stock/core/business_calendar.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7637,
+      "sha256": "467743d29c7a50fa41de40ceb697f938770a3a6c14286dfb96b76acd164c083f",
+      "arrow": {
+        "rows": 1096,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1096,
+        "columns": 11,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.business_calendar",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:scenario.asset_cohort",
+      "path": "web/public/data/cases/rollback-before-dawn/scenario/asset_cohort.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 105690,
+      "sha256": "0abd65b4113b7f94af10cdcd968af780cecfc382f82c840c7cdb61f9a379e3eb",
+      "arrow": {
+        "rows": 18000,
+        "columns": 5,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 18000,
+        "columns": 5,
+        "types": [
+          "DOUBLE",
+          "INTEGER",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:iot.asset",
+      "path": "web/public/data/cases/rollback-before-dawn/iot/asset.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 712465,
+      "sha256": "612769ed970c04ff792156f3b7ccba7899cb8ddb9898013095ec82d7924f105a",
+      "arrow": {
+        "rows": 21823,
+        "columns": 12,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int32",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 21823,
+        "columns": 12,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "iot.asset",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:iot.asset_installation_history",
+      "path": "web/public/data/cases/rollback-before-dawn/iot/asset_installation_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 436916,
+      "sha256": "806aaf27d8157ad57003ddb806897a7892c49fda6e243202da8c6f8032a3cfe4",
+      "arrow": {
+        "rows": 16640,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 16640,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "iot.asset_installation_history",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.007
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:iot.sensor",
+      "path": "web/public/data/cases/rollback-before-dawn/iot/sensor.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 435619,
+      "sha256": "8031b9c76211927d2c9056967e990b4593e9905a5280b6a51b9d6fd8851b50a5",
+      "arrow": {
+        "rows": 27549,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 27549,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "iot.sensor",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:iot.sensor_reading",
+      "path": "web/public/data/cases/rollback-before-dawn/iot/sensor_reading.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1317023,
+      "sha256": "a87260d69049836648f6934f1a677edf1493562777fc2edc0a5576f9da57d561",
+      "arrow": {
+        "rows": 41224,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "float",
+          "int32",
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 41224,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "INTEGER",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "iot.sensor_reading",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.014
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:iot.device_alert",
+      "path": "web/public/data/cases/rollback-before-dawn/iot/device_alert.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 150273,
+      "sha256": "08208bf9a708d953324afd2f467cc8137bddcffbc8b58a927529ee9e6d7c1dd1",
+      "arrow": {
+        "rows": 6297,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 6297,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "iot.device_alert",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:iot.asset_health_daily",
+      "path": "web/public/data/cases/rollback-before-dawn/iot/asset_health_daily.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2744234,
+      "sha256": "b9f43808e79352e6de46dfbcbace339b8aee0456c89d096cfc97cbfe9540bb25",
+      "arrow": {
+        "rows": 24810,
+        "columns": 38,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "float",
+          "int16",
+          "int32",
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 24810,
+        "columns": 38,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "iot.asset_health_daily",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.023
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:external.weather_station",
+      "path": "web/public/data/cases/rollback-before-dawn/external/weather_station.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3106,
+      "sha256": "b60f62c257f03dd98a8a82209c6929c20cbd260673f1547cae7c6862f4d9906b",
+      "arrow": {
+        "rows": 12,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 12,
+        "columns": 8,
+        "types": [
+          "DOUBLE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.weather_station",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:external.weather_hourly",
+      "path": "web/public/data/cases/rollback-before-dawn/external/weather_hourly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 805255,
+      "sha256": "9f3611d1d8a97cd0a4aa0b012d8a415fd763a737d3d4c01a7a7c0b30a888f954",
+      "arrow": {
+        "rows": 17280,
+        "columns": 14,
+        "row_groups": 1,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 17280,
+        "columns": 14,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.weather_hourly",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.008
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:field_ops.work_order",
+      "path": "web/public/data/cases/rollback-before-dawn/field_ops/work_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 160150,
+      "sha256": "db6c38f85fa16c4620d62c245d907563d0afbabfb07ce2b482051d7b86d14327",
+      "arrow": {
+        "rows": 2886,
+        "columns": 20,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 2886,
+        "columns": 20,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.work_order",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:field_ops.work_order_status_event",
+      "path": "web/public/data/cases/rollback-before-dawn/field_ops/work_order_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 272612,
+      "sha256": "f28806d427e79502fbd18a6a132e7bb821893978527049f76b45df35d2ac9aa0",
+      "arrow": {
+        "rows": 17316,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 17316,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.work_order_status_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:core.region",
+      "path": "web/public/data/cases/rollback-before-dawn/core/region.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1994,
+      "sha256": "fa1a14a448574d5608865a391ff875d341ee8209b24bbee03be659b2c36ba0de",
+      "arrow": {
+        "rows": 6,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 6,
+        "columns": 6,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.region",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:core.branch",
+      "path": "web/public/data/cases/rollback-before-dawn/core/branch.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 4020,
+      "sha256": "c1123a128fac192e6b202a69fdf034f2e987d90468eedf5e4faf5a52f026d8dd",
+      "arrow": {
+        "rows": 36,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 36,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.branch",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "rollback-before-dawn:core.world_event",
+      "path": "web/public/data/cases/rollback-before-dawn/core/world_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 4131,
+      "sha256": "489a54bef6c021ea231b7897d7a2a53e7f6a4025b54509ff6e857ac1ecd7c866",
+      "arrow": {
+        "rows": 19,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 19,
+        "columns": 10,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.world_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:scenario.current_appointment_roster",
+      "path": "web/public/data/cases/the-730-capacity-call/scenario/current_appointment_roster.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 8554,
+      "sha256": "33c9a0fe610cf56c8833f6660b0e7749a11a09ab334e9e18a64ffa1b31fbb387",
+      "arrow": {
+        "rows": 7,
+        "columns": 12,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 7,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:scenario.capacity_bulletin",
+      "path": "web/public/data/cases/the-730-capacity-call/scenario/capacity_bulletin.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 12361,
+      "sha256": "700b4459d44fc06bae86bbbd1a70f532648782954fd801034f15ae2a72b0877b",
+      "arrow": {
+        "rows": 1,
+        "columns": 17,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "int64",
+          "string",
+          "timestamp[ns]"
+        ],
+        "timestamp_ns_columns": [
+          "decision_at"
+        ]
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1,
+        "columns": 17,
+        "types": [
+          "BIGINT",
+          "DOUBLE",
+          "TIMESTAMP_NS",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:scenario.appointment_geography",
+      "path": "web/public/data/cases/the-730-capacity-call/scenario/appointment_geography.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 29324,
+      "sha256": "1c56658560c690826e73962b6613cb2358f712282ff7e5069a6d0255e65b35ee",
+      "arrow": {
+        "rows": 3517,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3517,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:field_ops.appointment",
+      "path": "web/public/data/cases/the-730-capacity-call/field_ops/appointment.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 92008,
+      "sha256": "f7a87c2f8d442b1f3d01749941194e42af2accad798525c5e49d468cde6d1d5b",
+      "arrow": {
+        "rows": 3517,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3517,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.appointment",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:field_ops.work_order",
+      "path": "web/public/data/cases/the-730-capacity-call/field_ops/work_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 173439,
+      "sha256": "91bfe9a9ff413cf38ab3be48d5e412d5232a98c7c5589234ececfcd35d79118f",
+      "arrow": {
+        "rows": 3517,
+        "columns": 20,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3517,
+        "columns": 20,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.work_order",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:field_ops.work_order_status_event",
+      "path": "web/public/data/cases/the-730-capacity-call/field_ops/work_order_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 334137,
+      "sha256": "fd63a21662cfdcaa04ed2de9af60915aa1c32eb7cbbd9e07afd798d8497a38de",
+      "arrow": {
+        "rows": 21102,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 21102,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.work_order_status_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.007
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:field_ops.visit",
+      "path": "web/public/data/cases/the-730-capacity-call/field_ops/visit.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 100342,
+      "sha256": "57b262afb8c8e9d73a41a74da21613b757e1f867399df225d4d0fad1c2be83e0",
+      "arrow": {
+        "rows": 3517,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3517,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.visit",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:workforce.shift",
+      "path": "web/public/data/cases/the-730-capacity-call/workforce/shift.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 125789,
+      "sha256": "7cff4b42563550aa4d0d2f8da5dd635afd0cdb3f54c383d7a4b175446dfca30b",
+      "arrow": {
+        "rows": 9687,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 9687,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "workforce.shift",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:workforce.employee_role_history",
+      "path": "web/public/data/cases/the-730-capacity-call/workforce/employee_role_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3270,
+      "sha256": "bf508e9403a0ca620e3c2c6ee12934e60eb9fe3069c094f009eb23f9f1f4efae",
+      "arrow": {
+        "rows": 28,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 28,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "workforce.employee_role_history",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:external.weather_station",
+      "path": "web/public/data/cases/the-730-capacity-call/external/weather_station.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2739,
+      "sha256": "8ae65a73ac346e1fe2bb23d17ce411e969e94b718630fb51f779b0bc927b3ce9",
+      "arrow": {
+        "rows": 2,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 2,
+        "columns": 8,
+        "types": [
+          "DOUBLE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.weather_station",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:external.weather_hourly",
+      "path": "web/public/data/cases/the-730-capacity-call/external/weather_hourly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1951683,
+      "sha256": "e2d7fe6dd1136932575485456d1f2264b27941818ae30cafdb605fca39928312",
+      "arrow": {
+        "rows": 38848,
+        "columns": 14,
+        "row_groups": 1,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 38848,
+        "columns": 14,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.weather_hourly",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.014
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:external.traffic_area_hourly",
+      "path": "web/public/data/cases/the-730-capacity-call/external/traffic_area_hourly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 176740,
+      "sha256": "460252a75f2deabdc5b39e665ad5fc376bd1fa88a2432b6928d6dad80569fe75",
+      "arrow": {
+        "rows": 7103,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 7103,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.traffic_area_hourly",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:core.branch",
+      "path": "web/public/data/cases/the-730-capacity-call/core/branch.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2831,
+      "sha256": "94701e10ca96b1da1282d52638ffbe4bac0ade4b341808c39f0a12716b7de4b2",
+      "arrow": {
+        "rows": 1,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.branch",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:core.service_area",
+      "path": "web/public/data/cases/the-730-capacity-call/core/service_area.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2520,
+      "sha256": "dc5ca5ee2578558e0cff37b6fd0350650f255996499a100e086172567f9aa351",
+      "arrow": {
+        "rows": 3,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3,
+        "columns": 8,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.service_area",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-730-capacity-call:core.business_calendar",
+      "path": "web/public/data/cases/the-730-capacity-call/core/business_calendar.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 7637,
+      "sha256": "467743d29c7a50fa41de40ceb697f938770a3a6c14286dfb96b76acd164c083f",
+      "arrow": {
+        "rows": 1096,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1096,
+        "columns": 11,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.business_calendar",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "the-monday-scorecard:support.csat_response",
+      "path": "web/public/data/support/csat_response.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 801616,
+      "arrow": {
+        "rows": 48000,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 48000,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "support.csat_response",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.01
+    },
+    {
+      "scope": "public",
+      "label": "the-monday-scorecard:support.ticket",
+      "path": "web/public/data/support/ticket.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3294392,
+      "arrow": {
+        "rows": 100000,
+        "columns": 18,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 100000,
+        "columns": 18,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "support.ticket",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.055
+    },
+    {
+      "scope": "public",
+      "label": "the-monday-scorecard:crm.account",
+      "path": "web/public/data/crm/account.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 841528,
+      "arrow": {
+        "rows": 65000,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 65000,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "crm.account",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.027
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:growth.experiment",
+      "path": "web/public/data/cases/the-navigation-vote/growth_experiment.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2264,
+      "sha256": "757f7f0950d627156b5094cf12db692e967f00f7132e2dc55e1eadd626ce1b0a",
+      "arrow": {
+        "rows": 1,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1,
+        "columns": 7,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "growth.experiment",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:growth.experiment_assignment",
+      "path": "web/public/data/cases/the-navigation-vote/growth_experiment_assignment.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1202049,
+      "sha256": "3fcc83131f4ce22dca85b8ba0897363e72197580196e13c09dd9a49f402651ba",
+      "arrow": {
+        "rows": 42000,
+        "columns": 9,
+        "row_groups": 2,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 42000,
+        "columns": 9,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "growth.experiment_assignment",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.019
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:growth.session",
+      "path": "web/public/data/cases/the-navigation-vote/growth_session.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1396987,
+      "sha256": "c317792a2ffde5212297ee3cd15f9f10d6140ee2c38513468337edab6ee414a8",
+      "arrow": {
+        "rows": 42000,
+        "columns": 12,
+        "row_groups": 2,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 42000,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "growth.session",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.024
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:growth.web_event",
+      "path": "web/public/data/cases/the-navigation-vote/growth_web_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2801683,
+      "sha256": "31f6f6460d07b607a6e4936986166944316b8e32fbbb00b1ab51cc0086204af4",
+      "arrow": {
+        "rows": 140670,
+        "columns": 8,
+        "row_groups": 5,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 140670,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "growth.web_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.035
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:commerce.order",
+      "path": "web/public/data/cases/the-navigation-vote/commerce_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 673176,
+      "sha256": "7befb317ec592179c7be4bed20578dcfb4054a9f41c26e1a228541d10025920f",
+      "arrow": {
+        "rows": 15518,
+        "columns": 15,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 15518,
+        "columns": 15,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "commerce.order",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.014
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:crm.account",
+      "path": "web/public/data/cases/the-navigation-vote/crm_account.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 403151,
+      "sha256": "cd32589413eefcb107abda67bf7deef854a2505e5574e6cddda7199123f3a6c8",
+      "arrow": {
+        "rows": 24773,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 24773,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "crm.account",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.012
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:casefiles.navigation_readout",
+      "path": "web/public/data/cases/the-navigation-vote/navigation_readout.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3076,
+      "sha256": "7997d20555fc2567940fd3efc38441216258f6c95844036867c98db35856f278",
+      "arrow": {
+        "rows": 2,
+        "columns": 4,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 2,
+        "columns": 4,
+        "types": [
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:casefiles.finance_conversion_check",
+      "path": "web/public/data/cases/the-navigation-vote/finance_conversion_check.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3089,
+      "sha256": "7d46089804d0d36294a06c9e8175e19e2ee9f05d40682ff9c4191def2bfcb8a0",
+      "arrow": {
+        "rows": 2,
+        "columns": 4,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 2,
+        "columns": 4,
+        "types": [
+          "BIGINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-navigation-vote:casefiles.experiment_intake",
+      "path": "web/public/data/cases/the-navigation-vote/experiment_intake.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5190,
+      "sha256": "ab09df3d5fb8d2be70ec5dc345af1a05c9631db469a103784603dceb440fd85a",
+      "arrow": {
+        "rows": 1,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 1,
+        "columns": 7,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:core.region",
+      "path": "web/public/data/cases/the-orion-renewal/region.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1152,
+      "sha256": "56c98107f53ba3a3e035c92cf02439a32a3ab4e27d7e6ec2e03af78075d6511a",
+      "arrow": {
+        "rows": 6,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 6,
+        "columns": 6,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.region",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:core.branch",
+      "path": "web/public/data/cases/the-orion-renewal/branch.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2837,
+      "sha256": "eb6e39bc2a8a22a4fdaa0f9de0b2135f445c3f00b920c8dd8be541a95d4718af",
+      "arrow": {
+        "rows": 36,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "double",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 36,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "DOUBLE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.branch",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:core.service_area",
+      "path": "web/public/data/cases/the-orion-renewal/service_area.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2296,
+      "sha256": "88b8388ad3c4986064d348ccadce48e8fe5e6e5a195ee57e6600250c0f9d376d",
+      "arrow": {
+        "rows": 120,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 120,
+        "columns": 8,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.service_area",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:core.business_calendar",
+      "path": "web/public/data/cases/the-orion-renewal/business_calendar.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 4212,
+      "sha256": "4a6cdee590f6b344bd14920b61077b070a00736175600709c4b27ea37b03871e",
+      "arrow": {
+        "rows": 731,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "int8",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 731,
+        "columns": 11,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "core.business_calendar",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:fleet.route",
+      "path": "web/public/data/cases/the-orion-renewal/route.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 975268,
+      "sha256": "08132a2a18320cf4eacb8829995ee5aa4aa2ab5a0dfa9bb4dba020a43f8a37ee",
+      "arrow": {
+        "rows": 73350,
+        "columns": 10,
+        "row_groups": 2,
+        "types": [
+          "date32[day]",
+          "float",
+          "int16",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 73350,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "FLOAT",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "fleet.route",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:fleet.route_stop",
+      "path": "web/public/data/cases/the-orion-renewal/route_stop.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5785721,
+      "sha256": "5add64fd8afc9b9657bf161213d7d8e8860e2e4903fe27f9e786475cd86922f2",
+      "arrow": {
+        "rows": 213566,
+        "columns": 8,
+        "row_groups": 4,
+        "types": [
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 213566,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "fleet.route_stop",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.034
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:field_ops.work_order",
+      "path": "web/public/data/cases/the-orion-renewal/work_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5283306,
+      "sha256": "1f71951a55c074343418b057e70f0debc1c5abf4a27f453f54ea2977b596391f",
+      "arrow": {
+        "rows": 99832,
+        "columns": 20,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 99832,
+        "columns": 20,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.work_order",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.06
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:field_ops.work_order_status_event",
+      "path": "web/public/data/cases/the-orion-renewal/work_order_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 10235750,
+      "sha256": "60193b09709f1547804c11eefec89a95abbe05f9af86c269143eaa223bcd3b47",
+      "arrow": {
+        "rows": 598992,
+        "columns": 7,
+        "row_groups": 10,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 598992,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.work_order_status_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.083
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:field_ops.visit",
+      "path": "web/public/data/cases/the-orion-renewal/visit.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3040539,
+      "sha256": "1346abee115b6a136edc77b0650ff1ab6e1a8fe05d2f7d8e0ec3b994b7b2c902",
+      "arrow": {
+        "rows": 99832,
+        "columns": 11,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 99832,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.visit",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.029
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:field_ops.work_order_part",
+      "path": "web/public/data/cases/the-orion-renewal/work_order_part.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5054326,
+      "sha256": "ca6ed41a5c847d1107acbc4728cd1f55de6477134cb83b8f2e51d3fe1b775e70",
+      "arrow": {
+        "rows": 216316,
+        "columns": 7,
+        "row_groups": 4,
+        "types": [
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 216316,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.work_order_part",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.032
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:field_ops.appointment",
+      "path": "web/public/data/cases/the-orion-renewal/appointment.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3217015,
+      "sha256": "e06323a4363465730bb3a7b971081897f5a0a9764342b28220318b926547760a",
+      "arrow": {
+        "rows": 99832,
+        "columns": 10,
+        "row_groups": 2,
+        "types": [
+          "bool",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 99832,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "field_ops.appointment",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.033
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:workforce.shift",
+      "path": "web/public/data/cases/the-orion-renewal/shift.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1639247,
+      "sha256": "4784b1c545f37d00a01df282d87cbea67f8eb4f0b015320ba7447e806af05834",
+      "arrow": {
+        "rows": 156695,
+        "columns": 8,
+        "row_groups": 3,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 156695,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "workforce.shift",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.031
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:workforce.employee_role_history",
+      "path": "web/public/data/cases/the-orion-renewal/employee_role_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 6052,
+      "sha256": "9a2595b58eab6b22248613b05187832bde7bdfe1014b9b07bb87f6cccd43da23",
+      "arrow": {
+        "rows": 425,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 425,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "workforce.employee_role_history",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:workforce.absence",
+      "path": "web/public/data/cases/the-orion-renewal/absence.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 81792,
+      "sha256": "e174ec0af0a05abe985016df65bbfa0a8a55a1260d7ff761d5a4cc047f076f27",
+      "arrow": {
+        "rows": 3996,
+        "columns": 7,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 3996,
+        "columns": 7,
+        "types": [
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "workforce.absence",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:external.traffic_area_hourly",
+      "path": "web/public/data/cases/the-orion-renewal/traffic_area_hourly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5958237,
+      "sha256": "f9c0376f3afb48072a4131f3aa961ea65dfa70d9130fdbd89b362ee1029f98f4",
+      "arrow": {
+        "rows": 252909,
+        "columns": 8,
+        "row_groups": 4,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 252909,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.traffic_area_hourly",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.027
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:external.weather_station",
+      "path": "web/public/data/cases/the-orion-renewal/weather_station.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1839,
+      "sha256": "eb87a4148a6dd14fe4b976b83c29eb14417a750d2fca9cdb3d9fa9eb8cebcdb1",
+      "arrow": {
+        "rows": 12,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "double",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 12,
+        "columns": 8,
+        "types": [
+          "DOUBLE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.weather_station",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-orion-renewal:external.weather_hourly",
+      "path": "web/public/data/cases/the-orion-renewal/weather_hourly.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 10199169,
+      "sha256": "814d4e9ccfcb223741b46826b3efa1ec520c5e5a8a9c18ce46a1258b020045f2",
+      "arrow": {
+        "rows": 210528,
+        "columns": 14,
+        "row_groups": 4,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 210528,
+        "columns": 14,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "external.weather_hourly",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.044
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:commerce.order",
+      "path": "web/public/data/cases/the-quarter-that-moved/commerce_order.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 785908,
+      "sha256": "0b7bf4080d81c45a15bcbaa17ad8b4b826072053f8309f95c84e6133136eea7b",
+      "arrow": {
+        "rows": 18167,
+        "columns": 15,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 18167,
+        "columns": 15,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "commerce.order",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:commerce.order_line",
+      "path": "web/public/data/cases/the-quarter-that-moved/commerce_order_line.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 941671,
+      "sha256": "a8b3204648d9e6e10307267f109133b969b529f047140c6185721e4740f6ec1e",
+      "arrow": {
+        "rows": 32466,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 32466,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "commerce.order_line",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.015
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:commerce.order_event",
+      "path": "web/public/data/cases/the-quarter-that-moved/commerce_order_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1152627,
+      "sha256": "5c3620c575e7f14d129a45719882c25e3802d708ede5a74c50cdeb5c690470cf",
+      "arrow": {
+        "rows": 54501,
+        "columns": 8,
+        "row_groups": 2,
+        "types": [
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 54501,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "commerce.order_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.017
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:commerce.shipment_event",
+      "path": "web/public/data/cases/the-quarter-that-moved/commerce_shipment_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1242278,
+      "sha256": "b46e745ece260db2f4c75d0997059520bb43022d6bbf4588fc70b5d88bbeeff7",
+      "arrow": {
+        "rows": 51036,
+        "columns": 8,
+        "row_groups": 2,
+        "types": [
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 51036,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "commerce.shipment_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.018
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:crm.account",
+      "path": "web/public/data/cases/the-quarter-that-moved/crm_account.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 257698,
+      "sha256": "b915598e1c50ebe9125d89405860cddd75da1d783708fa3a8b33672b09a91883",
+      "arrow": {
+        "rows": 15601,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 15601,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "crm.account",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.009
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:catalog.product_price_history",
+      "path": "web/public/data/cases/the-quarter-that-moved/catalog_product_price_history.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 54607,
+      "sha256": "cbc3b9443973ccf09c376b016d4330d83f69a96973a5dc6cdab66e4565ba4590",
+      "arrow": {
+        "rows": 4320,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 4320,
+        "columns": 8,
+        "types": [
+          "BIGINT",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "catalog.product_price_history",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.004
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:casefiles.q2_commercial_close",
+      "path": "web/public/data/cases/the-quarter-that-moved/q2_commercial_close.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 699347,
+      "sha256": "b5cee9c72ec52153e68a882c9e72e8e077d096326a64a030e47c4126ce977e12",
+      "arrow": {
+        "rows": 18167,
+        "columns": 13,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 18167,
+        "columns": 13,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.013
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:casefiles.q2_fulfillment_review",
+      "path": "web/public/data/cases/the-quarter-that-moved/q2_fulfillment_review.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 875651,
+      "sha256": "c6f3f00247729d98c583f00f6caaac69f4b289c2d2690abd0cb496d5c0e38043",
+      "arrow": {
+        "rows": 18167,
+        "columns": 12,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 18167,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.014
+    },
+    {
+      "scope": "public",
+      "label": "the-quarter-that-moved:casefiles.harborhome_transition_mapping",
+      "path": "web/public/data/cases/the-quarter-that-moved/harborhome_transition_mapping.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3632,
+      "sha256": "95539774209c969b28c4e34f02d12db2f72d77d0b426320fae27635ff95ccbb7",
+      "arrow": {
+        "rows": 6,
+        "columns": 4,
+        "row_groups": 1,
+        "types": [
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 6,
+        "columns": 4,
+        "types": [
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-queue-nobody-owns:support.conversation",
+      "path": "web/public/data/cases/the-queue-nobody-owns/conversation.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 728375,
+      "sha256": "29383477f0e098c7c025dae6a6e0c02421b4e029b07a7af79089cbd49d2ff3ea",
+      "arrow": {
+        "rows": 50387,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 50387,
+        "columns": 6,
+        "types": [
+          "BIGINT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "support.conversation",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.01
+    },
+    {
+      "scope": "public",
+      "label": "the-queue-nobody-owns:support.ticket",
+      "path": "web/public/data/cases/the-queue-nobody-owns/ticket.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1109681,
+      "sha256": "240115c1806728b440c5c4252581c1ac870378174f3810e232f509617032cc62",
+      "arrow": {
+        "rows": 30311,
+        "columns": 18,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 30311,
+        "columns": 18,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "support.ticket",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.024
+    },
+    {
+      "scope": "public",
+      "label": "the-queue-nobody-owns:support.message",
+      "path": "web/public/data/cases/the-queue-nobody-owns/message.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 3235978,
+      "sha256": "0e072509194c23972b1e0701d06973df65256f201b3b11231f59f71d2049c207",
+      "arrow": {
+        "rows": 161911,
+        "columns": 9,
+        "row_groups": 3,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 161911,
+        "columns": 9,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "support.message",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.035
+    },
+    {
+      "scope": "public",
+      "label": "the-queue-nobody-owns:support.ticket_status_event",
+      "path": "web/public/data/cases/the-queue-nobody-owns/ticket_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1857552,
+      "sha256": "74a3c81c905ffd9ab94e2e7570399063899c7d3b4429bcd1c0e6e90f9527f4a5",
+      "arrow": {
+        "rows": 130347,
+        "columns": 7,
+        "row_groups": 2,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 130347,
+        "columns": 7,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "support.ticket_status_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.028
+    },
+    {
+      "scope": "public",
+      "label": "the-queue-nobody-owns:case_input.scoring_queue",
+      "path": "web/public/data/cases/the-queue-nobody-owns/scoring_queue.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 19784,
+      "sha256": "1c2f3443ae1d4f7367cfb6fbcc5aa066d02e9f56aeae554503f1be3d4b6c37fa",
+      "arrow": {
+        "rows": 818,
+        "columns": 12,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int64",
+          "string",
+          "timestamp[us]"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 818,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "the-queue-nobody-owns:case_reference.routing_team",
+      "path": "web/public/data/cases/the-queue-nobody-owns/routing_team.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2916,
+      "sha256": "a4183832533de303d1402bebfb6b64a768dcc3ea17f21bfe2e4af0e4c5be261f",
+      "arrow": {
+        "rows": 5,
+        "columns": 3,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 5,
+        "columns": 3,
+        "types": [
+          "BIGINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.001
+    },
+    {
+      "scope": "public",
+      "label": "the-queue-nobody-owns:case_reference.misroute_cost",
+      "path": "web/public/data/cases/the-queue-nobody-owns/misroute_cost.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2623,
+      "sha256": "ad5eaea1922c8852da0e868c2b1f9e68b6d1e5facbbb745f802f73d4c95d8b2e",
+      "arrow": {
+        "rows": 25,
+        "columns": 3,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 25,
+        "columns": 3,
+        "types": [
+          "BIGINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.001
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:platform.account_feature_snapshot",
+      "path": "web/public/data/cases/too-good-to-ship/account_feature_snapshot.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 22645653,
+      "sha256": "b30fe6efc9b404c5ec7141bb9230cbcdf94bbb4ccd8ca8b847d057e1736bcbde",
+      "arrow": {
+        "rows": 33156,
+        "columns": 213,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "float",
+          "int16",
+          "int32",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 33156,
+        "columns": 213,
+        "types": [
+          "BIGINT",
+          "BOOLEAN",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "platform.account_feature_snapshot",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.142
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:platform.model_registry",
+      "path": "web/public/data/cases/too-good-to-ship/model_registry.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1974,
+      "sha256": "ef3d693e5f76d8c85d48edca869122f7c9729d48ea94ea7862319ca57372927e",
+      "arrow": {
+        "rows": 18,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "int16",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 18,
+        "columns": 8,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "platform.model_registry",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:platform.model_version",
+      "path": "web/public/data/cases/too-good-to-ship/model_version.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 6167,
+      "sha256": "1bbe13133c9f3507d7d74f26580734be2c3fd152fbbb385dab559929d2b3e092",
+      "arrow": {
+        "rows": 76,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "float",
+          "int16",
+          "int32",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 76,
+        "columns": 11,
+        "types": [
+          "DATE",
+          "FLOAT",
+          "INTEGER",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "platform.model_version",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.003
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:platform.pipeline",
+      "path": "web/public/data/cases/too-good-to-ship/pipeline.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2555,
+      "sha256": "7b3649ad83bb05b1fef3558c599f8a16ce654146f0d428af8de17518d3b4e038",
+      "arrow": {
+        "rows": 72,
+        "columns": 9,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "int16",
+          "int32",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 72,
+        "columns": 9,
+        "types": [
+          "BOOLEAN",
+          "INTEGER",
+          "SMALLINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "platform.pipeline",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.002
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:platform.pipeline_run",
+      "path": "web/public/data/cases/too-good-to-ship/pipeline_run.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 2134290,
+      "sha256": "0fbba6226c540cef06de94ba23bd3b0ef75bb5a6bdfb7aa990f8919d3f6bb6f4",
+      "arrow": {
+        "rows": 61301,
+        "columns": 11,
+        "row_groups": 1,
+        "types": [
+          "float",
+          "int16",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 61301,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "SMALLINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "platform.pipeline_run",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.024
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:platform.data_quality_result",
+      "path": "web/public/data/cases/too-good-to-ship/data_quality_result.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5530776,
+      "sha256": "6c9f109e6a71dc35d61efa0727a36d1592229a92383167bfb0a7b0c8b5893a21",
+      "arrow": {
+        "rows": 173210,
+        "columns": 11,
+        "row_groups": 3,
+        "types": [
+          "float",
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 173210,
+        "columns": 11,
+        "types": [
+          "BIGINT",
+          "FLOAT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "platform.data_quality_result",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.05
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:crm.account",
+      "path": "web/public/data/cases/too-good-to-ship/account.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 114315,
+      "sha256": "c099dd8e7cc8c3f4fdb88048265b8100db4e6acb5e6622ac289476dbd49698c6",
+      "arrow": {
+        "rows": 12000,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "bool",
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 12000,
+        "columns": 10,
+        "types": [
+          "BOOLEAN",
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "crm.account",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.007
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:crm.account_status_event",
+      "path": "web/public/data/cases/too-good-to-ship/account_status_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 69204,
+      "sha256": "d6b56caf8f1d34c626ca10da4129a83277f4e69de4bcb1ae875c059e18c1e884",
+      "arrow": {
+        "rows": 14175,
+        "columns": 6,
+        "row_groups": 1,
+        "types": [
+          "date32[day]",
+          "string"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 14175,
+        "columns": 6,
+        "types": [
+          "DATE",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "crm.account_status_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.006
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:billing.subscription",
+      "path": "web/public/data/cases/too-good-to-ship/subscription.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 356018,
+      "sha256": "d2e76c6cab0eb9e1dea453e39b9deb1529023e4c7fcd7073cfcab7e6fbfa7c60",
+      "arrow": {
+        "rows": 12084,
+        "columns": 10,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 12084,
+        "columns": 10,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "billing.subscription",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.008
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:billing.subscription_event",
+      "path": "web/public/data/cases/too-good-to-ship/subscription_event.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 1292442,
+      "sha256": "82420ef92d49b820508b620ae3b159672bf9d0070ab883f1f410760c410cc196",
+      "arrow": {
+        "rows": 60420,
+        "columns": 8,
+        "row_groups": 1,
+        "types": [
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 60420,
+        "columns": 8,
+        "types": [
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "billing.subscription_event",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.02
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:billing.payment_attempt",
+      "path": "web/public/data/cases/too-good-to-ship/payment_attempt.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 5918538,
+      "sha256": "a820f613878c4bde002067f901aebd64dec71df060c3fd4392cf3dfbc9967fc9",
+      "arrow": {
+        "rows": 230757,
+        "columns": 12,
+        "row_groups": 4,
+        "types": [
+          "int64",
+          "int8",
+          "string",
+          "timestamp[ms]"
+        ],
+        "timestamp_ns_columns": [],
+        "source_schema_match": true
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 230757,
+        "columns": 12,
+        "types": [
+          "BIGINT",
+          "TIMESTAMP",
+          "TINYINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true,
+        "source_contract": "billing.payment_attempt",
+        "source_schema_match": true
+      },
+      "elapsed_seconds": 0.067
+    },
+    {
+      "scope": "public",
+      "label": "too-good-to-ship:case_input.beacon_submitted_split",
+      "path": "web/public/data/cases/too-good-to-ship/beacon_submitted_split.parquet",
+      "status": "PASS",
+      "errors": [],
+      "warnings": [],
+      "bytes": 40870,
+      "sha256": "1543a06f489e69c53576ae4de077f58129c00f29e8b587f36a39bc1c5bfed3f5",
+      "arrow": {
+        "rows": 33156,
+        "columns": 2,
+        "row_groups": 1,
+        "types": [
+          "int64",
+          "string"
+        ],
+        "timestamp_ns_columns": []
+      },
+      "duckdb": {
+        "version": "1.5.5",
+        "rows": 33156,
+        "columns": 2,
+        "types": [
+          "BIGINT",
+          "VARCHAR"
+        ],
+        "full_value_scan": true
+      },
+      "elapsed_seconds": 0.003
+    }
+  ]
+}

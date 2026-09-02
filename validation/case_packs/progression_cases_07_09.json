@@ -13,7 +13,7 @@
       "value": {
         "files": 17,
         "rows": 2027178,
-        "bytes": 39782942
+        "bytes": 51488758
       },
       "requirement": "every manifest row, byte count, schema width, and SHA-256 matches the generated file"
     },
@@ -21,7 +21,7 @@
       "case": "the-orion-renewal",
       "check_id": "github_file_limit",
       "passed": true,
-      "value": 8756468,
+      "value": 10235750,
       "requirement": "every browser Parquet is below GitHub's 100 MB per-file limit"
     },
     {
@@ -31,7 +31,7 @@
       "value": {
         "files": 7,
         "rows": 373804,
-        "bytes": 5322556
+        "bytes": 6956909
       },
       "requirement": "every manifest row, byte count, schema width, and SHA-256 matches the generated file"
     },
@@ -39,7 +39,7 @@
       "case": "the-queue-nobody-owns",
       "check_id": "github_file_limit",
       "passed": true,
-      "value": 2402497,
+      "value": 3235978,
       "requirement": "every browser Parquet is below GitHub's 100 MB per-file limit"
     },
     {
@@ -49,7 +49,7 @@
       "value": {
         "files": 12,
         "rows": 630425,
-        "bytes": 27431829
+        "bytes": 38112802
       },
       "requirement": "every manifest row, byte count, schema width, and SHA-256 matches the generated file"
     },
@@ -57,7 +57,7 @@
       "case": "too-good-to-ship",
       "check_id": "github_file_limit",
       "passed": true,
-      "value": 15082436,
+      "value": 22645653,
       "requirement": "every browser Parquet is below GitHub's 100 MB per-file limit"
     },
     {

@@ -6,7 +6,7 @@
   "extract_boundary": "Historical conversation starts end before the learner-safe unlabeled backlog cohort; the routing snapshot is 2024-12-03 08:20 ET.",
   "file_count": 7,
   "total_rows": 373804,
-  "total_bytes": 5322556,
+  "total_bytes": 6956909,
   "files": [
     {
       "table": "support.conversation",
@@ -16,8 +16,8 @@
       "selection": "historical conversations started 2023-07-01 through 2024-10-31",
       "rows": 50387,
       "columns": 6,
-      "bytes": 564624,
-      "sha256": "14088e2be11666c246b5b092d97e3f12e278f0fd5ce759d4c47b1adc7839c31b"
+      "bytes": 728375,
+      "sha256": "29383477f0e098c7c025dae6a6e0c02421b4e029b07a7af79089cbd49d2ff3ea"
     },
     {
       "table": "support.ticket",
@@ -27,8 +27,8 @@
       "selection": "tickets attached to the historical conversation cohort",
       "rows": 30311,
       "columns": 18,
-      "bytes": 812382,
-      "sha256": "b57e9b83a83aebce3c64302a8492195984f740be535a8a887be470dbef78b7ab"
+      "bytes": 1109681,
+      "sha256": "240115c1806728b440c5c4252581c1ac870378174f3810e232f509617032cc62"
     },
     {
       "table": "support.message",
@@ -38,8 +38,8 @@
       "selection": "complete frozen message histories for the historical cohort; intake filtering is learner-owned",
       "rows": 161911,
       "columns": 9,
-      "bytes": 2402497,
-      "sha256": "7b94dfc835a7bd21fdf018c0e2e465a6dc024bc02198acc944369ec85e81c201"
+      "bytes": 3235978,
+      "sha256": "0e072509194c23972b1e0701d06973df65256f201b3b11231f59f71d2049c207"
     },
     {
       "table": "support.ticket_status_event",
@@ -49,8 +49,8 @@
       "selection": "complete frozen status histories for the historical cohort",
       "rows": 130347,
       "columns": 7,
-      "bytes": 1517730,
-      "sha256": "92dc222119e88c2257bf6eda4f9849619d6e72a2bd517efd52f66da81391b5b4"
+      "bytes": 1857552,
+      "sha256": "74a3c81c905ffd9ab94e2e7570399063899c7d3b4429bcd1c0e6e90f9527f4a5"
     },
     {
       "table": "case_input.scoring_queue",

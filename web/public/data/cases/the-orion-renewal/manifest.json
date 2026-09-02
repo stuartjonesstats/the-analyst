@@ -6,7 +6,7 @@
   "extract_boundary": "Routes dated 2024-01-01 through 2025-12-31 and their complete relational neighborhood.",
   "file_count": 17,
   "total_rows": 2027178,
-  "total_bytes": 39782942,
+  "total_bytes": 51488758,
   "files": [
     {
       "table": "core.region",
@@ -71,8 +71,8 @@
       "selection": "all stops belonging to included routes",
       "rows": 213566,
       "columns": 8,
-      "bytes": 4654463,
-      "sha256": "e0413822ff9fa9e9c3724782fa2c5af2adc32989e4b646d590545d2873413563"
+      "bytes": 5785721,
+      "sha256": "5add64fd8afc9b9657bf161213d7d8e8860e2e4903fe27f9e786475cd86922f2"
     },
     {
       "table": "field_ops.work_order",
@@ -82,8 +82,8 @@
       "selection": "all work orders referenced by included route stops",
       "rows": 99832,
       "columns": 20,
-      "bytes": 4309607,
-      "sha256": "692f0fdb5eb3a6f31b907d85a030b9aae05a1baf14a76e173e47ebc6164ac703"
+      "bytes": 5283306,
+      "sha256": "1f71951a55c074343418b057e70f0debc1c5abf4a27f453f54ea2977b596391f"
     },
     {
       "table": "field_ops.work_order_status_event",
@@ -93,8 +93,8 @@
       "selection": "complete status histories for included work orders",
       "rows": 598992,
       "columns": 7,
-      "bytes": 8756468,
-      "sha256": "f501d342d465a372cb8021e92471c2feb93cfbaf71f243c60632dc19e0fdf986"
+      "bytes": 10235750,
+      "sha256": "60193b09709f1547804c11eefec89a95abbe05f9af86c269143eaa223bcd3b47"
     },
     {
       "table": "field_ops.visit",
@@ -104,8 +104,8 @@
       "selection": "all visits for included work orders",
       "rows": 99832,
       "columns": 11,
-      "bytes": 2331269,
-      "sha256": "c0ebd50874b0b178c1f706e3d0cfc8ee2bf7553ff4149701fc5113bd4f2f7097"
+      "bytes": 3040539,
+      "sha256": "1346abee115b6a136edc77b0650ff1ab6e1a8fe05d2f7d8e0ec3b994b7b2c902"
     },
     {
       "table": "field_ops.work_order_part",
@@ -115,8 +115,8 @@
       "selection": "all recorded parts for included work orders; one-to-many by design",
       "rows": 216316,
       "columns": 7,
-      "bytes": 3793277,
-      "sha256": "5d66d2f6da94839171c72b0d833a838ce833625589337b23db3b4323745c607c"
+      "bytes": 5054326,
+      "sha256": "ca6ed41a5c847d1107acbc4728cd1f55de6477134cb83b8f2e51d3fe1b775e70"
     },
     {
       "table": "field_ops.appointment",
@@ -126,8 +126,8 @@
       "selection": "appointments associated with included work orders",
       "rows": 99832,
       "columns": 10,
-      "bytes": 2829163,
-      "sha256": "40dca76ddd73e3028c261f11931d0870b8ab19f6ca7a72d1fab4294b35cc24d5"
+      "bytes": 3217015,
+      "sha256": "e06323a4363465730bb3a7b971081897f5a0a9764342b28220318b926547760a"
     },
     {
       "table": "workforce.shift",
@@ -137,8 +137,8 @@
       "selection": "included technicians' scheduled shifts in the route window",
       "rows": 156695,
       "columns": 8,
-      "bytes": 1561597,
-      "sha256": "b0c3da22d4e80133e98606fc6cb634bdeaff290e5801c7d4b381b87c49185ebe"
+      "bytes": 1639247,
+      "sha256": "4784b1c545f37d00a01df282d87cbea67f8eb4f0b015320ba7447e806af05834"
     },
     {
       "table": "workforce.employee_role_history",
@@ -159,8 +159,8 @@
       "selection": "absence episodes attached to included shifts",
       "rows": 3996,
       "columns": 7,
-      "bytes": 69715,
-      "sha256": "7dc502ba7d6af46349182b566ddf3209264941b1811895f284b61bcb4f49ec5c"
+      "bytes": 81792,
+      "sha256": "e174ec0af0a05abe985016df65bbfa0a8a55a1260d7ff761d5a4cc047f076f27"
     },
     {
       "table": "external.traffic_area_hourly",
@@ -170,8 +170,8 @@
       "selection": "complete service-area hourly history for the route window, including revisions",
       "rows": 252909,
       "columns": 8,
-      "bytes": 4048956,
-      "sha256": "05ba4eb40fd2bba4f6c22f94a2b8e9715e25ba62bb79ee2f42969d1918868acd"
+      "bytes": 5958237,
+      "sha256": "f9c0376f3afb48072a4131f3aa961ea65dfa70d9130fdbd89b362ee1029f98f4"
     },
     {
       "table": "external.weather_station",
@@ -192,8 +192,8 @@
       "selection": "complete station-hour history for the route window",
       "rows": 210528,
       "columns": 14,
-      "bytes": 6434771,
-      "sha256": "8b58decf74fedaf83bf029dfb40ddba750c40e43f82b1735ca1a15e03a5efe35"
+      "bytes": 10199169,
+      "sha256": "814d4e9ccfcb223741b46826b3efa1ec520c5e5a8a9c18ce46a1258b020045f2"
     }
   ]
 }

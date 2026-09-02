@@ -92,8 +92,8 @@
       "path": "/data/cases/the-730-capacity-call/field_ops/appointment.parquet",
       "python_path": "/data/cases/the-730-capacity-call/field_ops/appointment.parquet",
       "rows": 3517,
-      "bytes": 95512,
-      "sha256": "e5c483bbb7b33691bbea2c568b5b4e53802ae3beb2a5e1ad4f95d8c3f6fdf664",
+      "bytes": 92008,
+      "sha256": "f7a87c2f8d442b1f3d01749941194e42af2accad798525c5e49d468cde6d1d5b",
       "columns": [
         "appointment_id",
         "account_id",
@@ -114,8 +114,8 @@
       "path": "/data/cases/the-730-capacity-call/field_ops/work_order.parquet",
       "python_path": "/data/cases/the-730-capacity-call/field_ops/work_order.parquet",
       "rows": 3517,
-      "bytes": 180010,
-      "sha256": "f9af731da92d956e3cd702a2beb55f5883c6a703969b67482d64dc59b9e15ec1",
+      "bytes": 173439,
+      "sha256": "91bfe9a9ff413cf38ab3be48d5e412d5232a98c7c5589234ececfcd35d79118f",
       "columns": [
         "work_order_id",
         "work_order_code",
@@ -146,8 +146,8 @@
       "path": "/data/cases/the-730-capacity-call/field_ops/work_order_status_event.parquet",
       "python_path": "/data/cases/the-730-capacity-call/field_ops/work_order_status_event.parquet",
       "rows": 21102,
-      "bytes": 336708,
-      "sha256": "0cc3e4c8d08ecc88d8cc8a208d851f674eb2d6036e4174a5d30a97f80f62ef0e",
+      "bytes": 334137,
+      "sha256": "fd63a21662cfdcaa04ed2de9af60915aa1c32eb7cbbd9e07afd798d8497a38de",
       "columns": [
         "work_order_status_event_id",
         "work_order_id",
@@ -165,8 +165,8 @@
       "path": "/data/cases/the-730-capacity-call/field_ops/visit.parquet",
       "python_path": "/data/cases/the-730-capacity-call/field_ops/visit.parquet",
       "rows": 3517,
-      "bytes": 104001,
-      "sha256": "1550b0eb68dae8321d7e300684c4306287df07a87cbd028251a702234007b80d",
+      "bytes": 100342,
+      "sha256": "57b262afb8c8e9d73a41a74da21613b757e1f867399df225d4d0fad1c2be83e0",
       "columns": [
         "visit_id",
         "work_order_id",
@@ -188,8 +188,8 @@
       "path": "/data/cases/the-730-capacity-call/workforce/shift.parquet",
       "python_path": "/data/cases/the-730-capacity-call/workforce/shift.parquet",
       "rows": 9687,
-      "bytes": 128586,
-      "sha256": "4aaeb77591c14dba21d54d8caeafbccf03a8f41028545c3b792f260119b44760",
+      "bytes": 125789,
+      "sha256": "7cff4b42563550aa4d0d2f8da5dd635afd0cdb3f54c383d7a4b175446dfca30b",
       "columns": [
         "shift_id",
         "employee_id",
@@ -208,8 +208,8 @@
       "path": "/data/cases/the-730-capacity-call/workforce/employee_role_history.parquet",
       "python_path": "/data/cases/the-730-capacity-call/workforce/employee_role_history.parquet",
       "rows": 28,
-      "bytes": 6230,
-      "sha256": "12d1c5be9fb5851f1962fa71bc8b9acabb9d1343a44c9242797ecad98df8dcd2",
+      "bytes": 3270,
+      "sha256": "bf508e9403a0ca620e3c2c6ee12934e60eb9fe3069c094f009eb23f9f1f4efae",
       "columns": [
         "employee_role_id",
         "employee_id",
@@ -229,8 +229,8 @@
       "path": "/data/cases/the-730-capacity-call/external/weather_station.parquet",
       "python_path": "/data/cases/the-730-capacity-call/external/weather_station.parquet",
       "rows": 2,
-      "bytes": 5460,
-      "sha256": "3c21960cb300c886842bb72e3fc1638df9d8327068676eea2108eb2519d18f1a",
+      "bytes": 2739,
+      "sha256": "8ae65a73ac346e1fe2bb23d17ce411e969e94b718630fb51f779b0bc927b3ce9",
       "columns": [
         "weather_station_id",
         "station_code",
@@ -249,8 +249,8 @@
       "path": "/data/cases/the-730-capacity-call/external/weather_hourly.parquet",
       "python_path": "/data/cases/the-730-capacity-call/external/weather_hourly.parquet",
       "rows": 38848,
-      "bytes": 1956328,
-      "sha256": "449a885caa2d0bc0bc4a57dc12115249e4e3f0f3dfb212a6e603a7db353e584b",
+      "bytes": 1951683,
+      "sha256": "e2d7fe6dd1136932575485456d1f2264b27941818ae30cafdb605fca39928312",
       "columns": [
         "weather_observation_id",
         "weather_station_id",
@@ -275,8 +275,8 @@
       "path": "/data/cases/the-730-capacity-call/external/traffic_area_hourly.parquet",
       "python_path": "/data/cases/the-730-capacity-call/external/traffic_area_hourly.parquet",
       "rows": 7103,
-      "bytes": 179644,
-      "sha256": "89ab4833c00017d709e744f6992fbc60b85821bfe40fa6ea536d1106a1a971f8",
+      "bytes": 176740,
+      "sha256": "460252a75f2deabdc5b39e665ad5fc376bd1fa88a2432b6928d6dad80569fe75",
       "columns": [
         "traffic_area_hourly_id",
         "service_area_id",
@@ -295,8 +295,8 @@
       "path": "/data/cases/the-730-capacity-call/core/branch.parquet",
       "python_path": "/data/cases/the-730-capacity-call/core/branch.parquet",
       "rows": 1,
-      "bytes": 5740,
-      "sha256": "f0b81ff0c39c37f6252e4ec2e4567c480117c089449459de986b33c10aa1870b",
+      "bytes": 2831,
+      "sha256": "94701e10ca96b1da1282d52638ffbe4bac0ade4b341808c39f0a12716b7de4b2",
       "columns": [
         "branch_id",
         "branch_name",
@@ -316,8 +316,8 @@
       "path": "/data/cases/the-730-capacity-call/core/service_area.parquet",
       "python_path": "/data/cases/the-730-capacity-call/core/service_area.parquet",
       "rows": 3,
-      "bytes": 5272,
-      "sha256": "2faff6fa48ad7bcb90d8c52c75e361845b9d5c087ab2f6441e867e3f717baec9",
+      "bytes": 2520,
+      "sha256": "dc5ca5ee2578558e0cff37b6fd0350650f255996499a100e086172567f9aa351",
       "columns": [
         "service_area_id",
         "service_area_name",
@@ -336,8 +336,8 @@
       "path": "/data/cases/the-730-capacity-call/core/business_calendar.parquet",
       "python_path": "/data/cases/the-730-capacity-call/core/business_calendar.parquet",
       "rows": 1096,
-      "bytes": 11139,
-      "sha256": "78430128cb2c62d241953fab1abd2773570fbcb1e7ce7b8bf71f5b917cd7b296",
+      "bytes": 7637,
+      "sha256": "467743d29c7a50fa41de40ceb697f938770a3a6c14286dfb96b76acd164c083f",
       "columns": [
         "calendar_date",
         "calendar_year",
@@ -380,6 +380,6 @@
   "totals": {
     "files": 15,
     "rows": 91946,
-    "bytes": 3064869
+    "bytes": 3023374
   }
 }

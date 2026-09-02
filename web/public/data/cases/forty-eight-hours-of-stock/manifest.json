@@ -78,8 +78,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/inventory_movement.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/inventory_movement.parquet",
       "rows": 520000,
-      "bytes": 11554421,
-      "sha256": "eae482b011fd6b9323eaf582096a4e7e9e5edeb86617614ab2b12f8e2f826989",
+      "bytes": 11579090,
+      "sha256": "c4523507922d321df6ac8eda094578442b050de3d3d70dd3bb663acce77a8f35",
       "columns": [
         "inventory_movement_id",
         "warehouse_id",
@@ -103,8 +103,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/inventory_position_daily.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/inventory_position_daily.parquet",
       "rows": 330000,
-      "bytes": 5285097,
-      "sha256": "6a7cabef8d258f6dad25abec450c8c1a0397c02674a2dc241beafe44fdb1df49",
+      "bytes": 5276945,
+      "sha256": "b7d248ecd2729c035b2881852ac3a8b2401e59e384ee0573bc2992051a57f8a3",
       "columns": [
         "inventory_position_daily_id",
         "snapshot_date",
@@ -140,8 +140,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/purchase_order.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/purchase_order.parquet",
       "rows": 24000,
-      "bytes": 403382,
-      "sha256": "86e3e353c92eb8f2e4d82b2174c1b7d796cfaad755646553f12a800826339ff5",
+      "bytes": 401897,
+      "sha256": "0694c557ce87486cbbb97884dc69353d9c7da20f5d03aa94935dee941b991cec",
       "columns": [
         "purchase_order_id",
         "purchase_order_number",
@@ -162,8 +162,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/purchase_order_line.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/purchase_order_line.parquet",
       "rows": 96000,
-      "bytes": 1387394,
-      "sha256": "ada41929a7313230f469e30e44958eb054f64fda1a75549cb27f03585633fad9",
+      "bytes": 1384281,
+      "sha256": "355803826d8365ff036fc6a3b1ab4f7a85fea90328000587c1987da76cef6fbe",
       "columns": [
         "purchase_order_line_id",
         "purchase_order_id",
@@ -183,8 +183,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/goods_receipt.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/goods_receipt.parquet",
       "rows": 82000,
-      "bytes": 1047646,
-      "sha256": "2692f1ce06bc11b5ed07a1906a3cdff89428e38a30529b4dd95592d04ce4f801",
+      "bytes": 1044814,
+      "sha256": "a5be0c4856b728e210549249b37fc3fea5d0497026d4b2220813a73e0be4034a",
       "columns": [
         "goods_receipt_id",
         "purchase_order_line_id",
@@ -203,8 +203,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/product_vendor.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/product_vendor.parquet",
       "rows": 1440,
-      "bytes": 25816,
-      "sha256": "e283e6fb9b85f1c3d2857a4c71ff86d14ffe0e381e1f1d5021d0c306a50d84bc",
+      "bytes": 22356,
+      "sha256": "56caaf6d285dde77b5304d996593c99ae88222b333dbd0188724f495cc6c63c8",
       "columns": [
         "product_vendor_id",
         "product_id",
@@ -225,8 +225,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/vendor.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/vendor.parquet",
       "rows": 85,
-      "bytes": 6863,
-      "sha256": "9f503dd4e0eceeb57961cfdbda45082e958f613142ceed07e85595d7f8c84f90",
+      "bytes": 3863,
+      "sha256": "b22299406e55079deffbbdbd99af568fe09e3fc99ee6384ec544a67abb9e1392",
       "columns": [
         "vendor_id",
         "vendor_name",
@@ -246,8 +246,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/supply/warehouse.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/supply/warehouse.parquet",
       "rows": 3,
-      "bytes": 6567,
-      "sha256": "65b149493402f3379b0da571c18dcca4179d626f2adef8ba276cc086b14f9e53",
+      "bytes": 3250,
+      "sha256": "bda166e24fcad1912db3be0acd781e318a25122191cd75c45974913f1891b350",
       "columns": [
         "warehouse_id",
         "warehouse_name",
@@ -268,8 +268,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/catalog/product.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/catalog/product.parquet",
       "rows": 720,
-      "bytes": 23753,
-      "sha256": "1ff9eaffc0ebc85fe97978ef3cbdf2311aef85316570f89a24b8f370cad8a584",
+      "bytes": 19574,
+      "sha256": "e2bc0c21b9ea7c664e316b1e7af2311cceb23cb3a468730bf0a717fbe38b06f9",
       "columns": [
         "product_id",
         "sku",
@@ -293,8 +293,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/catalog/product_substitution.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/catalog/product_substitution.parquet",
       "rows": 1440,
-      "bytes": 13268,
-      "sha256": "9793bd5f187370b29b706f477ba06e4c39b69e99c31237854b989d1c959572e9",
+      "bytes": 10704,
+      "sha256": "4dbcf46ec7d578f347f17a2a875746fce80ef794da804391c82ef42acad8723b",
       "columns": [
         "substitution_id",
         "requested_product_id",
@@ -312,8 +312,8 @@
       "path": "/data/cases/forty-eight-hours-of-stock/core/business_calendar.parquet",
       "python_path": "/data/cases/forty-eight-hours-of-stock/core/business_calendar.parquet",
       "rows": 1096,
-      "bytes": 11139,
-      "sha256": "78430128cb2c62d241953fab1abd2773570fbcb1e7ce7b8bf71f5b917cd7b296",
+      "bytes": 7637,
+      "sha256": "467743d29c7a50fa41de40ceb697f938770a3a6c14286dfb96b76acd164c083f",
       "columns": [
         "calendar_date",
         "calendar_year",
@@ -356,6 +356,6 @@
   "totals": {
     "files": 14,
     "rows": 1056905,
-    "bytes": 19783206
+    "bytes": 19772271
   }
 }

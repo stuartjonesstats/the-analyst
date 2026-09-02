@@ -42,8 +42,8 @@
       "path": "/data/cases/rollback-before-dawn/iot/asset.parquet",
       "python_path": "/data/cases/rollback-before-dawn/iot/asset.parquet",
       "rows": 21823,
-      "bytes": 716683,
-      "sha256": "65dc860c9f716023562a4d32f38579c23ced3d53084f0f2d90793a9dbd961154",
+      "bytes": 712465,
+      "sha256": "612769ed970c04ff792156f3b7ccba7899cb8ddb9898013095ec82d7924f105a",
       "columns": [
         "asset_id",
         "asset_code",
@@ -66,8 +66,8 @@
       "path": "/data/cases/rollback-before-dawn/iot/asset_installation_history.parquet",
       "python_path": "/data/cases/rollback-before-dawn/iot/asset_installation_history.parquet",
       "rows": 16640,
-      "bytes": 439450,
-      "sha256": "f92db6aa6ee38f9211e1466dfc4ae8e95332e2d6ab0132b8a08f261425d1b8ca",
+      "bytes": 436916,
+      "sha256": "806aaf27d8157ad57003ddb806897a7892c49fda6e243202da8c6f8032a3cfe4",
       "columns": [
         "installation_id",
         "asset_id",
@@ -85,8 +85,8 @@
       "path": "/data/cases/rollback-before-dawn/iot/sensor.parquet",
       "python_path": "/data/cases/rollback-before-dawn/iot/sensor.parquet",
       "rows": 27549,
-      "bytes": 437802,
-      "sha256": "7efb2c749c80e4f3ea3bab6ce83da39241578159e7d6b607b9eb97f99604d522",
+      "bytes": 435619,
+      "sha256": "8031b9c76211927d2c9056967e990b4593e9905a5280b6a51b9d6fd8851b50a5",
       "columns": [
         "sensor_id",
         "asset_id",
@@ -103,8 +103,8 @@
       "path": "/data/cases/rollback-before-dawn/iot/sensor_reading.parquet",
       "python_path": "/data/cases/rollback-before-dawn/iot/sensor_reading.parquet",
       "rows": 41224,
-      "bytes": 1320414,
-      "sha256": "8608c775c8cc0815cdeaa25b54afacbed96a5be5d74314d0d518ef72c7dfef80",
+      "bytes": 1317023,
+      "sha256": "a87260d69049836648f6934f1a677edf1493562777fc2edc0a5576f9da57d561",
       "columns": [
         "sensor_reading_id",
         "sensor_id",
@@ -125,8 +125,8 @@
       "path": "/data/cases/rollback-before-dawn/iot/device_alert.parquet",
       "python_path": "/data/cases/rollback-before-dawn/iot/device_alert.parquet",
       "rows": 6297,
-      "bytes": 153327,
-      "sha256": "3c9b986dcb67c2ac1ecb010a373999b1b3f0da59be6b49a6929be89c7f321c86",
+      "bytes": 150273,
+      "sha256": "08208bf9a708d953324afd2f467cc8137bddcffbc8b58a927529ee9e6d7c1dd1",
       "columns": [
         "alert_id",
         "asset_id",
@@ -146,8 +146,8 @@
       "path": "/data/cases/rollback-before-dawn/iot/asset_health_daily.parquet",
       "python_path": "/data/cases/rollback-before-dawn/iot/asset_health_daily.parquet",
       "rows": 24810,
-      "bytes": 2756598,
-      "sha256": "8045b1a384df3edf2d8b31f98502e8db5681c02a1abcb85103ed63dce4f38d47",
+      "bytes": 2744234,
+      "sha256": "b9f43808e79352e6de46dfbcbace339b8aee0456c89d096cfc97cbfe9540bb25",
       "columns": [
         "asset_health_daily_id",
         "asset_id",
@@ -196,8 +196,8 @@
       "path": "/data/cases/rollback-before-dawn/external/weather_station.parquet",
       "python_path": "/data/cases/rollback-before-dawn/external/weather_station.parquet",
       "rows": 12,
-      "bytes": 5827,
-      "sha256": "598ef0e9d88f179b479f534db4d86ff78cb59872ff69168af5e06ee732cf5ffd",
+      "bytes": 3106,
+      "sha256": "b60f62c257f03dd98a8a82209c6929c20cbd260673f1547cae7c6862f4d9906b",
       "columns": [
         "weather_station_id",
         "station_code",
@@ -216,8 +216,8 @@
       "path": "/data/cases/rollback-before-dawn/external/weather_hourly.parquet",
       "python_path": "/data/cases/rollback-before-dawn/external/weather_hourly.parquet",
       "rows": 17280,
-      "bytes": 809900,
-      "sha256": "1a59392e28644a18f9da4814f3db9bc76d873f9ff7638ddf2d4f8d4f95ade991",
+      "bytes": 805255,
+      "sha256": "9f3611d1d8a97cd0a4aa0b012d8a415fd763a737d3d4c01a7a7c0b30a888f954",
       "columns": [
         "weather_observation_id",
         "weather_station_id",
@@ -242,8 +242,8 @@
       "path": "/data/cases/rollback-before-dawn/field_ops/work_order.parquet",
       "python_path": "/data/cases/rollback-before-dawn/field_ops/work_order.parquet",
       "rows": 2886,
-      "bytes": 166721,
-      "sha256": "3cf509c1ad95368db8199c56f7ae08e497026640690b96a391502b9564f27306",
+      "bytes": 160150,
+      "sha256": "db6c38f85fa16c4620d62c245d907563d0afbabfb07ce2b482051d7b86d14327",
       "columns": [
         "work_order_id",
         "work_order_code",
@@ -274,8 +274,8 @@
       "path": "/data/cases/rollback-before-dawn/field_ops/work_order_status_event.parquet",
       "python_path": "/data/cases/rollback-before-dawn/field_ops/work_order_status_event.parquet",
       "rows": 17316,
-      "bytes": 275183,
-      "sha256": "565a631d4b126e073e4f1c20197ecc9027dec410164ac7d9fcecb3fc876cfd1f",
+      "bytes": 272612,
+      "sha256": "f28806d427e79502fbd18a6a132e7bb821893978527049f76b45df35d2ac9aa0",
       "columns": [
         "work_order_status_event_id",
         "work_order_id",
@@ -293,8 +293,8 @@
       "path": "/data/cases/rollback-before-dawn/core/region.parquet",
       "python_path": "/data/cases/rollback-before-dawn/core/region.parquet",
       "rows": 6,
-      "bytes": 4076,
-      "sha256": "f0bf29d4787fa7b72d87a70899e4bd437f925903294446e280f814fa1cb11ca3",
+      "bytes": 1994,
+      "sha256": "fa1a14a448574d5608865a391ff875d341ee8209b24bbee03be659b2c36ba0de",
       "columns": [
         "region_id",
         "region_name",
@@ -311,8 +311,8 @@
       "path": "/data/cases/rollback-before-dawn/core/branch.parquet",
       "python_path": "/data/cases/rollback-before-dawn/core/branch.parquet",
       "rows": 36,
-      "bytes": 6929,
-      "sha256": "bc57c23f2976edbf048baf9ba806a8a700104d8b11a8d868b74ae2e794f325ee",
+      "bytes": 4020,
+      "sha256": "c1123a128fac192e6b202a69fdf034f2e987d90468eedf5e4faf5a52f026d8dd",
       "columns": [
         "branch_id",
         "branch_name",
@@ -332,8 +332,8 @@
       "path": "/data/cases/rollback-before-dawn/core/world_event.parquet",
       "python_path": "/data/cases/rollback-before-dawn/core/world_event.parquet",
       "rows": 19,
-      "bytes": 7374,
-      "sha256": "683b84b188aa96b7242fdd8ce47b7ae9447dbd208c297866c6f62d4eb8590e76",
+      "bytes": 4131,
+      "sha256": "489a54bef6c021ea231b7897d7a2a53e7f6a4025b54509ff6e857ac1ecd7c866",
       "columns": [
         "world_event_id",
         "event_type",
@@ -374,6 +374,6 @@
   "totals": {
     "files": 14,
     "rows": 193898,
-    "bytes": 7205974
+    "bytes": 7153488
   }
 }

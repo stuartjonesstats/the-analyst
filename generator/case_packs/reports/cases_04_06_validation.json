@@ -11,7 +11,7 @@
       "case": "rollback-before-dawn",
       "check": "manifest hashes, row counts, and byte counts match every Parquet",
       "passed": true,
-      "detail": "files=14; rows=193,898; bytes=7,205,974"
+      "detail": "files=14; rows=193,898; bytes=7,153,488"
     },
     {
       "case": "rollback-before-dawn",
@@ -23,7 +23,7 @@
       "case": "the-730-capacity-call",
       "check": "manifest hashes, row counts, and byte counts match every Parquet",
       "passed": true,
-      "detail": "files=15; rows=91,946; bytes=3,064,869"
+      "detail": "files=15; rows=91,946; bytes=3,023,374"
     },
     {
       "case": "the-730-capacity-call",
@@ -35,7 +35,7 @@
       "case": "forty-eight-hours-of-stock",
       "check": "manifest hashes, row counts, and byte counts match every Parquet",
       "passed": true,
-      "detail": "files=14; rows=1,056,905; bytes=19,783,206"
+      "detail": "files=14; rows=1,056,905; bytes=19,772,271"
     },
     {
       "case": "forty-eight-hours-of-stock",

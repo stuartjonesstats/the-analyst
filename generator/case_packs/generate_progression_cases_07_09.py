@@ -61,6 +61,41 @@ def copy_query(connection: duckdb.DuckDBPyConnection, query: str, path: Path) ->
     temporary.replace(path)
 
 
+def restore_source_schema(path: Path, table: str) -> None:
+    """Restore the source Arrow types that DuckDB normalizes while copying.
+
+    DuckDB intentionally represents all ordinary timestamps as TIMESTAMP, but
+    its Parquet writer emits microseconds even when the released source uses
+    milliseconds.  Both query the same in SQL; preserving the exact source
+    schema also keeps Python, Arrow, and manifest consumers on one contract.
+    """
+
+    schema_name, table_name = table.split(".", 1)
+    source_path = SOURCE_ROOT / schema_name / f"{table_name}.parquet"
+    source_schema = pq.ParquetFile(source_path).schema_arrow
+    parquet = pq.ParquetFile(path)
+    current_schema = parquet.schema_arrow
+    exact_types = current_schema.names == source_schema.names and all(
+        current_schema.field(name).type.equals(source_schema.field(name).type)
+        for name in current_schema.names
+    )
+    if exact_types:
+        return
+
+    temporary = path.with_suffix(".parquet.schema-building")
+    temporary.unlink(missing_ok=True)
+    writer_options = dict(PARQUET_OPTIONS)
+    row_group_size = int(writer_options.pop("row_group_size"))
+    try:
+        with pq.ParquetWriter(temporary, source_schema, **writer_options) as writer:
+            for batch in parquet.iter_batches(batch_size=row_group_size, use_threads=False):
+                cast = pa.Table.from_batches([batch]).cast(source_schema, safe=True)
+                writer.write_table(cast, row_group_size=row_group_size)
+        temporary.replace(path)
+    finally:
+        temporary.unlink(missing_ok=True)
+
+
 def write_frame(frame: pd.DataFrame, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(".parquet.building")
@@ -252,6 +287,7 @@ def build_orion(connection: duckdb.DuckDBPyConnection) -> None:
     for table, filename, query, selection in specs:
         path = output / filename
         copy_query(connection, query, path)
+        restore_source_schema(path, table)
         files.append(file_record(path, table, table, selection))
 
     write_manifest(
@@ -389,6 +425,8 @@ def build_queue(connection: duckdb.DuckDBPyConnection) -> None:
         path = output / filename
         copy_query(connection, query, path)
         source_table = table if not table.startswith("case_input.") else None
+        if source_table is not None:
+            restore_source_schema(path, source_table)
         files.append(file_record(path, table, source_table, selection))
 
     teams = pd.DataFrame(
@@ -528,6 +566,8 @@ def build_beacon(connection: duckdb.DuckDBPyConnection) -> None:
         path = output / filename
         copy_query(connection, query, path)
         source_table = table if not table.startswith("case_input.") else None
+        if source_table is not None:
+            restore_source_schema(path, source_table)
         files.append(file_record(path, table, source_table, selection))
 
     write_manifest(

@@ -6,7 +6,7 @@
   "extract_boundary": "A deterministic 12,000-account cohort retaining every snapshot, all 213 feature columns, and related event clocks.",
   "file_count": 12,
   "total_rows": 630425,
-  "total_bytes": 27431829,
+  "total_bytes": 38112802,
   "files": [
     {
       "table": "platform.account_feature_snapshot",
@@ -16,8 +16,8 @@
       "selection": "complete snapshots for a deterministic 12,000-account cohort; all 213 columns retained",
       "rows": 33156,
       "columns": 213,
-      "bytes": 15082436,
-      "sha256": "61371d0843e1d8ea07c4119e116b8a7afc6ff28d71fb1af3af6cbde01a2a703d"
+      "bytes": 22645653,
+      "sha256": "b30fe6efc9b404c5ec7141bb9230cbcdf94bbb4ccd8ca8b847d057e1736bcbde"
     },
     {
       "table": "platform.model_registry",
@@ -38,8 +38,8 @@
       "selection": "complete version history",
       "rows": 76,
       "columns": 11,
-      "bytes": 4328,
-      "sha256": "43fdfb170f8a432fe90b0c4014435a007bff2acbed36fe3b324755c4696a375e"
+      "bytes": 6167,
+      "sha256": "1bbe13133c9f3507d7d74f26580734be2c3fd152fbbb385dab559929d2b3e092"
     },
     {
       "table": "platform.pipeline",
@@ -60,8 +60,8 @@
       "selection": "pipeline runs contemporaneous with the candidate feature history",
       "rows": 61301,
       "columns": 11,
-      "bytes": 1622716,
-      "sha256": "7573b19cd08813e52443ad6dbc51f6a9b8dff154ab94cdf83f7c33cc25b1b4be"
+      "bytes": 2134290,
+      "sha256": "0fbba6226c540cef06de94ba23bd3b0ef75bb5a6bdfb7aa990f8919d3f6bb6f4"
     },
     {
       "table": "platform.data_quality_result",
@@ -71,8 +71,8 @@
       "selection": "quality checks attached to included pipeline runs",
       "rows": 173210,
       "columns": 11,
-      "bytes": 3958647,
-      "sha256": "1667655532f2957b9f9f18e6b40376df04056553fe717672ec6ce3b358c75ffb"
+      "bytes": 5530776,
+      "sha256": "6c9f109e6a71dc35d61efa0727a36d1592229a92383167bfb0a7b0c8b5893a21"
     },
     {
       "table": "crm.account",
@@ -104,8 +104,8 @@
       "selection": "subscriptions belonging to the feature cohort",
       "rows": 12084,
       "columns": 10,
-      "bytes": 342874,
-      "sha256": "f8cad1e286017583cb30ef8495b2529c6cf104d5d36afcc3c2dc5647f5f2b9af"
+      "bytes": 356018,
+      "sha256": "d2e76c6cab0eb9e1dea453e39b9deb1529023e4c7fcd7073cfcab7e6fbfa7c60"
     },
     {
       "table": "billing.subscription_event",
@@ -115,8 +115,8 @@
       "selection": "complete event histories for included subscriptions",
       "rows": 60420,
       "columns": 8,
-      "bytes": 1077366,
-      "sha256": "03e59b1f43b9722dfd26c635e327fcc4c1216e0d135b9a69b2e0f292d17942ad"
+      "bytes": 1292442,
+      "sha256": "82420ef92d49b820508b620ae3b159672bf9d0070ab883f1f410760c410cc196"
     },
     {
       "table": "billing.payment_attempt",
@@ -126,8 +126,8 @@
       "selection": "payment attempts for the feature cohort, with occurrence and availability clocks",
       "rows": 230757,
       "columns": 12,
-      "bytes": 5114544,
-      "sha256": "bbf6fde92bc1cc8622445c3ca48fa5e3859ea8d190fb1e373cc3a49fd7abe5da"
+      "bytes": 5918538,
+      "sha256": "a820f613878c4bde002067f901aebd64dec71df060c3fd4392cf3dfbc9967fc9"
     },
     {
       "table": "case_input.beacon_submitted_split",
