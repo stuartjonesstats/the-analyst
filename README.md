@@ -113,6 +113,14 @@ Parquets, workers, and internal links, then prepares `web/dist/client` as the
 Pages artifact. The `theanalyst.dev` domain can switch those path values
 to the domain root without changing the application architecture.
 
+When a learner wants outside AI help, the workbench can create a separate,
+reviewable Markdown context file. It includes the assignment brief, runtime
+rules, relevant table dictionary, revealed workplace messages, and only the
+worksheet material the learner selects. The site creates the file locally and
+does not upload or send it. This help packet is deliberately narrower than a
+formal `.analystcase` submission or portfolio archive; see
+[`docs/ai_context_packet.md`](docs/ai_context_packet.md).
+
 ## License
 
 The Analyst uses a split license so the software can remain genuinely open

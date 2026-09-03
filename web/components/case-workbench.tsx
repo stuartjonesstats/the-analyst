@@ -12,6 +12,7 @@ import {
   Download,
   FilePlus2,
   FileChartColumn,
+  FileText,
   Inbox,
   Link2,
   PanelRightOpen,
@@ -24,6 +25,7 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { AiContextDialog } from '@/components/ai-context-dialog';
 import { SiteLink } from '@/components/site-link';
 import {
   Table,
@@ -137,6 +139,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   const [evidenceComposerOpen, setEvidenceComposerOpen] = useState(false);
   const [evidenceRunId, setEvidenceRunId] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [aiContextOpen, setAiContextOpen] = useState(false);
   const [ledgerOpen, setLedgerOpen] = useState(false);
   const [ledgerIsOverlay, setLedgerIsOverlay] = useState(false);
   const [hydrated, setHydrated] = useState(false);
@@ -151,6 +154,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   const [publishName, setPublishName] = useState('analysis_result');
   const [publishStatus, setPublishStatus] = useState('');
   const importInputRef = useRef<HTMLInputElement>(null);
+  const aiContextTriggerRef = useRef<HTMLButtonElement>(null);
   const ledgerTriggerRef = useRef<HTMLButtonElement>(null);
   const workflowStageRef = useRef<HTMLDivElement>(null);
   const evidenceCount = evidence.length;
@@ -773,6 +777,9 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
             <div className="case-command-facts">
               <span><b>PRIORITY</b> {definition.priority}</span><span><b>UNIT</b> {definition.businessUnit.toUpperCase()}</span><span><b>DUE</b> {definition.dueLabel}</span>
             </div>
+            <button ref={aiContextTriggerRef} className="ai-context-trigger" onClick={() => { setLedgerOpen(false); setAiContextOpen(true); }}>
+              <FileText /> AI HELP PACKET
+            </button>
             <button ref={ledgerTriggerRef} className="ledger-trigger" onClick={() => setLedgerOpen(true)}>
               <PanelRightOpen /> ASSIGNMENT RECORD <span>{evidenceCount}</span>
             </button>
@@ -926,6 +933,22 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
           </section>
         </aside>
         {ledgerOpen && ledgerIsOverlay && <button className="ledger-scrim" onClick={closeLedger} aria-label="Close assignment record overlay" />}
+        {aiContextOpen && <AiContextDialog
+          onClose={() => { setAiContextOpen(false); window.requestAnimationFrame(() => aiContextTriggerRef.current?.focus()); }}
+          definition={definition}
+          scaffoldMode={mode}
+          workflowStep={activeWorkflowStep}
+          workspaceLanguage={workspaceLanguage}
+          revealedMessages={revealedWorkdayEvents.map(({ id, from, subject, body }) => ({ id, from, subject, body }))}
+          sql={query}
+          python={pythonCode}
+          notes={notes}
+          finalBrief={finalBrief}
+          activeError={activeError}
+          evidence={evidence}
+          sqlResult={lastSqlResult ? { columns, rows, totalRows: sqlTotalRows } : null}
+          pythonResult={pythonResult}
+        />}
       </div>
     </main>
   );

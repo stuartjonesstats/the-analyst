@@ -8644,3 +8644,320 @@ textarea {
   .identity-grid { grid-template-columns: 1fr; }
   .artifact-actions button, .artifact-actions label { flex: 1 0 45%; justify-content: center; }
 }
+
+/* External AI context packet ---------------------------------------------- */
+
+.ai-context-trigger {
+  display: inline-flex;
+  height: 30px;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+  border-left: 1px solid #c1ccd7;
+  padding: 0 12px;
+  color: #294f78;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 740;
+  letter-spacing: 0.02em;
+}
+
+.ai-context-trigger:hover {
+  background: #e3ebf3;
+}
+
+.ai-context-trigger svg {
+  width: 13px;
+  height: 13px;
+}
+
+.ai-context-trigger + .ledger-trigger {
+  margin-left: 0;
+}
+
+.ai-context-scrim {
+  position: fixed;
+  z-index: 80;
+  inset: 0;
+  background: rgb(9 23 38 / 58%);
+  backdrop-filter: blur(1px);
+}
+
+.ai-context-dialog {
+  position: fixed;
+  z-index: 81;
+  top: 50%;
+  left: 50%;
+  display: grid;
+  width: min(760px, calc(100vw - 36px));
+  max-width: none;
+  height: min(790px, calc(100vh - 36px));
+  max-height: none;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  margin: 0;
+  transform: translate(-50%, -50%);
+  border: 1px solid #72859a;
+  border-radius: 5px;
+  background: #eef2f6;
+  box-shadow: 0 26px 70px rgb(8 22 37 / 34%);
+  color: #26394f;
+  overflow: hidden;
+}
+
+.ai-context-dialog > header {
+  display: flex;
+  min-height: 70px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #536d88;
+  background: #15314f;
+  padding: 13px 16px 13px 19px;
+  color: #f4f7fa;
+}
+
+.ai-context-dialog > header span {
+  color: #94b9dc;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.ai-context-dialog > header h2 {
+  margin-top: 3px;
+  font-size: 18px;
+  font-weight: 680;
+  letter-spacing: -0.015em;
+}
+
+.ai-context-dialog > header button {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #58728d;
+  color: #dbe6ef;
+}
+
+.ai-context-dialog > header button:hover {
+  background: #254768;
+}
+
+.ai-context-dialog > header svg {
+  width: 16px;
+}
+
+.ai-context-body {
+  min-height: 0;
+  overflow-y: auto;
+  padding: 18px;
+}
+
+.ai-context-intro {
+  border-left: 3px solid #3979bb;
+  background: #ffffff;
+  padding: 12px 14px;
+  color: #42566d;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.ai-context-question,
+.ai-context-selection {
+  margin-top: 14px;
+  border: 1px solid #bec9d4;
+  background: #ffffff;
+}
+
+.ai-context-section-label {
+  display: flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #c5d0da;
+  background: #e4eaf0;
+  padding: 0 12px;
+  color: #36516d;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.ai-context-section-label b {
+  color: #64768a;
+  font-size: 8px;
+}
+
+.ai-context-starters {
+  display: flex;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #d0d8e0;
+  background: #f6f8fa;
+}
+
+.ai-context-starters button {
+  min-height: 32px;
+  border-right: 1px solid #d0d8e0;
+  padding: 0 10px;
+  color: #38618a;
+  font-size: 8px;
+  font-weight: 720;
+}
+
+.ai-context-starters button:hover {
+  background: #e2ecf5;
+}
+
+.ai-context-question textarea {
+  display: block;
+  width: 100%;
+  min-height: 105px;
+  resize: vertical;
+  border: 0;
+  padding: 13px;
+  color: #23394f;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.ai-context-selection > p {
+  border-bottom: 1px solid #d6dde4;
+  padding: 10px 12px;
+  color: #58697b;
+  font-size: 10px;
+  line-height: 1.55;
+}
+
+.ai-context-checks {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ai-context-checks label {
+  display: flex;
+  min-height: 39px;
+  align-items: center;
+  gap: 8px;
+  border-right: 1px solid #d4dce4;
+  border-bottom: 1px solid #d4dce4;
+  padding: 8px 11px;
+  color: #334a62;
+  font-size: 10px;
+}
+
+.ai-context-checks label:nth-child(even) {
+  border-right: 0;
+}
+
+.ai-context-checks input {
+  accent-color: #2e6ea9;
+}
+
+.ai-context-checks small {
+  margin-left: auto;
+  color: #728196;
+  font-size: 7px;
+  font-weight: 700;
+}
+
+.ai-context-checks .data-preview-option {
+  background: #fff8ec;
+}
+
+.ai-context-boundary {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr);
+  gap: 9px;
+  margin-top: 14px;
+  border: 1px solid #c5cfd8;
+  background: #f8fafb;
+  padding: 11px 13px;
+  color: #596a7c;
+  font-size: 9px;
+  line-height: 1.55;
+}
+
+.ai-context-boundary svg {
+  width: 17px;
+  color: #3e6f9f;
+}
+
+.ai-context-boundary strong {
+  color: #334a62;
+}
+
+.ai-context-error {
+  margin-top: 12px;
+  border-left: 3px solid #a7462e;
+  background: #fae9e4;
+  padding: 10px 12px;
+  color: #7e321f;
+  font-size: 10px;
+}
+
+.ai-context-dialog > footer {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 245px;
+  align-items: center;
+  border-top: 1px solid #aebdca;
+  background: #f7f9fb;
+}
+
+.ai-context-dialog > footer p {
+  padding: 12px 16px;
+  color: #596b7d;
+  font-size: 9px;
+  line-height: 1.45;
+}
+
+.ai-context-dialog > footer button {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: #1b4f82;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 760;
+}
+
+.ai-context-dialog > footer button:hover:not(:disabled) {
+  background: #28669f;
+}
+
+.ai-context-dialog > footer button:disabled {
+  cursor: not-allowed;
+  background: #788a9c;
+}
+
+.ai-context-dialog > footer button svg {
+  width: 14px;
+}
+
+.ai-context-dialog > footer button small {
+  color: #bcd2e7;
+}
+
+@media (max-width: 767px) {
+  .ai-context-trigger {
+    display: none;
+  }
+
+  .ai-context-dialog {
+    width: calc(100vw - 20px);
+    height: calc(100vh - 20px);
+  }
+
+  .ai-context-checks,
+  .ai-context-dialog > footer {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-context-checks label,
+  .ai-context-checks label:nth-child(even) {
+    border-right: 0;
+  }
+}

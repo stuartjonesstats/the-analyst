@@ -237,7 +237,7 @@ export default function SelfGuidedPage() {
             <article><strong>TOOL OR SYNTAX</strong><p>Reduce to one table and five rows. Inspect exact column names and types. Add one clause or transformation at a time, and keep the last query that ran.</p></article>
             <article><strong>DATA OR GRAIN</strong><p>Return to the Data Register. Write what one row represents, test key uniqueness, count before and after joins, and identify which clock each timestamp records.</p></article>
             <article><strong>JUDGMENT</strong><p>Write two competing recommendations. Under each, list supporting evidence, counterevidence, consequence of being wrong, and the next fact that would change the decision.</p></article>
-            <article><strong>NO PROGRESS AFTER 45 MINUTES</strong><p>Save and export. Write the smallest unresolved question in scratch notes. Review the prerequisite—not the assignment spoiler—and resume in a new session.</p></article>
+            <article><strong>NO PROGRESS AFTER 45 MINUTES</strong><p>Save and export. Write the smallest unresolved question in scratch notes. Review the prerequisite—not the assignment spoiler—or use AI Help Packet to create focused context for an external AI tool. Review the file before sharing, then verify any advice by running the work yourself.</p></article>
           </div>
         </section>
 
@@ -263,7 +263,7 @@ export default function SelfGuidedPage() {
               <SiteLink path="/teach/replay" rel="nofollow">OPEN LOCAL SUBMISSION VIEWER →</SiteLink>
             </aside>
           </div>
-          <p className="manual-inline-note"><strong>Two useful exports:</strong> the .analystcase file is the restorable, reviewable record to save at every milestone. The portfolio .zip is a conventional human-readable copy to export after the work is polished. Course, section, and learner-ID fields may remain blank for independent study.</p>
+          <p className="manual-inline-note"><strong>Keep the exports distinct:</strong> the .analystcase file is the restorable, reviewable record to save at every milestone. The portfolio .zip is a conventional human-readable copy to export after the work is polished. The optional AI-context .md is a learner-selected help brief—not a submission—and is shared only when you attach it to an external tool. Course, section, and learner-ID fields may remain blank for independent study.</p>
         </section>
 
         <section className="public-cta compact">

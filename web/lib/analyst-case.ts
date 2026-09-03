@@ -392,6 +392,16 @@ type LegacyCase = Omit<AnalystCaseFile, 'version' | 'identity' | 'scaffold'> & {
   scaffold?: AnalystCaseFile['scaffold'];
 };
 
+type AdvisoryPilotCase = Omit<AnalystCaseFile, 'version' | 'learnerWorkspace' | 'runtime'> & {
+  version: '3.0.0';
+  learnerWorkspace: AnalystCaseFile['learnerWorkspace'] & {
+    advisoryConsultations?: unknown[];
+  };
+  runtime: AnalystCaseFile['runtime'] & {
+    advisory?: unknown;
+  };
+};
+
 function migrateLegacyCase(candidate: LegacyCase): AnalystCaseFile {
   const legacyRuns = candidate.capturedRuns as unknown as {
     sql: AnalystCaseFile['capturedRuns']['sql'];
@@ -420,6 +430,17 @@ function migrateLegacyCase(candidate: LegacyCase): AnalystCaseFile {
   };
 }
 
+function migrateAdvisoryPilotCase(candidate: AdvisoryPilotCase): AnalystCaseFile {
+  const { advisoryConsultations: _consultations, ...learnerWorkspace } = candidate.learnerWorkspace;
+  const { advisory: _advisory, ...runtime } = candidate.runtime;
+  return {
+    ...candidate,
+    version: ANALYST_CASE_VERSION,
+    learnerWorkspace,
+    runtime,
+  };
+}
+
 export function parseAnalystCase(value: string): AnalystCaseFile {
   const parsed: unknown = JSON.parse(value);
   if (!parsed || typeof parsed !== 'object') throw new Error('This file does not contain a valid submission.');
@@ -429,6 +450,7 @@ export function parseAnalystCase(value: string): AnalystCaseFile {
     throw new Error('The submission is incomplete.');
   }
   if (candidate.version === '1.0.0') return migrateLegacyCase(candidate as unknown as LegacyCase);
+  if (candidate.version === '3.0.0') return migrateAdvisoryPilotCase(candidate as unknown as AdvisoryPilotCase);
   if (candidate.version !== ANALYST_CASE_VERSION) throw new Error(`Unsupported submission version: ${candidate.version ?? 'missing'}.`);
   return candidate as AnalystCaseFile;
 }

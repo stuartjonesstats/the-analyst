@@ -10,14 +10,18 @@ second course-management system.
 The file is UTF-8 JSON with the extension `.analystcase` and media type
 `application/vnd.theanalyst.case+json`.
 
-## Version 1 contents
+## Version 2 contents
 
 - format and schema version;
 - export timestamp;
+- optional learner, course, section, team, and attempt identity fields;
 - scenario ID, slug, revision, and data-catalog snapshot;
 - SQL, Python, scratch-note, and polished final-brief files;
+- explicitly authored or attached handoff artifacts;
 - SHA-256 hash for each learner-authored file;
 - the case evidence register;
+- scaffold mode and help events used;
+- captured SQL and Python run history, including the exact executed-code hash;
 - the most recent successful displayed SQL result and run count;
 - the most recent successful Python stdout, stderr, display value, figures, and
   run count;
@@ -27,6 +31,11 @@ The file is UTF-8 JSON with the extension `.analystcase` and media type
 
 The source Parquets are not copied into every submission. The scenario and
 catalog revisions identify the governed data pack needed to reproduce the work.
+
+The workbench also offers an optional AI-context Markdown download. That file is
+a narrow, learner-selected help brief, not a submission format. Learners should
+not upload the `.analystcase` file to an AI service merely to ask a focused
+question; see [`ai_context_packet.md`](ai_context_packet.md).
 
 ## Review boundary
 
@@ -54,6 +63,9 @@ rules for storing and transmitting submitted work.
 
 - Schema changes require a version change.
 - A viewer must reject unsupported versions rather than guessing.
+- The current viewer accepts the short-lived `3.0.0` browser-model pilot format
+  and safely migrates its learner work back to version 2; transcript artifacts
+  remain ordinary workspace files.
 - Scenario revisions and catalog snapshots must remain explicit.
 - New deterministic records must describe exactly what was observed.
 - Analytical-quality checks may not be smuggled into the format as keyword,

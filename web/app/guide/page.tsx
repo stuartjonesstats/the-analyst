@@ -16,7 +16,8 @@ const steps = [
   ['03', 'Establish evidence in SQL', 'Run the starter query, inspect counts and grains, then replace it with your own reconciled evidence layer. Query results are limited to 1,000 displayed rows; the engine evaluates the full assignment data pack.'],
   ['04', 'Use Python for analytical work', 'Load the same named tables with `from analyst import table`, then use Pandas, Matplotlib, SciPy, or scikit-learn. Matplotlib figures appear directly below the worksheet; no file paths or data uploads are required.'],
   ['05', 'Keep reasoning separate from conclusions', 'Use scratch notes for assumptions and open questions, append concise evidence records, then write the decision-ready conclusion in Final Brief.'],
-  ['06', 'Export the handoff', 'Download one .analystcase file containing SQL, Python, scratch notes, the final brief, evidence, captured outputs, versions, and hashes. Keep it for your own record or share it for grading, coaching, or peer review.'],
+  ['06', 'Ask for focused AI help—optionally', 'Choose AI Help Packet in the workbench to download a reviewable Markdown brief for an external AI tool. You choose which worksheet or notes to include; The Analyst creates the file locally and does not send it. Follow your course or institution policy, and verify the advice by running the work yourself.'],
+  ['07', 'Export the handoff', 'Download one .analystcase file containing SQL, Python, scratch notes, the final brief, evidence, captured outputs, versions, and hashes. Keep it for your own record or share it for grading, coaching, or peer review.'],
 ] as const;
 
 export default function GuidePage() {
@@ -50,7 +51,7 @@ export default function GuidePage() {
           </div>
           <div>
             <span>PRIVACY</span>
-            <strong>Execution is local; no learner dataset or code upload</strong>
+            <strong>Execution and AI-packet creation are local; sharing is always your action</strong>
           </div>
           <div>
             <span>RECOVERY</span>
