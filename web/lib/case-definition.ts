@@ -42,14 +42,9 @@ export type CaseDefinition = {
   initialEvidence: EvidenceRecord[];
   requiredArtifacts: string[];
   pythonPackages: string[];
-  advisory?: {
-    modelId: string;
-    persona: string;
-    promptRevision: string;
-    analysisCutoff: string;
-  };
 };
 
 export function formatRowCount(rows: number) {
   return new Intl.NumberFormat('en-US').format(rows);
 }
+

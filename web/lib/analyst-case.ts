@@ -2,11 +2,10 @@ import { strToU8, zipSync } from 'fflate';
 
 import type { QueryRow } from '@/hooks/use-duckdb';
 import type { PythonRunResult } from '@/hooks/use-python';
-import { formatAdvisoryTranscript, type AdvisoryConsultation } from '@/lib/advisory';
 import type { CaseDefinition } from '@/lib/case-definition';
 
 export const ANALYST_CASE_FORMAT = 'theanalyst.case';
-export const ANALYST_CASE_VERSION = '3.0.0';
+export const ANALYST_CASE_VERSION = '2.0.0';
 
 export type ScaffoldMode = 'supported' | 'guided' | 'independent';
 
@@ -98,7 +97,6 @@ export type AnalystCaseFile = {
     files: WorkspaceFile[];
     evidence: EvidenceRecord[];
     publishedTables: PublishedTableRecord[];
-    advisoryConsultations: AdvisoryConsultation[];
   };
   capturedRuns: {
     history: RunSnapshot[];
@@ -128,12 +126,6 @@ export type AnalystCaseFile = {
     python: string;
     execution: 'learner-browser';
     dataLeavesDevice: false;
-    advisory: null | {
-      provider: 'browser-local';
-      backend: 'webgpu';
-      model: string;
-      promptRevision: string;
-    };
   };
   verification: {
     boundary: string;
@@ -157,7 +149,6 @@ export type BuildCaseInput = {
   artifacts?: WorkspaceFileDraft[];
   runHistory?: RunSnapshot[];
   publishedTables?: PublishedTableRecord[];
-  advisoryConsultations?: AdvisoryConsultation[];
   sqlRunCount: number;
   pythonRunCount: number;
   sqlCapturedAt: string | null;
@@ -222,18 +213,11 @@ function latestRun(history: RunSnapshot[], language: 'sql' | 'python') {
 
 export async function buildAnalystCase(definition: CaseDefinition, input: BuildCaseInput): Promise<AnalystCaseFile> {
   const exportedAt = new Date().toISOString();
-  const advisoryConsultations = input.advisoryConsultations ?? [];
   const drafts: WorkspaceFileDraft[] = [
     { path: 'workspace/query_01.sql', language: 'sql', content: input.sql, source: 'worksheet' },
     { path: 'workspace/analysis_01.py', language: 'python', content: input.python, source: 'worksheet' },
     { path: 'workspace/scratch_notes.md', language: 'markdown', content: input.notes, source: 'worksheet' },
     { path: 'workspace/final_brief.md', language: 'markdown', content: input.finalBrief, source: 'worksheet' },
-    ...(advisoryConsultations.length ? [{
-      path: 'advisory/advisory-transcript.md',
-      language: 'markdown' as const,
-      content: formatAdvisoryTranscript(advisoryConsultations),
-      source: 'generated-artifact' as const,
-    }] : []),
     ...(input.artifacts ?? []),
   ];
   const files = await Promise.all(drafts.map(finalizeFile));
@@ -276,7 +260,6 @@ export async function buildAnalystCase(definition: CaseDefinition, input: BuildC
       files,
       evidence: input.evidence,
       publishedTables: input.publishedTables ?? [],
-      advisoryConsultations,
     },
     capturedRuns: {
       history: runHistory,
@@ -309,12 +292,6 @@ export async function buildAnalystCase(definition: CaseDefinition, input: BuildC
       python: 'Pyodide 314.0.6',
       execution: 'learner-browser',
       dataLeavesDevice: false,
-      advisory: definition.advisory && advisoryConsultations.length ? {
-        provider: 'browser-local',
-        backend: 'webgpu',
-        model: definition.advisory.modelId,
-        promptRevision: definition.advisory.promptRevision,
-      } : null,
     },
     verification: {
       boundary: 'Mechanical records only: explicit file presence, hashes, and captured execution. Analytical quality and judgment require human review.',
@@ -386,10 +363,6 @@ export function downloadPortfolioZip(caseFile: AnalystCaseFile) {
     entries[path] = contentBytes(file);
   }
   entries['evidence/evidence-register.json'] = strToU8(JSON.stringify(caseFile.learnerWorkspace.evidence, null, 2));
-  if (caseFile.learnerWorkspace.advisoryConsultations.length) {
-    entries['advisory/advisory-transcript.json'] = strToU8(JSON.stringify(caseFile.learnerWorkspace.advisoryConsultations, null, 2));
-    entries['advisory/advisory-transcript.md'] = strToU8(formatAdvisoryTranscript(caseFile.learnerWorkspace.advisoryConsultations));
-  }
   entries['submission-manifest.json'] = strToU8(JSON.stringify({
     scenario: caseFile.scenario,
     identity: caseFile.identity,
@@ -397,8 +370,6 @@ export function downloadPortfolioZip(caseFile: AnalystCaseFile) {
     handoff: caseFile.handoff,
     verification: caseFile.verification,
     publishedTables: caseFile.learnerWorkspace.publishedTables,
-    advisory: caseFile.runtime.advisory,
-    advisoryConsultationCount: caseFile.learnerWorkspace.advisoryConsultations.length,
   }, null, 2));
   entries['README.md'] = strToU8([
     `# ${caseFile.scenario.title}`,
@@ -415,25 +386,17 @@ export function downloadPortfolioZip(caseFile: AnalystCaseFile) {
   triggerDownload([zipBuffer], 'application/zip', `${submissionStem(caseFile)}-portfolio.zip`);
 }
 
-type PriorCase = Omit<AnalystCaseFile, 'version' | 'identity' | 'scaffold' | 'learnerWorkspace' | 'runtime' | 'capturedRuns'> & {
-  version: '1.0.0' | '2.0.0';
+type LegacyCase = Omit<AnalystCaseFile, 'version' | 'identity' | 'scaffold'> & {
+  version: '1.0.0';
   identity?: LearnerIdentity;
   scaffold?: AnalystCaseFile['scaffold'];
-  learnerWorkspace: Omit<AnalystCaseFile['learnerWorkspace'], 'advisoryConsultations'> & {
-    advisoryConsultations?: AdvisoryConsultation[];
-  };
-  runtime: Omit<AnalystCaseFile['runtime'], 'advisory'> & {
-    advisory?: AnalystCaseFile['runtime']['advisory'];
-  };
-  capturedRuns: Partial<AnalystCaseFile['capturedRuns']> & {
+};
+
+function migrateLegacyCase(candidate: LegacyCase): AnalystCaseFile {
+  const legacyRuns = candidate.capturedRuns as unknown as {
     sql: AnalystCaseFile['capturedRuns']['sql'];
     python: AnalystCaseFile['capturedRuns']['python'];
   };
-};
-
-function migratePriorCase(candidate: PriorCase): AnalystCaseFile {
-  const legacyVersion = candidate.version === '1.0.0';
-  const legacyRuns = candidate.capturedRuns;
   return {
     ...candidate,
     version: ANALYST_CASE_VERSION,
@@ -448,24 +411,12 @@ function migratePriorCase(candidate: PriorCase): AnalystCaseFile {
         sizeBytes: file.sizeBytes ?? new TextEncoder().encode(file.content).byteLength,
       })),
       publishedTables: candidate.learnerWorkspace.publishedTables ?? [],
-      advisoryConsultations: candidate.learnerWorkspace.advisoryConsultations ?? [],
     },
     capturedRuns: {
-      history: legacyRuns.history ?? [],
-      sql: legacyRuns.sql ? {
-        ...legacyRuns.sql,
-        ...(legacyVersion ? {
-          totalRows: legacyRuns.sql.displayedRows.length,
-          codeSha256: '',
-          codeMatchesExportedWorkspace: false,
-        } : {}),
-      } : null,
-      python: legacyRuns.python ? {
-        ...legacyRuns.python,
-        ...(legacyVersion ? { codeSha256: '', codeMatchesExportedWorkspace: false } : {}),
-      } : null,
+      history: [],
+      sql: legacyRuns.sql ? { ...legacyRuns.sql, totalRows: legacyRuns.sql.displayedRows.length, codeSha256: '', codeMatchesExportedWorkspace: false } : null,
+      python: legacyRuns.python ? { ...legacyRuns.python, codeSha256: '', codeMatchesExportedWorkspace: false } : null,
     },
-    runtime: { ...candidate.runtime, advisory: candidate.runtime.advisory ?? null },
   };
 }
 
@@ -477,11 +428,8 @@ export function parseAnalystCase(value: string): AnalystCaseFile {
   if (!candidate.scenario || !candidate.learnerWorkspace || !candidate.capturedRuns || !candidate.verification) {
     throw new Error('The submission is incomplete.');
   }
-  if (candidate.version === '1.0.0' || candidate.version === '2.0.0') return migratePriorCase(candidate as unknown as PriorCase);
+  if (candidate.version === '1.0.0') return migrateLegacyCase(candidate as unknown as LegacyCase);
   if (candidate.version !== ANALYST_CASE_VERSION) throw new Error(`Unsupported submission version: ${candidate.version ?? 'missing'}.`);
-  if (!Array.isArray(candidate.learnerWorkspace.advisoryConsultations)) {
-    throw new Error('The submission is missing its Advisory Desk record.');
-  }
   return candidate as AnalystCaseFile;
 }
 

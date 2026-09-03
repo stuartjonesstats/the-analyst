@@ -10,14 +10,12 @@
     "build": "vinext build",
     "pages:prepare": "node scripts/prepare-pages.mjs",
     "test:migration": "node --experimental-strip-types scripts/test-python-worksheet-migration.mjs",
-    "test:advisory": "node --experimental-strip-types scripts/test-advisory-policy.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
     "@duckdb/duckdb-wasm": "^1.30.0",
-    "@mlc-ai/web-llm": "0.2.82",
     "@monaco-editor/react": "^4.7.0",
     "@shadcn/react": "0.3.0",
     "class-variance-authority": "0.7.1",

@@ -104,10 +104,4 @@ profile`,
     'Executive response',
   ],
   pythonPackages: [],
-  advisory: {
-    modelId: 'Qwen3-1.7B-q4f16_1-MLC',
-    persona: 'Senior Customer Insights Analyst',
-    promptRevision: 'assignment-01.v1',
-    analysisCutoff: '2024-12-02 08:05 ET',
-  },
 };

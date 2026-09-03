@@ -10,7 +10,7 @@ second course-management system.
 The file is UTF-8 JSON with the extension `.analystcase` and media type
 `application/vnd.theanalyst.case+json`.
 
-## Current schema: version 3
+## Version 1 contents
 
 - format and schema version;
 - export timestamp;
@@ -18,8 +18,6 @@ The file is UTF-8 JSON with the extension `.analystcase` and media type
 - SQL, Python, scratch-note, and polished final-brief files;
 - SHA-256 hash for each learner-authored file;
 - the case evidence register;
-- a distinct Advisory Desk consultation transcript, when the Assignment 01
-  pilot was used;
 - the most recent successful displayed SQL result and run count;
 - the most recent successful Python stdout, stderr, display value, figures, and
   run count;
@@ -30,22 +28,11 @@ The file is UTF-8 JSON with the extension `.analystcase` and media type
 The source Parquets are not copied into every submission. The scenario and
 catalog revisions identify the governed data pack needed to reproduce the work.
 
-Advisory consultations remain separate from the evidence register. Each record
-includes the learner's question, explicitly shared context, local model and
-prompt revision, response, timing, and interruption state. It does not claim
-that the advice is correct or that the learner followed it. The portfolio copy
-includes readable Markdown and structured JSON transcripts when consultations
-exist.
-
 ## Review boundary
 
 The public instructor viewer reads a submission locally, checks that the file
 contents still match their stored hashes, and exposes the recorded work. It does
 not silently execute learner code and does not assign a score.
-
-Version 3 viewers migrate version 1 and version 2 submissions in memory. Older
-files receive an empty Advisory Desk transcript; their original workspace is
-not rewritten unless the learner exports a new submission.
 
 A matching hash establishes internal file consistency, not authorship or an
 institutional digital signature. Institutions that require tamper-evident
