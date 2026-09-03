@@ -113,6 +113,22 @@ Parquets, workers, and internal links, then prepares `web/dist/client` as the
 Pages artifact. The `theanalyst.dev` domain can switch those path values
 to the domain root without changing the application architecture.
 
+## License
+
+The Analyst uses a split license so the software can remain genuinely open
+source while the educational work is protected from commercial repackaging:
+
+- Software source code is available under the MIT License.
+- Assignments, instructor materials, scenario content, catalogs, and synthetic
+  data are available under CC BY-NC 4.0 plus an additional permission for
+  teaching and academic use, including tuition-supported college, university,
+  and boot-camp courses.
+- Selling, sublicensing, or white-labeling the educational materials as a
+  commercial product requires separate written permission.
+
+See [LICENSE.md](LICENSE.md) for the complete scope, attribution requirement,
+academic-use permission, and third-party notice.
+
 ## Why the data are messy
 
 The data contain controlled, explainable difficulty rather than random corruption. Examples include:
