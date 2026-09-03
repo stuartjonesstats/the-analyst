@@ -14,6 +14,7 @@ import {
   FileChartColumn,
   Inbox,
   Link2,
+  MessagesSquare,
   PanelRightOpen,
   Play,
   RotateCcw,
@@ -24,6 +25,7 @@ import {
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
+import { AdvisoryDesk } from '@/components/advisory-desk';
 import { SiteLink } from '@/components/site-link';
 import {
   Table,
@@ -50,6 +52,7 @@ import {
   type ScaffoldMode,
   type WorkspaceFileDraft,
 } from '@/lib/analyst-case';
+import type { AdvisoryConsultation } from '@/lib/advisory';
 import { type CaseDefinition, formatRowCount } from '@/lib/case-definition';
 import { caseDefinitions } from '@/lib/case-definitions';
 import { migrateLegacyPythonWorksheet } from '@/lib/python-worksheet-migration';
@@ -78,6 +81,7 @@ type StoredWorkbenchExtras = {
   runHistory: RunSnapshot[];
   publishedTables: PublishedTableRecord[];
   revealedEventIds: string[];
+  advisoryConsultations: AdvisoryConsultation[];
 };
 
 const blankIdentity: LearnerIdentity = {
@@ -138,6 +142,8 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   const [evidenceRunId, setEvidenceRunId] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
   const [ledgerOpen, setLedgerOpen] = useState(false);
+  const [advisoryOpen, setAdvisoryOpen] = useState(false);
+  const [advisoryGenerating, setAdvisoryGenerating] = useState(false);
   const [ledgerIsOverlay, setLedgerIsOverlay] = useState(false);
   const [hydrated, setHydrated] = useState(false);
   const [saveState, setSaveState] = useState<'loading' | 'saved' | 'saving' | 'error'>('loading');
@@ -147,11 +153,13 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   const [runHistory, setRunHistory] = useState<RunSnapshot[]>([]);
   const [publishedTables, setPublishedTables] = useState<PublishedTableRecord[]>([]);
   const [revealedEventIds, setRevealedEventIds] = useState<string[]>([]);
+  const [advisoryConsultations, setAdvisoryConsultations] = useState<AdvisoryConsultation[]>([]);
   const [artifactEditorLabel, setArtifactEditorLabel] = useState<string | null>(null);
   const [publishName, setPublishName] = useState('analysis_result');
   const [publishStatus, setPublishStatus] = useState('');
   const importInputRef = useRef<HTMLInputElement>(null);
   const ledgerTriggerRef = useRef<HTMLButtonElement>(null);
+  const advisoryTriggerRef = useRef<HTMLButtonElement>(null);
   const workflowStageRef = useRef<HTMLDivElement>(null);
   const evidenceCount = evidence.length;
   const presentArtifactCount = definition.requiredArtifacts.filter((label) =>
@@ -236,6 +244,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
           }
           setPublishedTables(extra.publishedTables ?? []);
           setRevealedEventIds(extra.revealedEventIds ?? []);
+          setAdvisoryConsultations(extra.advisoryConsultations ?? []);
         }
       } catch {
         if (active) setSaveState('error');
@@ -275,11 +284,11 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
     const timeout = window.setTimeout(() => {
       setSaveState('saving');
       void saveWorkbenchRecord<StoredWorkbenchExtras>(storageKey, {
-        identity, artifacts, runHistory, publishedTables, revealedEventIds,
+        identity, artifacts, runHistory, publishedTables, revealedEventIds, advisoryConsultations,
       }).then(() => setSaveState('saved')).catch(() => setSaveState('error'));
     }, 350);
     return () => window.clearTimeout(timeout);
-  }, [artifacts, hydrated, identity, publishedTables, revealedEventIds, runHistory, storageKey]);
+  }, [advisoryConsultations, artifacts, hydrated, identity, publishedTables, revealedEventIds, runHistory, storageKey]);
 
   useEffect(() => {
     const media = window.matchMedia('(max-width: 1199px)');
@@ -323,6 +332,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   }
 
   async function runQuery() {
+    if (advisoryGenerating) return;
     setQueryError(null);
     try {
       const result = await run(query);
@@ -359,6 +369,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   }
 
   async function runPython() {
+    if (advisoryGenerating) return;
     setPythonError(null);
     try {
       const result = await python.run(pythonCode);
@@ -544,6 +555,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
       artifacts,
       runHistory,
       publishedTables,
+      advisoryConsultations,
       sqlRunCount,
       pythonRunCount,
       sqlCapturedAt,
@@ -584,6 +596,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
     setRunHistory([]);
     setPublishedTables([]);
     setRevealedEventIds([]);
+    setAdvisoryConsultations([]);
     setColumns([]);
     setRows([]);
     setSqlTotalRows(0);
@@ -614,6 +627,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
       setRunHistory(imported.capturedRuns.history ?? []);
       setPublishedTables(imported.learnerWorkspace.publishedTables ?? []);
       setRevealedEventIds(imported.scaffold.helpEventsUsed ?? []);
+      setAdvisoryConsultations(imported.learnerWorkspace.advisoryConsultations ?? []);
       setSqlRunCount(imported.capturedRuns.sql?.runCount ?? 0);
       setPythonRunCount(imported.capturedRuns.python?.runCount ?? 0);
       setLastSqlResult(imported.capturedRuns.sql ? {
@@ -690,6 +704,13 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   const currentRun = workspaceLanguage === 'sql' ? latestSqlRun : workspaceLanguage === 'python' ? latestPythonRun : null;
   const currentRunIsStale = workspaceLanguage === 'sql' ? sqlIsStale : workspaceLanguage === 'python' ? pythonIsStale : false;
   const revealedWorkdayEvents = workdayEvents.filter((event) => revealedEventIds.includes(event.id));
+  const advisoryWorkspaceSelection = workspaceLanguage === 'sql'
+    ? { kind: 'sql' as const, label: 'Current SQL worksheet', text: query }
+    : workspaceLanguage === 'python'
+      ? { kind: 'python' as const, label: 'Current Python worksheet', text: pythonCode }
+      : workspaceLanguage === 'final'
+        ? { kind: 'claim' as const, label: 'Current final brief', text: finalBrief }
+        : { kind: 'note' as const, label: 'Current scratch notes', text: notes };
   const modeLabels: Record<ScaffoldMode, string> = {
     supported: 'Supported',
     guided: 'Guided',
@@ -773,6 +794,9 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
             <div className="case-command-facts">
               <span><b>PRIORITY</b> {definition.priority}</span><span><b>UNIT</b> {definition.businessUnit.toUpperCase()}</span><span><b>DUE</b> {definition.dueLabel}</span>
             </div>
+            {definition.advisory && <button ref={advisoryTriggerRef} className="advisory-trigger" onClick={() => { setLedgerOpen(false); setAdvisoryOpen(true); }}>
+              <MessagesSquare /> ADVISORY DESK <span>{advisoryConsultations.length}</span>
+            </button>}
             <button ref={ledgerTriggerRef} className="ledger-trigger" onClick={() => setLedgerOpen(true)}>
               <PanelRightOpen /> ASSIGNMENT RECORD <span>{evidenceCount}</span>
             </button>
@@ -822,7 +846,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
                 {(workspaceLanguage === 'sql' || workspaceLanguage === 'python') && <button className="restore-starter" onClick={() => restoreStarter(workspaceLanguage)} title="Restore starter worksheet"><RotateCcw /> RESTORE</button>}
                 <div className="engine-state"><span className={activeError ? 'is-error' : ''} />{engineLabel}</div>
                 {(workspaceLanguage === 'sql' || workspaceLanguage === 'python') && <Button size="sm" className="run-control"
-                  disabled={workspaceLanguage === 'sql' ? status === 'booting' || status === 'running' || status === 'error' : python.status === 'booting' || python.status === 'loading_data' || python.status === 'error'}
+                  disabled={advisoryGenerating || (workspaceLanguage === 'sql' ? status === 'booting' || status === 'running' || status === 'error' : python.status === 'booting' || python.status === 'loading_data' || python.status === 'error')}
                   onClick={() => { if (workspaceLanguage === 'python' && python.status === 'running') python.stop(); else void (workspaceLanguage === 'sql' ? runQuery() : runPython()); }}>
                   <Play data-icon="inline-start" />{workspaceLanguage === 'python' && python.status === 'running' ? 'STOP' : workspaceLanguage === 'sql' && status === 'running' ? 'RUNNING' : 'EXECUTE'}
                 </Button>}
@@ -922,10 +946,37 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
           <section className="ledger-section handoff-section"><div className="ledger-section-head"><span>REQUIRED HANDOFF</span><b>{presentArtifactCount} / {definition.requiredArtifacts.length}</b></div><ul>{definition.requiredArtifacts.map((label) => { const present = Boolean(artifactFor(label)?.content.length); return <li className={present ? 'is-present' : ''} key={label}><span /> {label}<small>{present ? 'PRESENT' : 'MISSING'}</small></li>; })}</ul><p>Only file presence is checked here. Meaning and quality require human review.</p>
             <button className="download-case" onClick={() => void exportCase('case')} disabled={isExporting}><Download /><span>{isExporting ? 'PACKAGING' : 'DOWNLOAD SUBMISSION'}</span><small>.ANALYSTCASE</small></button><button className="download-case secondary" onClick={() => void exportCase('portfolio')} disabled={isExporting}><Download /><span>PORTFOLIO COPY</span><small>.ZIP</small></button>
             <div className="workspace-utilities"><input ref={importInputRef} type="file" accept=".analystcase,application/json" onChange={(event) => { const file = event.target.files?.[0]; if (file) void importSubmission(file); }} /><button onClick={() => importInputRef.current?.click()}><Upload /> RESTORE SUBMISSION</button><button onClick={() => void clearAssignment()}><RotateCcw /> CLEAR LOCAL ASSIGNMENT</button></div>
-            <p className="download-case-note">The restorable file includes identity, scaffold mode, worksheets, explicit artifacts, evidence, exact run snapshots, outputs, and hashes. No analytical answer is auto-certified.</p>
+            <p className="download-case-note">The restorable file includes identity, scaffold mode, worksheets, explicit artifacts, evidence, Advisory Desk consultations, exact run snapshots, outputs, and hashes. No analytical answer is auto-certified.</p>
           </section>
         </aside>
         {ledgerOpen && ledgerIsOverlay && <button className="ledger-scrim" onClick={closeLedger} aria-label="Close assignment record overlay" />}
+        {definition.advisory && <AdvisoryDesk
+          open={advisoryOpen}
+          onClose={() => { setAdvisoryOpen(false); window.requestAnimationFrame(() => advisoryTriggerRef.current?.focus()); }}
+          brief={{
+            id: definition.id,
+            title: definition.title,
+            role: definition.role,
+            requester: definition.requester,
+            requestTitle: definition.requestTitle,
+            requestBody: definition.requestBody,
+            responseDue: definition.responseDue,
+            decisionStandard: definition.decisionStandard,
+            analysisCutoff: definition.advisory.analysisCutoff,
+          }}
+          tableNames={definition.dataFiles.map((file) => file.table)}
+          promptRevision={definition.advisory.promptRevision}
+          persona={definition.advisory.persona}
+          mode={mode}
+          workflowStep={activeWorkflowStep}
+          revealedMessages={revealedWorkdayEvents.map(({ id, from, subject, body }) => ({ id, from, subject, body }))}
+          workspaceSelection={advisoryWorkspaceSelection}
+          activeError={activeError}
+          consultations={advisoryConsultations}
+          onAppend={(consultation) => setAdvisoryConsultations((current) => [...current, consultation])}
+          workbenchBusy={status === 'running' || python.status === 'running'}
+          onBusyChange={setAdvisoryGenerating}
+        />}
       </div>
     </main>
   );

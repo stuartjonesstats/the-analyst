@@ -104,6 +104,8 @@ npm run dev
 
 The public front door includes a nine-assignment progression register, pedagogical approach, learner field guide, and a searchable dictionary for all 96 source tables. Each assignment mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
 
+Assignment 01 also includes an opt-in Meridian Advisory Desk pilot. A pinned small language model runs locally through WebGPU after the learner chooses to download it, receives only learner-visible assignment context and explicitly shared draft material, and keeps its consultation transcript separate from evidence. The transcript travels with version 3 `.analystcase` submissions for learner and instructor review.
+
 The assignment-pack builders, manifests, and exact validators live in `generator/case_packs/`. Together the browser packs contain more than five million rows in about 110 MiB while preserving each assignment's authored mechanisms. The checks cover hashes, row/column contracts, relationship closure, cutoffs, and planted mechanical invariants—not the quality of a learner's conclusion.
 
 The public site is built as a static export and deployed from

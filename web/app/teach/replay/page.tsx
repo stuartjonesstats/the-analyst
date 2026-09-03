@@ -527,6 +527,22 @@ export default function SubmissionViewer() {
             </article>
           </div>
 
+          <section className="advisory-review-record" aria-labelledby="advisory-review-title">
+            <div className="teaching-section-title">
+              <span id="advisory-review-title">ADVISORY DESK TRANSCRIPT</span>
+              <b>{caseFile.learnerWorkspace.advisoryConsultations.length} CONSULTATIONS</b>
+            </div>
+            {caseFile.learnerWorkspace.advisoryConsultations.length ? <div className="advisory-review-list">
+              {caseFile.learnerWorkspace.advisoryConsultations.map((consultation, index) => <details key={consultation.id} open={index === caseFile.learnerWorkspace.advisoryConsultations.length - 1}>
+                <summary><span>{String(index + 1).padStart(2, '0')} / {consultation.intent.replaceAll('_', ' ').toUpperCase()}</span><small>{new Date(consultation.completedAt).toLocaleString()}</small></summary>
+                <div><strong>LEARNER QUESTION</strong><p>{consultation.question}</p></div>
+                <div><strong>CONTEXT SHARED</strong><p>{consultation.context.map((item) => item.label).join(', ') || 'Assignment brief and public data register only'}</p></div>
+                <div><strong>ADVISORY / VERIFY BEFORE USE</strong><pre>{consultation.response}</pre></div>
+                <footer>{consultation.modelId} / {consultation.promptRevision} / {consultation.elapsedMs} ms{consultation.interrupted ? ' / interrupted' : ''}</footer>
+              </details>)}
+            </div> : <p className="advisory-review-empty">No Advisory Desk consultations were recorded in this submission.</p>}
+          </section>
+
           <section
             className="grading-worksheet"
             aria-labelledby="grading-title"
