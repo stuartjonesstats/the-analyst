@@ -34,7 +34,7 @@ jobs:
           node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
-      - run: npm ci
+      - run: npm ci --no-audit --no-fund
       - run: npm run build
       - run: npm run pages:prepare
       - uses: actions/configure-pages@v5
