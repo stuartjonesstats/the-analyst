@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 
 import { PublicShell } from '@/components/public-shell';
+import { publicFeatures } from '@/lib/public-features';
 
 export const dynamic = 'force-static';
 
@@ -24,6 +25,18 @@ const commitments = [
     '03',
     'The simulation uses fictional data',
     'Meridian Living Systems and its data estate are synthetic. Do not paste real employer, client, customer, patient, student, or other protected information into the workbench or an AI help packet.',
+  ],
+  [
+    '04',
+    'Publishing is a deliberate learner action',
+    'Portfolio files and completion images are assembled locally and downloaded to the learner’s device. Nothing is published automatically. Opening a social network, email client, GitHub, or another external destination leaves The Analyst and is governed by that service’s privacy terms.',
+  ],
+  [
+    '05',
+    publicFeatures.fieldWork ? 'Field Work submissions are public' : 'Field Work is not accepting submissions',
+    publicFeatures.fieldWork
+      ? 'Field Work intake uses a clearly identified public GitHub issue. Submitted URLs, display names or pseudonyms, synopses, and discussion are public before editorial review. No email address is requested, and approved work remains hosted by its author.'
+      : 'The planned Field Work gallery is currently disabled. If it opens later, its intake will use a clearly identified public GitHub issue: submitted URLs, display names or pseudonyms, synopses, and discussion would be public before editorial review. The site will not publish work from private submissions or local workbench storage.',
   ],
 ] as const;
 
@@ -58,7 +71,7 @@ export default function PrivacyPage() {
         <section className="public-cta compact">
           <div>
             <span>LAST UPDATED</span>
-            <h2>September 3, 2026</h2>
+            <h2>September 4, 2026</h2>
           </div>
           <a href="https://github.com/stuartjonesstats/the-analyst">VIEW PROJECT SOURCE ↗</a>
         </section>

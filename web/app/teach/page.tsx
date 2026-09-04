@@ -8,6 +8,7 @@ import {
   scoreBands,
   teachingBoundaries,
 } from '@/lib/instructor-planning';
+import { priorityBriefs } from '@/lib/priority-briefs';
 import { complexityDimensions, scenarios } from '@/lib/scenarios';
 
 export const dynamic = 'force-static';
@@ -15,7 +16,7 @@ export const dynamic = 'force-static';
 export const metadata: Metadata = {
   title: 'Instructor Planning Desk — The Analyst',
   description:
-    'Sequence, prerequisites, workload, scaffolding, and technical requirements for The Analyst assignment curriculum.',
+    'Sequence, prerequisites, workload, scaffolding, and technical requirements for The Analyst assignments and Priority Briefs.',
   robots: { index: false, follow: false },
   openGraph: { images: [] },
   twitter: { images: [] },
@@ -52,11 +53,11 @@ export default function TeachPage() {
 
       <section className="teaching-intro">
         <p className="document-kicker">
-          THE ANALYST / NINE-ASSIGNMENT SEQUENCE
+          THE ANALYST / ASSIGNMENT STUDIO + PRIORITY BRIEF SEASON
         </p>
         <h1>Plan a progression through the work.</h1>
         <p>
-          This desk helps instructors sequence nine workplace assignments across
+          This desk helps instructors sequence nine workplace assignments and eight compact Priority Briefs across
           SQL, Python, data judgment, and professional handoff. It contains no
           sample conclusions. Prepared-hour estimates assume a learner can work
           independently; newcomer ranges assume active instructor support.
@@ -178,6 +179,32 @@ export default function TeachPage() {
               ))}
             </tbody>
           </table>
+        </div>
+      </section>
+
+      <section className="course-route-register" aria-labelledby="priority-brief-planning-heading">
+        <div className="teaching-section-title">
+          <span id="priority-brief-planning-heading">PRIORITY BRIEF SEASON / 08</span>
+          <b>BIWEEKLY PRACTICE / EXISTING MERIDIAN TABLES</b>
+        </div>
+        <p className="route-caveat">
+          Priority Briefs are bounded 60–120 minute workplace decisions—not attendance check-ins. Each opens a separate local workbench, reuses an existing governed data neighborhood, requires multiple evidence moves and a polished handoff, and leaves the corresponding full-assignment draft untouched. The eight-brief sequence repeats every 16 weeks; permanent URLs let instructors assign any brief outside the featured window. Debriefs describe defensible approaches and common traps rather than one required answer.
+        </p>
+        <div className="course-route-grid">
+          {priorityBriefs.map((brief) => (
+            <article key={brief.id}>
+              <header><span>{brief.id}</span><strong>{brief.title}</strong></header>
+              <p>{brief.shortDescription}</p>
+              <dl>
+                <div><dt>ROLE</dt><dd>{brief.role}</dd></div>
+                <div><dt>TIMEBOX</dt><dd>{brief.timeEstimate}</dd></div>
+                <div><dt>ROTATION</dt><dd>Slot {brief.sequence} of {priorityBriefs.length}</dd></div>
+                <div><dt>DATA</dt><dd>{brief.sourceTables.length} tables from {brief.sourceAssignment}</dd></div>
+              </dl>
+              <ol>{brief.deliverables.map((deliverable) => <li key={deliverable.title}>{deliverable.title}</li>)}</ol>
+              <SiteLink className="course-route-link" path={`/briefs/${brief.slug}/`}>OPEN INSTRUCTOR PREVIEW →</SiteLink>
+            </article>
+          ))}
         </div>
       </section>
 

@@ -1,14 +1,17 @@
 import type { ReactNode } from 'react';
 
 import { SiteLink } from '@/components/site-link';
+import { publicFeatures } from '@/lib/public-features';
 
 type PublicShellProps = {
   children: ReactNode;
-  currentPath?: '/' | '/projects' | '/self-guided' | '/approach' | '/guide' | '/data' | '/privacy';
+  currentPath?: '/' | '/projects' | '/briefs' | '/field-work' | '/self-guided' | '/approach' | '/guide' | '/data' | '/privacy';
 };
 
 const primaryNavigation = [
   { path: '/projects', label: 'ASSIGNMENTS' },
+  { path: '/briefs', label: 'PRIORITY BRIEFS' },
+  ...(publicFeatures.fieldWork ? [{ path: '/field-work' as const, label: 'FIELD WORK' }] : []),
   { path: '/self-guided', label: 'SELF-GUIDED' },
   { path: '/approach', label: 'APPROACH' },
   { path: '/data', label: 'DATA REGISTER' },
@@ -49,6 +52,8 @@ export function PublicShell({ children, currentPath }: PublicShellProps) {
         </div>
         <nav aria-label="Footer navigation">
           <SiteLink path="/projects">Assignments</SiteLink>
+          <SiteLink path="/briefs">Priority Briefs</SiteLink>
+          {publicFeatures.fieldWork && <SiteLink path="/field-work">Field Work</SiteLink>}
           <SiteLink path="/self-guided">Self-guided manual</SiteLink>
           <SiteLink path="/data">Data dictionary</SiteLink>
           <SiteLink path="/guide">Workbench guide</SiteLink>

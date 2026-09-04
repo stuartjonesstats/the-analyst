@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 1200 1200">
+  <rect y="285" width="1200" height="630" fill="#112129"/>
+  <rect y="285" width="1200" height="8" fill="#598ab5"/>
+  <path d="M760 293V915" stroke="#344851"/>
+  <path d="M72 382H688" stroke="#344851"/>
+  <path d="M72 805H688" stroke="#344851"/>
+  <g opacity=".35" stroke="#52666e">
+    <path d="M800 500H1152M800 550H1152M800 600H1152M800 650H1152M800 700H1152M800 750H1152"/>
+    <path d="M820 480V770M870 480V770M920 480V770M970 480V770M1020 480V770M1070 480V770M1120 480V770"/>
+  </g>
+  <path d="M808 714 L854 662 L900 670 L946 612 L992 620 L1038 573 L1084 595 L1130 542" fill="none" stroke="#598ab5" stroke-width="6" stroke-linecap="square" stroke-linejoin="miter"/>
+  <text x="72" y="348" fill="#e4eae8" font-family="Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4">THE ANALYST</text>
+  <text x="688" y="348" fill="#768a90" font-family="Menlo, monospace" font-size="11" text-anchor="end" letter-spacing="2">MERIDIAN WORK ASSIGNMENT</text>
+  <text x="72" y="438" fill="#598ab5" font-family="Menlo, monospace" font-size="13" font-weight="700" letter-spacing="2">FIELD OPERATIONS PLANNING / FO-250320</text>
+  <text x="72" y="530" fill="#f0f3f1" font-family="Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="-3">The 7:30</text>
+  <text x="72" y="598" fill="#f0f3f1" font-family="Arial, sans-serif" font-size="66" font-weight="700" letter-spacing="-3">Capacity Call</text>
+  <text x="72" y="660" fill="#a8b7ba" font-family="Menlo, monospace" font-size="13" letter-spacing="2">YOUR ROLE / SERVICE CAPACITY ANALYST</text>
+  <text x="72" y="852" fill="#8a9b9f" font-family="Menlo, monospace" font-size="12" letter-spacing="2">ACCEPT THE BRIEF</text>
+  <text x="688" y="852" fill="#e2e9e7" font-family="Menlo, monospace" font-size="12" text-anchor="end" letter-spacing="1">THEANALYST.DEV/ASSIGNMENTS/THE-730-CAPACITY-CALL</text>
+  <text x="800" y="378" fill="#598ab5" font-family="Menlo, monospace" font-size="12" font-weight="700" letter-spacing="3">ASSIGNMENT 05</text>
+  <text x="1144" y="444" fill="#edf1ef" font-family="Arial, sans-serif" font-size="112" font-weight="700" text-anchor="end" letter-spacing="-6">05</text>
+  <text x="800" y="828" fill="#768a90" font-family="Menlo, monospace" font-size="11" letter-spacing="2">COMPLEXITY BAND</text>
+  <text x="1144" y="862" fill="#e4eae8" font-family="Menlo, monospace" font-size="16" font-weight="700" text-anchor="end" letter-spacing="2">DECISION</text>
+</svg>

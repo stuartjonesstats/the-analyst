@@ -1,10 +1,10 @@
-# Meridian Living Systems data estate
+# The Analyst / Meridian Living Systems data estate
 
 This repository is the data foundation for a hands-on, open-world data-science simulation. It models one synthetic company across three years instead of presenting unrelated exercise datasets.
 
 The first deliverable was deliberately **data-first**: a reproducible generator, linked Parquet files, machine-readable catalog, relationship map, anomaly ledger, world guide, and validation suite.
 
-The browser product is **The Analyst** (`theanalyst.dev`). All nine assignments now run in `web/` with Monaco, DuckDB-Wasm, Pyodide, assignment-specific relational Parquet packs, local drafts, and portable submissions. The complete generated estate remains local and reproducible rather than being committed to Git; the public site ships compact decision populations built from it.
+The browser product is **The Analyst** ([theanalyst.dev](https://theanalyst.dev)). Nine full assignments and an eight-brief rotating decision series run in `web/` with Monaco, DuckDB-Wasm, Pyodide, governed relational Parquet packs, local drafts, portable submissions, and publication-reviewed portfolio exports. The complete generated estate remains local and reproducible rather than being committed to Git; the public site ships compact decision populations built from it.
 
 ## Current footprint
 
@@ -50,6 +50,12 @@ The estate covers:
 
 The authoring schema is [simulation.schema.json](scenarios/schema/simulation.schema.json). Instructor-only truth is part of source authoring but must be stripped from learner manifests before delivery.
 
+## Eight Priority Briefs
+
+Priority Briefs are substantial, self-contained 60–120 minute decisions in a permanent biweekly rotation. The eight-brief sequence repeats every 16 weeks while each briefing URL remains permanently available. They do not introduce separate toy tables: every brief reuses an existing Meridian assignment pack and opens it in its own persistence namespace, so brief work cannot overwrite the corresponding full assignment.
+
+The first season covers metric governance, join grain, missing telemetry, experiment interpretation, asymmetric forecast loss, point-in-time leakage, privacy-aware text review, and executive chart communication. Each brief has a permanent public URL, exact source register, SQL and Python workbench, multiple professional deliverables, optional stretch, and a spoiler-separated debrief describing defensible approaches rather than one answer.
+
 ## Query the Parquet files
 
 DuckDB can query a file directly without importing it:
@@ -72,7 +78,7 @@ SELECT
   count(*) AS orders,
   sum(o.order_total_cents) / 100.0 AS booked_value
 FROM read_parquet('parquet/commerce/order.parquet') o
-JOIN read_parquet('parquet/crm.account.parquet') a USING (account_id)
+JOIN read_parquet('parquet/crm/account.parquet') a USING (account_id)
 JOIN read_parquet('parquet/core/branch.parquet') b
   ON a.home_branch_id = b.branch_id
 JOIN read_parquet('parquet/core/region.parquet') r USING (region_id)
@@ -102,7 +108,9 @@ npm install
 npm run dev
 ```
 
-The public front door includes a nine-assignment progression register, pedagogical approach, learner field guide, and a searchable dictionary for all 96 source tables. Each assignment mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
+The public front door includes a nine-assignment progression register, permanent spoiler-free assignment pages, the Priority Brief season, pedagogical approach, self-guided manual, and a searchable dictionary for all 96 source tables. Each assignment or brief mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
+
+At handoff, learners can build a separate GitHub-ready portfolio through an explicit publication review. The exporter omits academic identity, course metadata, scratch notes, raw data, run errors/history, stale figures, and every unselected artifact. The resulting ZIP contains a professional README, source and report folders, approved evidence and figures, a responsive `docs/` portfolio for optional GitHub Pages, a repository preview image, honest reproducibility notes, attribution, and a publication checklist. An optional learner-declared Analytical Field Record can be downloaded for social sharing; it is deliberately not a score, credential, or certification.
 
 The assignment-pack builders, manifests, and exact validators live in `generator/case_packs/`. Together the browser packs contain more than five million rows in about 110 MiB while preserving each assignment's authored mechanisms. The checks cover hashes, row/column contracts, relationship closure, cutoffs, and planted mechanical invariants—not the quality of a learner's conclusion.
 

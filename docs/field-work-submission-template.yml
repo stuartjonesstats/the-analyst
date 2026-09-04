@@ -1,0 +1,84 @@
+# Dormant template: move to .github/ISSUE_TEMPLATE/field-work-submission.yml
+# only when NEXT_PUBLIC_FIELD_WORK is enabled for the public site.
+name: Share Field Work
+description: Voluntarily submit public work created with The Analyst for editorial consideration.
+title: "Field Work submission: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for offering your work to the Field Work gallery. This issue and everything you enter below will be public. Do not include an email address, learner ID, private data, credentials, or anything you do not want published.
+
+        Selection is editorial rather than competitive. Being featured is not a grade, certification, or endorsement of every conclusion, and some sound submissions may not be selected because of space and variety.
+  - type: input
+    id: artifact_url
+    attributes:
+      label: Public artifact URL
+      description: Link to an HTTPS GitHub repository, notebook, article, or portfolio page that you control.
+      placeholder: https://github.com/...
+    validations:
+      required: true
+  - type: input
+    id: public_title
+    attributes:
+      label: Public title
+      placeholder: A concise title for the work
+    validations:
+      required: true
+  - type: dropdown
+    id: artifact_type
+    attributes:
+      label: Artifact type
+      options:
+        - GitHub repository
+        - Notebook
+        - Article or blog post
+        - Portfolio page
+    validations:
+      required: true
+  - type: input
+    id: assignment
+    attributes:
+      label: Assignment or Priority Brief
+      description: Give the title or ID shown by The Analyst.
+    validations:
+      required: true
+  - type: input
+    id: display_name
+    attributes:
+      label: Display name or pseudonym
+      description: Leave blank if you want the gallery card to say “Independent analyst.” Your GitHub account remains visible on this public issue.
+  - type: textarea
+    id: synopsis
+    attributes:
+      label: Synopsis
+      description: In one or two sentences, describe the decision and what your analysis contributed. Avoid giving away a planted mechanism in the first sentence.
+    validations:
+      required: true
+  - type: textarea
+    id: reflection
+    attributes:
+      label: What changed in your thinking?
+      description: A short reflection on the most important judgment, limitation, or revision.
+    validations:
+      required: true
+  - type: input
+    id: skills
+    attributes:
+      label: Methods or skills
+      placeholder: SQL, time-aware joins, sensitivity analysis, decision memo
+    validations:
+      required: true
+  - type: checkboxes
+    id: permissions
+    attributes:
+      label: Publication confirmations
+      options:
+        - label: I created or control this work and permit The Analyst to link to it and publish the synopsis, reflection, and display name I supplied.
+          required: true
+        - label: I checked the public artifact for credentials, private employer or client material, protected data, and third-party personal data.
+          required: true
+        - label: I understand that this issue is public and that inclusion is editorial, not a grade, certification, ranking, or endorsement.
+          required: true
+        - label: I will use the visible correction/removal process if the link or publication permission changes.
+          required: true

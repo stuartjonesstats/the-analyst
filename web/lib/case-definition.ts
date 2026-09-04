@@ -35,6 +35,8 @@ export type CaseDefinition = {
   sessionLabel: string;
   responseWindow: string;
   persistenceKey: string;
+  /** Canonical public briefing page used by portfolio exports. */
+  publicUrl?: string;
   dataFiles: CaseDataFile[];
   defaultSql: string;
   defaultPython: string;
@@ -47,4 +49,3 @@ export type CaseDefinition = {
 export function formatRowCount(rows: number) {
   return new Intl.NumberFormat('en-US').format(rows);
 }
-

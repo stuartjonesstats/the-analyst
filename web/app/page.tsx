@@ -3,6 +3,7 @@ import { ArrowRight, Database, FileCode2, ShieldCheck } from 'lucide-react';
 
 import { PublicShell } from '@/components/public-shell';
 import { SiteLink } from '@/components/site-link';
+import { getPriorityBriefRotation } from '@/lib/priority-briefs';
 import { scenarios } from '@/lib/scenarios';
 
 export const dynamic = 'force-static';
@@ -13,6 +14,10 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
+  const priorityRotation = getPriorityBriefRotation();
+  const currentBrief = priorityRotation.brief;
+  const currentBriefRows = currentBrief.sourceTables.reduce((total, source) => total + source.rows, 0);
+
   return (
     <PublicShell currentPath="/">
       <main className="public-main" id="main-content" tabIndex={-1}>
@@ -29,7 +34,7 @@ export default function HomePage() {
               Defend the decision.
             </h1>
             <p className="hero-deck">
-              The Analyst places you inside Meridian Living Systems, a fictional products-and-services company. Across nine assignments, you step into different analyst roles and confront what clean tutorials remove: unclear requests, competing clocks, unreliable grains, operational limits, and accountable handoffs.
+              The Analyst places you inside Meridian Living Systems, a fictional products-and-services company. Across nine full assignments and a rotating season of Priority Briefs, you step into different analyst roles and confront what clean tutorials remove: unclear requests, competing clocks, unreliable grains, operational limits, and accountable handoffs.
             </p>
             <div className="hero-actions">
               <SiteLink path="/workbench" className="action-primary">
@@ -145,7 +150,7 @@ export default function HomePage() {
           </div>
           <div className="case-preview-list">
             {scenarios.slice(0, 4).map((scenario) => (
-              <SiteLink key={scenario.id} path={`/workbench/?case=${scenario.slug}`} className="case-preview-row">
+              <SiteLink key={scenario.id} path={`/assignments/${scenario.slug}/`} className="case-preview-row">
                 <span>{String(scenario.sequence).padStart(2, '0')}</span>
                 <div>
                   <small>{scenario.businessUnit}</small>
@@ -156,6 +161,36 @@ export default function HomePage() {
                 <ArrowRight />
               </SiteLink>
             ))}
+          </div>
+        </section>
+
+        <section className="home-priority" aria-labelledby="home-priority-title">
+          <header>
+            <span>CURRENT PRIORITY / {currentBrief.id}</span>
+            <time dateTime={priorityRotation.startsAt.toISOString()}>PERMANENT BIWEEKLY ROTATION</time>
+          </header>
+          <div className="home-priority-main">
+            <div>
+              <p className="public-kicker">{currentBrief.desk.toUpperCase()} / INCOMING</p>
+              <h2 id="home-priority-title">{currentBrief.title}</h2>
+              <p>{currentBrief.shortDescription}</p>
+              <dl>
+                <div><dt>YOUR ROLE</dt><dd>{currentBrief.role}</dd></div>
+                <div><dt>WORKING TIME</dt><dd>{currentBrief.timeEstimate}</dd></div>
+                <div><dt>DATA NEIGHBORHOOD</dt><dd>{currentBrief.sourceTables.length} existing tables / {currentBriefRows.toLocaleString('en-US')} mounted rows</dd></div>
+                <div><dt>DIFFICULTY</dt><dd>{currentBrief.difficulty}</dd></div>
+              </dl>
+              <nav aria-label="Current Priority Brief actions">
+                <SiteLink path={`/briefs/${currentBrief.slug}/`}>OPEN CURRENT BRIEF <ArrowRight /></SiteLink>
+                <SiteLink path="/briefs">VIEW EIGHT-BRIEF SEASON</SiteLink>
+              </nav>
+            </div>
+            <aside>
+              <span>THE DECISION</span>
+              <p>{currentBrief.decision}</p>
+              <div>{currentBrief.skills.map((skill) => <b key={skill}>{skill}</b>)}</div>
+              <small>Uses the existing {currentBrief.sourceAssignment} data neighborhood. No separate toy dataset.</small>
+            </aside>
           </div>
         </section>
 

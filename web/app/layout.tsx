@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(publicSiteUrl),
   title: 'The Analyst — Applied Data Science Work Simulations',
   description:
-    'Nine browser-based data science simulations where analysts investigate a living company, make defensible decisions, and show their work.',
+    'Nine browser-based data science assignments and a rotating season of Priority Briefs where analysts investigate a living company, make defensible decisions, and show their work.',
   openGraph: {
     title: 'The Analyst',
     description: 'Investigate. Decide. Show your work.',

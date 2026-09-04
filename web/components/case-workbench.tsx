@@ -26,6 +26,7 @@ import {
 
 import { Button } from '@/components/ui/button';
 import { AiContextDialog } from '@/components/ai-context-dialog';
+import { PortfolioBuilder } from '@/components/portfolio-builder';
 import { SiteLink } from '@/components/site-link';
 import {
   Table,
@@ -40,7 +41,6 @@ import { type PythonRunResult, usePython } from '@/hooks/use-python';
 import {
   buildAnalystCase,
   downloadAnalystCase,
-  downloadPortfolioZip,
   parseAnalystCase,
   sha256,
   verifyWorkspaceHashes,
@@ -139,6 +139,8 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   const [evidenceComposerOpen, setEvidenceComposerOpen] = useState(false);
   const [evidenceRunId, setEvidenceRunId] = useState<string | null>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [portfolioCase, setPortfolioCase] = useState<AnalystCaseFile | null>(null);
+  const [isPreparingPortfolio, setIsPreparingPortfolio] = useState(false);
   const [aiContextOpen, setAiContextOpen] = useState(false);
   const [ledgerOpen, setLedgerOpen] = useState(false);
   const [ledgerIsOverlay, setLedgerIsOverlay] = useState(false);
@@ -156,6 +158,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
   const importInputRef = useRef<HTMLInputElement>(null);
   const aiContextTriggerRef = useRef<HTMLButtonElement>(null);
   const ledgerTriggerRef = useRef<HTMLButtonElement>(null);
+  const portfolioTriggerRef = useRef<HTMLButtonElement>(null);
   const workflowStageRef = useRef<HTMLDivElement>(null);
   const evidenceCount = evidence.length;
   const presentArtifactCount = definition.requiredArtifacts.filter((label) =>
@@ -557,14 +560,22 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
     });
   }
 
-  async function exportCase(kind: 'case' | 'portfolio' = 'case') {
+  async function exportCase() {
     setIsExporting(true);
     try {
       const caseFile = await buildCurrentCase();
-      if (kind === 'portfolio') downloadPortfolioZip(caseFile);
-      else downloadAnalystCase(caseFile);
+      downloadAnalystCase(caseFile);
     } finally {
       setIsExporting(false);
+    }
+  }
+
+  async function openPortfolioBuilder() {
+    setIsPreparingPortfolio(true);
+    try {
+      setPortfolioCase(await buildCurrentCase());
+    } finally {
+      setIsPreparingPortfolio(false);
     }
   }
 
@@ -912,7 +923,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
                   {artifactEditorLabel === label && <textarea className="artifact-editor" aria-label={`Artifact content for ${label}`} value={artifact?.content ?? ''} onChange={(event) => upsertArtifact({ ...(artifact ?? { path: `artifacts/${String(index + 1).padStart(2, '0')}-${artifactSlug(label)}.md`, language: 'markdown', encoding: 'utf-8', mimeType: 'text/markdown', source: 'authored-artifact', requiredArtifactLabel: label }), content: event.target.value })} placeholder="Write or paste the artifact content here." />}
                 </article>; })}
               </section>
-              <div className="submission-actions"><button className="download-case" onClick={() => void exportCase('case')} disabled={isExporting}><Download /><span>{isExporting ? 'PACKAGING' : 'DOWNLOAD RESTORABLE SUBMISSION'}</span><small>.ANALYSTCASE</small></button><button className="download-case secondary" onClick={() => void exportCase('portfolio')} disabled={isExporting}><Download /><span>DOWNLOAD PORTFOLIO COPY</span><small>.ZIP</small></button></div>
+              <div className="submission-actions"><button ref={portfolioTriggerRef} className="download-case" onClick={() => void openPortfolioBuilder()} disabled={isPreparingPortfolio}><FileChartColumn /><span>{isPreparingPortfolio ? 'PREPARING REVIEW' : 'BUILD GITHUB PORTFOLIO'}</span><small>PUBLICATION REVIEW</small></button><button className="download-case secondary" onClick={() => void exportCase()} disabled={isExporting}><Download /><span>{isExporting ? 'PACKAGING' : 'DOWNLOAD RESTORABLE SUBMISSION'}</span><small>.ANALYSTCASE / PRIVATE</small></button></div>
             </section>}
           </div>
 
@@ -927,7 +938,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
             {evidenceComposerOpen ? <div className="evidence-composer">{evidenceRunId && <p>Linked to captured run {evidenceRunId.slice(0, 8)}. The source hash will travel with this record.</p>}<textarea value={evidenceDraft} onChange={(event) => setEvidenceDraft(event.target.value)} placeholder="State one finding this run supports. Include the population and limitation when they matter." /><div><button onClick={() => { setEvidenceComposerOpen(false); setEvidenceRunId(null); }}>CANCEL</button><button onClick={addEvidence} disabled={!evidenceDraft.trim()}>RECORD</button></div></div> : <button className="add-evidence" onClick={() => openEvidenceComposer(null)}><span>+</span> APPEND EVIDENCE RECORD</button>}
           </section>
           <section className="ledger-section handoff-section"><div className="ledger-section-head"><span>REQUIRED HANDOFF</span><b>{presentArtifactCount} / {definition.requiredArtifacts.length}</b></div><ul>{definition.requiredArtifacts.map((label) => { const present = Boolean(artifactFor(label)?.content.length); return <li className={present ? 'is-present' : ''} key={label}><span /> {label}<small>{present ? 'PRESENT' : 'MISSING'}</small></li>; })}</ul><p>Only file presence is checked here. Meaning and quality require human review.</p>
-            <button className="download-case" onClick={() => void exportCase('case')} disabled={isExporting}><Download /><span>{isExporting ? 'PACKAGING' : 'DOWNLOAD SUBMISSION'}</span><small>.ANALYSTCASE</small></button><button className="download-case secondary" onClick={() => void exportCase('portfolio')} disabled={isExporting}><Download /><span>PORTFOLIO COPY</span><small>.ZIP</small></button>
+            <button className="download-case" onClick={() => void openPortfolioBuilder()} disabled={isPreparingPortfolio}><FileChartColumn /><span>{isPreparingPortfolio ? 'PREPARING REVIEW' : 'BUILD GITHUB PORTFOLIO'}</span><small>SELECT PUBLIC CONTENT</small></button><button className="download-case secondary" onClick={() => void exportCase()} disabled={isExporting}><Download /><span>{isExporting ? 'PACKAGING' : 'DOWNLOAD SUBMISSION'}</span><small>.ANALYSTCASE / PRIVATE</small></button>
             <div className="workspace-utilities"><input ref={importInputRef} type="file" accept=".analystcase,application/json" onChange={(event) => { const file = event.target.files?.[0]; if (file) void importSubmission(file); }} /><button onClick={() => importInputRef.current?.click()}><Upload /> RESTORE SUBMISSION</button><button onClick={() => void clearAssignment()}><RotateCcw /> CLEAR LOCAL ASSIGNMENT</button></div>
             <p className="download-case-note">The restorable file includes identity, scaffold mode, worksheets, explicit artifacts, evidence, exact run snapshots, outputs, and hashes. No analytical answer is auto-certified.</p>
           </section>
@@ -948,6 +959,14 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
           evidence={evidence}
           sqlResult={lastSqlResult ? { columns, rows, totalRows: sqlTotalRows } : null}
           pythonResult={pythonResult}
+        />}
+        {portfolioCase && <PortfolioBuilder
+          caseFile={portfolioCase}
+          definition={definition}
+          onClose={() => {
+            setPortfolioCase(null);
+            window.requestAnimationFrame(() => portfolioTriggerRef.current?.focus());
+          }}
         />}
       </div>
     </main>

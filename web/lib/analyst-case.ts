@@ -1,5 +1,3 @@
-import { strToU8, zipSync } from 'fflate';
-
 import type { QueryRow } from '@/hooks/use-duckdb';
 import type { PythonRunResult } from '@/hooks/use-python';
 import type { CaseDefinition } from '@/lib/case-definition';
@@ -354,36 +352,6 @@ function triggerDownload(bytes: BlobPart[], type: string, filename: string) {
 
 export function downloadAnalystCase(caseFile: AnalystCaseFile) {
   triggerDownload([JSON.stringify(caseFile, null, 2)], 'application/vnd.theanalyst.case+json', `${submissionStem(caseFile)}.analystcase`);
-}
-
-export function downloadPortfolioZip(caseFile: AnalystCaseFile) {
-  const entries: Record<string, Uint8Array> = {};
-  for (const file of caseFile.learnerWorkspace.files) {
-    const path = file.path.replace(/^workspace\//, '').replace(/\.\.(\/|\\)/g, '');
-    entries[path] = contentBytes(file);
-  }
-  entries['evidence/evidence-register.json'] = strToU8(JSON.stringify(caseFile.learnerWorkspace.evidence, null, 2));
-  entries['submission-manifest.json'] = strToU8(JSON.stringify({
-    scenario: caseFile.scenario,
-    identity: caseFile.identity,
-    scaffold: caseFile.scaffold,
-    handoff: caseFile.handoff,
-    verification: caseFile.verification,
-    publishedTables: caseFile.learnerWorkspace.publishedTables,
-  }, null, 2));
-  entries['README.md'] = strToU8([
-    `# ${caseFile.scenario.title}`,
-    '',
-    caseFile.identity.name ? `Learner: ${caseFile.identity.name}` : '',
-    caseFile.identity.course ? `Course: ${caseFile.identity.course}${caseFile.identity.section ? ` / ${caseFile.identity.section}` : ''}` : '',
-    `Assignment: ${caseFile.scenario.id}`,
-    `Scaffold mode: ${caseFile.scaffold.mode}`,
-    `Exported: ${caseFile.exportedAt}`,
-    '',
-    'This folder is the standard portfolio copy. The matching .analystcase file retains the integrity and run-provenance record used for course review.',
-  ].filter(Boolean).join('\n'));
-  const zipBuffer = new Uint8Array(zipSync(entries, { level: 6 })).buffer;
-  triggerDownload([zipBuffer], 'application/zip', `${submissionStem(caseFile)}-portfolio.zip`);
 }
 
 type LegacyCase = Omit<AnalystCaseFile, 'version' | 'identity' | 'scaffold'> & {

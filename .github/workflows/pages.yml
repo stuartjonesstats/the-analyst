@@ -4,6 +4,10 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # A weekly rebuild advances the permanent biweekly Priority Brief rotation;
+    # after PB-008, the 16-week cycle returns to PB-001.
+    - cron: "17 12 * * 2"
 
 permissions:
   contents: read
