@@ -5,6 +5,7 @@ import './globals.css';
 const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://theanalyst.dev';
 const publicAssetUrl = (path: string) => `${publicSiteUrl.replace(/\/$/, '')}/${path}`;
 const publicSitePath = (process.env.NEXT_PUBLIC_SITE_PATH ?? '').replace(/\/$/, '');
+const googleAnalyticsId = process.env.NODE_ENV === 'production' ? 'G-95HP8M1K9F' : null;
 
 export const dynamic = 'force-static';
 
@@ -47,6 +48,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {googleAnalyticsId && <>
+          <script async src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalyticsId}`} />
+          <script dangerouslySetInnerHTML={{ __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${googleAnalyticsId}');
+          ` }} />
+        </>}
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

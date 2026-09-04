@@ -916,7 +916,7 @@ export function CaseWorkbench({ definition, mode, onSelectCase, onSelectMode }: 
             </section>}
           </div>
 
-          <footer className="trace-footer"><span><ShieldCheck /> COMPUTE: THIS BROWSER</span><span>CATALOG: {definition.catalogSnapshot}</span><span>SAVE: {saveState.toUpperCase()}</span><span>SCAFFOLD: {mode.toUpperCase()}</span><span className="ml-auto">NO ACCOUNT / LOCAL DRAFT</span><SiteLink path="/teach" rel="nofollow">INSTRUCTOR AREA</SiteLink></footer>
+          <footer className="trace-footer"><span><ShieldCheck /> COMPUTE: THIS BROWSER</span><span>CATALOG: {definition.catalogSnapshot}</span><span>SAVE: {saveState.toUpperCase()}</span><span>SCAFFOLD: {mode.toUpperCase()}</span><span className="ml-auto">NO ACCOUNT / LOCAL DRAFT</span><SiteLink path="/privacy">PRIVACY</SiteLink><SiteLink path="/teach" rel="nofollow">INSTRUCTOR AREA</SiteLink></footer>
         </section>
 
         <aside className={`case-ledger ${ledgerOpen ? 'is-open' : ''}`} aria-label="Assignment record" aria-hidden={ledgerIsOverlay && !ledgerOpen} inert={ledgerIsOverlay && !ledgerOpen}>
