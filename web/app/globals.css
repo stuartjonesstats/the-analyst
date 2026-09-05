@@ -7366,6 +7366,78 @@ textarea {
   background: #ffffff;
 }
 
+.priority-route-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: 1px solid #bdc8d3;
+  border-left: 1px solid #bdc8d3;
+  background: #ffffff;
+}
+
+.priority-route-grid article {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  border-right: 1px solid #cbd3dc;
+  border-bottom: 1px solid #cbd3dc;
+  padding: 18px;
+}
+
+.priority-route-grid header {
+  display: grid;
+  gap: 7px;
+  min-height: 62px;
+}
+
+.priority-route-grid header span,
+.priority-route-grid dt {
+  color: #2d609d;
+  font-family: var(--font-geist-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+.priority-route-grid header strong {
+  color: #263a50;
+  font-size: 16px;
+  line-height: 1.25;
+}
+
+.priority-route-grid > article > p,
+.priority-route-grid dd,
+.priority-route-grid li {
+  color: #4e5e71;
+  font-size: 11px;
+  line-height: 1.55;
+}
+
+.priority-route-grid > article > p {
+  min-height: 70px;
+  margin: 8px 0 14px;
+}
+
+.priority-route-grid dl > div {
+  border-top: 1px solid #d3dae2;
+  padding: 7px 0;
+}
+
+.priority-route-grid dd {
+  margin-top: 4px;
+}
+
+.priority-route-grid ol {
+  margin: 12px 0 0 18px;
+}
+
+.priority-route-grid li {
+  margin-bottom: 6px;
+  padding-left: 3px;
+}
+
+.priority-route-grid .course-route-link {
+  margin-top: auto;
+}
+
 .course-route-grid article {
   padding: 20px;
   border-right: 1px solid #cbd3dc;
@@ -7790,6 +7862,7 @@ textarea {
 
 @media (max-width: 900px) {
   .course-route-grid,
+  .priority-route-grid,
   .rubric-intro,
   .boundary-card {
     grid-template-columns: 1fr;
@@ -7802,6 +7875,10 @@ textarea {
 
   .course-route-grid article:last-child {
     border-bottom: 0;
+  }
+
+  .priority-route-grid article {
+    min-height: 0;
   }
 
   .preflight-grid {

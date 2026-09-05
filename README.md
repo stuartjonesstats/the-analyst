@@ -4,7 +4,7 @@ This repository is the data foundation for a hands-on, open-world data-science s
 
 The first deliverable was deliberately **data-first**: a reproducible generator, linked Parquet files, machine-readable catalog, relationship map, anomaly ledger, world guide, and validation suite.
 
-The browser product is **The Analyst** ([theanalyst.dev](https://theanalyst.dev)). Nine full assignments and an eight-brief rotating decision series run in `web/` with Monaco, DuckDB-Wasm, Pyodide, governed relational Parquet packs, local drafts, portable submissions, and publication-reviewed portfolio exports. The complete generated estate remains local and reproducible rather than being committed to Git; the public site ships compact decision populations built from it.
+The browser product is **The Analyst** ([theanalyst.dev](https://theanalyst.dev)). Nine full assignments and a sixteen-brief weekly decision series run in `web/` with Monaco, DuckDB-Wasm, Pyodide, governed relational Parquet packs, local drafts, portable submissions, and publication-reviewed portfolio exports. The complete generated estate remains local and reproducible rather than being committed to Git; the public site ships compact decision populations built from it.
 
 ## Current footprint
 
@@ -50,11 +50,11 @@ The estate covers:
 
 The authoring schema is [simulation.schema.json](scenarios/schema/simulation.schema.json). Instructor-only truth is part of source authoring but must be stripped from learner manifests before delivery.
 
-## Eight Priority Briefs
+## Sixteen Priority Briefs
 
-Priority Briefs are substantial, self-contained 60–120 minute decisions in a permanent biweekly rotation. The eight-brief sequence repeats every 16 weeks while each briefing URL remains permanently available. They do not introduce separate toy tables: every brief reuses an existing Meridian assignment pack and opens it in its own persistence namespace, so brief work cannot overwrite the corresponding full assignment.
+Priority Briefs are substantial, self-contained 60–120 minute decisions in a permanent weekly rotation. The sixteen-brief sequence maps to a 16-week term and then repeats while each briefing URL remains permanently available. They do not introduce separate toy tables: every brief reuses an existing Meridian assignment pack and opens it in its own persistence namespace, so brief work cannot overwrite the corresponding full assignment.
 
-The first season covers metric governance, join grain, missing telemetry, experiment interpretation, asymmetric forecast loss, point-in-time leakage, privacy-aware text review, and executive chart communication. Each brief has a permanent public URL, exact source register, SQL and Python workbench, multiple professional deliverables, optional stretch, and a spoiler-separated debrief describing defensible approaches rather than one answer.
+The rotation spans metric governance, join grain, missing telemetry, experiment interpretation, forecast judgment, point-in-time leakage, privacy, executive communication, dispatch controls, pricing, preventive-maintenance policy, event semantics, supplier performance, data reliability, process mining, and field-service operations. Each brief has a permanent public URL, exact source register, SQL and Python workbench, multiple professional deliverables, optional stretch, and a spoiler-separated debrief describing defensible approaches rather than one answer.
 
 ## Query the Parquet files
 
@@ -108,7 +108,7 @@ npm install
 npm run dev
 ```
 
-The public front door includes a nine-assignment progression register, permanent spoiler-free assignment pages, the Priority Brief season, pedagogical approach, self-guided manual, and a searchable dictionary for all 96 source tables. Each assignment or brief mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
+The public front door includes a nine-assignment progression register, permanent spoiler-free assignment pages, the weekly Priority Brief rotation, pedagogical approach, self-guided manual, and a searchable dictionary for all 96 source tables. Each assignment or brief mounts only its own compact data neighborhood. DuckDB and Python run locally in WebAssembly; learner Python opens named tables through `from analyst import table`, and Matplotlib figures render in the workbench. Source files remain unchanged, drafts stay in browser storage, and no account or upload is required. The complete estate is never downloaded on startup.
 
 At handoff, learners can build a separate GitHub-ready portfolio through an explicit publication review. The exporter omits academic identity, course metadata, scratch notes, raw data, run errors/history, stale figures, and every unselected artifact. The resulting ZIP contains a professional README, source and report folders, approved evidence and figures, a responsive `docs/` portfolio for optional GitHub Pages, a repository preview image, honest reproducibility notes, attribution, and a publication checklist. An optional learner-declared Analytical Field Record can be downloaded for social sharing; it is deliberately not a score, credential, or certification.
 

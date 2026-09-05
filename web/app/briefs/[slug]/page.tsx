@@ -59,8 +59,8 @@ export default async function PriorityBriefPage({ params }: PriorityBriefPagePro
   if (!brief) notFound();
 
   const index = priorityBriefs.findIndex((item) => item.slug === brief.slug);
-  const previous = index > 0 ? priorityBriefs[index - 1] : null;
-  const next = index < priorityBriefs.length - 1 ? priorityBriefs[index + 1] : null;
+  const previous = priorityBriefs[(index - 1 + priorityBriefs.length) % priorityBriefs.length];
+  const next = priorityBriefs[(index + 1) % priorityBriefs.length];
   const releaseState = getBriefReleaseState(brief);
 
   return (
@@ -194,8 +194,8 @@ export default async function PriorityBriefPage({ params }: PriorityBriefPagePro
         <PriorityBriefShare id={brief.id} slug={brief.slug} title={brief.title} role={brief.role} caption={brief.shareCaption} socialImage={brief.socialImage} />
 
         <nav className={styles.briefPager} aria-label="Priority Brief sequence">
-          {previous ? <SiteLink path={`/briefs/${previous.slug}/`}><ArrowLeft aria-hidden="true" /> <span>PREVIOUS / {previous.id}</span> {previous.title}</SiteLink> : <SiteLink path="/briefs/"><ArrowLeft aria-hidden="true" /> <span>PRIORITY DESK</span> ALL BRIEFS</SiteLink>}
-          {next ? <SiteLink path={`/briefs/${next.slug}/`}><span>NEXT / {next.id}</span> {next.title} <ArrowRight aria-hidden="true" /></SiteLink> : <SiteLink path="/briefs/"><span>RETURN</span> PRIORITY DESK <ArrowRight aria-hidden="true" /></SiteLink>}
+          <SiteLink path={`/briefs/${previous.slug}/`}><ArrowLeft aria-hidden="true" /> <span>PREVIOUS / {previous.id}</span> {previous.title}</SiteLink>
+          <SiteLink path={`/briefs/${next.slug}/`}><span>NEXT / {next.id}</span> {next.title} <ArrowRight aria-hidden="true" /></SiteLink>
         </nav>
       </main>
     </PublicShell>

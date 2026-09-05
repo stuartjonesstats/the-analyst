@@ -9,9 +9,11 @@
     "dev": "vinext dev",
     "build": "vinext build",
     "pages:prepare": "node scripts/prepare-pages.mjs",
+    "generate:brief-social": "node --experimental-strip-types scripts/generate-priority-brief-social.mjs",
     "test:ai-context": "node --experimental-strip-types scripts/test-ai-context-policy.mjs",
     "test:case-migration": "node --experimental-strip-types scripts/test-analyst-case-migration.mjs",
     "test:migration": "node --experimental-strip-types scripts/test-python-worksheet-migration.mjs",
+    "test:priority-briefs": "node --experimental-strip-types scripts/test-priority-briefs.mjs",
     "lint": "oxlint",
     "format": "oxfmt"
   },

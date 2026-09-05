@@ -53,11 +53,11 @@ export default function TeachPage() {
 
       <section className="teaching-intro">
         <p className="document-kicker">
-          THE ANALYST / ASSIGNMENT STUDIO + PRIORITY BRIEF SEASON
+          THE ANALYST / ASSIGNMENT STUDIO + PRIORITY BRIEF ROTATION
         </p>
         <h1>Plan a progression through the work.</h1>
         <p>
-          This desk helps instructors sequence nine workplace assignments and eight compact Priority Briefs across
+          This desk helps instructors sequence nine workplace assignments and sixteen compact Priority Briefs across
           SQL, Python, data judgment, and professional handoff. It contains no
           sample conclusions. Prepared-hour estimates assume a learner can work
           independently; newcomer ranges assume active instructor support.
@@ -184,13 +184,13 @@ export default function TeachPage() {
 
       <section className="course-route-register" aria-labelledby="priority-brief-planning-heading">
         <div className="teaching-section-title">
-          <span id="priority-brief-planning-heading">PRIORITY BRIEF SEASON / 08</span>
-          <b>BIWEEKLY PRACTICE / EXISTING MERIDIAN TABLES</b>
+          <span id="priority-brief-planning-heading">PRIORITY BRIEF ROTATION / 16</span>
+          <b>WEEKLY PRACTICE / EXISTING MERIDIAN TABLES</b>
         </div>
         <p className="route-caveat">
-          Priority Briefs are bounded 60–120 minute workplace decisions—not attendance check-ins. Each opens a separate local workbench, reuses an existing governed data neighborhood, requires multiple evidence moves and a polished handoff, and leaves the corresponding full-assignment draft untouched. The eight-brief sequence repeats every 16 weeks; permanent URLs let instructors assign any brief outside the featured window. Debriefs describe defensible approaches and common traps rather than one required answer.
+          Priority Briefs are bounded 60–120 minute workplace decisions—not attendance check-ins. Each opens a separate local workbench, reuses an existing governed data neighborhood, requires multiple evidence moves and a polished handoff, and leaves the corresponding full-assignment draft untouched. The sixteen-brief weekly sequence maps directly to a 16-week term and then repeats; permanent URLs let instructors substitute or assign any brief outside the featured window. Debriefs describe defensible approaches and common traps rather than one required answer.
         </p>
-        <div className="course-route-grid">
+        <div className="priority-route-grid">
           {priorityBriefs.map((brief) => (
             <article key={brief.id}>
               <header><span>{brief.id}</span><strong>{brief.title}</strong></header>

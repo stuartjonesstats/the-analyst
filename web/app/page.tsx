@@ -34,7 +34,7 @@ export default function HomePage() {
               Defend the decision.
             </h1>
             <p className="hero-deck">
-              The Analyst places you inside Meridian Living Systems, a fictional products-and-services company. Across nine full assignments and a rotating season of Priority Briefs, you step into different analyst roles and confront what clean tutorials remove: unclear requests, competing clocks, unreliable grains, operational limits, and accountable handoffs.
+              The Analyst places you inside Meridian Living Systems, a fictional products-and-services company. Across nine full assignments and a permanent weekly rotation of 16 Priority Briefs, you step into different analyst roles and confront what clean tutorials remove: unclear requests, competing clocks, unreliable grains, operational limits, and accountable handoffs.
             </p>
             <div className="hero-actions">
               <SiteLink path="/workbench" className="action-primary">
@@ -167,7 +167,7 @@ export default function HomePage() {
         <section className="home-priority" aria-labelledby="home-priority-title">
           <header>
             <span>CURRENT PRIORITY / {currentBrief.id}</span>
-            <time dateTime={priorityRotation.startsAt.toISOString()}>PERMANENT BIWEEKLY ROTATION</time>
+            <time dateTime={priorityRotation.startsAt.toISOString()}>PERMANENT WEEKLY ROTATION</time>
           </header>
           <div className="home-priority-main">
             <div>
@@ -182,7 +182,7 @@ export default function HomePage() {
               </dl>
               <nav aria-label="Current Priority Brief actions">
                 <SiteLink path={`/briefs/${currentBrief.slug}/`}>OPEN CURRENT BRIEF <ArrowRight /></SiteLink>
-                <SiteLink path="/briefs">VIEW EIGHT-BRIEF SEASON</SiteLink>
+                <SiteLink path="/briefs">VIEW ALL 16 BRIEFS</SiteLink>
               </nav>
             </div>
             <aside>

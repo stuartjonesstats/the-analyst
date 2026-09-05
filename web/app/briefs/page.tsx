@@ -11,7 +11,7 @@ export const dynamic = 'force-static';
 
 export const metadata: Metadata = {
   title: 'Priority Briefs — The Analyst',
-  description: 'Eight compact workplace decisions using The Analyst’s full Meridian data estate in a permanent 16-week rotation.',
+  description: 'Sixteen substantial workplace decisions using The Analyst’s Meridian data estate in a permanent weekly rotation.',
   alternates: { canonical: '/briefs/' },
 };
 
@@ -23,14 +23,14 @@ export default function PriorityBriefArchivePage() {
     <PublicShell currentPath="/briefs">
       <main className={`public-main ${styles.archiveMain}`} id="main-content" tabIndex={-1}>
         <header className={styles.archiveHero}>
-          <p className={styles.heroKicker}>PRIORITY DESK / EIGHT-BRIEF SERIES</p>
+          <p className={styles.heroKicker}>PRIORITY DESK / 16-BRIEF SERIES</p>
           <h1>One decision. Ninety minutes. No clean answer.</h1>
           <p>Priority Briefs are compact assignments drawn from Meridian’s existing enterprise estate. Each isolates a consequential analytical judgment, gives you a real data neighborhood and asks for a professional handoff—not a quiz response.</p>
         </header>
 
         <aside className={styles.seriesNote} role="note">
           <strong>WORKBENCH REQUIREMENT</strong>
-          <span>Read briefs on any device. SQL, Python, evidence capture and portfolio export require a current laptop or desktop browser. One brief is featured for two weeks; after PB-008, the 16-week rotation returns to PB-001. Every page remains permanently available.</span>
+          <span>Read briefs on any device. SQL, Python, evidence capture and portfolio export require a current laptop or desktop browser. One brief is featured each week; after PB-016, the 16-week rotation returns to PB-001. Every page remains permanently available.</span>
         </aside>
 
         <section className={styles.currentBrief} aria-labelledby="current-priority-title">
@@ -62,7 +62,7 @@ export default function PriorityBriefArchivePage() {
               <p className={styles.sectionKicker}>PERMANENT REGISTER / 16-WEEK LOOP</p>
               <h2 id="priority-archive-title">The full briefing rotation</h2>
             </div>
-            <p>Work in rotation order for breadth or select by skill. The rotation began in September 2026; every two weeks the featured position advances, and PB-008 rolls back to PB-001. URLs, shared challenges, and portfolio links do not expire.</p>
+            <p>Work in rotation order for breadth or select by skill. The rotation began in September 2026; every week the featured position advances, and PB-016 rolls back to PB-001. URLs, shared challenges, and portfolio links do not expire.</p>
           </header>
           <div className={styles.briefGrid}>
             {priorityBriefs.map((brief) => {
